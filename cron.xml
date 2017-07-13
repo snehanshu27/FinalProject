@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite" parallel="none" thread-count="1">
+
+	<parameter name="browser" value="chrome" />
+
+	<listeners>
+		<listener class-name="com.tata.selenium.driver.Driver" />
+	</listeners>
+
+	<test name="Disable Cron">
+		<classes>
+			<class name="com.tata.com.xmlcomp.testcases.DisableCron" />
+		</classes>
+	</test>
+
+	<test name="Make Changes in UI">
+		<parameter name="testCaseId" value="TC_15" />
+		<parameter name="uniqueDataId" value="Data_15" />
+		<classes>
+			<class
+				name="com.tata.selenium.test.supplierProvisioningCases.TC_07_SupplierEditing" />
+		</classes>
+	</test>
+
+	<test name="Execute Jar, Comapre Latest File With Ref File">
+		<classes>
+			<class name="com.tata.com.xmlcomp.testcases.ExecuteJarGetAndComapreLatestFileWithRefFile" />
+		</classes>
+	</test>
+	
+	<test name="Enable Cron">
+		<classes>
+			<class name="com.tata.com.xmlcomp.testcases.EnableCron" />
+		</classes>
+	</test>
+
+</suite>

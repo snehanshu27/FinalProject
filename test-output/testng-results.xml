@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[Executing Test Case -TC_04 -with TestdataId : Data_06]]>
+    </line>
+    <line>
+      <![CDATA[New CHROME REMOTE driver instantiated]]>
+    </line>
+    <line>
+      <![CDATA[URL launched is : https://mtmdevmblws01:8443/MMXProd]]>
+    </line>
+    <line>
+      <![CDATA[TATA Messaging Login Page appear/loaded successfully]]>
+    </line>
+    <line>
+      <![CDATA[Username 'sonali.das@tatacommunications.com' entered sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[Password 'Welcome01' entered sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[Submit Btn clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[MessagingInstanceHomePage Page loaded successfully]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
+    </line>
+    <line>
+      <![CDATA[TATA Messaging Home Page appear/loaded successfully]]>
+    </line>
+    <line>
+      <![CDATA[After Login Screen verified sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to //iframe[@name='bottom'] frame]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to index frame]]>
+    </line>
+    <line>
+      <![CDATA[Navigation Bar appear/loaded successfully]]>
+    </line>
+    <line>
+      <![CDATA[Reporting Delivery Statistics page opened sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to bottom frame]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to target frame]]>
+    </line>
+    <line>
+      <![CDATA[POP Up has appeared now]]>
+    </line>
+    <line>
+      <![CDATA[Validation passed as Pop up is being displayed and it is  - No data for the selected input parameters.]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStatisticsPage - having xpath 'By.xpath: //td/label[text()='Delivery Statistics']' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStat_FromDateTxt element is clicked]]>
+    </line>
+    <line>
+      <![CDATA[selectMonth element is clicked]]>
+    </line>
+    <line>
+      <![CDATA[clickOutside - having xpath 'By.xpath: //td[text()='From Date*']' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStat_ToDateTxt element is clicked]]>
+    </line>
+    <line>
+      <![CDATA[selectMonth_ToDate element is clicked]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStat_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[dynamicSupORCustAccORDestinationValue - having xpath 'By.xpath: //*[@id='myTable']/tbody/tr/td[2]/a[text()='COREGRAL-SMPP-DIRECT']' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[exportBtn Element is present and displayed in the page]]>
+    </line>
+    <line>
+      <![CDATA[backBtn Element is present and displayed in the page]]>
+    </line>
+    <line>
+      <![CDATA[DrillDown_CustomerNameTxt field is non editable]]>
+    </line>
+    <line>
+      <![CDATA[DrillDown_CustomerAccNameTxt field is non editable]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStat_FromDateTxt field is non editable]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStat_ToDateTxt field is non editable]]>
+    </line>
+    <line>
+      <![CDATA[exportBtn - having xpath 'By.xpath: //td[@align='right']/a[contains(@href,'CustAccData')]' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[DeliveryStatistics Page loaded successfully]]>
+    </line>
+    <line>
+      <![CDATA[dowloaded file path: C:\selenium\files\Customer-SMSCustomerAccountDistribution.csv]]>
+    </line>
+    <line>
+      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+    </line>
+    <line>
+      <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
+    </line>
+    <line>
+      <![CDATA[logout Successful]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="93813" started-at="2017-07-13T12:36:35Z" finished-at="2017-07-13T12:38:09Z">
+    <groups>
+    </groups>
+    <test name="TC_06" duration-ms="93813" started-at="2017-07-13T12:36:35Z" finished-at="2017-07-13T12:38:09Z">
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount">
+        <test-method status="PASS" signature="beforeMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="beforeMethod" is-config="true" duration-ms="123" started-at="2017-07-13T18:06:35Z" finished-at="2017-07-13T18:06:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[TC_04]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="DO(java.lang.String, java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="DO" duration-ms="91802" started-at="2017-07-13T18:06:35Z" finished-at="2017-07-13T18:08:07Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Data_06]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[TC_04]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+            <line>
+              <![CDATA[Executing Test Case -TC_04 -with TestdataId : Data_06]]>
+            </line>
+            <line>
+              <![CDATA[New CHROME REMOTE driver instantiated]]>
+            </line>
+            <line>
+              <![CDATA[URL launched is : https://mtmdevmblws01:8443/MMXProd]]>
+            </line>
+            <line>
+              <![CDATA[TATA Messaging Login Page appear/loaded successfully]]>
+            </line>
+            <line>
+              <![CDATA[Username 'sonali.das@tatacommunications.com' entered sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[Password 'Welcome01' entered sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[Submit Btn clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[MessagingInstanceHomePage Page loaded successfully]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
+            </line>
+            <line>
+              <![CDATA[TATA Messaging Home Page appear/loaded successfully]]>
+            </line>
+            <line>
+              <![CDATA[After Login Screen verified sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to //iframe[@name='bottom'] frame]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to index frame]]>
+            </line>
+            <line>
+              <![CDATA[Navigation Bar appear/loaded successfully]]>
+            </line>
+            <line>
+              <![CDATA[Reporting Delivery Statistics page opened sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to bottom frame]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to target frame]]>
+            </line>
+            <line>
+              <![CDATA[POP Up has appeared now]]>
+            </line>
+            <line>
+              <![CDATA[Validation passed as Pop up is being displayed and it is  - No data for the selected input parameters.]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStatisticsPage - having xpath 'By.xpath: //td/label[text()='Delivery Statistics']' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStat_FromDateTxt element is clicked]]>
+            </line>
+            <line>
+              <![CDATA[selectMonth element is clicked]]>
+            </line>
+            <line>
+              <![CDATA[clickOutside - having xpath 'By.xpath: //td[text()='From Date*']' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStat_ToDateTxt element is clicked]]>
+            </line>
+            <line>
+              <![CDATA[selectMonth_ToDate element is clicked]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStat_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[dynamicSupORCustAccORDestinationValue - having xpath 'By.xpath: //*[@id='myTable']/tbody/tr/td[2]/a[text()='COREGRAL-SMPP-DIRECT']' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[exportBtn Element is present and displayed in the page]]>
+            </line>
+            <line>
+              <![CDATA[backBtn Element is present and displayed in the page]]>
+            </line>
+            <line>
+              <![CDATA[DrillDown_CustomerNameTxt field is non editable]]>
+            </line>
+            <line>
+              <![CDATA[DrillDown_CustomerAccNameTxt field is non editable]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStat_FromDateTxt field is non editable]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStat_ToDateTxt field is non editable]]>
+            </line>
+            <line>
+              <![CDATA[exportBtn - having xpath 'By.xpath: //td[@align='right']/a[contains(@href,'CustAccData')]' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[DeliveryStatistics Page loaded successfully]]>
+            </line>
+            <line>
+              <![CDATA[dowloaded file path: C:\selenium\files\Customer-SMSCustomerAccountDistribution.csv]]>
+            </line>
+            <line>
+              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
+            </line>
+            <line>
+              <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
+            </line>
+            <line>
+              <![CDATA[logout Successful]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- DO -->
+        <test-method status="PASS" signature="afterMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="afterMethod" is-config="true" duration-ms="1864" started-at="2017-07-13T18:08:07Z" finished-at="2017-07-13T18:08:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[TC_04]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount -->
+    </test> <!-- TC_06 -->
+  </suite> <!-- Suite -->
+</testng-results>

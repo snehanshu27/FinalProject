@@ -1,0 +1,8 @@
+Customer,COREGRAL HOLDING LTD
+Customer Account,COREGRAL-SMPP-DIRECT
+From Date,04-01-2017 00:00
+To Date,04-07-2017 10:46
+
+Country,Destination,MCC,MNC,Supplier,Supplier Account,Attempted,Attempted Failure,Submitted,Submit Failure,%,Enroute,Delivered,%,Failed,%,Average Latency (Sec)
+"UK","LYCA MOBILE","234, 240","12, 26","MESSAGEBIRD B.V.","MSGBRD-MT-SMPP-DIRECT",2,0,2,0,100.00 %,0,2,100.00 %,0,0.00 %,15
+"UK","VODAFONE UNITED KINGDOM","234, 235","00, 08, 15, 16, 76, 77, 91","MESSAGEBIRD B.V.","MSGBRD-MT-SMPP-DIRECT",282,0,282,0,100.00 %,22,257,91.13 %,3,1.06 %,16

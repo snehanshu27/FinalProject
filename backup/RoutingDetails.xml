@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite" thread-count="1">
+
+	<!-- <parameter name="env" value="Local"/> tests -->
+	<parameter name="browser" value="chrome" />
+
+	<listeners>
+		<listener class-name="com.tata.selenium.driver.Driver" />
+	</listeners>
+
+	<!-- <test name="t1">
+			<parameter name="testCaseId" value="TC_01" />
+			<parameter name="uniqueDataId" value="Data_01" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_01_RoutingDetailsUIValidation" />
+			</classes>
+	</test> -->
+		
+	<test name="t2">
+			<parameter name="testCaseId" value="TC_02" />
+			<parameter name="uniqueDataId" value="Data_02" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_02_RoutingDetailsPopupsValidations" />
+			</classes>
+		</test> 
+	  
+	<!-- <test name="t3">
+			<parameter name="testCaseId" value="TC_03" />
+			<parameter name="uniqueDataId" value="Data_03" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_03_RoutingDetailsPerformanceReportValidations" />
+			</classes>
+	</test> -->
+	
+	<!-- <test name="t4">
+		<parameter name="testCaseId" value="TC_04" />
+		<parameter name="uniqueDataId" value="Data_04" />
+		<classes>
+			<class
+				name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_04_RoutingDetailsRoutesReportValidations" />
+		</classes>
+	</test> -->
+	
+	<!-- <test name="t5">
+		<parameter name="testCaseId" value="TC_05" />
+		<parameter name="uniqueDataId" value="Data_05" />
+		<classes>
+			<class
+				name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_05_RoutingDetailsDistributionReportValidations" />
+		</classes>
+	</test> -->
+	
+	<!-- <test name="t6">
+			<parameter name="testCaseId" value="TC_06" />
+			<parameter name="uniqueDataId" value="Data_03" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_06_RoutingDetailsPerformanceReportUIAndCSVDataCompare" />
+			</classes>
+	</test> -->
+
+	<!-- <test name="t7">
+			<parameter name="testCaseId" value="TC_07" />
+			<parameter name="uniqueDataId" value="Data_04" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_07_RoutingDetailsRoutesReportUIAndCSVDataCompare" />
+			</classes>
+	</test> -->
+	
+<!-- 	<test name="t8">
+			<parameter name="testCaseId" value="TC_08" />
+			<parameter name="uniqueDataId" value="Data_05" />
+			<classes>
+				<class
+					name="com.tata.selenium.test.productRoutingDetailsReportCases.TC_08_RoutingDetailsDistributionReportUIAndCSVDataCompare" />
+			</classes>
+	</test> -->
+</suite>
