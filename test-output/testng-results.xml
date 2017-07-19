@@ -1,139 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
     <line>
       <![CDATA[Executing Test Case -TC_04 -with TestdataId : Data_06]]>
     </line>
     <line>
-      <![CDATA[New CHROME REMOTE driver instantiated]]>
-    </line>
-    <line>
-      <![CDATA[URL launched is : https://mtmdevmblws01:8443/MMXProd]]>
-    </line>
-    <line>
-      <![CDATA[TATA Messaging Login Page appear/loaded successfully]]>
-    </line>
-    <line>
-      <![CDATA[Username 'sonali.das@tatacommunications.com' entered sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[Password 'Welcome01' entered sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[Submit Btn clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[MessagingInstanceHomePage Page loaded successfully]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
-    </line>
-    <line>
-      <![CDATA[TATA Messaging Home Page appear/loaded successfully]]>
-    </line>
-    <line>
-      <![CDATA[After Login Screen verified sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to //iframe[@name='bottom'] frame]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to index frame]]>
-    </line>
-    <line>
-      <![CDATA[Navigation Bar appear/loaded successfully]]>
-    </line>
-    <line>
-      <![CDATA[Reporting Delivery Statistics page opened sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to bottom frame]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to target frame]]>
-    </line>
-    <line>
-      <![CDATA[POP Up has appeared now]]>
-    </line>
-    <line>
-      <![CDATA[Validation passed as Pop up is being displayed and it is  - No data for the selected input parameters.]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStatisticsPage - having xpath 'By.xpath: //td/label[text()='Delivery Statistics']' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStat_FromDateTxt element is clicked]]>
-    </line>
-    <line>
-      <![CDATA[selectMonth element is clicked]]>
-    </line>
-    <line>
-      <![CDATA[clickOutside - having xpath 'By.xpath: //td[text()='From Date*']' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStat_ToDateTxt element is clicked]]>
-    </line>
-    <line>
-      <![CDATA[selectMonth_ToDate element is clicked]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStat_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[dynamicSupORCustAccORDestinationValue - having xpath 'By.xpath: //*[@id='myTable']/tbody/tr/td[2]/a[text()='COREGRAL-SMPP-DIRECT']' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[exportBtn Element is present and displayed in the page]]>
-    </line>
-    <line>
-      <![CDATA[backBtn Element is present and displayed in the page]]>
-    </line>
-    <line>
-      <![CDATA[DrillDown_CustomerNameTxt field is non editable]]>
-    </line>
-    <line>
-      <![CDATA[DrillDown_CustomerAccNameTxt field is non editable]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStat_FromDateTxt field is non editable]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStat_ToDateTxt field is non editable]]>
-    </line>
-    <line>
-      <![CDATA[exportBtn - having xpath 'By.xpath: //td[@align='right']/a[contains(@href,'CustAccData')]' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[DeliveryStatistics Page loaded successfully]]>
-    </line>
-    <line>
-      <![CDATA[dowloaded file path: C:\selenium\files\Customer-SMSCustomerAccountDistribution.csv]]>
-    </line>
-    <line>
-      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-    </line>
-    <line>
-      <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
-    </line>
-    <line>
-      <![CDATA[logout Successful]]>
+      <![CDATA[ Url launch failed : java.net.MalformedURLException: For input string: "null"]]>
     </line>
   </reporter-output>
-  <suite name="Suite" duration-ms="93813" started-at="2017-07-13T12:36:35Z" finished-at="2017-07-13T12:38:09Z">
+  <suite name="Suite" duration-ms="3977" started-at="2017-07-19T11:57:39Z" finished-at="2017-07-19T11:57:43Z">
     <groups>
     </groups>
-    <test name="TC_06" duration-ms="93813" started-at="2017-07-13T12:36:35Z" finished-at="2017-07-13T12:38:09Z">
+    <test name="TC_06" duration-ms="3977" started-at="2017-07-19T11:57:39Z" finished-at="2017-07-19T11:57:43Z">
       <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount">
-        <test-method status="PASS" signature="beforeMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="beforeMethod" is-config="true" duration-ms="123" started-at="2017-07-13T18:06:35Z" finished-at="2017-07-13T18:06:35Z">
+        <test-method status="PASS" signature="beforeMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="beforeMethod" is-config="true" duration-ms="130" started-at="2017-07-19T17:27:39Z" finished-at="2017-07-19T17:27:39Z">
           <params>
             <param index="0">
               <value>
@@ -144,7 +24,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="DO(java.lang.String, java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="DO" duration-ms="91802" started-at="2017-07-13T18:06:35Z" finished-at="2017-07-13T18:08:07Z">
+        <test-method status="FAIL" signature="DO(java.lang.String, java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="DO" duration-ms="3787" started-at="2017-07-19T17:27:39Z" finished-at="2017-07-19T17:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -157,136 +37,53 @@
               </value>
             </param>
           </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Error occured while launching the url -   java.net.MalformedURLException: For input string: "null"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Error occured while launching the url -   java.net.MalformedURLException: For input string: "null"
+	at org.testng.Assert.fail(Assert.java:93)
+	at com.tata.selenium.utils.CommonUtils.LaunchUrl(CommonUtils.java:211)
+	at com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount.DO(TC_04_SelectCustomerAccount.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
             <line>
               <![CDATA[Executing Test Case -TC_04 -with TestdataId : Data_06]]>
             </line>
             <line>
-              <![CDATA[New CHROME REMOTE driver instantiated]]>
-            </line>
-            <line>
-              <![CDATA[URL launched is : https://mtmdevmblws01:8443/MMXProd]]>
-            </line>
-            <line>
-              <![CDATA[TATA Messaging Login Page appear/loaded successfully]]>
-            </line>
-            <line>
-              <![CDATA[Username 'sonali.das@tatacommunications.com' entered sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[Password 'Welcome01' entered sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[Submit Btn clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[MessagingInstanceHomePage Page loaded successfully]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
-            </line>
-            <line>
-              <![CDATA[TATA Messaging Home Page appear/loaded successfully]]>
-            </line>
-            <line>
-              <![CDATA[After Login Screen verified sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to //iframe[@name='bottom'] frame]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to index frame]]>
-            </line>
-            <line>
-              <![CDATA[Navigation Bar appear/loaded successfully]]>
-            </line>
-            <line>
-              <![CDATA[Reporting Delivery Statistics page opened sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to bottom frame]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to target frame]]>
-            </line>
-            <line>
-              <![CDATA[POP Up has appeared now]]>
-            </line>
-            <line>
-              <![CDATA[Validation passed as Pop up is being displayed and it is  - No data for the selected input parameters.]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStatisticsPage - having xpath 'By.xpath: //td/label[text()='Delivery Statistics']' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStat_FromDateTxt element is clicked]]>
-            </line>
-            <line>
-              <![CDATA[selectMonth element is clicked]]>
-            </line>
-            <line>
-              <![CDATA[clickOutside - having xpath 'By.xpath: //td[text()='From Date*']' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStat_ToDateTxt element is clicked]]>
-            </line>
-            <line>
-              <![CDATA[selectMonth_ToDate element is clicked]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStat_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[dynamicSupORCustAccORDestinationValue - having xpath 'By.xpath: //*[@id='myTable']/tbody/tr/td[2]/a[text()='COREGRAL-SMPP-DIRECT']' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[exportBtn Element is present and displayed in the page]]>
-            </line>
-            <line>
-              <![CDATA[backBtn Element is present and displayed in the page]]>
-            </line>
-            <line>
-              <![CDATA[DrillDown_CustomerNameTxt field is non editable]]>
-            </line>
-            <line>
-              <![CDATA[DrillDown_CustomerAccNameTxt field is non editable]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStat_FromDateTxt field is non editable]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStat_ToDateTxt field is non editable]]>
-            </line>
-            <line>
-              <![CDATA[exportBtn - having xpath 'By.xpath: //td[@align='right']/a[contains(@href,'CustAccData')]' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[DeliveryStatistics Page loaded successfully]]>
-            </line>
-            <line>
-              <![CDATA[dowloaded file path: C:\selenium\files\Customer-SMSCustomerAccountDistribution.csv]]>
-            </line>
-            <line>
-              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[backBtn - having xpath 'By.xpath: //td/a[contains(@href,'smsDelStatsCust')]' clicked sucessfully]]>
-            </line>
-            <line>
-              <![CDATA[Successfully switched  to //iframe[@scrolling='no'] frame]]>
-            </line>
-            <line>
-              <![CDATA[logout Successful]]>
+              <![CDATA[ Url launch failed : java.net.MalformedURLException: For input string: "null"]]>
             </line>
           </reporter-output>
         </test-method> <!-- DO -->
-        <test-method status="PASS" signature="afterMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="afterMethod" is-config="true" duration-ms="1864" started-at="2017-07-13T18:08:07Z" finished-at="2017-07-13T18:08:09Z">
+        <test-method status="FAIL" signature="afterMethod(java.lang.String)[pri:0, instance:com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount@517cd4b]" name="afterMethod" is-config="true" duration-ms="3" started-at="2017-07-19T17:27:43Z" finished-at="2017-07-19T17:27:43Z">
           <params>
             <param index="0">
               <value>
@@ -294,6 +91,40 @@
               </value>
             </param>
           </params>
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount.afterMethod(TC_04_SelectCustomerAccount.java:630)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:523)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:224)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:723)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
