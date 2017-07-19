@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.tata.selenium.utils.CommonUtils;
 import com.tata.selenium.utils.PropertyUtility;
 
@@ -18,26 +19,32 @@ import com.tata.selenium.utils.PropertyUtility;
 public class LoginPage extends CommonUtils {
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginPage.class.getName());
-	PropertyUtility putility=new PropertyUtility(OBJECT_REPO_FILEPATH);
-
+	static String properties =  "./data/Login.properties";
+	PropertyUtility putility=new PropertyUtility(properties);
+	
+	
 	By username = putility.getObject("login_Usrname");
 	By passwd = putility.getObject("login_Pwd");
 	By loginSubmitBtn = putility.getObject("login_SubmitBtn");
 	
 	public LoginPage(WebDriver driver,ExtentTest test, String sheetName, String uniqueDataId, String testCaseId, String objetResPath) {
-		super(driver,test, sheetName, uniqueDataId, testCaseId, objetResPath);
-		try {
-			driver.findElement(username);
+		super(driver,test, sheetName, uniqueDataId, testCaseId, properties);
+		
+		if(elementDisplayed("login_Usrname"))
 			printLogs("TATA Messaging Login Page appear/loaded successfully");
-		} catch (NoSuchElementException e) {
-			LOGGER.info("TATA Messaging Login Page did not appear/loaded ", e);
+		else
+		{
+			LOGGER.info("TATA Messaging Login Page did not appear/loaded ");
 			printLogs("TATA Messaging Login Page did not appear/loaded");
+			getExTest().log(LogStatus.FAIL, "TATA Messaging Login Page should be loaded", "TATA Messaging Login Page did not appear/loaded");
 			Assert.fail("LoginPage did not get displayed as the username field did not appear");
 		}
 	}
 	
 	
 	private void setUsername(String user){
+		
+		
 		driver.findElement(username).sendKeys(user);
 		printLogs("Username '"+user+"' entered sucessfully");
 	}

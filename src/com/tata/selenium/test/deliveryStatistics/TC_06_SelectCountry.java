@@ -98,14 +98,6 @@ public class TC_06_SelectCountry implements ApplicationConstants {
 		cu.checkMessage("application_PopUpMessage", "After loading the page",
 				"No data for the selected input parameters.");
 
-//		// Validating all editable drop down
-//		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
-//		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
-//		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
-//		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
-//		cu.checkEditableDropDown("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
-//		cu.checkEditableDropDown("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
-
 		WebElement drpEle = driver.findElement(By.xpath("//select[@id='dimension']"));
 		Select drpSele = new Select(drpEle);
 		drpSele.selectByVisibleText("Country");
@@ -117,8 +109,6 @@ public class TC_06_SelectCountry implements ApplicationConstants {
 		drpSupSele.selectByVisibleText("CENBONG INT'L HOLDINGS LIMITED");
 		cu.clickElement("DeliveryStatisticsPage");
 		
-//		cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", "COREGRAL-SMPP-DIRECT");
-//		cu.clickElement("DeliveryStatisticsPage");
 		
 		// Select From DATE
 		cu.moveAndClick("DeliveryStat_FromDateTxt");
