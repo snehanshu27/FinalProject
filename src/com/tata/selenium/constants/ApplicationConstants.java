@@ -19,7 +19,7 @@ public interface ApplicationConstants {
 	static final String BROWSER = "browser.xml";
 	static final String SCREENSHOT_PATH = "./reports/ScreenShots/";
 	static final String REPORT_SCREENSHOT_PATH = "./ScreenShots/";
-	static final String LOG_FILEPATH = "./logs/TataMessagingExchangeApp.log";
+	static final String LOG_FILEPATH = "./TataMessagingExchangeApp.log";
 	static final String DRIVER_PATH="./lib";
 	public static final String dev="";
 	public static String FILE_DOWNLOAD_PATH="C:\\selenium\\files\\";
