@@ -124,6 +124,15 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 		cu.clickElement("DeliveryStat_DisplayBtn");
 
 		cu.getScreenShot("Screenshot of the results displayed");
+		if(cu.elementDisplayed("tableFirstRow"))
+			test.log(LogStatus.PASS, "EXPECTED: Data should be displayed after clicking on Display button with selected parameters",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Data has been displayed after clicking on Display button with selected parameters</span>");
+		else
+		{
+			test.log(LogStatus.PASS, "EXPECTED: Data should be displayed after clicking on Display button with selected parameters",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Data is not displayed after clicking on Display button with selected parameters</span>");
+			Assert.fail("Data is not displayed after clicking on Display button with selected parameters");
+		}
 
 		cu.clickElement("DeliveryStat_CancelBtn");
 		cu.getScreenShot("After clicking Cancel Button");
