@@ -112,8 +112,19 @@ public class TC_01_DeliveryStatisticsUIValidation implements ApplicationConstant
 		}else{
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 	        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-			String todayAsString = sdf.format(new Date());
-			cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsString);
+	        Date dtMain = new Date();
+	        Date dtWOoff = new Date(dtMain.getTime());
+	        Date dtW1minoff = new Date(dtMain.getTime() + 60000);
+			String todayAsStringWOoff = sdf.format(dtWOoff);
+			String todayAsStringW1minoff = sdf.format(dtW1minoff);
+			
+			if(todayAsStringWOoff.equals(cu.getAttribute("DeliveryStat_ToDateTxt", "value")))					
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringWOoff);
+			else 
+				if(todayAsStringW1minoff.equals(cu.getAttribute("DeliveryStat_ToDateTxt", "value")))		
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringW1minoff);
+				else
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringWOoff);
 		}
 		
 		// Taking screenshot and Logging out
