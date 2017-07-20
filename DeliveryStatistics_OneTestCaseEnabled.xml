@@ -57,17 +57,10 @@
 		</classes>
 	</test>
  -->  
-	<test name="TC_06">
-		<parameter name="testCaseId" value="TC_04" />
-		<parameter name="uniqueDataId" value="Data_06" />
-		<classes>
-			<class
-				name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount" />
-		</classes>
-	</test>
+
 
 	
-	<test name="TC_07">
+	<!-- <test name="TC_07">
 		<parameter name="testCaseId" value="TC_07" />
 		<parameter name="uniqueDataId" value="Data_07" />
 		<classes>
@@ -95,6 +88,15 @@
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination" />
 		</classes>
-	</test>  
+	</test>   -->
   	
+  	
+  	<test name="TC_06">
+		<parameter name="testCaseId" value="TC_04" />
+		<parameter name="uniqueDataId" value="Data_06" />
+		<classes>
+			<class
+				name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount" />
+		</classes>
+	</test>
   </suite>
