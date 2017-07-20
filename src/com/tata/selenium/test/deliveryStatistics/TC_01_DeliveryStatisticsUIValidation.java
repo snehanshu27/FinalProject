@@ -44,7 +44,7 @@ public class TC_01_DeliveryStatisticsUIValidation implements ApplicationConstant
 	public void DO(String uniqueDataId, String testCaseId) throws Exception {
 		// Starting the extent report
 		test = extent.startTest(
-				"Execution triggered for - TC_01_DeliveryStatisticsUIValidation -with TestdataId: " + uniqueDataId);
+				"Execution triggered for - "+TC_01_DeliveryStatisticsUIValidation.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 
 		// Reading excel values
@@ -92,6 +92,7 @@ public class TC_01_DeliveryStatisticsUIValidation implements ApplicationConstant
 
 		// Validating all editable drop down
 		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
 		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst",dataMap.get("DeliveryStat_Customer_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));

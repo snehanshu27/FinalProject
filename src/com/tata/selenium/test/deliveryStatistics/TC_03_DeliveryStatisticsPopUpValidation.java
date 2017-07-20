@@ -90,11 +90,12 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-		cu.checkMessage("application_PopUpMessage", "After loading the page",
-				"No data for the selected input parameters");
+//		cu.checkMessage("application_PopUpMessage", "After loading the page",
+//				"No data for the selected input parameters");
 
 		// Validating all editable drop down
 		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
 		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));

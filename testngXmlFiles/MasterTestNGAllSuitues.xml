@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="allSuites">
+	<suite-files>
+		<suite-file path="CustomerCoverage.xml" />
+		<suite-file path="CustomerPriceMgmt.xml" />
+		<suite-file path="CustomerProvisioning.xml" />
+		<suite-file path="CustomError.xml" />
+		<suite-file path="DeliveryStatistics.xml" />
+		<suite-file path="DestinationTrend.xml" />
+		<suite-file path="InventoryTestNg.xml" />
+		<suite-file path="MNP.xml" />
+		<suite-file path="Payable.xml" />
+		<suite-file path="PerformanceTrend.xml" />
+		<suite-file path="ProductCoverageTestng.xml" />
+		<suite-file path="ProductPriceManagement.xml" />
+		<suite-file path="ProductProvisioning.xml" />
+		<suite-file path="RADailyReport.xml" />
+		<suite-file path="Receivables.xml" />
+		<suite-file path="Routing.xml" />
+		<suite-file path="RoutingDetails.xml" />
+		<suite-file path="Routing_New_Session1.xml" />
+		<suite-file path="Routing_New_Session2.xml" />
+		<suite-file path="SecurityRoles.xml" />
+		<suite-file path="SupplierCostTestNG.xml" />
+		<suite-file path="SupplierCovergae.xml" />
+		<suite-file path="SupplierProvisioning.xml" />
+	</suite-files>
+</suite>

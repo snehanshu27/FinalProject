@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite" thread-count="1">
@@ -8,26 +10,26 @@
 	<listeners>
 		<listener class-name="com.tata.selenium.driver.Driver" />
 	</listeners>
-
-	<test name="TC_01">
+ 
+	<!-- <test name="TC_01">
 		<parameter name="testCaseId" value="TC_01" />
 		<parameter name="uniqueDataId" value="Data_01" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation" />
 		</classes>
-	</test>
+	</test> 
 
-	<test name="TC_02">
+	 <test name="TC_02">
 		<parameter name="testCaseId" value="TC_02" />
 		<parameter name="uniqueDataId" value="Data_02" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData" />
 		</classes>
-	</test>
-
-	<test name="TC_03">
+	</test> 
+	
+ <test name="TC_03">
 		<parameter name="testCaseId" value="TC_02" />
 		<parameter name="uniqueDataId" value="Data_03" />
 		<classes>
@@ -35,7 +37,7 @@
 				name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData" />
 		</classes>
 	</test>
-
+	
 	<test name="TC_04">
 		<parameter name="testCaseId" value="TC_02" />
 		<parameter name="uniqueDataId" value="Data_04" />
@@ -44,7 +46,7 @@
 				name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData" />
 		</classes>
 	</test>
-
+ 	
 
 	<test name="TC_05">
 		<parameter name="testCaseId" value="TC_03" />
@@ -54,7 +56,7 @@
 				name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation" />
 		</classes>
 	</test>
-
+ -->  
 	<test name="TC_06">
 		<parameter name="testCaseId" value="TC_04" />
 		<parameter name="uniqueDataId" value="Data_06" />
@@ -64,7 +66,7 @@
 		</classes>
 	</test>
 
-
+	
 	<test name="TC_07">
 		<parameter name="testCaseId" value="TC_07" />
 		<parameter name="uniqueDataId" value="Data_07" />
@@ -72,9 +74,9 @@
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_05_SelectSupplier" />
 		</classes>
-	</test>
-
-
+	</test>  
+	
+	 	 
 	<test name="TC_08">
 		<parameter name="testCaseId" value="TC_08" />
 		<parameter name="uniqueDataId" value="Data_08" />
@@ -82,10 +84,10 @@
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry" />
 		</classes>
-	</test>
-
-
-
+	</test>  
+  	
+  	
+  	
 	<test name="TC_09">
 		<parameter name="testCaseId" value="TC_09" />
 		<parameter name="uniqueDataId" value="Data_09" />
@@ -93,6 +95,6 @@
 			<class
 				name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination" />
 		</classes>
-	</test>
-
-</suite>
+	</test>  
+  	
+  </suite>

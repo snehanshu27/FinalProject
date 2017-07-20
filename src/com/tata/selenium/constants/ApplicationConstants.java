@@ -26,11 +26,11 @@ public interface ApplicationConstants {
 	public static int implicitWait = 3;
 	
 	
-	public static final boolean RUN_IN_REMOTE=true;
+	public static final boolean RUN_IN_REMOTE=false;
 	public static final String REMOTE_HOST_IP= System.getProperty("remoteHostIP");
 	public static final String GRID_HUB_PORT= System.getProperty("remoteGridHubPort");
 	public static final String DESKTOP_WIN_CONTROL_PORT= System.getProperty("remoteWinControlPort");
-	
+//	
 //	public static final String REMOTE_HOST_IP= "192.168.40.43";//"camttvdapp16";
 //	public static final String GRID_HUB_PORT= "4444";
 //	public static final String DESKTOP_WIN_CONTROL_PORT= "9090";

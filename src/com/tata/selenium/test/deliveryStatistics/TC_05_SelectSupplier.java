@@ -49,7 +49,7 @@ public class TC_05_SelectSupplier implements ApplicationConstants {
 	public void DO(String uniqueDataId, String testCaseId) {
 		// Starting the extent report
 		test = extent
-				.startTest("Execution triggered for - TC_04_SelectCustomerAccount -with TestdataId: " + uniqueDataId);
+				.startTest("Execution triggered for - "+TC_05_SelectSupplier.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 		
 		// Reading excel values
@@ -95,30 +95,52 @@ public class TC_05_SelectSupplier implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-		cu.checkMessage("application_PopUpMessage", "After loading the page",
-				"No data for the selected input parameters.");
+//		cu.checkMessage("application_PopUpMessage", "After loading the page",
+//				"No data for the selected input parameters.");
 
-//		// Validating all editable drop down
-//		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
-//		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
-//		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
-//		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
-//		cu.checkEditableDropDown("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
-//		cu.checkEditableDropDown("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
-
-		WebElement drpEle = driver.findElement(By.xpath("//select[@id='dimension']"));
-		Select drpSele = new Select(drpEle);
-		drpSele.selectByVisibleText("Supplier");
-		cu.clickElement("DeliveryStatisticsPage");
+		//Select dimension dropdown based on data sheet
+		cu.SelectDropDownByVisibleText("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
+		cu.waitForPageLoad("DeliveryStatics");
 		
-		WebElement drpSupEle = driver.findElement(By.xpath("//select[@id='suppName']"));
-		Select drpSupSele = new Select(drpSupEle);
-		drpSupSele.deselectAll();
-		drpSupSele.selectByVisibleText("CENBONG INT'L HOLDINGS LIMITED");
-		cu.clickElement("DeliveryStatisticsPage");
+		//validate table headernames
+		validateTableHeaders(cu, dataMap.get("TableHeaders"));
+						
+		//Select values in Customer, Supplier, Country, Destination and Instance based on excel data
+		if(!dataMap.get("DeliveryStat_Customer_NameLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_Customer_NameLst")))
+		{
+			cu.deselectDropDownByVisibleText("DeliveryStat_Customer_NameLst", "ALL");
+			cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+			cu.clickElement("DeliveryStatisticsPage");
+		}
 		
-//		cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", "COREGRAL-SMPP-DIRECT");
-//		cu.clickElement("DeliveryStatisticsPage");
+		if(!dataMap.get("DeliveryStat_Supplier_NameLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_Supplier_NameLst")))
+		{
+			cu.deselectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", "ALL");
+			cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
+			cu.clickElement("DeliveryStatisticsPage");
+		}
+		
+		if(!dataMap.get("DeliveryStat_CountryLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_CountryLst")))
+		{
+			cu.deselectDropDownByVisibleText("DeliveryStat_CountryLst", "ALL");
+			cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
+			cu.clickElement("DeliveryStatisticsPage");
+		}
+		
+		if(!dataMap.get("DeliveryStat_DestinationLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_DestinationLst")))
+		{
+			cu.deselectDropDownByVisibleText("DeliveryStat_DestinationLst", "ALL");
+			cu.SelectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
+			cu.clickElement("DeliveryStatisticsPage");
+		}
+		
+		if(!dataMap.get("DeliveryStat_InstanceLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_InstanceLst")))
+		{
+			cu.deselectDropDownByVisibleText("DeliveryStat_InstanceLst", "ALL");
+			cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
+			cu.clickElement("DeliveryStatisticsPage");
+		}
+		
 		
 		// Select From DATE
 		cu.moveAndClick("DeliveryStat_FromDateTxt");
@@ -249,18 +271,18 @@ public class TC_05_SelectSupplier implements ApplicationConstants {
 					if(csvData.get(colName).equals(uiValue))					
 						test.log(LogStatus.PASS,
 								"EXPECTED: " + suppAccVal
-										+ "The values of the csv data and the Ui Values of this customer account"
+										+ "The values of the csv data and the Ui Values of this supplier account"
 										+ suppAccVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
 								"Validation:  <span style='font-weight:bold;'>ACTUAL::" + suppAccVal
-										+ "The values of the csv data and the Ui Values of this customer account"
+										+ "The values of the csv data and the Ui Values of this supplier account"
 										+ suppAccVal + " are same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
 					else
 						test.log(LogStatus.FAIL,
 								"EXPECTED: " + suppAccVal
-								+ "The values of the csv data and the Ui Values of this customer account"
+								+ "The values of the csv data and the Ui Values of this supplier account"
 								+ suppAccVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::" + suppAccVal
-								+ "The values of the csv data and the Ui Values of this customer account"
+								+ "The values of the csv data and the Ui Values of this supplier account"
 								+ suppAccVal + " are not same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
 //				} catch (Exception e) {
 //					
@@ -606,6 +628,28 @@ public class TC_05_SelectSupplier implements ApplicationConstants {
 		}
 
 		return exceldata;
+	}
+	
+	private void validateTableHeaders(CommonUtils cu, String tabHeadsStr) {
+		
+		cu.getScreenShot("Table header validation");
+		String[] tableHeaders = tabHeadsStr.trim().split("~");
+		for(int i=0;i<tableHeaders.length;i++)
+		{
+			String currHeaderval = cu.getText("dynamicTableHeader", "$index$", ""+(i+1));
+			if(tableHeaders[i].equals(currHeaderval))
+				test.log(LogStatus.PASS,
+						"EXPECTED: Header name for index "+(i+1)+" should be "+tableHeaders[i],
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Header name for index "+(i+1)+"  is same as "+tableHeaders[i]+"</span>");
+			else
+			{
+				test.log(LogStatus.FAIL,
+						"EXPECTED: Header name for index "+(i+1)+" should be "+tableHeaders[i],
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Header name for index "+(i+1)+"  is same not as "+tableHeaders[i]+". It is having this vaule: "+currHeaderval+"</span>");				
+			}
+			
+		}
+		
 	}
 
 	@BeforeMethod

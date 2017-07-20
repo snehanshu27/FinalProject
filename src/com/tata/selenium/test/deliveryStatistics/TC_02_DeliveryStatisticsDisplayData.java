@@ -42,7 +42,7 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 	public void DO(String uniqueDataId, String testCaseId) throws Exception {
 		// Starting the extent report
 		test = extent.startTest(
-				"Execution triggered for - TC_02_DeliveryStatisticsDisplayData -with TestdataId: " + uniqueDataId);
+				"Execution triggered for - "+TC_02_DeliveryStatisticsDisplayData.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 
 		// Reading excel values
@@ -88,11 +88,12 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-		cu.checkMessage("application_PopUpMessage", "After loading the page",
-				"No data for the selected input parameters");
+//		cu.checkMessage("application_PopUpMessage", "After loading the page",
+//				"No data for the selected input parameters");
 
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
 		cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
 		cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 		cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));

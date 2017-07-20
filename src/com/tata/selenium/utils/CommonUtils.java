@@ -258,6 +258,7 @@ public class CommonUtils implements ApplicationConstants {
 		} else {
 			LOGGER.info("LogStatus " + value);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			Assert.fail("Test case is having some failed/warning steps. Please check in the report");
 		}
 
 	}
@@ -711,7 +712,7 @@ public class CommonUtils implements ApplicationConstants {
 				oSelect.selectByVisibleText(value);
 				printLogs("Selected - '" + value + "' from the dropdown");
 				test.log(LogStatus.PASS, "Drop down should be selected",
-						"Drop down value -'" + value + "'- selected sucessfully");
+						"Drop down value -'" + value + "'- selected from field "+filedname+" sucessfully");
 			}
 			return true;
 		} catch (Exception e) {
@@ -719,13 +720,36 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info("Dropdown selection failed..." + e);
 			printLogs("Dropdown selection failed..." + e);
 			test.log(LogStatus.FAIL, "Drop down should be selected",
-					"Drop down value -'" + value + "'- could not be selected because -" + e);
+					"Drop down value -'" + value + "'- could not be selected from filedname "+filedname+" because -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
 		}
 	}
 
+	public boolean deselectDropDownByVisibleText(String filedname, String value) {
+		try {
+			if (value != null && value.trim().length() > 0) {
+				WebElement supplierName = driver.findElement(putility.getObject(filedname));
+
+				Select oSelect = new Select(supplierName);
+				oSelect.deselectByVisibleText(value);
+				printLogs("DeSelected - '" + value + "' from the dropdown");
+				test.log(LogStatus.PASS, "Drop down should be DeSelected",
+						"Drop down value -'" + value + "'- DeSelected from field "+filedname+" sucessfully");
+			}
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + value);
+			LOGGER.info("Dropdown DeSelected failed..." + e);
+			printLogs("Dropdown DeSelected failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down should be DeSelected",
+					"Drop down value -'" + value + "'- could not be DeSelected from filedname "+filedname+" because -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
 	public boolean SelectDropDownByVisibleTextCustomMMX(String dropDownButton, String dropDownSearchTextbox,
 			String dynamicLabelOption, String value) {
 		try {
