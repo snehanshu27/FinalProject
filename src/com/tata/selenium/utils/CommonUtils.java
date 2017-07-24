@@ -124,7 +124,7 @@ public class CommonUtils implements ApplicationConstants {
 	 * @throws Exception
 	 *             throwing exception for any error occurring in try block
 	 */
-	public WebDriver LaunchUrl(String strUrl) {
+	public WebDriver LaunchUrl(String strUrl1) {
 		try {
 			Log.info("Launching url");
 			LOGGER.info("Launching url :: " + MyConstants.getBrowser());
@@ -196,16 +196,16 @@ public class CommonUtils implements ApplicationConstants {
 			// Deleting all browser cookies
 			driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
 			// Command to launch URL
-			driver.get(strUrl);
-			printLogs("URL launched is : " + strUrl);
+			driver.get(APP_URL);
+			printLogs("URL launched is : " + APP_URL);
 			driver.manage().window().maximize();
 			test.log(LogStatus.PASS, "URL should be launched",
-					"TATA Messaging Exchange App  '" + strUrl + "' Launced sucessfully");
+					"TATA Messaging Exchange App  '" + APP_URL + "' Launced sucessfully");
 		} catch (Exception e) {
 			LOGGER.info(" Url launch failed : " + e);
 			printLogs(" Url launch failed : " + e);
 			getScreenShot("Url_Launch_Failed");
-			test.log(LogStatus.FAIL, "URL:  " + strUrl + " could not be launched - " + e);
+			test.log(LogStatus.FAIL, "URL:  " + APP_URL + " could not be launched - " + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			Assert.fail("Error occured while launching the url -   " + e);
