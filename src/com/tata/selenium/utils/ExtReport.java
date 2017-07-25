@@ -14,7 +14,7 @@ public class ExtReport implements ApplicationConstants {
 		String path;
 		path = REPORT_PATH + "//" + moduleName + CommonUtils.getTimeStamp() + ".html";
 				
-		CommonUtils.printConsole(path);
+		CommonUtils.printConsole("ReportPath: "+path);
 		extent = new ExtentReports(path, false);
 		extent.config().documentTitle("TataMessagingExhangeApp").reportName("TataMessagingExhangeApp  Automation");
 
