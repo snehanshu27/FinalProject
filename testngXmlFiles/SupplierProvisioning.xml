@@ -44,13 +44,13 @@
     </classes>
   </test>  -->
   
-  <!--  <test name="t5">
+   <test name="t5">
     <parameter name="testCaseId" value="TC_05"/>
     <parameter name="uniqueDataId" value="Data_05"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_05_SupplierCreationNegativeValidation"/>
     </classes>
-  </test>  -->
+  </test> 
   
   <!-- <test name="t6">
     <parameter name="testCaseId" value="TC_06"/>

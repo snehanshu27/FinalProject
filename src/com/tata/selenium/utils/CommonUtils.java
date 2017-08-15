@@ -882,6 +882,34 @@ public class CommonUtils implements ApplicationConstants {
 		 * popUpName + "' at step - " + testStep);
 		 */
 	}
+	
+	public void check_Pop_Up1(String popFieldName, String testStep) {
+		boolean val = false;
+		String popUpName = null;
+		try {
+			WebElement objPath = driver.findElement(putility.getObject(popFieldName));
+
+			if ((objPath).isDisplayed()) {
+				val = true;
+				printLogs("POP Up has appeared now");
+				getScreenShot(testStep);
+				WebElement element = driver.findElement(putility.getObject("application_PopUpMessage"));
+				popUpName = element.getText();
+				test.log(LogStatus.PASS, "Test failed during  " + testStep,
+						"Pop up is being displayed and it is  - " + popUpName);
+				driver.findElement(putility.getObject("application_PopUpOk")).click();
+				excelUtils.setCellData(sheetName, "PASS", uniqueDataId, "Result_Status");
+				excelUtils.setCellData(sheetName, popUpName, uniqueDataId, "Result_Errors");
+				printLogs("Error occured because  Pop up is being displayed and it is  - " + popUpName);
+			}
+		} catch (Exception e) {
+			LOGGER.info("ERROR " + e);
+		}
+		/*
+		 * if (val) Assert.fail("Error occured because  of POP Up - '" +
+		 * popUpName + "' at step - " + testStep);
+		 */
+	}
 
 	public void checkMessage(String popFieldName, String testStep, String expectedPopUpMsg) {
 		String popUpName = null;
@@ -928,6 +956,54 @@ public class CommonUtils implements ApplicationConstants {
 
 		}
 	}
+	
+	
+	public void checkMessage1(String popFieldName, String testStep, String expectedPopUpMsg) {
+		String popUpName = null;
+		try {
+			WebElement objPath = driver.findElement(putility.getObject(popFieldName));
+			if ((objPath).isDisplayed()) {
+				printLogs("POP Up has appeared now");
+				getScreenShot(testStep);
+				WebElement element = driver.findElement(putility.getObject("application_PopUpMessage"));
+				popUpName = element.getText().trim();
+				if (popUpName.equalsIgnoreCase(expectedPopUpMsg.trim())) {
+					test.log(LogStatus.PASS, "POP Up is expected at " + testStep,
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up is being displayed and it is  - "
+									+ popUpName + "</span>");
+					driver.findElement(putility.getObject("application_PopUpOk")).click();
+					excelUtils.setCellData(sheetName, "PASS", uniqueDataId, "Result_Status");
+					excelUtils.setCellData(sheetName, popUpName, uniqueDataId, "Result_Errors");
+					printLogs("Validation passed as Pop up is being displayed and it is  - " + popUpName);
+				} else {
+					printLogs("Appeared Pop is  - " + popUpName + "  but expected POP Up was " + expectedPopUpMsg);
+					excelUtils.setCellData(sheetName, popUpName, uniqueDataId, "Result_Errors");
+					excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+					test.log(LogStatus.WARNING, "Expected POP Up is-  " + expectedPopUpMsg,
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up appeared is different than expected."
+									+ popUpName + "</span>");
+					driver.findElement(putility.getObject("application_PopUpOk")).click();
+				}
+			} else {
+				excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+				excelUtils.setCellData(sheetName, popUpName, uniqueDataId, "Result_Errors");
+				printLogs("Validation failed as expected Pop up did not get displayed");
+				test.log(LogStatus.FAIL, "POP Up is expected at " + testStep,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up did not get displayed</span>");
+			}
+		} catch (Exception e) {
+
+			getScreenShot("Error occured while checking popup message/ accepting popup. ");
+			LOGGER.info("Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			printLogs("Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			test.log(LogStatus.FAIL, "Popup message should be verified and accecpted",
+					"Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+
+		}
+	}
+
 
 	public WebElement returnElement(String fieldName) {
 		WebElement objPath = null;

@@ -88,7 +88,19 @@ public class TC_05_SupplierCreationNegativeValidation implements ApplicationCons
 		cu.newWindowHandles(parentWindow);
 		
 		//Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
+		//cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
+		
+		
+		
+		System.out.println(dataMap.get("Supplier_Name"));
+		
+		cu.clickElement("nws_supplier_name");
+		cu.sleep(1000);
+		cu.sendKeys("nws_Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("nws_Supplier_Name_DropDown_Dynamic_LabelOption", "$supplieraccountname$", dataMap.get("Supplier_Name"));
+		
+		
 		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Service", dataMap.get("Service"));
@@ -101,7 +113,7 @@ public class TC_05_SupplierCreationNegativeValidation implements ApplicationCons
 
 	
 		//Checking if any error occured in creating new Supplier
-		cu.checkMessage("application_PopUpTitle", "Creation of new Supplier","Please enter all mandatory input parameters");
+		cu.checkMessage1("application_PopUpTitle", "Creation of new Supplier","Please enter all mandatory input parameters.");
 		
 		cu.switchToWindow(parentWindow);
 		
