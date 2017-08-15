@@ -136,123 +136,123 @@ public class TC_04_RAValidateDataMOSMS implements ApplicationConstants {
 		/*if("--".equals(price.trim()))
 		{
 			if(cu.existElement("rowColorPath", "$CustomerAcc$", dataMap.get("CustAccName")))
-				test.log(LogStatus.PASS, "EXPECTECD: Row should be in red colour if price is empty", "Validation:  <span style='font-weight:bold;'>ACTUAL:: Row is in red colour since price is empty</span>");
+				test.log(LogStatus.PASS, "EXPECTED: Row should be in red colour if price is empty", "Validation:  <span style='font-weight:bold;'>ACTUAL:: Row is in red colour since price is empty</span>");
 			else
-				test.log(LogStatus.FAIL, "EXPECTECD: Row should be in red colour if price is empty", "Validation:  <span style='font-weight:bold;'>ACTUAL:: Row displayed in some othercolor than red color for price is empty</span>");
+				test.log(LogStatus.FAIL, "EXPECTED: Row should be in red colour if price is empty", "Validation:  <span style='font-weight:bold;'>ACTUAL:: Row displayed in some othercolor than red color for price is empty</span>");
 			
 		}*/
 		
 		//compare UI and data sheet values for respective CustomerAcc
 		if (cu.existElement("dynamicCustomerAcc", "$CustomerAcc$", dataMap.get("dynamicEffectiveDate"))) {
 
-			test.log(LogStatus.PASS, "EXPECTECD: CustomerAccountName should be displayed",
+			test.log(LogStatus.PASS, "EXPECTED: CustomerAccountName should be displayed",
 					"Validation:  <span style='font-weight:bold;'>ACTUAL::  CustomerAccountName is displayed as - "
 							+ custAccName + "</span>");
 			if (dataMap.get("CustomerAccLst").equalsIgnoreCase(custAccName)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: CustomerAccountName should be displayed as- " + dataMap.get("CustAccName"),
+						"EXPECTED: CustomerAccountName should be displayed as- " + dataMap.get("CustAccName"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  CustomerAccountName is displayed as - "
 								+ custAccName + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: CustomerAccountName should be displayed as- " + dataMap.get("CustAccName"),
+						"EXPECTED: CustomerAccountName should be displayed as- " + dataMap.get("CustAccName"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  CustomerAccountName is displayed as - "
 								+ custAccName + "</span>");
 			}
 
 			if (dataMap.get("dynamicAccStatus").equalsIgnoreCase(accStatus)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: AccountStatus should be displayed as- " + dataMap.get("dynamicAccStatus"),
+						"EXPECTED: AccountStatus should be displayed as- " + dataMap.get("dynamicAccStatus"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  AccountStatus is displayed as - "
 								+ accStatus + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: AccountStatus should be displayed as- " + dataMap.get("dynamicAccStatus"),
+						"EXPECTED: AccountStatus should be displayed as- " + dataMap.get("dynamicAccStatus"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  AccountStatus is displayed as - "
 								+ accStatus + "</span>");
 			}
 
 			if (dataMap.get("dynamicProduct").equalsIgnoreCase(product)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: ProductName should be displayed as- " + dataMap.get("dynamicProduct"),
+						"EXPECTED: ProductName should be displayed as- " + dataMap.get("dynamicProduct"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  ProductName is displayed as - "
 								+ product + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: ProductName should be displayed as- " + dataMap.get("dynamicProduct"),
+						"EXPECTED: ProductName should be displayed as- " + dataMap.get("dynamicProduct"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  ProductName is displayed as - "
 								+ product + "</span>");
 			}
 
 			if (dataMap.get("dynamicCountry").equalsIgnoreCase(country)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: CountryName should be displayed as- " + dataMap.get("dynamicCountry"),
+						"EXPECTED: CountryName should be displayed as- " + dataMap.get("dynamicCountry"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  CountryName is displayed as - "
 								+ country + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: CountryName should be displayed as- " + dataMap.get("dynamicCountry"),
+						"EXPECTED: CountryName should be displayed as- " + dataMap.get("dynamicCountry"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  CountryName is displayed as - "
 								+ country + "</span>");
 			}
 
 			if (dataMap.get("dynamicEffectiveDate").equalsIgnoreCase(effdate)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: UpcomingCostEffdate should be displayed as- " + dataMap.get("dynamicEffectiveDate"),
+						"EXPECTED: UpcomingCostEffdate should be displayed as- " + dataMap.get("dynamicEffectiveDate"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  UpcomingCostEffdate is displayed as - "
 								+ effdate + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: UpcomingCostEffdate should be displayed as- " + dataMap.get("dynamicEffectiveDate"),
+						"EXPECTED: UpcomingCostEffdate should be displayed as- " + dataMap.get("dynamicEffectiveDate"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  UpcomingCostEffdate is displayed as - "
 								+ effdate + "</span>");
 			}
 
 			if (dataMap.get("dynamicPrice").equalsIgnoreCase(price)) {
-				test.log(LogStatus.PASS, "EXPECTECD: Price should be displayed as- " + dataMap.get("dynamicPrice"),
+				test.log(LogStatus.PASS, "EXPECTED: Price should be displayed as- " + dataMap.get("dynamicPrice"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  Price is displayed as - " + price
 								+ "</span>");
 			} else {
-				test.log(LogStatus.FAIL, "EXPECTECD: Price should be displayed as- " + dataMap.get("dynamicPrice"),
+				test.log(LogStatus.FAIL, "EXPECTED: Price should be displayed as- " + dataMap.get("dynamicPrice"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  Price is displayed as - " + price
 								+ "</span>");
 			}
 
 			if (dataMap.get("dynamicVolume").equalsIgnoreCase(volume)) {
-				test.log(LogStatus.PASS, "EXPECTECD: Volume should be displayed as- " + dataMap.get("dynamicVolume"),
+				test.log(LogStatus.PASS, "EXPECTED: Volume should be displayed as- " + dataMap.get("dynamicVolume"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  Volume is displayed as - " + volume
 								+ "</span>");
 			} else {
-				test.log(LogStatus.FAIL, "EXPECTECD: Volume should be displayed as- " + dataMap.get("dynamicVolume"),
+				test.log(LogStatus.FAIL, "EXPECTED: Volume should be displayed as- " + dataMap.get("dynamicVolume"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  Volume is displayed as - " + volume
 								+ "</span>");
 			}
 
 			if (dataMap.get("dynamicTotalAmt").equalsIgnoreCase(totalAmt)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: TotalAmount should be displayed as- " + dataMap.get("dynamicTotalAmt"),
+						"EXPECTED: TotalAmount should be displayed as- " + dataMap.get("dynamicTotalAmt"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  TotalAmount is displayed as - "
 								+ totalAmt + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: TotalAmount should be displayed as- " + dataMap.get("dynamicTotalAmt"),
+						"EXPECTED: TotalAmount should be displayed as- " + dataMap.get("dynamicTotalAmt"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  TotalAmount is displayed as - "
 								+ totalAmt + "</span>");
 			}
 			if (dataMap.get("dynamicVolumeDiff").equalsIgnoreCase(volumediff)) {
 				test.log(LogStatus.PASS,
-						"EXPECTECD: VolumeDiff should be displayed as- " + dataMap.get("dynamicVolumeDiff"),
+						"EXPECTED: VolumeDiff should be displayed as- " + dataMap.get("dynamicVolumeDiff"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  VolumeDiff is displayed as - "
 								+ volumediff + "</span>");
 			} else {
 				test.log(LogStatus.FAIL,
-						"EXPECTECD: VolumeDiff should be displayed as- " + dataMap.get("dynamicVolumeDiff"),
+						"EXPECTED: VolumeDiff should be displayed as- " + dataMap.get("dynamicVolumeDiff"),
 						"Validation:  <span style='font-weight:bold;'>ACTUAL::  VolumeDiff is displayed as - "
 								+ volumediff + "</span>");
 			}
 
 		} else {
-			test.log(LogStatus.FAIL, "EXPECTECD: CustomerAccountName should be displayed",
+			test.log(LogStatus.FAIL, "EXPECTED: CustomerAccountName should be displayed",
 					"Validation:  <span style='font-weight:bold;'>ACTUAL::  CustomerAccountName did not get displayed in the page</span>");
 			Assert.fail("Customer Acc Name record did not get displayed.");
 		}
@@ -281,7 +281,7 @@ public class TC_04_RAValidateDataMOSMS implements ApplicationConstants {
 		String expectedFileName = "\\" + "RA_Daily_Report" + ".csv";
 		if (csvFilePath.trim().contains(expectedFileName.trim()))
 			test.log(LogStatus.PASS,
-					"EXPECTECD: Exported file name should be in 'RA_Daily_Report.csv' - '"
+					"EXPECTED: Exported file name should be in 'RA_Daily_Report.csv' - '"
 							+ expectedFileName + "'",
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is same as 'RA_Daily_Report.csv' - '"
 							+ expectedFileName + "'</span>");
@@ -289,7 +289,7 @@ public class TC_04_RAValidateDataMOSMS implements ApplicationConstants {
 		else {
 			cu.getScreenShot("Exported file name validation");
 			test.log(LogStatus.FAIL,
-					"EXPECTECD: Exported file name should be in 'RA_Daily_Report.csv' - '"
+					"EXPECTED: Exported file name should be in 'RA_Daily_Report.csv' - '"
 							+ expectedFileName + "'",
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is Not same as in 'RA_Daily_Report.csv' - '"
 							+ expectedFileName + "' Acutal file name: " + csvFilePath + "</span>");
@@ -308,7 +308,7 @@ public class TC_04_RAValidateDataMOSMS implements ApplicationConstants {
 				&& csvDatamap.get("Total Amount").equals(dataMap.get("TotalAmt")))
 
 		{
-			test.log(LogStatus.PASS, "EXPECTECD: The values should be same in both csv and UI",
+			test.log(LogStatus.PASS, "EXPECTED: The values should be same in both csv and UI",
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: The values are same in both csv and UI'</span>");
 		} else {
 
@@ -324,7 +324,7 @@ public class TC_04_RAValidateDataMOSMS implements ApplicationConstants {
 					+ dataMap.get("TotalAmt")+"Volume_Diff_csv: " + csvDatamap.get("Volume Diff") + " Volume_Diff_UI: "
 							+ dataMap.get("VolumeDiff");
 
-			test.log(LogStatus.FAIL, "EXPECTECD: The values should be same in both csv and UI",
+			test.log(LogStatus.FAIL, "EXPECTED: The values should be same in both csv and UI",
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: The values are NOT same in both csv and UI - Actual diifernce between UI and CSV is : "
 							+ actualDiff + " </span>");
 		}

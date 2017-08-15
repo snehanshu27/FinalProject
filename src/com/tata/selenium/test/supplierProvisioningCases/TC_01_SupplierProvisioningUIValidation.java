@@ -85,8 +85,21 @@ public class TC_01_SupplierProvisioningUIValidation implements ApplicationConsta
 		cu.SwitchFrames("target");
 	
 		//Validating all editable drop down
-		cu.checkEditableDropDown("Supplier_Account_Name", dataMap.get("Supplier_Account_Name"));
+		/*cu.checkEditableDropDown("Supplier_Account_Name", dataMap.get("Supplier_Account_Name"));
 		cu.checkEditableDropDown("Supplier_Name", dataMap.get("Supplier_Name"));
+		*/
+		
+		cu.clickElement("Supplier_Name_DropDown_Button");
+		/*cu.sendKeys("Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("Supplier_Name_DropDown_Dynamic_LabelOPtion", "$suppliername$", dataMap.get("Supplier_Name"));*/
+		
+		cu.clickElement("Supplier_Account_Name_DropDown_Button");
+		/*cu.sendKeys("Supplier_Account_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Account_Name"), false);
+		cu.sleep(5000);
+		cu.clickElement("Supplier_Account_Name_DropDown_Dynamic_LabelOPtion", "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
+		*/
+		
 		cu.checkEditableDropDown("Instance", dataMap.get("Instance"));
 		cu.checkEditableDropDown("History", dataMap.get("History"));
 		cu.checkEditableDropDown("Account_Status", dataMap.get("Account_Status"));

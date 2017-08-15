@@ -18,16 +18,16 @@
     </classes>
   </test> -->
  
-    <!-- <test name="t2">
+   <!--  <test name="t2">
     <parameter name="testCaseId" value="TC_02"/>
     <parameter name="uniqueDataId" value="Data_02"/>
     <classes>
-      <class name="com.tata.selenium.test.supplierProvisioningCases.TC_02_SupplierCreation"/>
+      <class name="com.tata.selenium.test.supplierProvisioningCases.TC_020_SupplierCreation"/>
     </classes>
-  </test>   -->
+  </test>  
+   -->
   
-  
-  	 <!-- <test name="t3">
+  	<!--  <test name="t3">
     <parameter name="testCaseId" value="TC_03"/>
     <parameter name="uniqueDataId" value="Data_03"/>
     <classes>
@@ -60,7 +60,7 @@
     </classes>
   </test>  -->
   
- <!--  <test name="t7">
+  <!-- <test name="t7">
     <parameter name="testCaseId" value="TC_07"/>
     <parameter name="uniqueDataId" value="Data_07"/>
     <classes>
@@ -120,12 +120,12 @@
     </classes>
   </test> -->
   
-     <test name="t14">
+    <!--  <test name="t14">
     <parameter name="testCaseId" value="TC_13"/>
     <parameter name="uniqueDataId" value="Data_13"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_12_TrafficTabValidation"/>
     </classes>
-  </test>
+  </test> -->
   
 </suite>

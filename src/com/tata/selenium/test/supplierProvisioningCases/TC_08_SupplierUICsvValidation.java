@@ -84,8 +84,21 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
-		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
+		/*cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
+		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));*/
+		cu.clickElement("Supplier_Name_DropDown_Button");
+		cu.sendKeys("Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("Supplier_Name_DropDown_Dynamic_LabelOPtion", "$suppliername$", dataMap.get("Supplier_Name"));
+		
+         System.out.println(dataMap.get("Supplier_Name"));
+         System.out.println(dataMap.get("Supplier_Account_Name"));
+         
+		cu.clickElement("Supplier_Account_Name_DropDown_Button");
+		cu.sendKeys("Supplier_Account_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Account_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("Supplier_Account_Name_DropDown_Dynamic_LabelOPtion", "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
+		
 		cu.clickElement("supplier_DisplayBtn");
 		cu.waitForPageLoad("");
 		

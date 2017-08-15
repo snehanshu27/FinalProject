@@ -102,7 +102,7 @@ public class TC_03_DatePopUpValidation implements ApplicationConstants {
 		cu.clickElement("DisplayBtn");
 
 		cu.checkMessage("application_PopUpMessage", "To Date Less than from date: Validate pop-up message",
-				"Error: To Date should be greater than or equal to From");
+				"Error: To Date should be greater than or equal to From.");
 
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);

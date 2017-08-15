@@ -88,7 +88,9 @@ public class TC_03_SupplierCreationFormValidation implements ApplicationConstant
 		cu.newWindowHandles(parentWindow);
 		
 		//Selecting required values from drop down based on input
-		cu.checkEditableDropDown("nws_supplier_name", dataMap.get("Supplier_Name"));
+		//cu.checkEditableDropDown("nws_supplier_name", dataMap.get("Supplier_Name"));
+		
+		cu.clickElement("nws_supplier_name");
 		cu.checkEditableDropDown("nws_supplier_Category", dataMap.get("Supplier_Category"));
 		cu.checkEditableDropDown("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
 		cu.checkEditableDropDown("nws_supplier_Service", dataMap.get("Service"));

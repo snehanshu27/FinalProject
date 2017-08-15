@@ -35,7 +35,7 @@
 			<class
 				name="com.tata.selenium.test.ReceivablesCases.TC_02_ReceivablesUIValidationMobileLNS" />
 		</classes>
-	</test>
+	</test> -->
 
 	<test name="t4">
 		<parameter name="testCaseId" value="TC_03" />
@@ -54,23 +54,23 @@
 			<class
 				name="com.tata.selenium.test.ReceivablesCases.TC_03_DatePopUpValidation" />
 		</classes>
-	</test> -->
+	</test>
 
-	<test name="t6">
+	<!-- <test name="t6">
 		<parameter name="testCaseId" value="TC_04" />
 		<parameter name="uniqueDataId" value="Data_06" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.ReceivablesCases.TC_04_ValidateDataMobileLNS" />
 		</classes>
-	</test>
-	<!-- <test name="t7">
+	</test> -->
+	<test name="t7">
 		<parameter name="testCaseId" value="TC_05" />
 		<parameter name="uniqueDataId" value="Data_07" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.ReceivablesCases.TC_05_ValidateDataMTSMS" />
 		</classes>
-	</test> -->
+	</test>
 
 </suite>

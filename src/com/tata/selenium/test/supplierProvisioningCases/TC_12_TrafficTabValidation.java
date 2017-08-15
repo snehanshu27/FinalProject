@@ -73,25 +73,38 @@ public class TC_12_TrafficTabValidation implements ApplicationConstants {
 		
 		test.log(LogStatus.INFO, "Launch Application", "Usage: <span style='font-weight:bold;'>Going to Launch App</span>");
 		
-		CommonUtils cu1=new CommonUtils(driver,test, sheetName, uniqueDataId, testCaseId, properties);	
-		cu1.printLogs("Executing Test Case -"+testCaseId+" -with TestdataId : "+uniqueDataId);
-		driver =cu1.LaunchUrl(dataMap.get("URL"));
+		CommonUtils cu=new CommonUtils(driver,test, sheetName, uniqueDataId, testCaseId, properties);	
+		cu.printLogs("Executing Test Case -"+testCaseId+" -with TestdataId : "+uniqueDataId);
+		driver =cu.LaunchUrl(dataMap.get("URL"));
 
 		LoginPage loginPage= new LoginPage(driver,test, sheetName, uniqueDataId, testCaseId, properties);	
 		loginPage.dologin(dataMap.get("Username"), dataMap.get("Password"));
-		cu1.waitForPageLoad("MessagingInstanceHomePage");
+		cu.waitForPageLoad("MessagingInstanceHomePage");
 		MessagingInstanceHomePage msgInsHomePage = new MessagingInstanceHomePage(driver,test, sheetName, uniqueDataId, testCaseId, properties);	
 		msgInsHomePage.verifyLogin(test, testCaseId,sheetName);
 		
 		NavigationMenuPage navMenuPage=new NavigationMenuPage(driver,test, sheetName, uniqueDataId, testCaseId, properties);	
 		navMenuPage.navigateToMenu(dataMap.get("Navigation"));
-		cu1.SwitchFrames("bottom");
-		cu1.SwitchFrames("target");
+		cu.SwitchFrames("bottom");
+		cu.SwitchFrames("target");
 		
-		cu1.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
-		cu1.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
-		cu1.clickElement("supplier_DisplayBtn");
-		cu1.waitForPageLoad("");
+		/*cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
+		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));*/
+		
+		cu.clickElement("Supplier_Name_DropDown_Button");
+		cu.sendKeys("Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("Supplier_Name_DropDown_Dynamic_LabelOPtion", "$suppliername$", dataMap.get("Supplier_Name"));
+		
+         System.out.println(dataMap.get("Supplier_Name"));
+         System.out.println(dataMap.get("Supplier_Account_Name"));
+         
+		cu.clickElement("Supplier_Account_Name_DropDown_Button");
+		cu.sendKeys("Supplier_Account_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Account_Name"), false);
+		cu.sleep(1000);
+		cu.clickElement("Supplier_Account_Name_DropDown_Dynamic_LabelOPtion", "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
+		cu.clickElement("supplier_DisplayBtn");
+		cu.waitForPageLoad("");
 		
 		String Throttling=dataMap.get("Traffic_ThrottlingTxt");
 		String OASupport=dataMap.get("Traffic_OASupportLst");
@@ -104,19 +117,19 @@ public class TC_12_TrafficTabValidation implements ApplicationConstants {
 		
 		
 		//First validation: History Tab has 5 latest values or not.
-		 List<String> retStrOPs=cu1.getAllOptionsFromDropDown("Instance");
+		 List<String> retStrOPs=cu.getAllOptionsFromDropDown("Instance");
 		
-	   // cu1.checkFromDropDowntraffic("Instance","Traffic_DAWhiteTxt","Traffic_OABlackListTxt","Traffic_DABlackListTxt", 
+	   // cu.checkFromDropDowntraffic("Instance","Traffic_DAWhiteTxt","Traffic_OABlackListTxt","Traffic_DABlackListTxt", 
 	    //		"Traffic_OAPoolTxt","Traffic_OAListTxt","Traffic_OAWhiteTxt","Traffic_OASupportLst",retStrOPs,Throttling,DAWhite,OABlack,
 	    	//	DABlack,OAPool,OAList,OAWhite,OASupport);
 
 	    //Taking ScreenShot
-	    cu1.getScreenShot("ScreenShot of Traffic Information Section");	
-		test = cu1.getExTest();
+	    cu.getScreenShot("ScreenShot of Traffic Information Section");	
+		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
 		
 		//Printing pass/fail in the test data sheet
-		cu1.checkRunStatus();
+		cu.checkRunStatus();
 	}
 	
 	
