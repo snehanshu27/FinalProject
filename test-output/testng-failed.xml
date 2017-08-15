@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Suite]">
+  <parameter name="browser" value="chrome"/>
+  <parameter name="uniqueDataId" value="Data_05"/>
+  <parameter name="testCaseId" value="TC_05"/>
+  <listeners>
+    <listener class-name="com.tata.selenium.driver.Driver"/>
+  </listeners>
+  <test name="t5(failed)">
+    <parameter name="uniqueDataId" value="Data_05"/>
+    <parameter name="testCaseId" value="TC_05"/>
+    <classes>
+      <class name="com.tata.selenium.test.supplierProvisioningCases.TC_05_SupplierCreationNegativeValidation">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="DO" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierProvisioningCases.TC_05_SupplierCreationNegativeValidation -->
+    </classes>
+  </test> <!-- t5(failed) -->
+</suite> <!-- Failed suite [Suite] -->
