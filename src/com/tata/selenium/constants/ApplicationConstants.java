@@ -24,10 +24,10 @@ public interface ApplicationConstants {
 	public static final String dev="";
 	public static String FILE_DOWNLOAD_PATH="C:\\selenium\\files\\";
 	public static int implicitWait = 3;
-	public static final String APP_URL ="https://10.133.43.10:8443/MessagingInstance";
-	//public static final String APP_URL = System.getProperty("appURL");
+//	public static final String APP_URL ="https://10.133.43.10:8443/MessagingInstance";
+	public static final String APP_URL = System.getProperty("appURL");
 	
-	public static final boolean RUN_IN_REMOTE=false;
+	public static final boolean RUN_IN_REMOTE=true;
 	public static final String REMOTE_HOST_IP= System.getProperty("remoteHostIP");
 	public static final String GRID_HUB_PORT= System.getProperty("remoteGridHubPort");
 	public static final String DESKTOP_WIN_CONTROL_PORT= System.getProperty("remoteWinControlPort");
