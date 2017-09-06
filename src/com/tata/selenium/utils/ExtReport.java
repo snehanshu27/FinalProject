@@ -1,6 +1,8 @@
 package com.tata.selenium.utils;
 
 
+import java.io.File;
+
 import com.relevantcodes.extentreports.ExtentReports;
 import com.tata.selenium.constants.ApplicationConstants;
 
@@ -16,7 +18,7 @@ public class ExtReport implements ApplicationConstants {
 				
 		CommonUtils.printConsole("ReportPath: "+path);
 		extent = new ExtentReports(path, false);
-		extent.config().documentTitle("TataMessagingExhangeApp").reportName("TataMessagingExhangeApp  Automation");
+		extent.loadConfig(new File("extendReportConfig.xml"));		
 
 		return extent;
 	}

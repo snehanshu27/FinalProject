@@ -91,22 +91,18 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-//		cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
-//		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
+//		cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));		
+		cu.SelectDropDownByVisibleTextCustomMMX("Supplier_Name_DropDown_Button", "Supplier_Name_DropDown_SearchTextbox", "Supplier_Name_DropDown_Dynamic_LabelOPtion"
+				, "$suppliername$", dataMap.get("Supplier_Name"));
 		
-		cu.clickElement("Supplier_Name_DropDown_Button");
-		cu.sendKeys("Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
-		cu.sleep(1000);
-		cu.clickElement("Supplier_Name_DropDown_Dynamic_LabelOPtion", "$suppliername$", dataMap.get("Supplier_Name"));
+//		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
+		cu.SelectDropDownByVisibleTextCustomMMX("Supplier_Account_Name_DropDown_Button", "Supplier_Account_Name_DropDown_SearchTextbox", "Supplier_Account_Name_DropDown_Dynamic_LabelOPtion"
+				, "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
 		
          System.out.println(dataMap.get("Supplier_Name"));
          System.out.println(dataMap.get("Supplier_Account_Name"));
          
-		cu.clickElement("Supplier_Account_Name_DropDown_Button");
-		cu.sendKeys("Supplier_Account_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Account_Name"), false);
-		cu.sleep(1000);
-		cu.clickElement("Supplier_Account_Name_DropDown_Dynamic_LabelOPtion", "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
-		
+
 		cu.clickElement("supplier_DisplayBtn");
 		cu.waitForPageLoad("");
 		
@@ -246,6 +242,46 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 			
 		}
 		
+		
+		if(("Y").equalsIgnoreCase(dataMap.get("HTTPInformation_TAB"))){
+			
+			cu.clickElement("HTTP_InfoTab");
+			cu.sleep(1000);
+			cu.clickElement("HTTP_General_Parameters_Tab");
+			cu.sleep(1000);
+
+			if(!dataMap.get("HTTP_InterfaceTxt").isEmpty())
+				cu.SetData("HTTP_InterfaceTxt", dataMap.get("HTTP_InterfaceTxt").replace("{timestamp}", CommonUtils.getTimeStamp()));
+			
+			if(!dataMap.get("HTTP_Dlr_SupportLst").isEmpty())
+				cu.SelectDropDownByVisibleText("HTTP_Dlr_SupportLst", dataMap.get("HTTP_Dlr_SupportLst"));
+			
+			if(!dataMap.get("HTTP_Max_Pending_RequestTxt").isEmpty())
+				cu.SetData("HTTP_Max_Pending_RequestTxt", dataMap.get("HTTP_Max_Pending_RequestTxt"));
+			
+			if(!dataMap.get("HTTP_Max_SMS_Octet_LengthTxt").isEmpty())
+				cu.SetData("HTTP_Max_SMS_Octet_LengthTxt", dataMap.get("HTTP_Max_SMS_Octet_LengthTxt"));
+			
+			if(!dataMap.get("HTTP_Sucess_Status_RegexTxt").isEmpty() && !dataMap.get("HTTP_Message_ID_RegexTxt").isEmpty() && !dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt").isEmpty()
+					&& !dataMap.get("HTTP_Send_URLTxt").isEmpty() )
+			{
+				cu.clickElement("HTTP_Outgoing_Message_Parameters_Tab");
+				cu.sleep(1000);
+				
+				if(!dataMap.get("HTTP_Sucess_Status_RegexTxt").isEmpty())
+					cu.SetData("HTTP_Sucess_Status_RegexTxt", dataMap.get("HTTP_Sucess_Status_RegexTxt"));
+				
+				if(!dataMap.get("HTTP_Message_ID_RegexTxt").isEmpty())
+					cu.SetData("HTTP_Message_ID_RegexTxt", dataMap.get("HTTP_Message_ID_RegexTxt"));
+				
+				if(!dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt").isEmpty())
+					cu.SetData("HTTP_Permanent_Failure_Status_RegexTxt", dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt"));
+				
+				if(!dataMap.get("HTTP_Send_URLTxt").isEmpty())
+					cu.SetData("HTTP_Send_URLTxt", dataMap.get("HTTP_Send_URLTxt"));
+			}			
+		}
+		
 		if(("Y").equalsIgnoreCase(dataMap.get("NumberManagement_TAB"))){
 			cu.clickElement("NumberMgt_InfoTab");
 			
@@ -298,7 +334,7 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 		  Log.startTestCase("Start Execution");
 		  Log.startTestCase(testCaseId);
 //		  extent = ExtReport.instance("SupplierProvisioning");
-		  extent = ExtReport.instance("Report");
+		  extent = ExtReport.instance("SupplierProvisioning");
 	  }	
 	
 	  @AfterMethod

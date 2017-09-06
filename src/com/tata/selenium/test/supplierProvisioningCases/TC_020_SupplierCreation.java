@@ -87,7 +87,10 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 		cu.newWindowHandles(parentWindow);
 
 		//Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
+//		cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
+		cu.SelectDropDownByVisibleTextCustomMMX("nws_supplier_name", "nws_Supplier_Name_DropDown_SearchTextbox", "nws_Supplier_Name_DropDown_Dynamic_LabelOption"
+				, "$suppliername$", dataMap.get("Supplier_Name"));
+		
 		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Service", dataMap.get("Service"));
@@ -107,7 +110,7 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 
-		/*if(cu.currentSelectedVal("Supplier_Account_Name").equalsIgnoreCase(dataMap.get("Supplier_Account_Name"))
+		if(cu.getText("Supplier_Name_DropDown_Button").equalsIgnoreCase(dataMap.get("Supplier_Account_Name"))
 				&& ("ALL").equalsIgnoreCase(cu.currentSelectedVal("Instance"))){
 			test.log(LogStatus.PASS, "EXPECTED:: All values should be reflected in Input parameter", "Usage: <span style='font-weight:bold;'>ACTUAL:: All values reflected in Input parameter sucessfully</span>");
 			cu.printLogs("All values reflected in Input parameter sucessfully");
@@ -117,7 +120,7 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 			test.log(LogStatus.FAIL, "EXPECTED:: All values should be reflected in Input parameter", "Usage: <span style='font-weight:bold;'>ACTUAL:: All values did not get reflected in Input parameter</span>");
 			cu.printLogs("All values did not get reflected in Input parameter");
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
-		}*/
+		}
 
 		//String parentWindow = hu.getCurrWindowName();
 		CommonUtils.printConsole("parentWindow   "+parentWindow);

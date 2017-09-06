@@ -86,10 +86,22 @@ public class TC_02_SupplierCreation implements ApplicationConstants {
 		
 		cu.newWindowHandles(parentWindow);
 		
+		//replace {timestamp} 
+		dataMap.put("Supplier_Account_Name", dataMap.get("Supplier_Account_Name").replace("{timestamp}", CommonUtils.getTimeStamp()));
+		
 		//Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
-		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
-		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
+//		cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
+		cu.SelectDropDownByVisibleTextCustomMMX("nws_supplier_name", "nws_Supplier_Name_DropDown_SearchTextbox", "nws_Supplier_Name_DropDown_Dynamic_LabelOption"
+				, "$suppliername$", dataMap.get("Supplier_Name"));
+		
+//		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
+//		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
+		
+		if(!dataMap.get("Supplier_Category").isEmpty())
+			cu.checkNonEditableDropDown("nws_supplier_Category", dataMap.get("Supplier_Category"));
+		if(!dataMap.get("Supplier_Currency").isEmpty())
+			cu.checkNonEditableDropDown("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
+		
 		cu.SelectDropDownByVisibleText("nws_supplier_Service", dataMap.get("Service"));
 		cu.SelectDropDownByVisibleText("nws_supplier_connectivityType", dataMap.get("Connectivity_Type"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Security", dataMap.get("Security"));
@@ -107,7 +119,7 @@ public class TC_02_SupplierCreation implements ApplicationConstants {
 		cu.SwitchFrames("target");
 	
 		
-		if(cu.currentSelectedVal("Supplier_Account_Name").equalsIgnoreCase(dataMap.get("Supplier_Account_Name"))
+		if(cu.getText("Supplier_Account_Name_DropDown_Button").contains(dataMap.get("Supplier_Account_Name"))
 				&& ("ALL").equalsIgnoreCase(cu.currentSelectedVal("Instance"))){
 			test.log(LogStatus.PASS, "EXPECTED:: All values should be reflected in Input parameter", "Usage: <span style='font-weight:bold;'>ACTUAL:: All values reflected in Input parameter sucessfully</span>");
 			cu.printLogs("All values reflected in Input parameter sucessfully");

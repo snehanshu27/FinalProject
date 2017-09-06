@@ -1,11 +1,17 @@
 package com.tata.selenium.test.supplierProvisioningCases;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
@@ -20,36 +26,36 @@ import com.tata.selenium.constants.ApplicationConstants;
 import com.tata.selenium.pages.LoginPage;
 import com.tata.selenium.pages.MessagingInstanceHomePage;
 import com.tata.selenium.pages.NavigationMenuPage;
+import com.tata.selenium.utils.CSVUtil;
+import com.tata.selenium.utils.CommonUtils;
 import com.tata.selenium.utils.CommonUtils;
 import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
+import com.tata.selenium.utils.PropertyUtility;
 
 
-/**
- * @date 
- * @author Sonali Das
- * @description This class will perform action in MMX application
- */
+public class TC_14_HTTPTabNegativeValidation implements ApplicationConstants {
 
-public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants {
-	
-	private static final Logger LOGGER = Logger.getLogger(TC_04_SmppPasswordHostIPValidation.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_14_HTTPTabNegativeValidation.class.getName());
+	private static final String String = null;
 	String properties = OBJECT_REPO_FILEPATH;
 	ExcelUtils excelUtils = new ExcelUtils();
-	
-	private WebDriver driver;
 	Map<String, String> dataMap = new HashMap<>();
+	protected WebDriver driver;
 	private ExtentTest test ;
 	private ExtentReports extent;
+	PropertyUtility putility;
+	
+	
 	
 	@Test
 	@Parameters({"uniqueDataId", "testCaseId"})		
 	public void DO (String uniqueDataId, String testCaseId) throws Exception {
 		//Starting the extent report
-		test = extent.startTest("Execution triggered for  - TC_04_SmppPasswordHostIPValidation  -with TestdataId: "+uniqueDataId);
+		test = extent.startTest("Execution triggered for  - TC_12_TrafficTabValidation -with TestdataId: "+uniqueDataId);
 		String sheetName="Supplier_Provisioning_Screen";
-		
+		String Traffic_ThrottlingTxt=null;
 		try{
 			ExcelUtils excel = new ExcelUtils();
 			excel.setExcelFile(DATA_FILEPATH,sheetName);
@@ -89,45 +95,48 @@ public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants 
 //		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
 		cu.SelectDropDownByVisibleTextCustomMMX("Supplier_Account_Name_DropDown_Button", "Supplier_Account_Name_DropDown_SearchTextbox", "Supplier_Account_Name_DropDown_Dynamic_LabelOPtion"
 				, "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
-
 		
          System.out.println(dataMap.get("Supplier_Name"));
          System.out.println(dataMap.get("Supplier_Account_Name"));
-
-		
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+         
 		cu.clickElement("supplier_DisplayBtn");
-		cu.clickElement("supplier_EditBtn");
+		cu.waitForPageLoad("");
 		
-		if(("Y").equalsIgnoreCase(dataMap.get("SMPP_InfoTab"))){
-			cu.clickElement("SMPP_InfoTab");
-			cu.waitForPageLoad("SupplierProvisioning");
-			//Doing validation if password field has some value in test data
-			if(dataMap.get("SMPP_PasswordTxt").trim().length() >0){
-				cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
-				cu.clickElement("supplier_SubmitBtn");
-				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Password","Error: SMPP Password cannot be more than 8 characters");
-			}
-			
-			//Doing validation if Host IP field has some value in test data
-			if(dataMap.get("SMPP_HostIPTxt").trim().length() >0){
-				cu.SetData("SMPP_HostIPTxt", dataMap.get("SMPP_HostIPTxt"));
-				cu.clickElement("supplier_SubmitBtn");
-				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Host IP","Error: Please enter valid Host IP address");
-			}
-			
-			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){
-				String[] data=dataMap.get("SMPP_DataCodeLst").split(";");
-				for(String val : data)
-					cu.SelectDropDownByVisibleText("SMPP_DataCodeLst", val);
-			}
-			
-		}
-	
-		//Taking screenshot and Logging out
-		cu.getScreenShot("Creation of New Supplier");
+		cu.clickElement("supplier_EditBtn");
+		cu.waitForPageLoad("");
+		
+
+		//Checking Popup of value exceeding max limit
+		cu.clickElement("HTTP_InfoTab");
+		cu.sleep(1000);
+		cu.clickElement("HTTP_General_Parameters_Tab");
+		cu.sleep(1000);
+		
+		if(!dataMap.get("HTTP_InterfaceTxt").isEmpty() && dataMap.get("HTTP_InterfaceTxt").length()>64)
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_InterfaceTxt", dataMap.get("HTTP_InterfaceTxt"), "Error: HTTP Interface should have length between 1 to 64 characters.");
+		
+		if(!dataMap.get("HTTP_Max_Pending_RequestTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Max_Pending_RequestTxt", dataMap.get("HTTP_Max_Pending_RequestTxt"), "Error: Max Pending HTTP Request should be a unsigned numeric value with less than 32 bits.");
+
+		if(!dataMap.get("HTTP_Max_SMS_Octet_LengthTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Max_SMS_Octet_LengthTxt", dataMap.get("HTTP_Max_SMS_Octet_LengthTxt"), "Error: Max SMS Octet Length should be a unsigned numeric value with less than 32 bits.");
+
+		cu.clickElement("HTTP_Outgoing_Message_Parameters_Tab");
+		cu.sleep(1000);
+		
+		if(!dataMap.get("HTTP_Sucess_Status_RegexTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Sucess_Status_RegexTxt", dataMap.get("HTTP_Sucess_Status_RegexTxt"), "Error: Success Status Regex should have length between 1 to 255 characters.");
+
+
+		if(!dataMap.get("HTTP_Message_ID_RegexTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Message_ID_RegexTxt", dataMap.get("HTTP_Message_ID_RegexTxt"), "Error: Message ID Regex should have length between 1 to 255 characters.");
+
+		if(!dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Permanent_Failure_Status_RegexTxt", dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt"), "Error: Permanent Failure Status Regex should have length between 1 to 255 characters.");
+
+		if(!dataMap.get("HTTP_Send_URLTxt").isEmpty())
+			fillHTTPFieldAndValiadateErrorMessage(cu, "HTTP_Send_URLTxt", dataMap.get("HTTP_Send_URLTxt"), "Error: Send-URL should have length between 1 to 255 characters.");
+
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
 		
@@ -135,7 +144,21 @@ public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants 
 		cu.checkRunStatus();
 	}
 	
-	  @BeforeMethod
+	
+void fillHTTPFieldAndValiadateErrorMessage(CommonUtils cu, String fieldName, String newExitingMaxValue, String ExpectedMessage)
+{
+	String oldVal = cu.getAttribute(fieldName, "value");
+	
+	cu.SetData(fieldName, newExitingMaxValue);
+	cu.clickElement("supplier_SubmitBtn");
+	cu.sleep(500);
+	cu.checkMessage("application_PopUpTitle", "Popup valitaion of HTTP field "+fieldName+" for exceeding max value", ExpectedMessage);
+	
+	cu.SetData(fieldName, oldVal);
+	
+}
+
+	@BeforeMethod
 	  @Parameters("testCaseId")
 	  public void beforeMethod(String testCaseId) throws Exception {
 		  DOMConfigurator.configure("log4j.xml");
@@ -156,12 +179,13 @@ public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants 
 			  //Writing the report to HTML format
 			  extent.flush();    
 		  } catch(Exception e){
-			  LOGGER.info("App Logout failed () :: Exception: " +e);
+			  LOGGER.info(" App Logout failed () :: Exception: " +e);
 			  driver.quit();
 			  Log.endTestCase(testCaseId);
 			  extent.endTest(test);
 			  extent.flush();  
 		  }
 	  }	 
+	
 	
 }

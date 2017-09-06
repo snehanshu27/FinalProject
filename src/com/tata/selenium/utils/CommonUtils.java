@@ -351,11 +351,41 @@ public class CommonUtils implements ApplicationConstants {
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
 	}
+	
+	public void checkNonEditableDropDown(String fieldName, String value) {
+		try {
+			WebElement dropDownField = driver.findElement(putility.getObject(fieldName));
+			String selectedVal =  new Select(dropDownField).getFirstSelectedOption().getText();
+			
+			if (dropDownField.isEnabled() && !selectedVal.equalsIgnoreCase(value)) {
+				printLogs(fieldName + " field is editable and selected option is " + selectedVal);
+				test.log(LogStatus.FAIL,
+						"EXPECTED: Dropdown field " + fieldName + " should not be editable and default value should be "
+								+ value,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Dropdown field " + fieldName
+								+ " is editable and default value present is -'" + value + "</span>");
+			} else {
+				printLogs(fieldName + " field non editable and selected option is " + selectedVal);
+				test.log(LogStatus.PASS,
+						"EXPECTED: Dropdown field " + fieldName + " should not be editable and default value should be "
+								+ value,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Dropdown field " + fieldName
+								+ " is not editable and default value present is -'" + value + "</span>");
+			}
+		} catch (Exception e) {
+			getScreenShot("Checking dropdown status " + fieldName);
+			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
+			printLogs(fieldName + " -Dropdown validation failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
 
 	public void checkNonEditableBox(String fieldName, String value) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
-			String editFieldval = textField.getText().trim();
+			String editFieldval = textField.getAttribute("value").trim();
 			if (textField.isEnabled() && !editFieldval.equalsIgnoreCase(value)) {
 				printLogs(fieldName + " field is editable and the value present is " + editFieldval);
 				test.log(LogStatus.FAIL,
@@ -727,6 +757,40 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	public boolean SelectDropDownByVisibleTextCustomMMX(String dropDownButton, String dropDownSearchTextbox,
+			String dynamicLabelOption, String replaceKey, String replaceValue) {
+		try {
+			if (replaceValue != null && replaceValue.trim().length() > 0) {
+
+				WebElement dropDownButtonEle = driver.findElement(putility.getObject(dropDownButton));
+				dropDownButtonEle.click();
+				sleep(700);
+				WebElement dropDownSearchTextboxEle = driver.findElement(putility.getObject(dropDownSearchTextbox));
+				dropDownSearchTextboxEle.sendKeys(replaceValue);
+
+				sleep(500);
+
+				String finalStrObj = putility.getProperty(dynamicLabelOption).replace(replaceKey, replaceValue);
+				By locator = putility.getObjectFromStr(finalStrObj);
+				WebElement dynamicLabelOptionEle = driver.findElement(locator);
+				dynamicLabelOptionEle.click();
+
+				printLogs("Selected - '" + replaceValue + "' from the custom dropdown " + dropDownButton);
+				test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
+						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully");
+			}
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + replaceValue);
+			LOGGER.info(dropDownButton + " Custom Dropdown selection failed..." + e);
+			printLogs(dropDownButton + " Custom Dropdown selection failed..." + e);
+			test.log(LogStatus.FAIL, dropDownButton + " Custom Drop down should be selected",
+					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
 	public boolean deselectDropDownByVisibleText(String filedname, String value) {
 		try {
 			if (value != null && value.trim().length() > 0) {

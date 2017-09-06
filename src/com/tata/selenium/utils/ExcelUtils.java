@@ -650,7 +650,7 @@ public class ExcelUtils implements ApplicationConstants {
 						rowData.add("");
 					} else if (cell.getCellType() == cellGlobal.CELL_TYPE_NUMERIC) {
 						final Double val = cell.getNumericCellValue();
-						value = val.intValue();
+						value = val.longValue();
 						rowData.add(value.toString());
 					} else if (cell.getCellType() == cellGlobal.CELL_TYPE_STRING) {
 						rowData.add(cell.getStringCellValue());
