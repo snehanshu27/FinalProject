@@ -9,38 +9,38 @@
    <listener class-name="com.tata.selenium.driver.Driver"/>
  </listeners>
   
-  <!-- <test name="t1">
+  <!--  <test name="t1">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_01"/>
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation"/>
     </classes>
-  </test> --> 
+  </test> 
   
- <!--  <test name="t2">
+ <test name="t2">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_02"/>
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation"/>
     </classes>
   </test> 
-   -->
-  <!-- <test name="t3">
+
+<test name="t3">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_03"/>
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation"/>
     </classes>
-  </test>  -->
-  
- <!--  <test name="t4">
+  </test>
+   -->
+ <test name="t4">
     <parameter name="testCaseId" value="TC_002"/>
     <parameter name="uniqueDataId" value="Data_04"/>
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS"/>
     </classes>
-  </test>  -->
-  
+  </test> 
+ 
   <test name="t5">
     <parameter name="testCaseId" value="TC_002"/>
     <parameter name="uniqueDataId" value="Data_05"/>
@@ -48,8 +48,8 @@
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS"/>
     </classes>
   </test> 
-  
-  <!-- <test name="t6">
+   <!--  
+  <test name="t6">
     <parameter name="testCaseId" value="TC_003"/>
     <parameter name="uniqueDataId" value="Data_06"/>
     <classes>
@@ -64,4 +64,12 @@
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_003_SupplierCoverageMOSMSAndMLNS"/>
     </classes>
   </test>  -->
+  
+    <test name="t8">
+    <parameter name="testCaseId" value="TC_004"/>
+    <parameter name="uniqueDataId" value="Data_08"/>
+    <classes>
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality"/>
+    </classes>
+  </test>
 </suite>

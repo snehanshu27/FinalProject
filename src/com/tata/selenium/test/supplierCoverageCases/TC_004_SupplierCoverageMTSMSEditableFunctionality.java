@@ -34,9 +34,9 @@ import com.tata.selenium.utils.Log;
 
 
 
-public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
+public class TC_004_SupplierCoverageMTSMSEditableFunctionality implements ApplicationConstants {
 
-	private static final Logger LOGGER = Logger.getLogger(TC_002_SupplierCoverageMTSMS.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_004_SupplierCoverageMTSMSEditableFunctionality.class.getName());
 	String properties = "./data/SupplierCoverageObjects.properties";
 	ExcelUtils excelUtils = new ExcelUtils();
 	private ExtentReports extent;
@@ -101,105 +101,42 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
 		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 
-		String historyDefaultSelected = cu.getSelectVauleFromDropDown("supplierCoverageHistoryLst");
-		// validate 1st AccName has been auto populated
-		if ("ON".equals(dataMap.get("ValidateFirstAccNameAutoPopulated")))
-			validateFirstAccNameAutoPopulated(cu);
-
 		// Selecting required values from drop down based on input
 		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
-
-		// validate Historys
-		if ("ON".equals(dataMap.get("ValidateHistory")))
-			validateHistory(dataMap, cu, dataMap.get("Supplier_Account_Name"));
-
-		// select history as per data
+		
+//		 //select history as per data
 //		cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", dataMap.get("Coverage_History"));
-		cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", historyDefaultSelected);
+		
 		// click on display button
 		cu.clickElement("displayBtn");
-
-		// Check input and UI coverage is not same
-		checkInputAndUICoverageIsNotSame(cu, dataMap);
-
-		// Check error pop up, then check either SC/LN/DR/AN seslected
-		if ("ON".equals(dataMap.get("ValidateErrorPopupWithoutAddingCoverage")))
-			validateErrorPopupWithoutAddingCoverage(cu, navMenuPage, dataMap);
-
-		// add\modify coverage as per input data
-		if (!"ON".equals(dataMap.get("InputThroughUploadButton")))
-			modifyCoverage(cu, dataMap);
+		
+		
+		if(cu.elementDisplayed("ResultTableFirstRow"))
+		{
+			cu.selectCheckBox("FirstRowCoverageCheckbox");
+			cu.checkEditableDropDown("FirstRowRouteTypeDropdown");
+			cu.checkEditableCheckBox("FirstRowAlphaCheckboxAN");
+			cu.checkEditableCheckBox("FirstRowShortCheckboxSC");
+			cu.checkEditableCheckBox("FirstRowLongCheckboxLN");
+			cu.checkEditableCheckBox("FirstRowDlrCheckboxDR");
+			cu.getScreenShot("Fileds of first row should be editable");
+			
+			
+			cu.unSelectCheckBox("FirstRowCoverageCheckbox");			
+			cu.checkNonEditableDropDown("FirstRowRouteTypeDropdown");
+			cu.checkNonEditableCheckBox("FirstRowAlphaCheckboxAN");
+			cu.checkNonEditableCheckBox("FirstRowShortCheckboxSC");
+			cu.checkNonEditableCheckBox("FirstRowLongCheckboxLN");
+			cu.checkNonEditableCheckBox("FirstRowDlrCheckboxDR");
+			cu.getScreenShot("Fileds of first row should be non-editable");
+		}
 		else
-			modifyCoverageUsingUploadOption(cu, dataMap);
-
-		cu.sleep(4000);
-
-		// Alert message validations
-		validateSuccessAlertMessageAndPDFPageLoaded(cu);
-
-		// validate Supplier Cost Management page has been loaded
-		if (cu.existsElement("supplierCstMgtLabel"))
-			test.log(LogStatus.PASS, "EXPECTECD: Supplier Cost Management screen should be loaded",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Supplier Cost Management screen has been loaded</span>");
-		else {
-			cu.getScreenShot("Supplier Cost Management screen should be loaded validation");
-			test.log(LogStatus.FAIL, "EXPECTECD: Supplier Cost Management screen should be loaded",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Supplier Cost Management screen has not loaded</span>");
-			Assert.fail();
+		{
+			test.log(LogStatus.FAIL, "Result table is not displayed");
 		}
 
-		cu.default_content();
-		cu.SwitchFrames("//iframe[@scrolling='no']");
-		cu.clickElement("exchange");
-		cu.waitForPageLoad("");
-
-		navMenuPage.navigateToMenuPageAndMenu(dataMap.get("Navigation"));
-		cu.SwitchFrames("bottom");
-		cu.SwitchFrames("target");
-
-		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
-		cu.waitForPageLoad("SupplierCoverage");
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
-		cu.waitForPageLoad("SupplierCoverage");
-
-		// get time string as date-month-year and validate date on which order
-		// is created should be appended to the order number (history)
-		cu.default_content();
-		cu.SwitchFrames("//iframe[@scrolling='no']");
-		String[] uiTime = cu.getText("uiTimestamp").split(" ");
-		String expectedUIDateFormat = uiTime[1].trim() + "-" + uiTime[2].trim() + "-" + uiTime[3].trim();
-
-		cu.default_content();
-		cu.SwitchFrames("bottom");
-		cu.SwitchFrames("target");
-		String selectedHistoryVal = cu.getSelectVauleFromDropDown("supplierCoverageHistoryLst");
-		if (selectedHistoryVal.toLowerCase().contains(expectedUIDateFormat.toLowerCase()))
-			test.log(LogStatus.PASS,
-					"EXPECTECD: Date on which order is created should be appended to the order number (coverage history)",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Date on which order is created has been appended to the order number (coverage history)</span>");
-		else {
-			cu.getScreenShot(
-					"Date on which order is created should be appended to the order number (coverage history) validation");
-			test.log(LogStatus.FAIL,
-					"EXPECTECD: Date on which order is created should be appended to the order number (coverage history)",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Coverage history is loaded with date : "
-							+ expectedUIDateFormat + " acutal coverage history option which was populated is : "
-							+ selectedHistoryVal + "</span>");
-		}
-
-		// click on display button
-		cu.clickElement("displayBtn");
-
-		// validate coverage fields
-		validateCoverageFieldsUpdatedinUI(cu, dataMap);
-
-		// export file and validate
-		if ("ON".equalsIgnoreCase(dataMap.get("ValidateExportCSVFile")))
-			exportCSVAndCoverageFieldsUpdated(cu, dataMap);
-
+		
 		// Taking screenshot and Logging out
 		cu.getScreenShot("Validation Of Coverage Screen");
 		test = cu.getExTest();
@@ -332,7 +269,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.unSelectCheckBox("dynamicDlrCheckboxDR", "$destinationVal$", dataMap.get("Destination"));
 		cu.clickElement("submitBtn");
 		cu.checkMessage("application_PopUpMessage", "Check popup without adding/checking SC/LN/DR/AN",
-				"Error: Please provide at least one Route feature.");
+				"Error: Please provide at least one Route feature");
 
 		cu.default_content();
 		cu.SwitchFrames("//iframe[@scrolling='no']");
@@ -463,7 +400,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 	public void validateCoverageFieldsUpdatedinUI(CommonUtils cu, Map<String, String> dataMap) {
 		System.out.println("Inside validateCoverageFieldsUpdatedinUI");
 		
-//		cu.checkNonEditableDropDown("dynamicRouteTypeDropdown", "$destinationVal$", dataMap.get("Destination"));
+		cu.checkNonEditableDropDown("dynamicRouteTypeDropdown", "$destinationVal$", dataMap.get("Destination"));
 				
 		cu.selectCheckBox("dynamicCoverageCheckbox", "$destinationVal$", dataMap.get("Destination"));
 
@@ -516,7 +453,6 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.ConfirmAlert();
 		// switch to new window and check pdf loaded
 		String parentWindow = cu.getCurrWindowName();
-		
 		cu.newWindowHandles(cu.getCurrWindowName());
 		String newWindowTitle = cu.getTitle();
 		if (cu.existsElement("pdfEmbed"))
@@ -528,8 +464,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: PDF file has not loaded after new coverage addition -contains no pdf in title: acutal title : "
 							+ newWindowTitle + "</span>");
 		}
-		if(cu.getAllWindowNames().size()>1)
-			cu.DriverClose();
+		cu.DriverClose();
 
 		// switch parent window
 		cu.switchToWindow(parentWindow);
@@ -600,14 +535,9 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 			cu.getScreenShot("input and UI coverage is same");
 			test.log(LogStatus.FAIL,
 					"EXPECTECD: Input sheet and UI coverage data should not be same, Because then only we can edit the coverage sucessfully",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Input sheet and UI coverage data is same, data is <br/>"
-							+ " Coverage_UI: "+ uiData.get("Coverage") + "          Coverage_Input: "+dataMap.get("Coverage")+ "<br/>"
-							+ " RouteType_UI: "+uiData.get("RouteType")+ "          RouteType_Input: "+dataMap.get("RouteType")+ "<br/>"
-							+"  AN_UI: " + uiData.get("AN") +"         AN_Input: " + dataMap.get("AN")+ "<br/>"
-							+ " SC_UI: " + uiData.get("SC") + "         SC_Input: " + dataMap.get("SC")+ "<br/>"
-							+ " LN_UI: " + uiData.get("LN") + "          LN_Input: " + dataMap.get("LN")+ "<br/>"
-							+ " DR_UI: " + uiData.get("DR") + "          DR_Input: " + dataMap.get("DR")+ "<br/>"
-							+ "</span>");
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: Input sheet and UI coverage data is same, data is  Coverage: "
+							+ uiData.get("Coverage") + " AN: " + uiData.get("AN") + " SC: " + uiData.get("SC") + " LN: "
+							+ uiData.get("LN") + " DR: " + uiData.get("DR") + "</span>");
 			Assert.fail();
 		}
 	}
@@ -649,7 +579,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 			allLines.add(new String[] { "Country", "Company", "Destination", "MCC", "MNC", "RouteType", "Coverage", "AN", "SC", "LN",
 					"DR", "Restriction" });
 			allLines.add(new String[] { uiData.get("Country"), uiData.get("Company"), uiData.get("Destination"),
-					uiData.get("MCC"), uiData.get("MNC"), dataMap.get("RouteType"), dataMap.get("Coverage"), dataMap.get("AN"), dataMap.get("SC"),
+					uiData.get("MCC"), uiData.get("MNC"), uiData.get("RouteType"), dataMap.get("Coverage"), dataMap.get("AN"), dataMap.get("SC"),
 					dataMap.get("LN"), dataMap.get("DR"), uiData.get("Restriction") });
 			wr.writeAll(allLines, false);
 			wr.close();
@@ -667,7 +597,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 
 		// Check warnig message and accept popup
 		cu.checkMessage("application_PopUpMessage", "Check popup waring message after uploading the file",
-				"Warning: This action will upload the Selected CSV. Do you want to Continue ?");
+				"Warning: This action will upload the Selected CSV. Do you want to Continue?");
 		cu.waitForPageLoad("");
 
 		// checkInputAndUICoverageIsSame

@@ -295,6 +295,38 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	
+	public void checkEditableDropDown(String fieldName, String value, String replaceKeys, String replaceValues) {
+		try {
+			WebElement dropDownField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			Select oSelect = new Select(dropDownField);
+			String defaultSelVal = oSelect.getFirstSelectedOption().getText();
+			LOGGER.info("defaultSelVal is " + defaultSelVal);
+			boolean val = dropDownField.isEnabled();
+			if (val && defaultSelVal.trim().equalsIgnoreCase(value)) {
+				printLogs(fieldName + " field is editable and the default value selected is " + defaultSelVal);
+				test.log(LogStatus.PASS,
+						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+								+ " is by default selected",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is editable and default value selected is '" + value + "</span>");
+			} else {
+				printLogs(fieldName + " field is not editable and the default value selected is " + defaultSelVal);
+				test.log(LogStatus.FAIL,
+						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+								+ " is selected by default",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is non editable and default value selected is -'" + value + "</span>");
+			}
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + value);
+			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
+			printLogs(fieldName + " -Dropdown validation failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
 	public void checkEditableDropDownButton(String fieldName, String value) {
 		try {
 			WebElement dropDownField = driver.findElement(putility.getObject(fieldName));
@@ -330,6 +362,56 @@ public class CommonUtils implements ApplicationConstants {
 	public void checkNonEditableDropDown(String fieldName) {
 		try {
 			WebElement dropDownField = driver.findElement(putility.getObject(fieldName));
+			boolean val = dropDownField.isEnabled();
+			if (val) {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Drop down " + fieldName + " should be Non-editable",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is editable</span>");
+			} else {
+				printLogs(fieldName + " field is non-editable");
+				test.log(LogStatus.PASS, "EXPECTED: Drop down " + fieldName + " should be Non-editable",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is Non-editable</span>");
+			}
+		} catch (Exception e) {
+			getScreenShot("Checking dropdown status " + fieldName);
+			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
+			printLogs(fieldName + " -Dropdown validation failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
+	public void checkEditableDropDown(String fieldName) {
+		try {
+			WebElement dropDownField = driver.findElement(putility.getObject(fieldName));
+			boolean val = dropDownField.isEnabled();
+			if (val) {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.PASS, "EXPECTED: Drop down " + fieldName + " should be editable",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is editable</span>");
+			} else {
+				printLogs(fieldName + " field is non-editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Drop down " + fieldName + " should be editable",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+								+ " is Non-editable</span>");
+			}
+		} catch (Exception e) {
+			getScreenShot("Checking dropdown status " + fieldName);
+			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
+			printLogs(fieldName + " -Dropdown validation failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
+	public void checkNonEditableDropDown(String fieldName, String replaceKeys, String replaceValues) {
+		try {
+			WebElement dropDownField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
 			boolean val = dropDownField.isEnabled();
 			if (val) {
 				printLogs(fieldName + " field is editable");
@@ -733,16 +815,16 @@ public class CommonUtils implements ApplicationConstants {
 	 * @throws Exception
 	 *             throwing exception for any error occurring in try block
 	 */
-	public boolean SelectDropDownByVisibleText(String filedname, String value) {
+	public boolean SelectDropDownByVisibleText(String fieldname, String value) {
 		try {
 			if (value != null && value.trim().length() > 0) {
-				WebElement supplierName = driver.findElement(putility.getObject(filedname));
+				WebElement supplierName = driver.findElement(putility.getObject(fieldname));
 
 				Select oSelect = new Select(supplierName);
 				oSelect.selectByVisibleText(value);
 				printLogs("Selected - '" + value + "' from the dropdown");
 				test.log(LogStatus.PASS, "Drop down should be selected",
-						"Drop down value -'" + value + "'- selected from field "+filedname+" sucessfully");
+						"Drop down value -'" + value + "'- selected from field "+fieldname+" sucessfully");
 			}
 			return true;
 		} catch (Exception e) {
@@ -750,7 +832,32 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info("Dropdown selection failed..." + e);
 			printLogs("Dropdown selection failed..." + e);
 			test.log(LogStatus.FAIL, "Drop down should be selected",
-					"Drop down value -'" + value + "'- could not be selected from filedname "+filedname+" because -" + e);
+					"Drop down value -'" + value + "'- could not be selected from filedname "+fieldname+" because -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
+
+	
+	public boolean SelectDropDownByVisibleText(String fieldname, String value, String replaceKeys, String replaceValues) {
+		try {
+			if (value != null && value.trim().length() > 0) {
+				WebElement supplierName = driver.findElement(putility.getObject(fieldname, replaceKeys, replaceValues));
+
+				Select oSelect = new Select(supplierName);
+				oSelect.selectByVisibleText(value);
+				printLogs("Selected - '" + value + "' from the dropdown");
+				test.log(LogStatus.PASS, "Drop down should be selected",
+						"Drop down value -'" + value + "'- selected from field "+fieldname+" sucessfully");
+			}
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + value);
+			LOGGER.info("Dropdown selection failed..." + e);
+			printLogs("Dropdown selection failed..." + e);
+			test.log(LogStatus.FAIL, "Drop down should be selected",
+					"Drop down value -'" + value + "'- could not be selected from filedname "+fieldname+" because -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
@@ -1309,6 +1416,16 @@ public class CommonUtils implements ApplicationConstants {
 		}
 
 	}
+	
+	public Set<String> getAllWindowNames() {
+		try {
+			return driver.getWindowHandles();
+		} catch (Exception e) {
+			LOGGER.info("Exception:  " + e);
+			return null;
+		}
+
+	}
 
 	/**
 	 * @description Method used to select check boxes
@@ -1479,6 +1596,22 @@ public class CommonUtils implements ApplicationConstants {
 		String selectedOpStr = "";
 		try {
 			WebElement supplierName = driver.findElement(putility.getObject(filedname));
+			Select oSelect = new Select(supplierName);
+			selectedOpStr = oSelect.getFirstSelectedOption().getText();
+			printLogs(selectedOpStr + " seems to selected in " + filedname + " dropdown");
+			return selectedOpStr;
+		} catch (Exception e) {
+			LOGGER.info("get selected option From DropDown failed..." + e);
+			getScreenShot("selectedOpStr - " + filedname);
+			printLogs("get selected option From DropDown failed..." + e);
+			return selectedOpStr;
+		}
+	}
+	
+	public String getSelectVauleFromDropDown(String filedname, String replaceKeys, String replaceValues) {
+		String selectedOpStr = "";
+		try {
+			WebElement supplierName = driver.findElement(putility.getObject(filedname, replaceKeys, replaceValues));
 			Select oSelect = new Select(supplierName);
 			selectedOpStr = oSelect.getFirstSelectedOption().getText();
 			printLogs(selectedOpStr + " seems to selected in " + filedname + " dropdown");
@@ -2062,6 +2195,28 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	public void unSelectCheckBox(String filedname) {
+
+		try {			
+			By locator = putility.getObject(filedname);
+
+			if (driver.findElement(locator).isSelected())
+				driver.findElement(locator).click();
+
+			printLogs(filedname + " checkbox has been unselected");
+			test.log(LogStatus.PASS, "EXPECTED: checkbox " + filedname + " should be unselected",
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: checkbox " + filedname
+							+ " has been unselected</span>");
+
+		} catch (Exception e) {
+			getScreenShot("Unselecting checkbox " + filedname);
+			LOGGER.info("Unselecting checkbox failed..." + e);
+			printLogs("Unselecting checkbox failed..." + e);
+			test.log(LogStatus.FAIL, "Unselecting checkbox failed", "Unselecting checkbox failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "Selecting checkbox failed " + e, uniqueDataId, "Result_Errors");
+		}
+	}
 	public void checkCheckBoxSelected(String filedname, String replaceKeys, String replaceValues) {
 
 		try {
@@ -2270,6 +2425,57 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	
+	public void checkEditableCheckBox(String fieldName) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			if (textField.isEnabled()) {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.PASS, "EXPECTED: Checkbox " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Checkbox " + fieldName
+								+ " is editable</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Checkbox " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Checkbox " + fieldName
+								+ " is non editable</span>");
+			}
+
+		} catch (Exception e) {
+			getScreenShot("Validating field" + fieldName);
+			LOGGER.info("Checkbox validations failed..." + e);
+			printLogs("Checkbox validations failed..." + e);
+			test.log(LogStatus.FAIL, "Checkbox validation", "Checkbox validation failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
+	public void checkNonEditableCheckBox(String fieldName) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			if (!textField.isEnabled()) {
+				printLogs(fieldName + " field is non editable");
+				test.log(LogStatus.PASS, "EXPECTED: Checkbox " + fieldName + " should be non editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Checkbox " + fieldName
+								+ " is non editable</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Checkbox " + fieldName + " should be non editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Checkbox " + fieldName
+								+ " is editable</span>");
+			}
+
+		} catch (Exception e) {
+			getScreenShot("Validating field" + fieldName);
+			LOGGER.info("Checkbox validations failed..." + e);
+			printLogs("Checkbox validations failed..." + e);
+			test.log(LogStatus.FAIL, "Checkbox validation", "Checkbox validation failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
 	public void checkReadonlyProperty(String fieldName) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
