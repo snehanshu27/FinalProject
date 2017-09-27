@@ -981,6 +981,8 @@ public class CommonUtils implements ApplicationConstants {
 			}
 		}
 	}
+	
+	
 
 	/**
 	 * @description Method used to check for any pop up currently being
@@ -1579,8 +1581,14 @@ public class CommonUtils implements ApplicationConstants {
 			WebElement supplierName = driver.findElement(putility.getObject(filedname));
 			Select oSelect = new Select(supplierName);
 			List<WebElement> optionElemens = oSelect.getOptions();
+			int j=0;
 			for (WebElement opele : optionElemens)
-				retStrOPs.add(opele.getText());
+			{
+				retStrOPs.add(opele.getText().trim());
+				System.out.println(j);
+				j++;
+				
+			}
 
 			printLogs(retStrOPs.size() + " were obtianed from the " + filedname + "dropdown");
 			return retStrOPs;
@@ -2684,7 +2692,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("'" + fieldname + "'  could not be clicked");
 			LOGGER.info(fieldname + " - having xpath '" + locator + "'  click failed  - " + e);
 			test.log(LogStatus.WARNING, "Element should be clicked sucessfully",
-					fieldname + " -  could not be clicked because -" + e);
+					fieldname + " - (locator: "+locator+") could not be clicked because -" + e);
 			printLogs(fieldname + " - having xpath '" + locator + "'  click failed  - " + e);
 			return false;
 		}
@@ -2796,42 +2804,52 @@ public class CommonUtils implements ApplicationConstants {
 			}
 		} catch (Exception e) {
 			LOGGER.info("Exception :  " + e);
+			test.log(LogStatus.FAIL, "Error occured while validating dropdown options ( count ) from "+filedname+"   Exception :  " + e);
 		}
 		return value;
 
 	}
 
 	public void validateFieldsInDropDown(String filedname, String fieldVal) {
-
-		List<WebElement> optionElemens;
-		WebElement supplierName = null;
-
+		
 		try {
 			if (fieldVal != null && fieldVal.trim().length() > 0) {
 				String[] arr = fieldVal.split(";");
-				supplierName = driver.findElement(putility.getObject(filedname));
-				Select oSelect = new Select(supplierName);
-				optionElemens = oSelect.getOptions();
-				for (int i = 0; i < arr.length; i++) {
-					boolean isfound = false;
-					for (WebElement opele : optionElemens) {
-						if (opele.getText().equalsIgnoreCase(arr[i])) {
-							isfound = true;
-							break;
-						}
-					}
-					if (isfound) {
-						test.log(LogStatus.PASS,
-								"EXPECTED: " + filedname + " field  should have : '" + arr[i] + "' value in dropdown",
-								"Validation:  <span style='font-weight:bold;'>ACTUAL::  " + filedname
-										+ " field  has the value : '" + arr[i] + "' in the dropdown</span>");
-					} else {
-						test.log(LogStatus.FAIL,
-								"EXPECTED: " + filedname + " field  should have : '" + arr[i] + "' value in dropdown",
-								"Validation:  <span style='font-weight:bold;'>ACTUAL::  " + filedname
-										+ " field does not have the value : '" + arr[i] + "' in the dropdown</span>");
+				List<String> optionList = getAllOptionsFromDropDown(filedname);			
+				
+				//validating count
+				if (optionList.size() == arr.length) {
+					test.log(LogStatus.PASS,
+							"EXPECTED: " + filedname + " field  should have total : " + arr.length + " values",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL::  " + filedname
+									+ " field  has total : " + optionList.size() + " values</span>");
+				} else {
+					test.log(LogStatus.FAIL,
+							"EXPECTED: " + filedname + " field  should have total : " + arr.length + " values",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL::  " + filedname
+									+ " field  has total : " + optionList.size() + " values</span>");
+				}
+				
+				//validating field text
+				boolean allFieldsMatched =true;
+				for (int i = 0; i < arr.length; i++) {				
+					if(!arr[i].trim().isEmpty())
+					{
+						if ( !optionList.contains(arr[i].trim())) {
+								test.log(LogStatus.FAIL,
+										"EXPECTED: " + filedname + " field  should have : '" + arr[i] + "' value in dropdown",
+										"Validation:  <span style='font-weight:bold;'>ACTUAL::  " + filedname
+												+ " field does not have the value : '" + arr[i] + "' in the dropdown</span>");
+								allFieldsMatched= false;
+							}
 					}
 				}
+				
+				if(allFieldsMatched)
+					test.log(LogStatus.PASS,
+							"EXPECTED: All options within dropdown " + filedname + " should be matched",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL::  All options within dropdown " + filedname + " have ben matched</span>");
+				
 			}
 		} catch (Exception e) {
 			LOGGER.info("Exception :  " + e);
@@ -3333,6 +3351,16 @@ public class CommonUtils implements ApplicationConstants {
 		return sb.toString();
 	}
 
+	public void scrollDownPage()
+	{
+		try{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,250)", "");
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page. Exception - "+e);
+		}
+	}
 	// public void readPDFContent() throws IOException
 	// {
 	//
