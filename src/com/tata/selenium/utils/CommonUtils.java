@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -248,6 +249,11 @@ public class CommonUtils implements ApplicationConstants {
 			printLogs(pageName + " Page loaded successfully");
 			return;
 		}
+	}
+	
+	public void waitForPageLoadWithSleep(String pageName, long initialSleepmilisec) {
+		sleep(initialSleepmilisec);
+		waitForPageLoad(pageName);
 	}
 
 	public void checkRunStatus() {
@@ -527,7 +533,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void checkEditableBox(String fieldName, String value) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
-			String strText = textField.getText().trim();
+			String strText = textField.getAttribute("value").trim();
 			if (textField.isEnabled()) {
 				printLogs(fieldName + " field is editable");
 				test.log(LogStatus.PASS, "EXPECTED: Text field " + fieldName + " should be editable",
@@ -564,6 +570,46 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	
+	public void checkEditableBox(String fieldName, String value, String replaceKeys, String replaceValues) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			String strText = textField.getAttribute("value").trim();
+			if (textField.isEnabled()) {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.PASS, "EXPECTED: Text field " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is editable</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Text field " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is non editable</span>");
+
+			}
+			if (strText.equalsIgnoreCase(value.trim())) {
+				printLogs(fieldName + " field has default value as -" + strText);
+				test.log(LogStatus.PASS,
+						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is has default value as " + strText + "</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL,
+						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " has default value as - " + strText + "</span>");
+			}
+
+		} catch (Exception e) {
+			getScreenShot("Validating field" + fieldName);
+			LOGGER.info("Text field validations failed..." + e);
+			printLogs("Text field validations failed..." + e);
+			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
 	public boolean waitForElementInvisiblity(String fieldName, int timeout) {
 		boolean val = false;
 		try {
@@ -692,9 +738,27 @@ public class CommonUtils implements ApplicationConstants {
 	 * @param setValue
 	 *            Variable holding value which needs to be set
 	 */
-	public void SetData(String fieldName, String setValue) {
+	public void setData(String fieldName, String setValue) {
 		try {
 			WebElement objPath = driver.findElement(putility.getObject(fieldName));
+			if (setValue != null && setValue.trim().length() > 0) {
+				objPath.clear();
+				objPath.sendKeys(setValue);
+				printLogs("Data  '" + setValue + "' entered sucessfully in the " + fieldName + " box");
+				test.log(LogStatus.PASS, "Enter value in the field",
+						"Value - '" + setValue + "' entered sucessfully in " + fieldName + "field");
+			}
+		} catch (Exception e) {
+			LOGGER.info("Error occured while setting data  " + setValue + "  - " + e);
+			printLogs("Error occured while setting data  " + setValue + "  - " + e);
+			test.log(LogStatus.FAIL, "Enter value in " + fieldName,
+					"Value - '" + setValue + "' could not be entered - " + e);
+		}
+	}
+	
+	public void setData(String fieldName, String setValue, String replaceKeys, String replaceValues) {
+		try {
+			WebElement objPath = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
 			if (setValue != null && setValue.trim().length() > 0) {
 				objPath.clear();
 				objPath.sendKeys(setValue);
@@ -720,10 +784,28 @@ public class CommonUtils implements ApplicationConstants {
 						fieldName + "' text field cleared sucessfully");
 			
 		} catch (Exception e) {
-			LOGGER.info("Error occured while clearing text field  - " + e);
-			printLogs("Error occured while clearing text field  - " + e);
+			LOGGER.info("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
+			printLogs("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
 			test.log(LogStatus.FAIL, "Clear a text field",
-					"Error occured while clearing text field  - " + e);
+					"Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
+		}
+	}
+	
+	public void clearData(String fieldName, String replaceKeys, String replaceValues) {
+		try {
+			WebElement objPath = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+				objPath.clear();				
+				LOGGER.info(fieldName + " box has been cleared");
+				printLogs(fieldName + " box has been cleared");				
+				test.log(LogStatus.PASS, "Clear a text field",
+						fieldName + "' text field cleared sucessfully");
+			
+		} catch (Exception e) {
+			LOGGER.info("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
+			printLogs("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
+			getScreenShot("Error occured while clearing text field  - "+fieldName);
+			test.log(LogStatus.FAIL, "Clear a text field",
+					"Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
 		}
 	}
 
@@ -1263,7 +1345,7 @@ public class CommonUtils implements ApplicationConstants {
 	 */
 	public void switchToWindow(String givenWindow) {
 		try {
-			sleep(3000);
+			sleep(1000);
 			driver.switchTo().window(givenWindow);
 		} catch (Exception e) {
 			LOGGER.info("error  " + e);
@@ -1761,6 +1843,20 @@ public class CommonUtils implements ApplicationConstants {
 	public boolean checkDisabledBtn(String fieldName) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			if (textField.isEnabled()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			LOGGER.info("Exception:  " + e);
+			return false;
+		}
+	}
+	
+	public boolean checkDisabledEelement(String fieldName, String replaceKeys, String replaceValues) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
 			if (textField.isEnabled()) {
 				return true;
 			} else {
@@ -3122,9 +3218,36 @@ public class CommonUtils implements ApplicationConstants {
 				LOGGER.info("Txt Box value is " + strText);
 			} catch (Exception e) {
 				LOGGER.info("Exception in getting value from drop down:  " + e);
-
 			}
 		}
+		return strText;
+	}
+	
+	public String getTxtBoxValue(String fieldName) {
+		WebElement textField = null;
+		String strText = null;
+			try {
+				textField = driver.findElement(putility.getObject(fieldName));
+				strText = textField.getAttribute("value").trim();
+				LOGGER.info("Txt Box value is " + strText);
+			} catch (Exception e) {
+				LOGGER.info("Exception in getting value from textbox: '"+fieldName+"'        " + e);
+				test.log(LogStatus.FAIL, "Error occured while getting value from textbox: '"+fieldName+"'          " + e);
+			}
+		return strText;
+	}
+	
+	public String getTxtBoxValue(String fieldName, String replaceKeys, String replaceValues) {
+		WebElement textField = null;
+		String strText = null;
+			try {
+				textField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+				strText = textField.getAttribute("value").trim();
+				LOGGER.info("Txt Box value is " + strText);
+			} catch (Exception e) {
+				LOGGER.info("Error occured while getting value from textbox: '"+fieldName+"'.   " + e);
+				test.log(LogStatus.FAIL, "Error occured while getting value from textbox: '"+fieldName+"'.   " + e);
+			}
 		return strText;
 	}
 
@@ -3257,8 +3380,8 @@ public class CommonUtils implements ApplicationConstants {
 		return allSelectedOptions;
 	}
 
-	public ArrayList<String> ElementsToList(String fieldName) {
-		ArrayList<String> list1 = new ArrayList<String>();
+	public List<String> ElementsToList(String fieldName) {
+		List<String> list1 = new LinkedList<>();
 
 		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
 		Iterator<WebElement> iter = listOfElement.iterator();
@@ -3355,12 +3478,70 @@ public class CommonUtils implements ApplicationConstants {
 	{
 		try{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0,250)", "");
+		jse.executeScript("window.scrollTo(0,document.body.scrollHeight)");
 		}catch(Exception e)
 		{
 			LOGGER.error("Error occured while scrolling the page. Exception - "+e);
 		}
 	}
+	
+	public void scrollUpPage()
+	{
+		try{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollTo(document.body.scrollHeight,0)");		
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page. Exception - "+e);
+		}
+	}
+	
+	public void scrollRightPage()
+	{
+		try{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(2000,0)", "");
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page. Exception - "+e);
+		}
+	}
+	
+	public void scrollLeftPage()
+	{
+		try{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(-2000,0)", "");
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page. Exception - "+e);
+		}
+	}
+	
+	public void scrollPageToViewElement(String fieldName)
+	{
+		try{
+			
+		WebElement ele = driver.findElement(putility.getObject(fieldName));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", ele);		
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page to element. Exception - "+e);
+		}
+	}
+	
+	public void scrollPageToViewElement(String fieldName, String replaceKeys, String replaceValues)
+	{
+		try{
+			
+		WebElement ele = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", ele);		
+		}catch(Exception e)
+		{
+			LOGGER.error("Error occured while scrolling the page to element. Exception - "+e);
+		}
+	}
+	
 	// public void readPDFContent() throws IOException
 	// {
 	//
@@ -3386,4 +3567,15 @@ public class CommonUtils implements ApplicationConstants {
 	// wr.close();
 	//
 	// }
+	
+	
+	public String getPropery(String fieldsName)
+	{
+		return putility.getProperty(fieldsName);
+	}
+
+	public String getPropery(String fieldsName, String replaceKeys, String replaceValues)
+	{
+		return putility.getProperty(fieldsName, replaceKeys, replaceValues);
+	}
 }

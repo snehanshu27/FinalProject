@@ -41,6 +41,15 @@ public class PropertyUtility {
 		return propertyValue;
 	}
 	
+	public String getProperty(String propertyKey, String replaceKeys, String replaceValues){
+		String finalStrObj = getProperty(propertyKey);
+		String[] rKys = replaceKeys.split("\\~");
+		String[] rVals = replaceValues.split("\\~");
+
+		for (int i = 0; i < rKys.length; i++)
+			finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
+		return finalStrObj;
+	}
 	public By getObjectFromStr(String strObj)
 	{
 		By ret = null;

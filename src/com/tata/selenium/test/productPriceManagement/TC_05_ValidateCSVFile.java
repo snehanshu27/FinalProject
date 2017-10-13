@@ -99,7 +99,7 @@ public class TC_05_ValidateCSVFile implements ApplicationConstants {
 			cu.SelectDropDownByVisibleText("DestinationFilterLst", dataMap.get("DestinationFilterLst"));
 			cu.SelectDropDownByVisibleText("Mcc_FilterLst", dataMap.get("Mcc_FilterLst"));
 			cu.SelectDropDownByVisibleText("Mnc_FilterLst", dataMap.get("Mnc_FilterLst"));
-			cu.SetData("CriteriaTxt", dataMap.get("CriteriaTxt"));
+			cu.setData("CriteriaTxt", dataMap.get("CriteriaTxt"));
 			cu.clickElement("FilterBtn");
 			cu.waitForPageLoad("");
 		}

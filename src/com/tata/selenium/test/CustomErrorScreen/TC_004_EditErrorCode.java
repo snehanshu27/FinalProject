@@ -120,7 +120,7 @@ public class TC_004_EditErrorCode implements ApplicationConstants {
 			hu.sleep(1000);
 			
 			//Set error code
-			hu.SetData("customError_CodeTxt",  dataMap.get("ErrorCode_EditValue"));		
+			hu.setData("customError_CodeTxt",  dataMap.get("ErrorCode_EditValue"));		
 			hu.clickElement("customError_PageTitle");
 			hu.sleep(1000);
 			//select Error Code Type
@@ -129,7 +129,7 @@ public class TC_004_EditErrorCode implements ApplicationConstants {
 			hu.clickElement("dynamicCustomErrorCode_TypeList", "$errorcodetype$", dataMap.get("TypeOfErrorCode"));
 			
 			//Set Description
-			hu.SetData("customErrorCode_DescTxt",  dataMap.get("Description"));
+			hu.setData("customErrorCode_DescTxt",  dataMap.get("Description"));
 			hu.sleep(500);
 			
 			//click on save button

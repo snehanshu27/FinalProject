@@ -113,7 +113,7 @@ public class TC_003_AddNewErrorCode implements ApplicationConstants {
 		hu.sleep(1000);
 		
 		//Set error code
-		hu.SetData("customError_CodeTxt",  dataMap.get("ErrorCode"));		
+		hu.setData("customError_CodeTxt",  dataMap.get("ErrorCode"));		
 		hu.clickElement("customError_PageTitle");
 		hu.sleep(1000);
 		
@@ -123,7 +123,7 @@ public class TC_003_AddNewErrorCode implements ApplicationConstants {
 		hu.clickElement("dynamicCustomErrorCode_TypeList", "$errorcodetype$", dataMap.get("TypeOfErrorCode"));
 		
 		//Set Description
-		hu.SetData("customErrorCode_DescTxt",  dataMap.get("Description"));
+		hu.setData("customErrorCode_DescTxt",  dataMap.get("Description"));
 		hu.sleep(500);
 		
 		//click on save button

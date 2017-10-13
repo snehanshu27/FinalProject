@@ -96,10 +96,10 @@ public class TC_02_CustomerCreation implements ApplicationConstants {
 		
 		if(driver.findElement(By.xpath("//input[@id='custShortChild']")).isEnabled())
 				{
-		cu.SetData("nws_customer_ShortName" , dataMap.get("Customer_Short_Name"));
+		cu.setData("nws_customer_ShortName" , dataMap.get("Customer_Short_Name"));
 				}
 		
-		cu.SetData("nws_customer_Acc_name" , dataMap.get("Customer_Account_Name"));
+		cu.setData("nws_customer_Acc_name" , dataMap.get("Customer_Account_Name"));
 	
 		cu.clickElement("nws_CreateBtn");		
 

@@ -113,7 +113,7 @@ public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants 
 			
 			//Doing validation if Host IP field has some value in test data
 			if(dataMap.get("SMPP_HostIPTxt").trim().length() >0){
-				cu.SetData("SMPP_HostIPTxt", dataMap.get("SMPP_HostIPTxt"));
+				cu.setData("SMPP_HostIPTxt", dataMap.get("SMPP_HostIPTxt"));
 				cu.clickElement("supplier_SubmitBtn");
 				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Host IP","Error: Please enter valid Host IP address");
 			}

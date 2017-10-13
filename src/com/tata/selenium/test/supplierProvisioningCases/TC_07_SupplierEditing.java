@@ -133,7 +133,7 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 			if(("Y").equalsIgnoreCase(dataMap.get("Ins_Sms_FireWallChk")))
 				cu.clickElement("Ins_Sms_FireWallChk");
 			
-			cu.SetData("Ins_commentsTxt", dataMap.get("Ins_commentsTxt").replace("{timestamp}", CommonUtils.getTimeStamp()));
+			cu.setData("Ins_commentsTxt", dataMap.get("Ins_commentsTxt").replace("{timestamp}", CommonUtils.getTimeStamp()));
 		}
 		
 		if(("Y").equalsIgnoreCase(dataMap.get("Traffic_InformationTAB"))){
@@ -147,20 +147,20 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 					}
 			else
 			{
-			cu.SetData("Traffic_ThrottlingTxt", dataMap.get("Traffic_ThrottlingTxt"));
+			cu.setData("Traffic_ThrottlingTxt", dataMap.get("Traffic_ThrottlingTxt"));
 			}
-			cu.SetData("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
-			cu.SetData("Traffic_DAWhiteTxt", dataMap.get("Traffic_DAWhiteTxt"));
-			cu.SetData("Traffic_OAPoolTxt", dataMap.get("Traffic_OAPoolTxt"));
-			cu.SetData("Traffic_OAListTxt", dataMap.get("Traffic_OAListTxt"));
+			cu.setData("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
+			cu.setData("Traffic_DAWhiteTxt", dataMap.get("Traffic_DAWhiteTxt"));
+			cu.setData("Traffic_OAPoolTxt", dataMap.get("Traffic_OAPoolTxt"));
+			cu.setData("Traffic_OAListTxt", dataMap.get("Traffic_OAListTxt"));
 			//Checking for multiple option to get selected based on input
 			if(dataMap.get("Traffic_OASupportLst").trim().length() >0){
 				String[] data=dataMap.get("Traffic_OASupportLst").split(";");
 				for(String val : data)
 					cu.SelectDropDownByVisibleText("Traffic_OASupportLst", val);
 			}
-			cu.SetData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
-			cu.SetData("Traffic_DABlackListTxt", dataMap.get("Traffic_DABlackListTxt"));
+			cu.setData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
+			cu.setData("Traffic_DABlackListTxt", dataMap.get("Traffic_DABlackListTxt"));
 		}
 		
 		
@@ -171,28 +171,28 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 			cu.clickElement("SMPP_InfoTab");
 			cu.waitForPageLoad("SMPP_InfoTab");
 			cu.SelectDropDownByVisibleText("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
-			cu.SetData("SMPP_BindAdderTonTxt", dataMap.get("SMPP_BindAdderTonTxt"));
-			cu.SetData("SMPP_BindAdderNpiTxt", dataMap.get("SMPP_BindAdderNpiTxt"));
+			cu.setData("SMPP_BindAdderTonTxt", dataMap.get("SMPP_BindAdderTonTxt"));
+			cu.setData("SMPP_BindAdderNpiTxt", dataMap.get("SMPP_BindAdderNpiTxt"));
 			cu.SelectDropDownByVisibleText("SMPP_Dlr_SupportLst", dataMap.get("SMPP_Dlr_SupportLst"));
 			cu.SelectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
 			cu.SelectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
-			cu.SetData("SMPP_WindowSizeTxt", dataMap.get("SMPP_WindowSizeTxt"));
+			cu.setData("SMPP_WindowSizeTxt", dataMap.get("SMPP_WindowSizeTxt"));
 			cu.SetDataWithoutClearing("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
 			cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
-			cu.SetData("SMPP_SystemTypetxt", dataMap.get("SMPP_SystemTypetxt"));
-			cu.SetData("SMPP_PortTRXTxt", dataMap.get("SMPP_PortTRXTxt"));
-			cu.SetData("SMPP_PortRXTxt", dataMap.get("SMPP_PortRXTxt"));
-			cu.SetData("SMPP_MaxFragmentationTxt", dataMap.get("SMPP_MaxFragmentationTxt"));
-			cu.SetData("SMPP_OATonTxt", dataMap.get("SMPP_OATonTxt"));
-			cu.SetData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
-			cu.SetData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
-			cu.SetData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
+			cu.setData("SMPP_SystemTypetxt", dataMap.get("SMPP_SystemTypetxt"));
+			cu.setData("SMPP_PortTRXTxt", dataMap.get("SMPP_PortTRXTxt"));
+			cu.setData("SMPP_PortRXTxt", dataMap.get("SMPP_PortRXTxt"));
+			cu.setData("SMPP_MaxFragmentationTxt", dataMap.get("SMPP_MaxFragmentationTxt"));
+			cu.setData("SMPP_OATonTxt", dataMap.get("SMPP_OATonTxt"));
+			cu.setData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
+			cu.setData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
+			cu.setData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
 			cu.SelectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
 			cu.SelectDropDownByVisibleText("SMPP_SMSC_MsgModeLst", dataMap.get("SMPP_SMSC_MsgModeLst"));
-			cu.SetData("SMPP_EnqLinkTimerTxt", dataMap.get("SMPP_EnqLinkTimerTxt"));
-			cu.SetData("SMPP_InactivityTimerTxt", dataMap.get("SMPP_InactivityTimerTxt"));
-			cu.SetData("SMPP_ResponceTimerTxt", dataMap.get("SMPP_ResponceTimerTxt"));
-			cu.SetData("SMPP_DelayTimerTxt", dataMap.get("SMPP_DelayTimerTxt"));
+			cu.setData("SMPP_EnqLinkTimerTxt", dataMap.get("SMPP_EnqLinkTimerTxt"));
+			cu.setData("SMPP_InactivityTimerTxt", dataMap.get("SMPP_InactivityTimerTxt"));
+			cu.setData("SMPP_ResponceTimerTxt", dataMap.get("SMPP_ResponceTimerTxt"));
+			cu.setData("SMPP_DelayTimerTxt", dataMap.get("SMPP_DelayTimerTxt"));
 			cu.SetDataWithoutClearing("SMPP_HostIPTxt", dataMap.get("SMPP_HostIPTxt"));
 			//Handling multi select options
 			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){
@@ -209,14 +209,14 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 		
 		if(("Y").equalsIgnoreCase(dataMap.get("SS7_TAB"))){
 				cu.clickElement("SS7_InfoTab");
-				cu.SetData("SS7_CallingPtyTxt", dataMap.get("SS7_CallingPtyTxt"));
-				cu.SetData("SS7_CalledPtyTxt", dataMap.get("SS7_CalledPtyTxt"));
-				cu.SetData("SS7_OA_TONTxt", dataMap.get("SS7_OA_TONTxt"));
-				cu.SetData("SS7_OANpiTxt", dataMap.get("SS7_OANpiTxt"));
-				cu.SetData("SS7_DA_TONTxt", dataMap.get("SS7_DA_TONTxt"));
-				cu.SetData("SS7_DANpiTxt", dataMap.get("SS7_DANpiTxt"));
+				cu.setData("SS7_CallingPtyTxt", dataMap.get("SS7_CallingPtyTxt"));
+				cu.setData("SS7_CalledPtyTxt", dataMap.get("SS7_CalledPtyTxt"));
+				cu.setData("SS7_OA_TONTxt", dataMap.get("SS7_OA_TONTxt"));
+				cu.setData("SS7_OANpiTxt", dataMap.get("SS7_OANpiTxt"));
+				cu.setData("SS7_DA_TONTxt", dataMap.get("SS7_DA_TONTxt"));
+				cu.setData("SS7_DANpiTxt", dataMap.get("SS7_DANpiTxt"));
 				cu.SelectDropDownByVisibleText("SS7_SM_RP_PRI_FlagLst", dataMap.get("SS7_SM_RP_PRI_FlagLst"));
-				cu.SetData("SS7_MaxFragmentationTxt", dataMap.get("SS7_MaxFragmentationTxt"));
+				cu.setData("SS7_MaxFragmentationTxt", dataMap.get("SS7_MaxFragmentationTxt"));
 				//Checking for multiple option to get selected based on input
 				if(dataMap.get("SS7_MT_DCSSupportLst").trim().length() >0){
 					String[] data=dataMap.get("SS7_MT_DCSSupportLst").split(";");
@@ -251,16 +251,16 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 			cu.sleep(1000);
 
 			if(!dataMap.get("HTTP_InterfaceTxt").isEmpty())
-				cu.SetData("HTTP_InterfaceTxt", dataMap.get("HTTP_InterfaceTxt").replace("{timestamp}", CommonUtils.getTimeStamp()));
+				cu.setData("HTTP_InterfaceTxt", dataMap.get("HTTP_InterfaceTxt").replace("{timestamp}", CommonUtils.getTimeStamp()));
 			
 			if(!dataMap.get("HTTP_Dlr_SupportLst").isEmpty())
 				cu.SelectDropDownByVisibleText("HTTP_Dlr_SupportLst", dataMap.get("HTTP_Dlr_SupportLst"));
 			
 			if(!dataMap.get("HTTP_Max_Pending_RequestTxt").isEmpty())
-				cu.SetData("HTTP_Max_Pending_RequestTxt", dataMap.get("HTTP_Max_Pending_RequestTxt"));
+				cu.setData("HTTP_Max_Pending_RequestTxt", dataMap.get("HTTP_Max_Pending_RequestTxt"));
 			
 			if(!dataMap.get("HTTP_Max_SMS_Octet_LengthTxt").isEmpty())
-				cu.SetData("HTTP_Max_SMS_Octet_LengthTxt", dataMap.get("HTTP_Max_SMS_Octet_LengthTxt"));
+				cu.setData("HTTP_Max_SMS_Octet_LengthTxt", dataMap.get("HTTP_Max_SMS_Octet_LengthTxt"));
 			
 			if(!dataMap.get("HTTP_Sucess_Status_RegexTxt").isEmpty() && !dataMap.get("HTTP_Message_ID_RegexTxt").isEmpty() && !dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt").isEmpty()
 					&& !dataMap.get("HTTP_Send_URLTxt").isEmpty() )
@@ -269,16 +269,16 @@ public class TC_07_SupplierEditing  implements ApplicationConstants {
 				cu.sleep(1000);
 				
 				if(!dataMap.get("HTTP_Sucess_Status_RegexTxt").isEmpty())
-					cu.SetData("HTTP_Sucess_Status_RegexTxt", dataMap.get("HTTP_Sucess_Status_RegexTxt"));
+					cu.setData("HTTP_Sucess_Status_RegexTxt", dataMap.get("HTTP_Sucess_Status_RegexTxt"));
 				
 				if(!dataMap.get("HTTP_Message_ID_RegexTxt").isEmpty())
-					cu.SetData("HTTP_Message_ID_RegexTxt", dataMap.get("HTTP_Message_ID_RegexTxt"));
+					cu.setData("HTTP_Message_ID_RegexTxt", dataMap.get("HTTP_Message_ID_RegexTxt"));
 				
 				if(!dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt").isEmpty())
-					cu.SetData("HTTP_Permanent_Failure_Status_RegexTxt", dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt"));
+					cu.setData("HTTP_Permanent_Failure_Status_RegexTxt", dataMap.get("HTTP_Permanent_Failure_Status_RegexTxt"));
 				
 				if(!dataMap.get("HTTP_Send_URLTxt").isEmpty())
-					cu.SetData("HTTP_Send_URLTxt", dataMap.get("HTTP_Send_URLTxt"));
+					cu.setData("HTTP_Send_URLTxt", dataMap.get("HTTP_Send_URLTxt"));
 			}			
 		}
 		

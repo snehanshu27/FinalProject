@@ -1,4 +1,4 @@
-package com.tata.selenium.test.ProductDefault;
+package com.tata.selenium.test.filteringRules;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +25,11 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_02_ModifyDefaultPrice implements ApplicationConstants{
+public class TC_01_FilteringRulesUIValidation implements ApplicationConstants {
 	
-	private static final Logger LOGGER = Logger.getLogger(TC_02_ModifyDefaultPrice.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TC_01_FilteringRulesUIValidation.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
-	String properties = "./data/Default.properties";
+	String properties = "./data/filteringRules.properties";
 	ExcelUtils excelUtils = new ExcelUtils();
 	private ExtentReports extent;
 	
@@ -42,8 +42,8 @@ public class TC_02_ModifyDefaultPrice implements ApplicationConstants{
 	public void DO(String uniqueDataId, String testCaseId) {
 		// Starting the extent report
 		test = extent.startTest(
-				"Execution triggered for - TC_01_MNPUIValidation -with TestdataId: " + uniqueDataId);
-				String sheetName = "Product_Default";
+				"Execution triggered for - "+TC_01_FilteringRulesUIValidation.class.getName()+" -with TestdataId: " + uniqueDataId);
+				String sheetName = "FilteringRules";
 		
 				// Reading excel values
 				try {
@@ -89,34 +89,28 @@ public class TC_02_ModifyDefaultPrice implements ApplicationConstants{
 				cu.SwitchFrames("bottom");
 				cu.SwitchFrames("target");
 				
-				String parentWindow = cu.getCurrWindowName();
-				String winHandleBefore = driver.getWindowHandle();
-				CommonUtils.printConsole("parentWindow   "+parentWindow);
-
-				//Validating all fields
-				cu.SelectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
-				cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+				//validating editabledropdown
+				cu.checkEditableDropDown("filteringRules_CountryLst", dataMap.get("Country"));
+				cu.checkEditableDropDown("filteringRules_DestinationLst", dataMap.get("Destination"));
+				cu.checkEditableDropDown("filteringRules_SupplierNameLst", dataMap.get("SupplierName"));
+				cu.checkEditableDropDown("filteringRules_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
+				cu.checkEditableDropDown("filteringRules_CustomerNameLst", dataMap.get("CustomerName"));
+				cu.checkEditableDropDown("filteringRules_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
 				
-				cu.clickElement("Product_DefaultBtn");
+				//validating editable textbox
+				cu.checkEditableBox("filteringRules_RuleIdFilterTxt");
+				cu.checkEditableBox("filteringRules_OAFilterTxt");
 				
-				cu.newWindowHandles(parentWindow);
-				String winHandleAfter = driver.getWindowHandle();
-				
-				System.out.println(dataMap.get("Default_Price"));
-				System.out.println(dataMap.get("Roaming_Price"));
-				
-				cu.setData("Default_Price", dataMap.get("Default_Price"));
-				cu.setData("Roaming_Price", dataMap.get("Roaming_Price"));
-				
-				cu.clickElement("Product_Provisioning_SubmitBtn");
-				
-				cu.checkMessage("application_PopUpMessage", "Displaying the data",
-						"The product price(s) have been successfully submitted.");
-			
-				driver.close();
-				
-				driver.switchTo().window(winHandleBefore);
-			
+				// Validating all buttons
+				cu.checkElementPresence("filteringRules_diplayButton");
+				cu.checkElementPresence("filteringRules_SubmitButton");
+				cu.checkElementPresence("filteringRules_cancelButton");
+				cu.checkElementPresence("filteringRules_AddRuleButton");
+				cu.checkElementPresence("filteringRules_ExportButton");
+								
+				// Taking screenshot and Logging out
+				cu.getScreenShot("Validation Of UI parameters for Default Screen");
+						
 				test = cu.getExTest();
 				msgInsHomePage.doLogOut(test);
 
@@ -131,7 +125,7 @@ public class TC_02_ModifyDefaultPrice implements ApplicationConstants{
 		DOMConfigurator.configure("log4j.xml");
 		Log.startTestCase("Start Execution");
 		Log.startTestCase(testCaseId);
-		extent = ExtReport.instance("Product_Default");
+		extent = ExtReport.instance("Filtering_Rules");
 	}
 
 	@AfterMethod
@@ -154,4 +148,5 @@ public class TC_02_ModifyDefaultPrice implements ApplicationConstants{
 		}
 	}
 	
+
 }

@@ -141,7 +141,7 @@ public class ExcelUtils implements ApplicationConstants {
 	}
 
 	public void setCellData(String sheetName, String cellValue, String rowName, String colName)  {
-		try {
+		try {/*
 			InputStream inp = new FileInputStream(DATA_FILEPATH);
 			Workbook wb = WorkbookFactory.create(inp);
 			Sheet sheet = wb.getSheet(sheetName);
@@ -178,7 +178,7 @@ public class ExcelUtils implements ApplicationConstants {
 			FileOutputStream fileOut = new FileOutputStream(DATA_FILEPATH);
 			wb.write(fileOut);
 			fileOut.close();
-		} catch (Exception e) {
+		*/} catch (Exception e) {
 			LOGGER.info("Error while setting the cell data by setCellData(Str1, Str2, Str3, Str4) for column : "+colName+" and row : "+rowName+" Exception : " + e);
 			CommonUtils.printConsole("Error while setting the cell data by setCellData(Str1, Str2, Str3, Str4) for column : "+colName+" and row : "+rowName+" Exception : " + e.getMessage());
 		}

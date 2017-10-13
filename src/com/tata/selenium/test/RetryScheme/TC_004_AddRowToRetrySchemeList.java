@@ -121,10 +121,10 @@ public class TC_004_AddRowToRetrySchemeList implements ApplicationConstants {
 		//String editButton = "ActionBtn_starts"+dataMap.get("Pattern")+"editBtn_ends";
 		hu.clickElement("addRowBtn");
 		Thread.sleep(1000);
-		hu.SetData("pattern_txt", dataMap.get("Pattern"));
+		hu.setData("pattern_txt", dataMap.get("Pattern"));
 		hu.clickElement("error_txt");
 		hu.clickElement("errorList");
-		hu.SetData("description_txt", dataMap.get("Description"));
+		hu.setData("description_txt", dataMap.get("Description"));
 		hu.clickElement("saveBtn");
 		//hu.checkElementPresent(editButton);
 		//hu.checkElementPresent("ActionBtn_starts"+dataMap.get("Pattern")+"editBtn_ends");

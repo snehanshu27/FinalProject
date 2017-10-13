@@ -88,7 +88,7 @@ public class TC_07_ProductCreation implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SetData("Product_Provisioning_ProductNameTxt", dataMap.get("Product_Provisioning_ProductNameTxt"));
+		cu.setData("Product_Provisioning_ProductNameTxt", dataMap.get("Product_Provisioning_ProductNameTxt"));
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		cu.ConfirmAlert();
 		cu.SelectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));

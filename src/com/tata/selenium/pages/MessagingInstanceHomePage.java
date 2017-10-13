@@ -58,7 +58,8 @@ public class MessagingInstanceHomePage extends CommonUtils {
 	public void doLogOut(ExtentTest test){
 		try{
 			default_content();
-			SwitchFrames("//iframe[@scrolling='no']");
+			scrollUpPage();
+			SwitchFrames("//iframe[@scrolling='no']");			
 			driver.findElement(signOutBtn).click();
 			printLogs("logout Successful");
 			test.log(LogStatus.PASS, "EXPECTECD: Sigout from application", "Usage: <span style='font-weight:bold;'>ACTUAL:: Sigout is sucessfull from application</span>");

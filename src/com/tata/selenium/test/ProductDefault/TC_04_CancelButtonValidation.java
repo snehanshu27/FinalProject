@@ -99,8 +99,8 @@ public class TC_04_CancelButtonValidation implements ApplicationConstants {
 				System.out.println(dataMap.get("Default_Price"));
 				System.out.println(dataMap.get("Roaming_Price"));
 				
-				cu.SetData("Default_Price", dataMap.get("Default_Price"));
-				cu.SetData("Roaming_Price", dataMap.get("Roaming_Price"));
+				cu.setData("Default_Price", dataMap.get("Default_Price"));
+				cu.setData("Roaming_Price", dataMap.get("Roaming_Price"));
 				
 				cu.clickElement("Product_Provisioning_CancelBtn");
 				

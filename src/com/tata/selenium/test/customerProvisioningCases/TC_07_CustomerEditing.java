@@ -99,21 +99,21 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
 		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
 		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
-		cu.SetData("Rate_Change_Notification_Period", dataMap.get("RateChangeNotification"));
+		cu.setData("Rate_Change_Notification_Period", dataMap.get("RateChangeNotification"));
 		
 		//Entering values in Instance Info Tab if data is present in test data
 		if(("Y").equalsIgnoreCase(dataMap.get("Ins_TAB"))){
 			cu.SelectDropDownByVisibleText("Ins_Instance_StateLst",dataMap.get("Ins_Instance_StateLst"));	
-			cu.SetData("Ins_commentsTxt", dataMap.get("Ins_commentsTxt"));
+			cu.setData("Ins_commentsTxt", dataMap.get("Ins_commentsTxt"));
 		}
 		
 		if(("Y").equalsIgnoreCase(dataMap.get("Traffic_InformationTAB"))){
 			cu.clickElement("Traffic_InfoTab");
 			
-			cu.SetData("Traffic_ThrottlingTxt", dataMap.get("Traffic_ThrottlingTxt"));
-			cu.SetData("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
-			cu.SetData("Traffic_DAShortCodeTxt", dataMap.get("Traffic_DAWhiteTxt"));
-			cu.SetData("Traffic_AllowedIPTxt", dataMap.get("Traffic_OAPoolTxt"));
+			cu.setData("Traffic_ThrottlingTxt", dataMap.get("Traffic_ThrottlingTxt"));
+			cu.setData("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
+			cu.setData("Traffic_DAShortCodeTxt", dataMap.get("Traffic_DAWhiteTxt"));
+			cu.setData("Traffic_AllowedIPTxt", dataMap.get("Traffic_OAPoolTxt"));
 			
 			if(dataMap.get("Traffic_OASupportLst").trim().length() >0){
 				String[] data=dataMap.get("Traffic_OASupportLst").split(";");
@@ -121,9 +121,9 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 					cu.SelectDropDownByVisibleText("Traffic_OASupportLst", val);
 			}
 			
-			cu.SetData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
-			cu.SetData("Traffic_OADCInfoTxt", dataMap.get("Traffic_DABlackListTxt"));
-			cu.SetData("Traffic_DeniedIPTxt", dataMap.get("Traffic_DABlackListTxt"));
+			cu.setData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
+			cu.setData("Traffic_OADCInfoTxt", dataMap.get("Traffic_DABlackListTxt"));
+			cu.setData("Traffic_DeniedIPTxt", dataMap.get("Traffic_DABlackListTxt"));
 			if(("Y").equalsIgnoreCase(dataMap.get("Enhanced_Dlr")))
 			{
 				cu.selectCheckBox("Enhanced_Dlr");
@@ -144,13 +144,13 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			cu.SelectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
 			cu.SelectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
 			cu.SelectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
-			cu.SetData("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
+			cu.setData("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
 			cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
-			cu.SetData("SMPP_MaxConnectionsTxt", dataMap.get("SMPP_MaxConnectionsTxt"));
-			cu.SetData("SMPP_OATonTxt", dataMap.get("SMPP_OATonTxt"));
-			cu.SetData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
-			cu.SetData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
-			cu.SetData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
+			cu.setData("SMPP_MaxConnectionsTxt", dataMap.get("SMPP_MaxConnectionsTxt"));
+			cu.setData("SMPP_OATonTxt", dataMap.get("SMPP_OATonTxt"));
+			cu.setData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
+			cu.setData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
+			cu.setData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
 			cu.SelectDropDownByVisibleText("Enhanced_DLR_Format", dataMap.get("Enhanced_DLR_Format"));
 			
 			//Handling multi select options

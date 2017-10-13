@@ -149,12 +149,12 @@ void fillHTTPFieldAndValiadateErrorMessage(CommonUtils cu, String fieldName, Str
 {
 	String oldVal = cu.getAttribute(fieldName, "value");
 	
-	cu.SetData(fieldName, newExitingMaxValue);
+	cu.setData(fieldName, newExitingMaxValue);
 	cu.clickElement("supplier_SubmitBtn");
 	cu.sleep(500);
 	cu.checkMessage("application_PopUpTitle", "Popup valitaion of HTTP field "+fieldName+" for exceeding max value", ExpectedMessage);
 	
-	cu.SetData(fieldName, oldVal);
+	cu.setData(fieldName, oldVal);
 	
 }
 

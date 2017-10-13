@@ -90,7 +90,7 @@ public class TC_05_CustomerCreationNegativeValidation implements ApplicationCons
 		cu.SelectDropDownByVisibleText("nws_customer_Security", dataMap.get("Security"));
 		
 		//Entering data in text field
-		cu.SetData("nws_customer_Acc_name" , dataMap.get("Customer_Account_Name"));
+		cu.setData("nws_customer_Acc_name" , dataMap.get("Customer_Account_Name"));
 		cu.clickElement("nws_CreateBtn");		
 
 	

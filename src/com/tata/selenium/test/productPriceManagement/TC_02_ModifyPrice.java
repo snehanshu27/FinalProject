@@ -104,7 +104,7 @@ public class TC_02_ModifyPrice implements ApplicationConstants {
 			cu.SelectDropDownByVisibleText("DestinationFilterLst", dataMap.get("DestinationFilterLst"));
 			cu.SelectDropDownByVisibleText("Mcc_FilterLst", dataMap.get("Mcc_FilterLst"));
 			cu.SelectDropDownByVisibleText("Mnc_FilterLst", dataMap.get("Mnc_FilterLst"));
-			cu.SetData("CriteriaTxt", dataMap.get("CriteriaTxt"));
+			cu.setData("CriteriaTxt", dataMap.get("CriteriaTxt"));
 			cu.clickElement("FilterBtn");
 			cu.waitForPageLoad("");
 			if(dataMap.get("PriceCardLst").contains("COST") || dataMap.get("PriceCardLst").contains("COVERAGE")){
@@ -206,7 +206,7 @@ public class TC_02_ModifyPrice implements ApplicationConstants {
 	    }
 	    
 	    //Set New Price and date
-	    cu.SetData("newTab_NewPrice", dataMap.get("newTab_NewPrice"));
+	    cu.setData("newTab_NewPrice", dataMap.get("newTab_NewPrice"));
 	    cu.checkPopUp("application_PopUpTitle", "Validating if any error occured because of New Price value");
 	    cu.clickElement("newTab_NewEffectiveDate");
 	    cu.selectCalendarDate("newTab_NewEffectiveDate", dataMap.get("newTab_NewEffectiveDate"));

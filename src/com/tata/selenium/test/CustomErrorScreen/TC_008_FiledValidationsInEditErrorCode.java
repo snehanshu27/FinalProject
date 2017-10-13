@@ -137,7 +137,7 @@ public class TC_008_FiledValidationsInEditErrorCode implements ApplicationConsta
 			fillFieldsAndClearExcluded(hu, "errorcodedesc");
 			long descMax = 100;
 			String descStrExceedMax = hu.generateRadnomString(descMax+1);
-			hu.SetData("customErrorCode_DescTxt",  descStrExceedMax);		
+			hu.setData("customErrorCode_DescTxt",  descStrExceedMax);		
 			hu.clickElement("customError_PageTitle");
 			hu.sleep(500);
 			fieldEmptyCheck(hu, "4. Row with ErrorCode Description exceed MAX length cannot be saved", "Enter error code description more than Max ("+descMax+")",
@@ -147,7 +147,7 @@ public class TC_008_FiledValidationsInEditErrorCode implements ApplicationConsta
 			fillFieldsAndClearExcluded(hu, "errorcodetype");
 			String errMax = "4294967295";
 			String errExceedMax = "4294967296";
-			hu.SetData("customError_CodeTxt",  errMax);		
+			hu.setData("customError_CodeTxt",  errMax);		
 			hu.clickElement("customError_PageTitle");
 			hu.sleep(500);
 			String uiErrCodeTxt = hu.getAttribute("customError_CodeTxt", "value");
@@ -260,7 +260,7 @@ public class TC_008_FiledValidationsInEditErrorCode implements ApplicationConsta
 			if(!"errorcode".equalsIgnoreCase(exceptionalField))
 			{
 				//Set error code
-				hu.SetData("customError_CodeTxt",  dataMap.get("ErrorCode"));		
+				hu.setData("customError_CodeTxt",  dataMap.get("ErrorCode"));		
 				hu.clickElement("customError_PageTitle");
 				hu.sleep(500);
 			}
@@ -283,7 +283,7 @@ public class TC_008_FiledValidationsInEditErrorCode implements ApplicationConsta
 			if(!"errorcodedesc".equalsIgnoreCase(exceptionalField))
 			{
 				//Set Description
-				hu.SetData("customErrorCode_DescTxt",  dataMap.get("Description"));
+				hu.setData("customErrorCode_DescTxt",  dataMap.get("Description"));
 				hu.clickElement("customError_PageTitle");
 				hu.sleep(500);
 			}

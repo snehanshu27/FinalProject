@@ -101,7 +101,7 @@ public class TC_09_NewSupplierAccountCreation implements ApplicationConstants {
 		cu.SelectDropDownByVisibleText("nws_supplier_connectivityType", dataMap.get("Connectivity_Type"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Security", dataMap.get("Security"));
 		//Entering data in text field
-		cu.SetData("nws_supplier_Acc_name" , dataMap.get("Supplier_Account_Name"));
+		cu.setData("nws_supplier_Acc_name" , dataMap.get("Supplier_Account_Name"));
 		cu.clickElement("nws_CreateBtn");		
 /*
 		String popUpName=null;		
