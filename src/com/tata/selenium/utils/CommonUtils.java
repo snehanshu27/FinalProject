@@ -3395,7 +3395,39 @@ public class CommonUtils implements ApplicationConstants {
 		return list1;
 
 	}
+	
+	public List<String> ElementsToListWithTrim(String fieldName) {
+		List<String> list1 = new LinkedList<>();
 
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			list1.add(item.getText().trim());
+		}
+		return list1;
+
+	}
+
+	public List<String> ElementsToListWithTrim(String fieldName, String replaceKeys, String replaceValues) {
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName, replaceKeys, replaceValues));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			list1.add(item.getText().trim());
+		}
+		return list1;
+
+	}
+	
 	public ArrayList<String> readCSVToList(File newFile) {
 		BufferedReader crunchifyBuffer = null;
 		ArrayList<String> CSVData = new ArrayList<String>();

@@ -12,8 +12,8 @@ public interface ApplicationConstants {
 	static final String LOG_FILENAME= "./log4j.properties";
 	static final String OBJECT_REPO_FILEPATH = "./data/SupplierProvisioning.properties";
 	static final String DATA_REPO_FILEPATH = "./data";
-//	static final String DATA_FILEPATH = "H:\\AAAShared\\Test_Data.xlsx";
-	static final String DATA_FILEPATH = "./data/Test_Data.xlsx";
+	static final String DATA_FILEPATH = "H:\\AAAShared\\Test_Data.xlsx";
+//	static final String DATA_FILEPATH = "./data/Test_Data.xlsx";
 	static final String DB_DATA_FILEPATH = "D:/MMX/DatabaseTestingMaven2/data/result/DB_Result_MMX3.xlsx";
 	static final String DATA_FILEPATH_NEW = "./data/Test_Data_new.xlsx";
 	static final String BROWSER = "browser.xml";

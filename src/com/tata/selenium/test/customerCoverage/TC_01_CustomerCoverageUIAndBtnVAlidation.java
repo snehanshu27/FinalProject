@@ -85,15 +85,17 @@ public class TC_01_CustomerCoverageUIAndBtnVAlidation implements ApplicationCons
 		//Validating all fields
 		cu.checkEditableDropDown("Customer_Coverage_ServiceNameLst",dataMap.get("Customer_Coverage_ServiceNameLst"));
 		cu.checkEditableDropDown("Customer_Coverage_CustomerNameLst",dataMap.get("Customer_Coverage_CustomerNameLst"));
+		cu.checkEditableDropDown("Customer_Coverage_TemplateLst",dataMap.get("Customer_Coverage_TemplateLst"));
 		cu.checkEditableDropDown("Customer_Coverage_CustomerAccNameLst",dataMap.get("Customer_Coverage_CustomerAccNameLst"));
-		cu.checkEditableDropDown("Customer_Coverage_CustomerProductLst",dataMap.get("Customer_Coverage_CustomerProductLst"));
+		cu.checkNonEditableBox("Customer_Coverage_CustomerProductTxt",dataMap.get("Customer_Coverage_CustomerProductLst"));
 		cu.checkNonEditableBox("Customer_Coverage_CurrencyTxt");
 		cu.checkElementPresence("Customer_Coverage_DisplayBtn");
 		cu.checkElementPresence("Customer_Coverage_CancelBtn");
+		cu.checkElementPresence("Customer_Coverage_EmailerBtn");
 		
 		//Validating display Btton functionality
 		cu.clickElement("Customer_Coverage_DisplayBtn");
-		cu.checkMessage("application_PopUpOkBtn", "Validating after Clicking Display without seecting any Value", "Error: Please select all input parameters");
+		cu.checkMessage("application_PopUpOkBtn", "Validating after Clicking Display without seecting any Value", "Error: Please select all required input parameters.");
 		
 		//Validating Cancel Btn functionality
 		cu.clickElement("Customer_Coverage_CancelBtn");

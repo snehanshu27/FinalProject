@@ -44,7 +44,6 @@ public class LoginPage extends CommonUtils {
 	
 	private void setUsername(String user){
 		
-		
 		driver.findElement(username).sendKeys(user);
 		printLogs("Username '"+user+"' entered sucessfully");
 	}
