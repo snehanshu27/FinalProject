@@ -45,8 +45,8 @@ import com.tata.selenium.utils.Log;
  * @description This class will perform a login and logout in Gmail application
  */
 
-public class TC_02_ValidateCoverage implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_02_ValidateCoverage.class.getName());
+public class TC_04_ValidateHeaders implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_04_ValidateHeaders.class.getName());
 	String properties =  "./data/CustomerCoverage.properties";
 	ExcelUtils excelUtils = new ExcelUtils();
 	private ExtentReports extent;
@@ -59,7 +59,7 @@ public class TC_02_ValidateCoverage implements ApplicationConstants {
 	@Parameters({"uniqueDataId", "testCaseId"})	
 	public void DO (String uniqueDataId, String testCaseId) throws Exception {
 		//Starting the extent report
-		test = extent.startTest("Execution triggered for - "+TC_02_ValidateCoverage.class.getName()+" - "+uniqueDataId);
+		test = extent.startTest("Execution triggered for - "+TC_04_ValidateHeaders.class.getName()+" - "+uniqueDataId);
 		String sheetName="Customer_Coverage_Screen";
 		
 		//Reading excel values
@@ -118,30 +118,27 @@ public class TC_02_ValidateCoverage implements ApplicationConstants {
 		
 			if(!"Error: Please select all required input parameters.".equalsIgnoreCase(popUpName)){				
 				
-				if(!dataMap.get("Table_ResultData_Json").isEmpty())
+				if(!dataMap.get("Table_Haeders_Json").isEmpty())
 				{
-					List<Map<String, String>> expectedTableResultData =  getExpectedTableResultData(dataMap.get("Table_ResultData_Json"));
-					List<Map<String, String>> uiData = getUIData();
+					List<String> expectedTableHeaders =  getExpectedTableHeaderData(dataMap.get("Table_Haeders_Json"));
+					List<String> uiHeaders = getTableResultUIHeaders();
 					
-					if(expectedTableResultData.equals(uiData))
+					if(expectedTableHeaders.equals(uiHeaders))
 					{
-						test.log(LogStatus.PASS, "UI and InputSheet data should be matched", "UI and InputSheet data has been matched");
+						test.log(LogStatus.PASS, "UI and InputSheet headers should be matched", "UI and InputSheet headers has been matched");
 					}
 					else
-						test.log(LogStatus.FAIL, "UI and InputSheet data should be matched", 
-														"UI and excelsheet data have not matched. <br/>UI data:<br/> "+StringEscapeUtils.escapeHtml3(uiData.toString())
-																			+"<br/><br/>Expecteddata:<br/> "+StringEscapeUtils.escapeHtml3(expectedTableResultData.toString()));
+						test.log(LogStatus.FAIL, "UI and InputSheet headers should be matched", 
+														"UI and datasheet headers have not matched.<br/>UI headers:<br/> "+StringEscapeUtils.escapeHtml3(uiHeaders.toString())
+																			+"<br/><br/>Expected headers:<br/> "+StringEscapeUtils.escapeHtml3(expectedTableHeaders.toString()));
 				}
 				else				
-					test.log(LogStatus.FAIL, "'Table_ResultData_Json' can't be empty in inputsheet. Please correct the input sheet");
+					test.log(LogStatus.FAIL, "'Table_Haeders_Json' can't be empty in inputsheet. Please correct the input sheet");
 							
 			}else{
 				cu.checkMessage("application_PopUpTitle", "Checking for any error when results are expected.", "No data for the selected input parameters");
 			}
-		
-			//export file and validate
-			//if(("ON").equalsIgnoreCase(dataMap.get("ValidateExportCSVFile")))
-				exportCSVAndValidateCoverage();
+					
 				
 		cu.getScreenShot("Validation Of Coverage in Customer Coverage Screen");
 		test = cu.getExTest();
@@ -151,48 +148,22 @@ public class TC_02_ValidateCoverage implements ApplicationConstants {
 		cu.checkRunStatus();	
 
 	}
-	
-	  private List<Map<String, String>> getUIData() 
-	  {		
-		  List<Map<String, String>> retData = new LinkedList<>(); 
-		  List<String> tableheaders = getTableResultHeaders();
-		  int dataRowsSize = cu.ElementsToList("Customer_Coverage_TableResultDataRows").size();		  
-		  for(int i=1;i<dataRowsSize+1;i++)
-		  {
-			  Map<String, String> currRowData = new LinkedHashMap<>();
-			  List<String> rowColoumValues = cu.ElementsToListWithTrim("Customer_Coverage_TableResult_DynamicDataRowColoumns", "$index$", i+"");
-			  for(int k=0;k<tableheaders.size();k++)
-			  {
-				  currRowData.put(tableheaders.get(k), rowColoumValues.get(k));
-			  }
-			  retData.add(currRowData);
-		  }
-		
-		  return retData;
-	}
 
-	private List<String> getTableResultHeaders()
+
+	private List<String> getTableResultUIHeaders()
 	{			
 		  return cu.ElementsToList("Customer_Coverage_TableResultHeaders");		
 	}
 	  
-	private List<Map<String, String>> getExpectedTableResultData(String jsonStr)
+	private List<String> getExpectedTableHeaderData(String jsonStr)
 	{
 		JsonReader jsonReader = Json.createReader(new StringReader(jsonStr));
 		JsonArray arrayObj = jsonReader.readArray();
-		List<Map<String, String>> allSubRules = new LinkedList<>();
+		List<String> ret = new LinkedList<>();		
+		for(JsonValue jsonVal : arrayObj)		
+			ret.add(jsonVal.toString().replace("\"", ""));		
 		
-		for(JsonValue jsonVal : arrayObj)
-		{
-			JsonObject obj = jsonVal.asJsonObject();
-			Map<String, String> map = new LinkedHashMap<>();				
-			for(String key : obj.keySet())				
-				map.put(key, obj.getString(key));	
-			
-			allSubRules.add(map);
-		}		
-		
-		return allSubRules;
+		return ret;
 	}
 	  
 	@BeforeMethod
@@ -224,31 +195,7 @@ public class TC_02_ValidateCoverage implements ApplicationConstants {
 			  extent.flush();  
 		  }
 	  }	
-	  
-	  
-	  public void exportCSVAndValidateCoverage() throws Exception
-	  {
-		  	cu.deleteAllFilesInDownloadFolder();
-			cu.clickElement("Customer_Coverage_ExportBtn");
-			cu.waitForPageLoad("CustomerCoverage");
-			cu.sleep(2000);
-			String csvFilePath = cu.getDownlaodedFileName();
-			
-			CSVUtil csvu = new CSVUtil(csvFilePath, 1);
-			List<Map<String, String>> csvData = csvu.getAllRowData();
-			List<Map<String, String>> uiData = getUIData();
-			
-			if(csvData.equals(uiData))
-			{
-				test.log(LogStatus.PASS, "UI and CSV data should be matched", "UI and CSV data has been matched");
-			}
-			else
-				test.log(LogStatus.FAIL, "UI and CSV data should be matched", 
-												"UI and CSV data has not matched.<br/><br/>UI data:<br/> "+StringEscapeUtils.escapeHtml3(uiData.toString())
-																	+"<br/><br/>CSV_Data:<br/> "+StringEscapeUtils.escapeHtml3(csvData.toString()));
-				
-	  }
-	
+	  	
 	  
 		
 }
