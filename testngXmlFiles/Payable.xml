@@ -37,7 +37,7 @@
 		</classes>
 	</test>
 
-	<test name="t4">
+	<!-- <test name="t4">
 		<parameter name="testCaseId" value="TC_03" />
 		<parameter name="uniqueDataId" value="Data_04" />
 		<classes>
@@ -71,6 +71,6 @@
 			<class
 				name="com.tata.selenium.test.Payable.TC_05_PayableValidateDataMTSMS" />
 		</classes>
-	</test>
+	</test> -->
 
 </suite>
