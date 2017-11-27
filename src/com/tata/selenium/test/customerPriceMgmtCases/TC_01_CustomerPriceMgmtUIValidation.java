@@ -2,8 +2,12 @@ package com.tata.selenium.test.customerPriceMgmtCases;
 
 import java.util.Map;
 import java.util.HashMap;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
@@ -120,6 +124,17 @@ public class TC_01_CustomerPriceMgmtUIValidation implements ApplicationConstants
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");

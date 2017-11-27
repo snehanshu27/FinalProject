@@ -245,10 +245,14 @@ public class CommonUtils implements ApplicationConstants {
 	public void waitForPageLoad(String pageName) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if ("complete".equals(js.executeScript("return document.readyState").toString())) {
-			printLogs(pageName + " Page loaded successfully");
-			return;
+		int count =0;
+		while (!"complete".equals(js.executeScript("return document.readyState").toString())) {
+			sleep(100);			
+			count++;
+			if(count>100)
+				break;			
 		}
+		printLogs(pageName + " Page loaded successfully");
 	}
 	
 	public void waitForPageLoadWithSleep(String pageName, long initialSleepmilisec) {
@@ -273,7 +277,8 @@ public class CommonUtils implements ApplicationConstants {
 		try {
 			WebElement dropDownField = driver.findElement(putility.getObject(fieldName));
 			Select oSelect = new Select(dropDownField);
-			String defaultSelVal = oSelect.getFirstSelectedOption().getText();
+			List<WebElement> allSelectedOptions = oSelect.getAllSelectedOptions();
+			String defaultSelVal = allSelectedOptions.size()>0?allSelectedOptions.get(0).getText():"";
 			LOGGER.info("defaultSelVal is " + defaultSelVal);
 			boolean val = dropDownField.isEnabled();
 			if (val && defaultSelVal.trim().equalsIgnoreCase(value)) {
@@ -282,20 +287,32 @@ public class CommonUtils implements ApplicationConstants {
 						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
 								+ " is by default selected",
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is editable and default value selected is '" + value + "</span>");
+								+ " is editable and default value selected is '" + value + "'</span>");
 			} else {
-				printLogs(fieldName + " field is not editable and the default value selected is " + defaultSelVal);
-				test.log(LogStatus.FAIL,
-						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
-								+ " is selected by default",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is non editable and default value selected is -'" + value + "</span>");
+				if(val)
+				{
+					printLogs(fieldName + " field is editable and but the default value selected is " + defaultSelVal);
+					test.log(LogStatus.WARNING,
+							"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+									+ " is selected by default",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+									+ " is editable and but default value selected is -'" + defaultSelVal + "'</span>");
+				}
+				else
+				{
+					printLogs(fieldName + " field is not editable and the default value selected is " + defaultSelVal);
+					test.log(LogStatus.FAIL,
+							"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+									+ " is selected by default",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+									+ " is non editable and default value selected is -'" + defaultSelVal + "'</span>");
+				}
 			}
 		} catch (Exception e) {
 			getScreenShot("Selecting  " + value);
 			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
 			printLogs(fieldName + " -Dropdown validation failed..." + e);
-			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			test.log(LogStatus.FAIL, "Drop down validation", fieldName+" - Drop down validation failed failed because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -317,12 +334,24 @@ public class CommonUtils implements ApplicationConstants {
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
 								+ " is editable and default value selected is '" + value + "</span>");
 			} else {
-				printLogs(fieldName + " field is not editable and the default value selected is " + defaultSelVal);
-				test.log(LogStatus.FAIL,
-						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
-								+ " is selected by default",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is non editable and default value selected is -'" + value + "</span>");
+				if(val)
+				{
+					printLogs(fieldName + " field is editable and but the default value selected is " + defaultSelVal);
+					test.log(LogStatus.WARNING,
+							"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+									+ " is selected by default",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+									+ " is editable and but default value selected is -'" + defaultSelVal + "'</span>");
+				}
+				else
+				{
+					printLogs(fieldName + " field is not editable and the default value selected is " + defaultSelVal);
+					test.log(LogStatus.FAIL,
+							"EXPECTED: Drop down " + fieldName + " should be editable and " + value
+									+ " is selected by default",
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
+									+ " is non editable and default value selected is -'" + defaultSelVal + "'</span>");
+				}
 			}
 		} catch (Exception e) {
 			getScreenShot("Selecting  " + value);
@@ -524,7 +553,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("Validating field" + fieldName);
 			LOGGER.info("Text field validations failed..." + e);
 			printLogs("Text field validations failed..." + e);
-			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			test.log(LogStatus.FAIL, "Text field validation", fieldName+"-Text field validation failed  because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -625,6 +654,29 @@ public class CommonUtils implements ApplicationConstants {
 		return val;
 	}
 
+	public void checkElementNotPresence(String fieldName) {
+		try {			
+			if (existsElement(fieldName, 500) && driver.findElement(putility.getObject(fieldName)).isDisplayed()) {
+				printLogs(fieldName + " Element is present and displayed in the page");
+				test.log(LogStatus.FAIL, "EXPECTED: Element " + fieldName + " should be not displayed",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Element " + fieldName
+								+ " is displayed</span>");
+			} else {
+				printLogs(fieldName + " Element is not present and not displayed in the page");
+				test.log(LogStatus.PASS, "EXPECTED: Element " + fieldName + " should be not displayed",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Element " + fieldName
+								+ " is not displayed</span>");
+			}
+		} catch (Exception e) {
+			getScreenShot("UI Element  " + fieldName);
+			LOGGER.info(fieldName + " -UI Element validation failed..." + e);
+			printLogs(fieldName + " -UI Element validation failed..." + e);
+			test.log(LogStatus.FAIL, "UI Element validation", "UI Element validation failed because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
 	public void checkElementPresence(String fieldName) {
 		try {
 			WebElement uiElement = driver.findElement(putility.getObject(fieldName));
@@ -847,6 +899,7 @@ public class CommonUtils implements ApplicationConstants {
 		By locator = putility.getObject(fieldname);
 		try {
 			WebElement clkObject = driver.findElement(locator);
+			scrollPageToViewElement(fieldname);
 			clkObject.click();
 			printLogs(fieldname + " - having xpath '" + locator + "' clicked sucessfully");
 			test.log(LogStatus.PASS, "Element should be clicked sucessfully", fieldname + " - clicked sucessfully");
@@ -907,6 +960,7 @@ public class CommonUtils implements ApplicationConstants {
 				printLogs("Selected - '" + value + "' from the dropdown");
 				test.log(LogStatus.PASS, "Drop down should be selected",
 						"Drop down value -'" + value + "'- selected from field "+fieldname+" sucessfully");
+				waitForPageLoad("");
 			}
 			return true;
 		} catch (Exception e) {
@@ -998,6 +1052,30 @@ public class CommonUtils implements ApplicationConstants {
 			printLogs("Dropdown DeSelected failed..." + e);
 			test.log(LogStatus.FAIL, "Drop down should be DeSelected",
 					"Drop down value -'" + value + "'- could not be DeSelected from filedname "+filedname+" because -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
+	
+	
+	public boolean deselectDropDownAllOptions(String filedname) {
+		try {
+			
+				WebElement supplierName = driver.findElement(putility.getObject(filedname));
+
+				Select oSelect = new Select(supplierName);
+				oSelect.deselectAll();
+				printLogs("All options have been deSelected from the dropdown "+filedname);
+				test.log(LogStatus.PASS, "All options in Drop down should be DeSelected",
+						"All options have been deSelected from the dropdown "+filedname+" sucessfully");			
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Deselecting options in dropdown  " + filedname);
+			LOGGER.info("Dropdown DeSelection failed..." + e);
+			printLogs("Dropdown DeSelection failed..." + e);
+			test.log(LogStatus.FAIL, "All options in Drop down should be DeSelected",
+					"All options could not be DeSelected from filedname "+filedname+" because -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
@@ -1925,6 +2003,22 @@ public class CommonUtils implements ApplicationConstants {
 		}
 
 	}
+	
+	public boolean existsElement(String fieldName, long timeOutMilliSec) {
+		try {
+			driver.manage().timeouts().implicitlyWait(timeOutMilliSec, TimeUnit.MILLISECONDS);
+			By locBY = putility.getObject(fieldName);
+			driver.findElement(locBY);
+			printLogs(fieldName + " element Exist");
+			driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			return true;
+		} catch (NoSuchElementException e) {
+			LOGGER.info("Exception occured while looking for element : " + fieldName + "  - " + e);
+			printLogs("Exception occured while looking for element : " + fieldName + "  - " + e);
+			driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			return false;
+		}
+	}
 
 	public boolean existsElement(String fieldName) {
 		try {
@@ -2167,11 +2261,19 @@ public class CommonUtils implements ApplicationConstants {
 		{
 			File folder = new File(downloadpathstr);
 			File[] allfilesInFolder = folder.listFiles();
-			Arrays.sort(allfilesInFolder, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
-	
-			if (allfilesInFolder[0].getName().contains(".csv")) {
-	
-				retfilename = allfilesInFolder[0].getName();
+			if(allfilesInFolder.length > 0)
+			{
+				Arrays.sort(allfilesInFolder, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+		
+				if (allfilesInFolder[0].getName().contains(".csv")) {
+		
+					retfilename = allfilesInFolder[0].getName();
+				}
+			}
+			else
+			{
+				test.log(LogStatus.FAIL, "Get downloaded file", "There is no file avaliable in download dirctory '"+downloadpathstr+"'");
+				Assert.fail("Failed to get downloaded file. There is no file avaliable in download dirctory '"+downloadpathstr+"'");
 			}
 		}
 		printLogs("dowloaded file path: " + downloadpathstr + retfilename);
@@ -2202,11 +2304,14 @@ public class CommonUtils implements ApplicationConstants {
 				Arrays.sort(allfilesInFolder, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
 			}
 	
-			while (!noinprogress) {
-				if (!allfilesInFolder[0].getName().contains(".crdownload"))
-					noinprogress = true;
-				allfilesInFolder = folder.listFiles();
-				Arrays.sort(allfilesInFolder, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+			if(allfilesInFolder.length >0)
+			{
+				while (!noinprogress) {
+					if (!allfilesInFolder[0].getName().contains(".crdownload"))
+						noinprogress = true;
+					allfilesInFolder = folder.listFiles();
+					Arrays.sort(allfilesInFolder, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
+				}
 			}
 	
 			printLogs("no downloads pending");
@@ -2601,7 +2706,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("Validating field" + fieldName);
 			LOGGER.info("Text field validations failed..." + e);
 			printLogs("Text field validations failed..." + e);
-			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			test.log(LogStatus.FAIL, "Text field validation", "'"+fieldName+"' - Text field validation failed  because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -2634,7 +2739,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("Selecting  " + value);
 			LOGGER.info("Text field validations failed..." + e);
 			printLogs("Text field validations failed..." + e);
-			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			test.log(LogStatus.FAIL, "Text field validation", "'"+fieldName+"' - Text field validation failed  because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -3191,20 +3296,20 @@ public class CommonUtils implements ApplicationConstants {
 		System.out.println(msg);
 	}
 
-	public String getDropDownSelectedVal(String fieldName, String val) {
+	public String getDropDownSelectedVal(String fieldName) {
 		WebElement dropDownField = null;
 		String defaultSelVal = null;
-		if (val.trim().length() > 0 && val != null) {
-			try {
-				dropDownField = driver.findElement(putility.getObject(fieldName));
-				Select oSelect = new Select(dropDownField);
-				defaultSelVal = oSelect.getFirstSelectedOption().getText();
-				LOGGER.info("defaultSelVal is " + defaultSelVal);
-			} catch (Exception e) {
-				LOGGER.info("Exception in getting value from drop down:  " + e);
+		
+		try {
+			dropDownField = driver.findElement(putility.getObject(fieldName));
+			Select oSelect = new Select(dropDownField);
+			defaultSelVal = oSelect.getFirstSelectedOption().getText();
+			LOGGER.info("defaultSelVal is " + defaultSelVal);
+		} catch (Exception e) {
+			LOGGER.info("Exception in getting value from drop down:  " + e);
 
-			}
 		}
+		
 		return defaultSelVal;
 	}
 
@@ -3326,6 +3431,26 @@ public class CommonUtils implements ApplicationConstants {
 			}
 		}
 		return allSelectedOptions;
+	}
+	
+	public List<String> getDropDownAllOptionsAsList(String fieldName) {
+		WebElement dropDownField = null;
+		List<String> retLst = new LinkedList<>();		
+			try {
+				dropDownField = driver.findElement(putility.getObject(fieldName));
+				Select oSelect = new Select(dropDownField);
+
+				
+				for (WebElement ele : oSelect.getOptions()) {
+					retLst.add(ele.getText());
+				}
+				
+			} catch (Exception e) {
+				LOGGER.info("Exception in getting value from drop down:  " + e);
+
+			}
+		
+		return retLst;
 	}
 
 	/* Get the newest file for a specific extension */

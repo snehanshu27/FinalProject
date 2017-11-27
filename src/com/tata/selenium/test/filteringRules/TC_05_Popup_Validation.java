@@ -13,6 +13,8 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.poi.hwmf.record.HwmfEscape.EscapeFunction;
@@ -20,6 +22,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -299,6 +302,17 @@ public class TC_05_Popup_Validation implements ApplicationConstants {
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MMX LCR">
+  <listeners>
+    <listener class-name="com.tata.selenium.driver.Driver"/>
+  </listeners>
+  <test name="com.tata.selenium.test.deliveryStatistics.c.TC_04_SelectCustomerAccount   -    Admin">
+    <parameter name="uniqueDataId" value="Data_06"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.c.TC_04_SelectCustomerAccount   -    Admin"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> 
+</suite> <!-- MMX LCR -->

@@ -24,7 +24,6 @@ public class NavigationMenuPage extends CommonUtils {
 			default_content();
 			SwitchFrames("//iframe[@name='bottom']");
 			SwitchFrames("index");
-			driver.findElement(navBar);
 			printLogs("Navigation Bar appear/loaded successfully");
 		} catch (Exception e) {
 			LOGGER.info("error" +e);

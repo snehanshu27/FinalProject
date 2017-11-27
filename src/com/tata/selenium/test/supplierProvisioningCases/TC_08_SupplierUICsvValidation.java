@@ -5,10 +5,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -134,7 +137,7 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 
 		
 		//Fetching the value from each field for INS Tab
-		String Ins_Instance_StateLst=cu.getDropDownSelectedVal("Ins_Instance_StateLst", dataMap.get("Ins_Instance_StateLst"));
+		String Ins_Instance_StateLst=cu.getDropDownSelectedVal("Ins_Instance_StateLst");
 		String Ins_commentsTxt=cu.getTxtBoxValue("Ins_commentsTxt", dataMap.get("Ins_commentsTxt"));
 		String Ins_Sms_FireWallChk=cu.getChkBoxStatus("Ins_Sms_FireWallChk", dataMap.get("Ins_Sms_FireWallChk"));	
 
@@ -165,12 +168,12 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		cu.clickElement("SMPP_InfoTab");
 		cu.waitForPageLoad("SMPP_InfoTab");
 		Thread.sleep(50);
-		String SMPP_VersionLst=cu.getDropDownSelectedVal("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
+		String SMPP_VersionLst=cu.getDropDownSelectedVal("SMPP_VersionLst");
 		String SMPP_BindAdderTonTxt=cu.getTxtBoxValue("SMPP_BindAdderTonTxt", dataMap.get("SMPP_BindAdderTonTxt"));
 		String SMPP_BindAdderNpiTxt=cu.getTxtBoxValue("SMPP_BindAdderNpiTxt", dataMap.get("SMPP_BindAdderNpiTxt"));
-		String SMPP_Dlr_SupportLst=cu.getDropDownSelectedVal("SMPP_Dlr_SupportLst", dataMap.get("SMPP_Dlr_SupportLst"));
-		String SMPP_MsgIDTypeLst=cu.getDropDownSelectedVal("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
-		String SMPP_MsgLengthLst=cu.getDropDownSelectedVal("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
+		String SMPP_Dlr_SupportLst=cu.getDropDownSelectedVal("SMPP_Dlr_SupportLst");
+		String SMPP_MsgIDTypeLst=cu.getDropDownSelectedVal("SMPP_MsgIDTypeLst");
+		String SMPP_MsgLengthLst=cu.getDropDownSelectedVal("SMPP_MsgLengthLst");
 		String SMPP_WindowSizeTxt=cu.getTxtBoxValue("SMPP_WindowSizeTxt", dataMap.get("SMPP_WindowSizeTxt"));
 		String SMPP_SysIdTxt=cu.getTxtBoxValue("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
 		String SMPP_PasswordTxt=cu.getTxtBoxValue("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
@@ -182,8 +185,8 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		String SMPP_OANpiTxt=cu.getTxtBoxValue("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
 		String SMPP_DATonTxt=cu.getTxtBoxValue("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
 		String SMPP_DANpiTxt=cu.getTxtBoxValue("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
-		String SMPP_SMSC_DefaultLst=cu.getDropDownSelectedVal("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
-		String SMPP_SMSC_MsgModeLst=cu.getDropDownSelectedVal("SMPP_SMSC_MsgModeLst", dataMap.get("SMPP_SMSC_MsgModeLst"));
+		String SMPP_SMSC_DefaultLst=cu.getDropDownSelectedVal("SMPP_SMSC_DefaultLst");
+		String SMPP_SMSC_MsgModeLst=cu.getDropDownSelectedVal("SMPP_SMSC_MsgModeLst");
 		String SMPP_EnqLinkTimerTxt=cu.getTxtBoxValue("SMPP_EnqLinkTimerTxt", dataMap.get("SMPP_EnqLinkTimerTxt"));
 		String SMPP_InactivityTimerTxt=cu.getTxtBoxValue("SMPP_InactivityTimerTxt", dataMap.get("SMPP_InactivityTimerTxt"));
 		String SMPP_ResponceTimerTxt=cu.getTxtBoxValue("SMPP_ResponceTimerTxt", dataMap.get("SMPP_ResponceTimerTxt"));
@@ -201,7 +204,7 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		String SS7_OANpiTxt =cu.getTxtBoxValue("SS7_OANpiTxt", dataMap.get("SS7_OANpiTxt"));
 		String SS7_DA_TONTxt =cu.getTxtBoxValue("SS7_DA_TONTxt", dataMap.get("SS7_DA_TONTxt"));
 		String SS7_DANpiTxt =cu.getTxtBoxValue("SS7_DANpiTxt", dataMap.get("SS7_DANpiTxt"));
-		String SS7_SM_RP_PRI_FlagLst =cu.getDropDownSelectedVal("SS7_SM_RP_PRI_FlagLst", dataMap.get("SS7_SM_RP_PRI_FlagLst"));
+		String SS7_SM_RP_PRI_FlagLst =cu.getDropDownSelectedVal("SS7_SM_RP_PRI_FlagLst");
 		String SS7_MaxFragmentationTxt =cu.getTxtBoxValue("SS7_MaxFragmentationTxt", dataMap.get("SS7_MaxFragmentationTxt"));
 		String SS7_MT_DCSSupportLst1=cu.getDropDownMultiSelectedVal("SS7_MT_DCSSupportLst", dataMap.get("SS7_MT_DCSSupportLst"));
 		String SS7_MT_DCSSupportLst=SS7_MT_DCSSupportLst1.replace(",","");
@@ -345,6 +348,17 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 	  }	
 	
 	  @AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	  @Parameters("testCaseId")
 	  public void afterMethod(String testCaseId) {
 		  Log.info("App Logout :: afterClass() method invoked...");

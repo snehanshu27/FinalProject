@@ -1,12 +1,18 @@
-package com.tata.selenium.test.deliveryStatistics;
+package com.tata.selenium.test.deliveryStatistics.Old;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,11 +31,9 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConstants {
-
-	private static final Logger LOGGER = Logger.getLogger(TC_03_DeliveryStatisticsPopUpValidation.class.getName());
+public class TC_01_DeliveryStatisticsUIValidation implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_01_DeliveryStatisticsUIValidation.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
-
 	String properties = "./data/DeliveryStatistics.properties";
 	ExcelUtils excelUtils = new ExcelUtils();
 	private ExtentReports extent;
@@ -40,10 +44,10 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 
 	@Test
 	@Parameters({ "uniqueDataId", "testCaseId" })
-	public void DO(String uniqueDataId, String testCaseId) throws Exception {
+	public void DO2(String uniqueDataId, String testCaseId) throws Exception {
 		// Starting the extent report
 		test = extent.startTest(
-				"Execution triggered for - TC_03_DeliveryStatisticsPopUpValidation -with TestdataId: " + uniqueDataId);
+				"Execution triggered for - "+TC_01_DeliveryStatisticsUIValidation.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 
 		// Reading excel values
@@ -52,7 +56,7 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 			excel.setExcelFile(DATA_FILEPATH, sheetName);
 			dataMap = excel.getSheetData(uniqueDataId, sheetName);
 		} catch (Exception e) {
-			LOGGER.info("Exception while reading data from EXCEL file for test case : " + testCaseId
+			LOGGER.error("Exception while reading data from EXCEL file for test case : " + testCaseId
 					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
 			CommonUtils.printConsole("Exception while reading data from EXCEL file for test case : " + testCaseId
 					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
@@ -65,8 +69,7 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 					"Exception while reading data from EXCEL file for test case : " + testCaseId
 							+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e,
 					uniqueDataId, "Result_Errors");
-			Assert.fail("Error occured while trying to login to the application  -  " + e);
-
+			Assert.fail("Error occured while trying to login to the application  -  " +e);
 		}
 
 		test.log(LogStatus.INFO, "Launch Application",
@@ -90,54 +93,45 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-//		cu.checkMessage("application_PopUpMessage", "After loading the page",
-//				"No data for the selected input parameters");
-
 		// Validating all editable drop down
 		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
 		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
-		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst",dataMap.get("DeliveryStat_Customer_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
 		cu.checkEditableDropDown("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
 		cu.checkEditableDropDown("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
-
-		// Select From DATE
-		cu.moveAndClick("DeliveryStat_FromDateTxt");
-		Thread.sleep(2000);
-
-		cu.moveAndClick("clickYear");
-		Thread.sleep(2000);
-		cu.calYear(dataMap.get("FromYear"));
-		Thread.sleep(2000);
-		cu.moveAndClick("selectMonth");
-		Thread.sleep(2000);
-		cu.calMonth(dataMap.get("FromMonth"));
-		Thread.sleep(2000);
-		cu.calDate(dataMap.get("FromDay"));
-		Thread.sleep(2000);
-		cu.clickElement("clickOutside");
-
-		// Select TO DATE
-		cu.moveAndClick("DeliveryStat_ToDateTxt");
-		Thread.sleep(2000);
-		cu.moveAndClick("clickYear");
-		Thread.sleep(2000);
-		cu.calYear(dataMap.get("ToYear"));
-
-		cu.moveAndClick("selectMonth_ToDate");
-		Thread.sleep(2000);
-		cu.calMonth(dataMap.get("ToMonth"));
-		Thread.sleep(2000);
-		cu.calDate(dataMap.get("ToDay"));
-		Thread.sleep(2000);
-
-		cu.clickElement("DeliveryStat_DisplayBtn");
-
-		cu.checkMessage("application_PopUpMessage", "Displaying the data",
-				"Error: To Date should be greater than or equal to From");
-		//cu.getScreenShot("Validate the pop up message on the screen");
-
+		
+		
+		if (dataMap.get("DeliveryStat_FromDateTxt") != null && dataMap.get("DeliveryStat_FromDateTxt").trim().length() >0 ){
+			cu.checkEditableDate("DeliveryStat_FromDateTxt",dataMap.get("DeliveryStat_FromDateTxt"));
+		}else{
+			String todayAsString = new SimpleDateFormat("dd-MM-yyyy 00:00").format(new Date());
+			cu.checkEditableDate("DeliveryStat_FromDateTxt",todayAsString);
+		}
+		
+		if (dataMap.get("DeliveryStat_ToDateTxt") != null && dataMap.get("DeliveryStat_ToDateTxt").trim().length() >0 ){
+			cu.checkEditableDate("DeliveryStat_ToDateTxt",dataMap.get("DeliveryStat_ToDateTxt"));
+		}else{
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+	        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+	        Date dtMain = new Date();
+	        Date dtWOoff = new Date(dtMain.getTime());
+	        Date dtW1minoff = new Date(dtMain.getTime() + 60000);
+			String todayAsStringWOoff = sdf.format(dtWOoff);
+			String todayAsStringW1minoff = sdf.format(dtW1minoff);
+			
+			if(todayAsStringWOoff.equals(cu.getAttribute("DeliveryStat_ToDateTxt", "value")))					
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringWOoff);
+			else 
+				if(todayAsStringW1minoff.equals(cu.getAttribute("DeliveryStat_ToDateTxt", "value")))		
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringW1minoff);
+				else
+					cu.checkEditableDate("DeliveryStat_ToDateTxt",todayAsStringWOoff);
+		}
+		
+		// Taking screenshot and Logging out
+		cu.getScreenShot("Validation Of Delivery Statistics Screen");
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
 
@@ -156,6 +150,17 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");
@@ -167,12 +172,13 @@ public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConst
 			// Writing the report to HTML format
 			extent.flush();
 		} catch (Exception e) {
-			LOGGER.info(" App Logout failed () :: Exception: " + e);
+			LOGGER.info(" App Logout failed () :: Exception: " +e);
 			driver.quit();
 			Log.endTestCase(testCaseId);
 			extent.endTest(test);
 			extent.flush();
 		}
 	}
+
 
 }

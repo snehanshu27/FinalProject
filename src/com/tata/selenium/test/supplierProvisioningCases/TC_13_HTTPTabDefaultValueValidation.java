@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.List;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -142,7 +145,18 @@ public class TC_13_HTTPTabDefaultValueValidation implements ApplicationConstants
 		  extent = ExtReport.instance("SupplierProvisioning");	
 	  }	
 	
-	  @AfterMethod
+	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	  @Parameters("testCaseId")
 	  public void afterMethod(String testCaseId) {
 		  Log.info("App Logout :: afterClass() method invoked...");

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.collections4.*;
@@ -673,4 +674,47 @@ public class ExcelUtils implements ApplicationConstants {
 		return rowVal;
 
 	}
+	
+	 public List<Map<String, String>> getSheetAllData(String sheetName) {
+		  
+		  List<Map<String, String>> ret = new LinkedList<>();
+		  Object value;
+		  final Sheet sheet = getSheet(sheetName);
+		  final List<String> coulmnNames = getColumns(sheet);
+		  final int totalRows = sheet.getPhysicalNumberOfRows();
+		  final Row row = sheet.getRow(0);
+		  final int firstCellNum = row.getFirstCellNum();
+		  final int lastCellNum = row.getLastCellNum();
+		  for (int i = 1; i < totalRows; i++) {
+		   LinkedHashMap<String, String> rowVal = new LinkedHashMap<>();
+		   final Row rows = sheet.getRow(i);
+		   final List<String> rowData = new LinkedList<>();   
+		    for (int j = firstCellNum; j < lastCellNum; j++) {
+		     final Cell cell = rows.getCell(j);
+		     if (cell == null
+		       || cell.getCellType() == XSSFCell.CELL_TYPE_BLANK) {
+		      rowData.add("");
+		     } else if (cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
+		      final Double val = cell.getNumericCellValue();
+		      value = val.intValue();
+		      rowData.add(value.toString());
+		     } else if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING) {
+		      rowData.add(cell.getStringCellValue());
+		     } else if (cell.getCellType() == XSSFCell.CELL_TYPE_FORMULA) {
+		      rowData.add(cell.getStringCellValue());
+		     } else if (DateUtil.isCellDateFormatted(cell)) {
+		      rowData.add(cell.getDateCellValue().toString());
+		     } else if (cell.getCellType() == XSSFCell.CELL_TYPE_BOOLEAN
+		       || cell.getCellType() == XSSFCell.CELL_TYPE_ERROR
+		       || cell.getCellType() == XSSFCell.CELL_TYPE_FORMULA) {
+		      throw new RuntimeException(" Cell Type is not supported ");
+		     }
+		     rowVal.put(coulmnNames.get(j), rowData.get(j).trim());
+		    }
+		    ret.add(rowVal);   
+
+		  }
+		  return ret;
+
+		 }
 } 

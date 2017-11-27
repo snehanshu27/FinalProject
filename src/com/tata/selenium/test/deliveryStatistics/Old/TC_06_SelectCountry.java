@@ -1,4 +1,4 @@
-package com.tata.selenium.test.deliveryStatistics;
+package com.tata.selenium.test.deliveryStatistics.Old;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.By;
@@ -13,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -32,8 +35,8 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_07_SelectDestination implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_07_SelectDestination.class.getName());
+public class TC_06_SelectCountry implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_06_SelectCountry.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
 
 	String properties = "./data/DeliveryStatistics.properties";
@@ -49,7 +52,7 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 	public void DO(String uniqueDataId, String testCaseId) {
 		// Starting the extent report
 		test = extent
-				.startTest("Execution triggered for - "+TC_07_SelectDestination.class.getName()+" -with TestdataId: " + uniqueDataId);
+				.startTest("Execution triggered for - "+TC_06_SelectCountry.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 		
 		// Reading excel values
@@ -141,6 +144,7 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		
+		
 		// Select From DATE
 		cu.moveAndClick("DeliveryStat_FromDateTxt");
 		cu.sleep(2000);		
@@ -164,15 +168,15 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 
 		cu.clickElement("DeliveryStat_DisplayBtn");
 
-		List<WebElement> destinationElemets = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[2]/a"));
-		List<String> destinationValues = new ArrayList<>();
-		for (WebElement ele : destinationElemets)
-			destinationValues.add(ele.getText());
+		List<WebElement> countriesElemets = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[1]/a"));
+		List<String> countriesValues = new ArrayList<>();
+		for (WebElement ele : countriesElemets)
+			countriesValues.add(ele.getText());
 
-		for (String destinationVal : destinationValues) {
+		for (String countryVal : countriesValues) {
 
-			test.log(LogStatus.INFO, "$$$$$$$$$$$ Validating for Destination: "+destinationVal);
-			Map<String, Double> uiData = getUIVales(cu, destinationVal);
+			test.log(LogStatus.INFO, "$$$$$$$$$$$ Validating for Countries: "+countryVal);
+			Map<String, Double> uiData = getUIVales(cu, countryVal);
 			
 			//checking % and enroute valdiations on main pagedd
 			
@@ -193,73 +197,69 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 			if(String.valueOf(submitPerMainExpected).equals(String.valueOf(submitPerMainActual)))
 			{	
 				test.log(LogStatus.PASS,
-						"EXPECTED: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" should be "+submitPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is same as  "+submitPerMainActual+"</span>");
+						"EXPECTED: Submitted Failure Percentage (main page)for Country: "+countryVal+" should be "+submitPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is same as  "+submitPerMainActual+"</span>");
 			}
 			else
 			{		
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" should be "+submitPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is not same as "+submitPerMainActual+"</span>");
+						"EXPECTED: Submitted Failure Percentage (main page)for Country: "+countryVal+" should be "+submitPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is not same as "+submitPerMainActual+"</span>");
 			}
 			
 			//main page Delivered Percentage validation
 			if(String.valueOf(deliveredPerMainExpected).equals(String.valueOf(deliveredPerMainActual)))
 			{	
 				test.log(LogStatus.PASS,
-						"EXPECTED: Delivered Percentage (main page) for Destination: "+destinationVal+" should be "+deliveredPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is same as  "+deliveredPerMainActual+"</span>");
+						"EXPECTED: Delivered Percentage (main page)for Country: "+countryVal+" should be "+deliveredPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is same as  "+deliveredPerMainActual+"</span>");
 			}
 			else
 			{		
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Delivered Percentage (main page) for Destination: "+destinationVal+" should be "+deliveredPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is not same as "+deliveredPerMainActual+"</span>");
+						"EXPECTED: Delivered Percentage (main page)for Country: "+countryVal+" should be "+deliveredPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is not same as "+deliveredPerMainActual+"</span>");
 			}
 			
 			//main page Delivered Failed Percentage validation
 			if(String.valueOf(deliveredFailedPerMainExpected).equals(String.valueOf(deliveredFailedPerMainActual)))
 			{	
 				test.log(LogStatus.PASS,
-						"EXPECTED: Delivered Failed Percentage (main page) for Destination: "+destinationVal+" should be "+deliveredFailedPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is same as  "+deliveredFailedPerMainActual+"</span>");
+						"EXPECTED: Delivered Failed Percentage (main page)for Country: "+countryVal+" should be "+deliveredFailedPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is same as  "+deliveredFailedPerMainActual+"</span>");
 			}
 			else
 			{		
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Delivered Failed Percentage (main page) for Destination: "+destinationVal+" should be "+deliveredFailedPerMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is not same as "+deliveredFailedPerMainActual+"</span>");
+						"EXPECTED: Delivered Failed Percentage (main page)for Country: "+countryVal+" should be "+deliveredFailedPerMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is not same as "+deliveredFailedPerMainActual+"</span>");
 			}
 			
 			//main page Enroute validation
 			if(enrouteMainExpected == enrouteMainActual)
 			{	
 				test.log(LogStatus.PASS,
-						"EXPECTED: Enroute (main page) for Destination: "+destinationVal+" should be "+enrouteMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is same as  "+enrouteMainActual+"</span>");
+						"EXPECTED: Enroute (main page)for Country: "+countryVal+" should be "+enrouteMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is same as  "+enrouteMainActual+"</span>");
 			}
 			else
 			{		
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Enroute (main page) for Destination: "+destinationVal+" should be "+enrouteMainExpected,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page) for Destination: "+destinationVal+" is not same as "+enrouteMainActual+"</span>");
+						"EXPECTED: Enroute (main page)for Country: "+countryVal+" should be "+enrouteMainExpected,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Country: "+countryVal+" is not same as "+enrouteMainActual+"</span>");
 			}
 			
 
-			cu.clickElement("dynamicSupORCustAccORDestinationValue", "$SupplierORCustomerAccORDestinationVal$", destinationVal);
-			test.log(LogStatus.INFO, "######### Validating 1st drilldown for Destination: "+destinationVal);
-			
+			cu.clickElement("dynamicContryValue", "$ContryVal$", countryVal);
+
 			//UI fields validation
 			cu.checkElementPresence("exportBtn");
 			cu.checkElementPresence("backBtn");
 
 			cu.checkReadonlyProperty("DrillDown_CountryNameTxt");
 			cu.checkReadonlyProperty("DrillDown_SupplierNameTxt");
-			cu.checkReadonlyProperty("DrillDown_DestinationNameTxt");
 			cu.checkReadonlyProperty("DeliveryStat_FromDateTxt");
 			cu.checkReadonlyProperty("DeliveryStat_ToDateTxt");
-			
-			
 
 			Map<String, Integer> csvData = exportCSVAndCoverageFieldsUpdated(cu, dataMap);
 
@@ -272,27 +272,27 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 			    	
 					if(csvData.get(colName).equals(uiValue))					
 						test.log(LogStatus.PASS,
-								"EXPECTED: " + destinationVal
-										+ "The values of the csv data and the Ui Values of this Destination "
-										+ destinationVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
-								"Validation:  <span style='font-weight:bold;'>ACTUAL::" + destinationVal
-										+ "The values of the csv data and the Ui Values of this Destination "
-										+ destinationVal + " are same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
+								"EXPECTED: " + countryVal
+										+ "The values of the csv data and the Ui Values of this Country "
+										+ countryVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
+								"Validation:  <span style='font-weight:bold;'>ACTUAL::" + countryVal
+										+ "The values of the csv data and the Ui Values of this Country"
+										+ countryVal + " are same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
 					else
 						test.log(LogStatus.FAIL,
-								"EXPECTED: " + destinationVal
-								+ "The values of the csv data and the Ui Values of this Destination "
-								+ destinationVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL::" + destinationVal
-								+ "The values of the csv data and the Ui Values of this Destination "
-								+ destinationVal + " are not same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
+								"EXPECTED: " + countryVal
+								+ "The values of the csv data and the Ui Values of this Country"
+								+ countryVal + " -> should be same. Filed Name : "+colName+"  - expected value: "+uiValue,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL::" + countryVal
+								+ "The values of the csv data and the Ui Values of this Country"
+								+ countryVal + " are not same. Filed Name : "+colName+"  - expected value: "+csvData.get(colName)+"</span>");
 //				} catch (Exception e) {
 //					
 //					cu.printLogs("Exception occur while comparing the data  - " + e);
 //					test.log(LogStatus.FAIL,"", "Exception occur while comparing the data  - " + e);
 //				}
 			}
-						
+			
 			cu.clickElement("backBtn");
 
 		}
@@ -305,25 +305,25 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 
 	}
 
-	public Map<String, Double> getUIVales(CommonUtils cu, String customerAccValue)  {
+	public Map<String, Double> getUIVales(CommonUtils cu, String countryValue)  {
 		Map<String, Double> ret = new HashMap<>();
 
 		try {
-			ret.put("Attempted", Double.valueOf(cu.getText("DynamicAttempted", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Attempted Failure",Double.valueOf(cu.getText("DynamicAttemptedFailure", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Submitted", Double.valueOf(cu.getText("DynamicSubmitted", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Submit Failure", Double.valueOf(cu.getText("DynamicSubmittedFailure", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Submitted Failure Percentage", Double.valueOf(cu.getText("DynamicSubmittedFailurePercentage", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace("%", "")));
-			ret.put("Enroute", Double.valueOf(cu.getText("DynamicEnroute", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Delivered", Double.valueOf(cu.getText("DynamicDelivered", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Delivered Percentage", Double.valueOf(cu.getText("DynamicDeliveredPercentage", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace("%", "")));
-			ret.put("Failed", Double.valueOf(cu.getText("DynamicFailed", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace(",", "")));
-			ret.put("Failed Percentage", Double.valueOf(cu.getText("DynamicFailedPercentage", "$SupplierORCustomerAccORDestinationVal$", customerAccValue).replace("%", "")));
+			ret.put("Attempted", Double.valueOf(cu.getText("DynamicAttempted_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Attempted Failure",Double.valueOf(cu.getText("DynamicAttemptedFailure_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Submitted", Double.valueOf(cu.getText("DynamicSubmitted_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Submit Failure", Double.valueOf(cu.getText("DynamicSubmittedFailure_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Submitted Failure Percentage", Double.valueOf(cu.getText("DynamicSubmittedFailurePercentage_DimensionContry", "$ContryVal$", countryValue).replace("%", "")));
+			ret.put("Enroute", Double.valueOf(cu.getText("DynamicEnroute_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Delivered", Double.valueOf(cu.getText("DynamicDelivered_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Delivered Percentage", Double.valueOf(cu.getText("DynamicDeliveredPercentage_DimensionContry", "$ContryVal$", countryValue).replace("%", "")));
+			ret.put("Failed", Double.valueOf(cu.getText("DynamicFailed_DimensionContry", "$ContryVal$", countryValue).replace(",", "")));
+			ret.put("Failed Percentage", Double.valueOf(cu.getText("DynamicFailedPercentage_DimensionContry", "$ContryVal$", countryValue).replace("%", "")));
 
 			return ret;
 		} catch (Exception e) {
 			LOGGER.error("Error occured while reading the data from UI -- "+e);
-			cu.getScreenShot("Get webtable data for Supplier Account Value: " + customerAccValue);
+			cu.getScreenShot("Get webtable data for country Value: " + countryValue);
 			test.log(LogStatus.FAIL,"", "Exception occur while fething the data from UI - " + e);
 			return ret;
 		}
@@ -338,23 +338,23 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 		String csvFilePath = cu.getDownlaodedFileName();
 
 		// validate file name
-		String expectedFileName = "\\" + "Destination-SMSCustomerAccountDistribution" + ".csv";
+		String expectedFileName = "\\" + "Country-SMSCustomerAccountDistribution" + ".csv";
 		if (csvFilePath.trim().contains(expectedFileName.trim()))
 			test.log(LogStatus.PASS,
-					"EXPECTED: Exported file name should be in 'Destination-SMSCustomerAccountDistribution.csv' - '"
+					"EXPECTED: Exported file name should be in 'Country-SMSCustomerAccountDistribution.csv' - '"
 							+ expectedFileName + "'",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is same as 'Destination-SMSCustomerAccountDistribution.csv' - '"
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is same as 'Country-SMSCustomerAccountDistribution.csv' - '"
 							+ expectedFileName + "'</span>");
 		else {
 			cu.getScreenShot("Exported file name validation");
 			test.log(LogStatus.FAIL,
-					"EXPECTED: Exported file name should be in 'Destination-SMSCustomerAccountDistribution.csv' - '"
+					"EXPECTED: Exported file name should be in 'Country-SMSCustomerAccountDistribution.csv' - '"
 							+ expectedFileName + "'",
-					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is Not same as in 'Destination-SMSCustomerAccountDistribution.csv' - '"
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: Exported file name is Not same as in 'Country-SMSCustomerAccountDistribution.csv' - '"
 							+ expectedFileName + "' Acutal file name: " + csvFilePath + "</span>");
 		}
 
-		CSVUtil csvu = new CSVUtil(csvFilePath, 7);
+		CSVUtil csvu = new CSVUtil(csvFilePath, 6);
 
 		List<String> attemStrs = csvu.getSingleColAllData("Attempted");
 		int AttemptedCount = csvu.getSingleColSum(attemStrs);
@@ -419,6 +419,17 @@ public class TC_07_SelectDestination implements ApplicationConstants {
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");

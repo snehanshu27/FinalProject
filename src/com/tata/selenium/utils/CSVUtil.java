@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -193,7 +194,53 @@ public static ArrayList<String> crunchifyCSVtoArrayList(String crunchifyCSV) {
 	return crunchifyResult;
 }
 
+public List<List<String>> getAllRowLinesFromHeader()
+{
+	List<List<String>> ret = new LinkedList<>();
+	String[] headerLine = allLines.get(headerRowNo);
+	for(int i=headerRowNo;i<allLines.size();i++)
+	{
+		String[] currLine = allLines.get(i);
+		if(currLine.length== headerLine.length)
+			ret.add(Arrays.asList(currLine));
+		else
+		{
+			String[] adjustedArray = Arrays.copyOfRange(currLine, 0, headerLine.length);
+			for(int k=0;k<adjustedArray.length;k++)
+			{
+				if(adjustedArray[k]==null)
+					adjustedArray[k] ="";
+			}
+			
+			ret.add(Arrays.asList(adjustedArray));
+		}
+	}
+	
+	return ret;
+}
+
+
 public List<Map<String,String>> getAllRowData()
+{		
+	
+	List<Map<String,String>> returnList = new LinkedList<>();
+	try {
+		String[] headerLine = allLines.get(headerRowNo);
+		
+		for(int i=headerRowNo+1;i<allLines.size();i++)
+		{
+			String[] dataLine = allLines.get(i);
+			returnList.add(getData(headerLine, dataLine));		
+		}
+	} catch (Exception e) {
+		LOGGER.info("error in CSVUtil.getAllRowData method", e);
+	}
+	
+	return returnList;
+
+}
+
+public List<Map<String,String>> getAllRowDataWith1StRowAsHeader()
 {		
 	
 	List<Map<String,String>> returnList = new LinkedList<>();
@@ -212,5 +259,4 @@ public List<Map<String,String>> getAllRowData()
 	return returnList;
 
 }
-
 }

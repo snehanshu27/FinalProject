@@ -1,12 +1,15 @@
-package com.tata.selenium.test.deliveryStatistics;
+package com.tata.selenium.test.deliveryStatistics.Old;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,8 +28,9 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_02_DeliveryStatisticsDisplayData.class.getName());
+public class TC_03_DeliveryStatisticsPopUpValidation implements ApplicationConstants {
+
+	private static final Logger LOGGER = Logger.getLogger(TC_03_DeliveryStatisticsPopUpValidation.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
 
 	String properties = "./data/DeliveryStatistics.properties";
@@ -42,7 +46,7 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 	public void DO(String uniqueDataId, String testCaseId) throws Exception {
 		// Starting the extent report
 		test = extent.startTest(
-				"Execution triggered for - "+TC_02_DeliveryStatisticsDisplayData.class.getName()+" -with TestdataId: " + uniqueDataId);
+				"Execution triggered for - TC_03_DeliveryStatisticsPopUpValidation -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen";
 
 		// Reading excel values
@@ -51,9 +55,9 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 			excel.setExcelFile(DATA_FILEPATH, sheetName);
 			dataMap = excel.getSheetData(uniqueDataId, sheetName);
 		} catch (Exception e) {
-			CommonUtils.printConsole("Exception while reading data from EXCEL file for test case : " + testCaseId
-					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
 			LOGGER.info("Exception while reading data from EXCEL file for test case : " + testCaseId
+					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
+			CommonUtils.printConsole("Exception while reading data from EXCEL file for test case : " + testCaseId
 					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
 			Reporter.log("Exception while reading data from EXCEL file for test case : " + testCaseId
 					+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e);
@@ -65,6 +69,7 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 							+ " -with TestdataId : " + uniqueDataId + " Exceptions : " + e,
 					uniqueDataId, "Result_Errors");
 			Assert.fail("Error occured while trying to login to the application  -  " + e);
+
 		}
 
 		test.log(LogStatus.INFO, "Launch Application",
@@ -92,16 +97,21 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 //				"No data for the selected input parameters");
 
 		// Validating all editable drop down
-		cu.SelectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+		cu.checkEditableDropDown("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
 		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
+		cu.checkEditableDropDown("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+		cu.checkEditableDropDown("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
+		cu.checkEditableDropDown("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
+		cu.checkEditableDropDown("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
+		cu.checkEditableDropDown("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
 
 		// Select From DATE
 		cu.moveAndClick("DeliveryStat_FromDateTxt");
+		Thread.sleep(2000);
+
+		cu.moveAndClick("clickYear");
+		Thread.sleep(2000);
+		cu.calYear(dataMap.get("FromYear"));
 		Thread.sleep(2000);
 		cu.moveAndClick("selectMonth");
 		Thread.sleep(2000);
@@ -114,6 +124,10 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 		// Select TO DATE
 		cu.moveAndClick("DeliveryStat_ToDateTxt");
 		Thread.sleep(2000);
+		cu.moveAndClick("clickYear");
+		Thread.sleep(2000);
+		cu.calYear(dataMap.get("ToYear"));
+
 		cu.moveAndClick("selectMonth_ToDate");
 		Thread.sleep(2000);
 		cu.calMonth(dataMap.get("ToMonth"));
@@ -123,19 +137,10 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 
 		cu.clickElement("DeliveryStat_DisplayBtn");
 
-		cu.getScreenShot("Screenshot of the results displayed");
-		if(cu.elementDisplayed("tableFirstRow"))
-			test.log(LogStatus.PASS, "EXPECTED: Data should be displayed after clicking on Display button with selected parameters",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Data has been displayed after clicking on Display button with selected parameters</span>");
-		else
-		{
-			test.log(LogStatus.PASS, "EXPECTED: Data should be displayed after clicking on Display button with selected parameters",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Data is not displayed after clicking on Display button with selected parameters</span>");
-			Assert.fail("Data is not displayed after clicking on Display button with selected parameters");
-		}
+		cu.checkMessage("application_PopUpMessage", "Displaying the data",
+				"Error: To Date should be greater than or equal to From");
+		//cu.getScreenShot("Validate the pop up message on the screen");
 
-		cu.clickElement("DeliveryStat_CancelBtn");
-		cu.getScreenShot("After clicking Cancel Button");
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
 
@@ -154,6 +159,17 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");

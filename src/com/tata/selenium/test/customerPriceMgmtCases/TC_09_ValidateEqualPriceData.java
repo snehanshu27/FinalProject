@@ -22,8 +22,12 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 import java.util.HashMap;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.ITestResult;
 public class TC_09_ValidateEqualPriceData implements ApplicationConstants {
 	private static final Logger LOGGER = Logger.getLogger(TC_09_ValidateEqualPriceData.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
@@ -124,6 +128,17 @@ public class TC_09_ValidateEqualPriceData implements ApplicationConstants {
 	}
 
 	@AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	@Parameters("testCaseId")
 	public void afterMethod(String testCaseId) {
 		Log.info("App Logout :: afterClass() method invoked...");

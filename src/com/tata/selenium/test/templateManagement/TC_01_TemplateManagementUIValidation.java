@@ -3,10 +3,13 @@ package com.tata.selenium.test.templateManagement;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -32,9 +35,9 @@ import com.tata.selenium.utils.Log;
  * @description This class will perform a login and logout in Gmail application
  */
 
-public class TC_01_CustomerCoverageUIAndBtnVAlidation implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_01_CustomerCoverageUIAndBtnVAlidation.class.getName());
-	String properties =  "./data/CustomerCoverage.properties";
+public class TC_01_TemplateManagementUIValidation implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_01_TemplateManagementUIValidation.class.getName());
+	String properties =  "./data/TemplateManagement.properties";
 	ExcelUtils excelUtils = new ExcelUtils();
 	private ExtentReports extent;
 	Map<String, String> dataMap = new HashMap<>();
@@ -45,8 +48,8 @@ public class TC_01_CustomerCoverageUIAndBtnVAlidation implements ApplicationCons
 	@Parameters({"uniqueDataId", "testCaseId"})	
 	public void DO (String uniqueDataId, String testCaseId) throws Exception {
 		//Starting the extent report
-		test = extent.startTest("Execution triggered for - TC_01_CustomerCoverageUIVAlidation - "+uniqueDataId);
-		String sheetName="Customer_Coverage_Screen";
+		test = extent.startTest("Execution triggered for - "+TC_01_TemplateManagementUIValidation.class.getName()+" - "+uniqueDataId);
+		String sheetName="TemplateManagement_Screen";
 		
 		//Reading excel values
 		try{
@@ -83,25 +86,15 @@ public class TC_01_CustomerCoverageUIAndBtnVAlidation implements ApplicationCons
 		cu.SwitchFrames("target");
 	
 		//Validating all fields
-		cu.checkEditableDropDown("Customer_Coverage_ServiceNameLst",dataMap.get("Customer_Coverage_ServiceNameLst"));
-		cu.checkEditableDropDown("Customer_Coverage_CustomerNameLst",dataMap.get("Customer_Coverage_CustomerNameLst"));
-		cu.checkEditableDropDown("Customer_Coverage_TemplateLst",dataMap.get("Customer_Coverage_TemplateLst"));
-		cu.checkEditableDropDown("Customer_Coverage_CustomerAccNameLst",dataMap.get("Customer_Coverage_CustomerAccNameLst"));
-		cu.checkNonEditableBox("Customer_Coverage_CustomerProductTxt",dataMap.get("Customer_Coverage_CustomerProductLst"));
-		cu.checkNonEditableBox("Customer_Coverage_CurrencyTxt");
-		cu.checkElementPresence("Customer_Coverage_DisplayBtn");
-		cu.checkElementPresence("Customer_Coverage_CancelBtn");
-		cu.checkElementPresence("Customer_Coverage_EmailerBtn");
+		cu.checkNonEditableBox("TemplateMangement_LastUpdatedDateTxtBox");
+		cu.checkNonEditableBox("TemplateMangement_LastUpdatedUserTxtBox");
+		cu.checkElementPresence("TemplateMangement_DisplayButton");
+		cu.checkElementPresence("TemplateMangement_SubmitButton");
+		cu.checkElementPresence("TemplateMangement_CancelButton");
+		cu.checkElementPresence("TemplateMangement_AddTemplateButton");
+		cu.checkElementPresence("TemplateMangement_ExportCSVLink");
 		
-		//Validating display Btton functionality
-		cu.clickElement("Customer_Coverage_DisplayBtn");
-		cu.checkMessage("application_PopUpOkBtn", "Validating after Clicking Display without seecting any Value", "Error: Please select all required input parameters.");
-		
-		//Validating Cancel Btn functionality
-		cu.clickElement("Customer_Coverage_CancelBtn");
-		cu.checkEditableDropDown("Customer_Coverage_ServiceNameLst","--Select--");
-		
-		cu.getScreenShot("Validation Of UI elements in Customer Coverage Screen");
+		cu.getScreenShot("Validation Of UI elements in Template Management Screen");
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
 		
@@ -116,10 +109,21 @@ public class TC_01_CustomerCoverageUIAndBtnVAlidation implements ApplicationCons
 		  DOMConfigurator.configure("log4j.xml");
 		  Log.startTestCase("Start Execution");
 		  Log.startTestCase(testCaseId);
-		  extent = ExtReport.instance("Customer_Coverage");
+		  extent = ExtReport.instance("Template_Management");
 	  }	
 	
 	  @AfterMethod
+	  public void afterMethodFailed(ITestResult result) {		  
+		  
+		  if(ITestResult.FAILURE ==result.getStatus()
+				  && !ExceptionUtils.getRootCauseMessage(result.getThrowable()).startsWith("AssertionError:")){		
+			  
+			  test.log(LogStatus.FAIL, "Error Ocuured in while executing the test case.<br/> Exception trace:<br/><br/> "
+					  			+StringEscapeUtils.escapeHtml3(ExceptionUtils.getStackTrace(result.getThrowable())).replace("\n", "<br/>"));
+		  }		 
+	  }  
+	  
+	@AfterMethod(dependsOnMethods="afterMethodFailed")
 	  @Parameters("testCaseId")
 	  public void afterMethod(String testCaseId) {
 		  Log.info("App Logout :: afterClass() method invoked...");
