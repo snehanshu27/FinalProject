@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MMX-UIAutomation">
+  <listeners>
+    <listener class-name="com.tata.selenium.driver.Driver"/>
+  </listeners>
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Supplier Manager">
+    <parameter name="uniqueDataId" value="Data_12"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Supplier Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Supplier Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_05_SelectSupplier   -    MMX-Supplier Manager">
+    <parameter name="uniqueDataId" value="Data_13"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_05_SelectSupplier   -    MMX-Supplier Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_05_SelectSupplier"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_05_SelectSupplier   -    MMX-Supplier Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_14"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_15"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_16"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_17"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_18"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Manager">
+    <parameter name="uniqueDataId" value="Data_19"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Manager"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Manager -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_20"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_21"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_22"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_23"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_24"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Finance">
+    <parameter name="uniqueDataId" value="Data_25"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Finance"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Finance -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_26"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_01_DeliveryStatisticsUIValidation   -    MMX-Customer Routing -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_27"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_02_DeliveryStatisticsDisplayData   -    MMX-Customer Routing -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_28"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_03_DeliveryStatisticsPopUpValidation   -    MMX-Customer Routing -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_29"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_04_SelectCustomerAccount   -    MMX-Customer Routing -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_30"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_06_SelectCountry   -    MMX-Customer Routing -->
+  <test name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Routing">
+    <parameter name="uniqueDataId" value="Data_31"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Routing"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination"/>
+    </classes>
+  </test> <!-- com.tata.selenium.test.deliveryStatistics.TC_07_SelectDestination   -    MMX-Customer Routing -->
+</suite> <!-- MMX-UIAutomation -->
