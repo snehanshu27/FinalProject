@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Failed suite [Suite]">
+  <parameter name="browser" value="chrome"/>
+  <parameter name="uniqueDataId" value="Data_08"/>
+  <parameter name="testCaseId" value="TC_004"/>
+  <listeners>
+    <listener class-name="com.tata.selenium.driver.Driver"/>
+  </listeners>
+  <test name="t4(failed)">
+    <parameter name="uniqueDataId" value="Data_04"/>
+    <parameter name="testCaseId" value="TC_002"/>
+    <classes>
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_003_SupplierCoverageMOSMSAndMLNS">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_003_SupplierCoverageMOSMSAndMLNS -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS">
+        <methods>
+          <include name="DO" invocation-numbers="0"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS -->
+    </classes>
+  </test> <!-- t4(failed) -->
+  <test name="t5(failed)">
+    <parameter name="uniqueDataId" value="Data_05"/>
+    <parameter name="testCaseId" value="TC_002"/>
+    <classes>
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_003_SupplierCoverageMOSMSAndMLNS">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_003_SupplierCoverageMOSMSAndMLNS -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_001_SupplierCoverageUIValidation -->
+      <class name="com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS">
+        <methods>
+          <include name="DO" invocation-numbers="0"/>
+          <include name="afterMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterMethodFailed"/>
+          <include name="afterMethodFailed"/>
+          <include name="beforeMethod"/>
+          <include name="beforeMethod"/>
+        </methods>
+      </class> <!-- com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS -->
+    </classes>
+  </test> <!-- t5(failed) -->
+</suite> <!-- Failed suite [Suite] -->

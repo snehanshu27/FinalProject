@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>TestNG:  t13</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>t13</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Sat Dec 16 21:29:38 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>66 seconds (66253 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.tata.selenium.test.supplierProvisioningCases.TC_11_InstanceSpecificParametersValidation.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.supplierProvisioningCases.TC_11_InstanceSpecificParametersValidation<br>Parameters: Data_13, TC_13<br/>
+<a href="#Output-1605851606" onClick='toggleBox("Output-1605851606", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1605851606" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1605851606">
+Executing Test Case -TC_13 -with TestdataId : Data_13<br/>
+New CHROME LOCAL driver instantiated<br/>
+URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
+TATA Messaging Login Page appear/loaded successfully<br/>
+Username 'sonali.das@tatacommunications.com' entered sucessfully<br/>
+Password 'Welcome01' entered sucessfully<br/>
+Submit Btn clicked sucessfully<br/>
+MessagingInstanceHomePage Page loaded successfully<br/>
+Successfully switched  to //iframe[@scrolling='no'] frame<br/>
+TATA Messaging Home Page appear/loaded successfully<br/>
+After Login Screen verified sucessfully<br/>
+Successfully switched  to //iframe[@name='bottom'] frame<br/>
+Successfully switched  to index frame<br/>
+Navigation Bar appear/loaded successfully<br/>
+Supplier Provisioning page opened sucessfully<br/>
+Successfully switched  to bottom frame<br/>
+Successfully switched  to target frame<br/>
+Supplier_Name_DropDown_Button - having xpath 'By.xpath: //select[@id='supplier']/..//button[contains(@class, 'dropdown')]' clicked sucessfully<br/>
+4PAY SYSTEM ROMANIA [34616] has been sent/entered to elemet Supplier_Name_DropDown_SearchTextbox<br/>
+Supplier_Name_DropDown_Dynamic_LabelOPtion - having xpath 'By.xpath: //select[@id='supplier']/..//label[@class='radio'][normalize-space(text())='4PAY SYSTEM ROMANIA [34616]']' clicked sucessfully<br/>
+Supplier_Account_Name_DropDown_Button - having xpath 'By.xpath: //select[@id='suppAccName']/..//button[contains(@class, 'dropdown')]' clicked sucessfully<br/>
+4PAY_TEST_SS7 [34616-4] has been sent/entered to elemet Supplier_Account_Name_DropDown_SearchTextbox<br/>
+Supplier_Account_Name_DropDown_Dynamic_LabelOPtion - having xpath 'By.xpath: //select[@id='suppAccName']/..//label[@class='radio'][normalize-space(text())='4PAY_TEST_SS7 [34616-4]']' clicked sucessfully<br/>
+supplier_DisplayBtn - having xpath 'By.id: displayButton' clicked sucessfully<br/>
+ Page loaded successfully<br/>
+4 were obtianed from the Instancedropdown<br/>
+supplier_EditBtn - having xpath 'By.xpath: //*[@id="editButton"]' clicked sucessfully<br/>
+ Page loaded successfully<br/>
+Successfully switched  to //iframe[@scrolling='no'] frame<br/>
+logout Successful<br/>
+</div>
+</td>
+<td></td>
+<td>63</td>
+<td>com.tata.selenium.test.supplierProvisioningCases.TC_11_InstanceSpecificParametersValidation@799d4f69</td></tr>
+</table><p>
+</body>
+</html>
