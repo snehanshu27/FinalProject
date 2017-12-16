@@ -271,7 +271,7 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 		cu.checkMessage("application_PopUpTitle", "Validating Pop Up after Clicking Submit Btn", "Warning: This action will submit the details and create an order. Do you want to Continue?");
 		
 		cu.waitForPageLoad("");
-		cu.checkMessage("application_PopUpTitle", "Validating sucess Msg after submitting details", "The supplier provisioning information have been successfully entered");
+		cu.checkMessage("application_PopUpTitle", "Validating sucess Msg after submitting details", "The supplier provisioning information have been successfully entered.");
 		
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);

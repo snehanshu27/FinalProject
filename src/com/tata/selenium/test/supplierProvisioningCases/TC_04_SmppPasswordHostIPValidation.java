@@ -111,14 +111,14 @@ public class TC_04_SmppPasswordHostIPValidation implements ApplicationConstants 
 			if(dataMap.get("SMPP_PasswordTxt").trim().length() >0){
 				cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
 				cu.clickElement("supplier_SubmitBtn");
-				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Password","Error: SMPP Password cannot be more than 8 characters");
+				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Password","Error: SMPP Password cannot be more than 8 characters.");
 			}
 			
 			//Doing validation if Host IP field has some value in test data
 			if(dataMap.get("SMPP_HostIPTxt").trim().length() >0){
 				cu.setData("SMPP_HostIPTxt", dataMap.get("SMPP_HostIPTxt"));
 				cu.clickElement("supplier_SubmitBtn");
-				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Host IP","Error: Please enter valid Host IP address");
+				cu.checkMessage("application_PopUpTitle", "Validation of SMPP Host IP","Error: Please enter valid Host IP address.	");
 			}
 			
 			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){

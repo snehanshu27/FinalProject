@@ -113,9 +113,14 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-
-		if(cu.getText("Supplier_Name_DropDown_Button").equalsIgnoreCase(dataMap.get("Supplier_Account_Name"))
+		System.out.println(cu.getText("Supplier_Name_DropDown_Button"));
+		System.out.println(cu.currentSelectedVal("Instance"));
+		System.out.println(dataMap.get("Supplier_Account_Name"));
+		
+		Thread.sleep(2000);
+		if(cu.getText("Supplier_Name_DropDown_Button").equalsIgnoreCase(dataMap.get("Supplier_Name"))
 				&& ("ALL").equalsIgnoreCase(cu.currentSelectedVal("Instance"))){
+			Thread.sleep(2000);
 			test.log(LogStatus.PASS, "EXPECTED:: All values should be reflected in Input parameter", "Usage: <span style='font-weight:bold;'>ACTUAL:: All values reflected in Input parameter sucessfully</span>");
 			cu.printLogs("All values reflected in Input parameter sucessfully");
 			excelUtils.setCellData(sheetName, "PASS", uniqueDataId, "Result_Status");
@@ -127,38 +132,38 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 		}
 
 		//String parentWindow = hu.getCurrWindowName();
-		CommonUtils.printConsole("parentWindow   "+parentWindow);
-		cu.clickElement("Supplier_CustomError");
+		//CommonUtils.printConsole("parentWindow   "+parentWindow);
+		//cu.clickElement("Supplier_CustomError");
 		
 		
-		cu.newWindowHandles(parentWindow);
-		Thread.sleep(500);
+		//cu.newWindowHandles(parentWindow);
+		//Thread.sleep(500);
 		
-		cu.SelectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
-		System.out.println(dataMap.get("Supplier_Name"));
-		cu.waitForPageLoad("");
+		//cu.SelectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
+		//System.out.println(dataMap.get("Supplier_Name"));
+		//cu.waitForPageLoad("");
 		
 	//	cu.waitForPageLoad("");
 		//Thread.sleep(200);
 
 	//	String value = cu.getAttribute("supplierID_txt","value");
 	//	System.out.println(value);
-		Thread.sleep(2000);
-		cu.clickElement("supplier_DisplayBtn");
+		//Thread.sleep(2000);
+		//cu.clickElement("supplier_DisplayBtn");
 
 		//if(hu.checkElementPresenc=e("customErrorList_TableElements"))
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 
 
 		//cu.checkMessage("application_PopUpMessage", "click submit button", "Error: No records found for the selected supplier.");
-		cu.checkElementPresence("application_PopUpMessage");
-		cu.clickElement("application_PopUpMessage_ok");
-		Thread.sleep(1000);
+		//cu.checkElementPresence("application_PopUpMessage");
+		//cu.clickElement("application_PopUpMessage_ok");
+		//Thread.sleep(1000);
 		
-		cu.switchToWindow(parentWindow);
+		/*cu.switchToWindow(parentWindow);
 		cu.waitForPageLoad("");
 		cu.SwitchFrames("bottom");
-		cu.SwitchFrames("target");
+		cu.SwitchFrames("target");*/
 		//Taking screenshot and Logging out
 		cu.getScreenShot("Creation of New Supplier");
 		test = cu.getExTest();

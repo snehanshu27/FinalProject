@@ -116,7 +116,7 @@ public class TC_11_InstanceSpecificParametersValidation implements ApplicationCo
 		cu.clickElement("supplier_DisplayBtn");
 		cu.waitForPageLoad("");
 		
-		String Value1=dataMap.get("Ins_Sms_FireWallChk");
+		//String Value1=dataMap.get("Ins_Sms_FireWallChk");
 		//First validation: History Tab has 5 latest values or not.
 		 List<String> retStrOPs=cu.getAllOptionsFromDropDown("Instance");
 		

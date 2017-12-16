@@ -93,11 +93,14 @@ public class TC_09_NewSupplierAccountCreation implements ApplicationConstants {
 		//Selecting required values from drop down based on input
 		//cu.SelectDropDownByVisibleText("nws_supplier_name", dataMap.get("Supplier_Name"));
 		
-		cu.clickElement("nws_supplier_name");
+		/*cu.clickElement("nws_supplier_name");
 		cu.sleep(1000);
 		cu.sendKeys("nws_Supplier_Name_DropDown_SearchTextbox", dataMap.get("Supplier_Name"), false);
 		cu.sleep(1000);
-		cu.clickElement("nws_Supplier_Name_DropDown_Dynamic_LabelOption", "$supplieraccountname$", dataMap.get("Supplier_Name"));
+		cu.clickElement("nws_Supplier_Name_DropDown_Dynamic_LabelOption", "$supplieraccountname$", dataMap.get("Supplier_Name"));*/
+		
+		cu.SelectDropDownByVisibleTextCustomMMX("nws_supplier_name", "nws_Supplier_Name_DropDown_SearchTextbox", "nws_Supplier_Name_DropDown_Dynamic_LabelOption"
+				, "$suppliername$", dataMap.get("Supplier_Name"));
 		
 		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
 		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));

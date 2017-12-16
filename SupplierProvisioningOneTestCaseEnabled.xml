@@ -18,109 +18,109 @@
     </classes>
   </test>
  
-<!--  <test name="t2">
+ <test name="t2">
     <parameter name="testCaseId" value="TC_02"/>
     <parameter name="uniqueDataId" value="Data_02"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_020_SupplierCreation"/>
     </classes>
-  </test>  --> 
+  </test>  
 
   
-<!--   	 <test name="t3">
+  	 <test name="t3">
     <parameter name="testCaseId" value="TC_03"/>
     <parameter name="uniqueDataId" value="Data_03"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_03_SupplierCreationFormValidation"/>
     </classes>
-  </test>  -->
+  </test> 
   
    
-<!--  <test name="t4">
+ <test name="t4">
     <parameter name="testCaseId" value="TC_04"/>
     <parameter name="uniqueDataId" value="Data_04"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_04_SmppPasswordHostIPValidation"/>
     </classes>
-  </test> -->
+  </test>
   
-<!--    <test name="t5">
+   <test name="t5">
     <parameter name="testCaseId" value="TC_05"/>
     <parameter name="uniqueDataId" value="Data_05"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_05_SupplierCreationNegativeValidation"/>
     </classes>
-  </test>  -->
+  </test> 
   
-  <!-- <test name="t6">
+  <test name="t6">
     <parameter name="testCaseId" value="TC_06"/>
     <parameter name="uniqueDataId" value="Data_06"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_06_LatestHistoryValidation"/>
     </classes>
-  </test>  -->
+  </test> 
   
-  <!-- <test name="t7">
+  <test name="t7">
     <parameter name="testCaseId" value="TC_07"/>
     <parameter name="uniqueDataId" value="Data_07"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_07_SupplierEditing"/>
     </classes>
-  </test> -->
-  <!-- 
+  </test>
+  
    <test name="t10">
     <parameter name="testCaseId" value="TC_10"/>
     <parameter name="uniqueDataId" value="Data_10"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_07_SupplierEditing"/>
     </classes>
-  </test> -->
+  </test>
   
- <!--   <test name="t11">
+   <test name="t11">
     <parameter name="testCaseId" value="TC_11"/>
     <parameter name="uniqueDataId" value="Data_11"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_10_NewSupplierEditing"/>
     </classes>
-  </test> -->
+  </test>
 
-  <!-- <test name="t8">
+ <!--  <test name="t8">
     <parameter name="testCaseId" value="TC_08"/>
     <parameter name="uniqueDataId" value="Data_08"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_08_SupplierUICsvValidation"/>
     </classes>
-  </test> -->
-  
+  </test>
+   -->
  <!--  <test name="t12">
     <parameter name="testCaseId" value="TC_12"/>
     <parameter name="uniqueDataId" value="Data_12"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_08_SupplierUICsvValidation"/>
     </classes>
-  </test>
-   -->
-  <!-- This is for validating negative scenario during Supplier Creation -->
+  </test> -->
   
-  <!--  <test name="t9">
+  This is for validating negative scenario during Supplier Creation
+  
+   <test name="t9">
     <parameter name="testCaseId" value="TC_09"/>
     <parameter name="uniqueDataId" value="Data_09"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_09_NewSupplierAccountCreation"/>
     </classes>
-  </test> -->
+  </test>
   
-   <!-- This is for validating test cases  for instance specific parameters-->
+   This is for validating test cases  for instance specific parameters
    
-   <!-- <test name="t13">
+   <test name="t13">
     <parameter name="testCaseId" value="TC_13"/>
     <parameter name="uniqueDataId" value="Data_13"/>
     <classes>
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_11_InstanceSpecificParametersValidation"/>
     </classes>
-  </test> -->
+  </test>
   
-    <!--  <test name="t14">
+     <test name="t14">
     <parameter name="testCaseId" value="TC_13"/>
     <parameter name="uniqueDataId" value="Data_13"/>
     <classes>
@@ -160,5 +160,5 @@
       <class name="com.tata.selenium.test.supplierProvisioningCases.TC_07_SupplierEditing"/>
     </classes>
   </test>
-     -->
+    
 </suite>

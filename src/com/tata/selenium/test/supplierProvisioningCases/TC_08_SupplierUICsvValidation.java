@@ -139,7 +139,7 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		//Fetching the value from each field for INS Tab
 		String Ins_Instance_StateLst=cu.getDropDownSelectedVal("Ins_Instance_StateLst");
 		String Ins_commentsTxt=cu.getTxtBoxValue("Ins_commentsTxt", dataMap.get("Ins_commentsTxt"));
-		String Ins_Sms_FireWallChk=cu.getChkBoxStatus("Ins_Sms_FireWallChk", dataMap.get("Ins_Sms_FireWallChk"));	
+		//String Ins_Sms_FireWallChk=cu.getChkBoxStatus("Ins_Sms_FireWallChk", dataMap.get("Ins_Sms_FireWallChk"));	
 
 		//Fetching details of Traffic_InformationTAB
 		Thread.sleep(5000);
@@ -148,26 +148,33 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		{
 		Traffic_ThrottlingTxt=cu.getTxtBoxValue("Traffic_ThrottlingTxt", dataMap.get("Traffic_ThrottlingTxt"));
 		}
-		String Traffic_OAWhiteTxt1=cu.getTxtBoxValue("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
+		String Traffic_OAWhiteTxt=cu.getTxtBoxValue("Traffic_OAWhiteTxt", dataMap.get("Traffic_OAWhiteTxt"));
+		/*if(!Traffic_OAWhiteTxt1.isEmpty())
+		{
 		String Traffic_OAWhiteTxt=Traffic_OAWhiteTxt1.trim();
-		String Traffic_DAWhiteTxt1=cu.getTxtBoxValue("Traffic_DAWhiteTxt", dataMap.get("Traffic_DAWhiteTxt"));
-		String Traffic_DAWhiteTxt=Traffic_DAWhiteTxt1.trim();
-		String Traffic_OAPoolTxt1=cu.getTxtBoxValue("Traffic_OAPoolTxt", dataMap.get("Traffic_OAPoolTxt"));
-		String Traffic_OAPoolTxt=Traffic_OAPoolTxt1.trim();
-		String Traffic_OAListTxt1=cu.getTxtBoxValue("Traffic_OAListTxt", dataMap.get("Traffic_OAListTxt"));
-		String Traffic_OAListTxt=Traffic_OAListTxt1.trim();
-		String Traffic_OABlackListTxt1=cu.getTxtBoxValue("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
-		String Traffic_OABlackListTxt=Traffic_OABlackListTxt1.trim();
-		String Traffic_DABlackListTxt1=cu.getTxtBoxValue("Traffic_DABlackListTxt", dataMap.get("Traffic_DABlackListTxt"));
-		String Traffic_DABlackListTxt=Traffic_DABlackListTxt1.trim();
-		String Traffic_OASupportLst1=cu.getDropDownMultiSelectedVal("Traffic_OASupportLst", dataMap.get("Traffic_OASupportLst"));
-		String Traffic_OASupportLst=Traffic_OASupportLst1.replace(",","");
+		}
+		else
+		{
+			String Traffic_OAWhiteTxt=Traffic_OAWhiteTxt1;
+		}*/
+		String Traffic_DAWhiteTxt=cu.getTxtBoxValue("Traffic_DAWhiteTxt", dataMap.get("Traffic_DAWhiteTxt"));
+		//String Traffic_DAWhiteTxt=Traffic_DAWhiteTxt1.trim();
+		String Traffic_OAPoolTxt=cu.getTxtBoxValue("Traffic_OAPoolTxt", dataMap.get("Traffic_OAPoolTxt"));
+		//String Traffic_OAPoolTxt=Traffic_OAPoolTxt1.trim();
+		String Traffic_OAListTxt=cu.getTxtBoxValue("Traffic_OAListTxt", dataMap.get("Traffic_OAListTxt"));
+		//String Traffic_OAListTxt=Traffic_OAListTxt1.trim();
+		String Traffic_OABlackListTxt=cu.getTxtBoxValue("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
+		//String Traffic_OABlackListTxt=Traffic_OABlackListTxt1.trim();
+		String Traffic_DABlackListTxt=cu.getTxtBoxValue("Traffic_DABlackListTxt", dataMap.get("Traffic_DABlackListTxt"));
+		//String Traffic_DABlackListTxt=Traffic_DABlackListTxt1.trim();
+		String Traffic_OASupportLstl=cu.getDropDownMultiSelectedVal("Traffic_OASupportLst", dataMap.get("Traffic_OASupportLst"));
+		String Traffic_OASupportLst=Traffic_OASupportLstl.replace(",","");
 		System.out.println(Traffic_OASupportLst);	
 		//Fetching details of SMPP_InfoTab
 		Thread.sleep(5000);
 		cu.clickElement("SMPP_InfoTab");
 		cu.waitForPageLoad("SMPP_InfoTab");
-		Thread.sleep(50);
+		Thread.sleep(50000);
 		String SMPP_VersionLst=cu.getDropDownSelectedVal("SMPP_VersionLst");
 		String SMPP_BindAdderTonTxt=cu.getTxtBoxValue("SMPP_BindAdderTonTxt", dataMap.get("SMPP_BindAdderTonTxt"));
 		String SMPP_BindAdderNpiTxt=cu.getTxtBoxValue("SMPP_BindAdderNpiTxt", dataMap.get("SMPP_BindAdderNpiTxt"));
@@ -198,6 +205,7 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		//Fetching details of SMPP_InfoTab
 		Thread.sleep(5000);
 		cu.clickElement("SS7_InfoTab");
+		Thread.sleep(2000);
 		String SS7_CallingPtyTxt =cu.getTxtBoxValue("SS7_CallingPtyTxt", dataMap.get("SS7_CallingPtyTxt"));
 		String SS7_CalledPtyTxt =cu.getTxtBoxValue("SS7_CalledPtyTxt", dataMap.get("SS7_CalledPtyTxt"));
 		String SS7_OA_TONTxt =cu.getTxtBoxValue("SS7_OA_TONTxt", dataMap.get("SS7_OA_TONTxt"));
@@ -235,7 +243,7 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		
 		compareDataAndLog("Ins_Instance_StateLst", Ins_Instance_StateLst, csvData.get("Instance State"));
 		compareDataAndLog("Ins_commentsTxt", Ins_commentsTxt, csvData.get("Comments"));
-		compareDataAndLog("Ins_Sms_FireWallChk", Ins_Sms_FireWallChk, csvData.get("SMS Firewall Required"));
+		//compareDataAndLog("Ins_Sms_FireWallChk", Ins_Sms_FireWallChk, csvData.get("SMS Firewall Required"));
 		
 		
 		compareDataAndLog("Traffic_ThrottlingTxt", Traffic_ThrottlingTxt, csvData.get("Throttling (SMS/Second)"));
