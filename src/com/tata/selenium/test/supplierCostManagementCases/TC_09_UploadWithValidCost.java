@@ -195,7 +195,7 @@ public class TC_09_UploadWithValidCost implements ApplicationConstants {
 
 		// Check warning message and accept popup
 		cu.checkMessage("application_PopUpMessage", "Check popup waring message after uploading the file",
-				"Warning: This action will upload the Selected CSV. Do you want to Continue?");
+				"Warning: This action will upload the Selected CSV. Do you want to Continue ?");
 		cu.waitForPageLoad("");
 
 		// Click submit button

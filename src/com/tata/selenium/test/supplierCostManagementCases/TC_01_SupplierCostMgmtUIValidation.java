@@ -106,7 +106,7 @@ public class TC_01_SupplierCostMgmtUIValidation implements ApplicationConstants 
 		
 		//Click Cancel button
 		cu.clickElement("CostManagement_CancelBtn");
-		cu.checkMessage("application_PopUpTitle", "Clicking CANCEL button", "Error: Please display a cost card");
+		cu.checkMessage("application_PopUpTitle", "Clicking CANCEL button", "Error: Please display a cost card.");
 
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);

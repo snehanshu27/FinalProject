@@ -116,7 +116,7 @@ public class TC_03_SupplierCostMgmtAddCost implements ApplicationConstants {
 		cu.clickElement("CostManagement_SubmitBtn");
 
 		cu.checkMessage("application_PopUpTitle", "Clicking Submit button after passing 1.0 value in COST field",
-				"Warning: MT cost should be between 0.0000 and 0.2300.");
+				"Warning: MT cost should be between 0.0000 and 0.2000.");
 
 		cu.getScreenShot("Validation Of the screen displayed");
 

@@ -183,7 +183,7 @@ public class TC_08_UploadWithInvalidCostValue implements ApplicationConstants {
 
 		// Validate the pop up message
 		cu.checkMessage("application_PopUpMessage", "Check popup waring message after uploading the file",
-				dataMap.get("CostManagement_Destination_FilterLst")+ " - Warning: MT Cost should be between 0.0000 and 0.2300- found in the row 1");
+				dataMap.get("CostManagement_Destination_FilterLst")+ " - Warning: MT Cost should be between 0.0000 and 0.2000- found in the row 1");
 	}
 
 	public Map<String, String> getCurrentCoverageUIStatus(CommonUtils cu, String country) throws Exception {
