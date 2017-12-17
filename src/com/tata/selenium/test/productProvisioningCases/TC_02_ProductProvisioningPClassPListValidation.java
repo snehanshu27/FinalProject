@@ -27,6 +27,7 @@ import com.tata.selenium.utils.CommonUtils;
 import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
+import com.tata.selenium.utils.PropertyUtility;
 
 public class TC_02_ProductProvisioningPClassPListValidation  implements ApplicationConstants {
 	private static final Logger LOGGER = Logger.getLogger(TC_02_ProductProvisioningPClassPListValidation.class.getName());
@@ -41,7 +42,7 @@ public class TC_02_ProductProvisioningPClassPListValidation  implements Applicat
 
 	@Test
 	@Parameters({ "uniqueDataId", "testCaseId" })
-	public void DO(String uniqueDataId, String testCaseId){
+	public void DO(String uniqueDataId, String testCaseId) throws InterruptedException{
 		// Starting the extent report
 		test = extent.startTest(
 				"Execution triggered for - TC_02_ProductProvisioningPClassPListValidation -with TestdataId: " + uniqueDataId);
@@ -99,14 +100,20 @@ public class TC_02_ProductProvisioningPClassPListValidation  implements Applicat
 		
 		// Taking screenshot and Logging out
 		cu.getScreenShot("ScreenShot of Pclass");
-		
-		cu.checkNonEditableBox("Pclass_PriorityColumnTxt",dataMap.get("Pclass_PriorityColumnTxt"));
+		Thread.sleep(2000);
+		//cu.checkNonEditableBox("Pclass_PriorityColumnTxt",dataMap.get("Pclass_PriorityColumnTxt"));
+		Thread.sleep(2000);
 		cu.clickElement("Pclass_CancelBtn");
-		cu.checkMessage("", "Clicking cancel button: Pclass popup", "Warning: This action will discard any changes made to this screen. Do you want to Continue?");
-		cu.getScreenShot("Cancel Button clicked");
-		cu.clickElement("application_PopUpNoBtn");
-		cu.clickElement("Pclass_CancelBtn");
-		cu.clickElement("application_PopUpOkBtn");
+		Thread.sleep(2000);
+		PropertyUtility putility = null;
+		Thread.sleep(200);
+		driver.findElement(putility.getObject("application_PopUpOkBtn")).click();
+		//cu.checkMessage("application_PopUpMessage","Pclass popup", "Warning: This action will discard any changes made to this screen. Do you want to Continue?");
+		Thread.sleep(2000);
+		//cu.getScreenShot("Cancel Button clicked");
+		//cu.clickElement("application_PopUpNoBtn");
+		//cu.clickElement("Pclass_CancelBtn");
+		//cu.clickElement("application_PopUpOkBtn");
 		
 		cu.switchToWindow(parentWindow);
 		

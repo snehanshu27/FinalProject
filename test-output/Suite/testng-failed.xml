@@ -2,44 +2,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" name="Failed suite [Suite]">
   <parameter name="browser" value="chrome"/>
-  <parameter name="uniqueDataId" value="Data_09"/>
+  <parameter name="uniqueDataId" value="Data_08"/>
   <parameter name="testCaseId" value="TC_08"/>
   <listeners>
     <listener class-name="com.tata.selenium.driver.Driver"/>
   </listeners>
-  <test name="t7(failed)">
-    <parameter name="uniqueDataId" value="Data_07"/>
-    <parameter name="testCaseId" value="TC_06"/>
+  <test name="t8(failed)">
+    <parameter name="uniqueDataId" value="Data_08"/>
+    <parameter name="testCaseId" value="TC_08"/>
     <classes>
-      <class name="com.tata.selenium.test.inventoryNumberManagement.TC_07_DisplayResultsBasedOn_Input">
+      <class name="com.tata.selenium.test.productProvisioningCases.TC_08_VerifyExcel">
         <methods>
-          <include name="afterMethod"/>
-          <include name="beforeMethod"/>
           <include name="afterMethodFailed"/>
-        </methods>
-      </class> <!-- com.tata.selenium.test.inventoryNumberManagement.TC_07_DisplayResultsBasedOn_Input -->
-      <class name="com.tata.selenium.test.inventoryNumberManagement.TC_03_AddingNumbersToSupplier">
-        <methods>
-          <include name="afterMethod"/>
           <include name="beforeMethod"/>
-          <include name="afterMethodFailed"/>
-        </methods>
-      </class> <!-- com.tata.selenium.test.inventoryNumberManagement.TC_03_AddingNumbersToSupplier -->
-      <class name="com.tata.selenium.test.inventoryNumberManagement.TC_05_ValidatingEndDateGreaterThanFrom">
-        <methods>
-          <include name="afterMethod"/>
-          <include name="beforeMethod"/>
-          <include name="afterMethodFailed"/>
           <include name="DO" invocation-numbers="0"/>
-        </methods>
-      </class> <!-- com.tata.selenium.test.inventoryNumberManagement.TC_05_ValidatingEndDateGreaterThanFrom -->
-      <class name="com.tata.selenium.test.inventoryNumberManagement.TC_06_ClearingResultsValidation">
-        <methods>
-          <include name="beforeMethod"/>
-          <include name="afterMethodFailed"/>
           <include name="afterMethod"/>
         </methods>
-      </class> <!-- com.tata.selenium.test.inventoryNumberManagement.TC_06_ClearingResultsValidation -->
+      </class> <!-- com.tata.selenium.test.productProvisioningCases.TC_08_VerifyExcel -->
     </classes>
-  </test> <!-- t7(failed) -->
+  </test> <!-- t8(failed) -->
 </suite> <!-- Failed suite [Suite] -->

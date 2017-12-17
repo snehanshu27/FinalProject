@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Dec 17 08:41:31 IST 2017</td>
+<td>Started on:</td><td>Sun Dec 17 12:04:47 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>31 seconds (31209 ms)</td>
+<tr><td>Total time:</td><td>47 seconds (47063 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,11 +75,11 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation<br>Parameters: Data_02, TC_02<br/>
-<a href="#Output-1204481453" onClick='toggleBox("Output-1204481453", this, "Show output", "Hide output");'>Show output</a>
+<td title='com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation<br>Parameters: Data_02, TC_02<br/>
+<a href="#Output-1267556427" onClick='toggleBox("Output-1267556427", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1204481453" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1204481453">
+<a href="#Output-1267556427" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1267556427">
 Executing Test Case -TC_02 -with TestdataId : Data_02<br/>
 New CHROME LOCAL driver instantiated<br/>
 URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
@@ -94,36 +94,18 @@ After Login Screen verified sucessfully<br/>
 Successfully switched  to //iframe[@name='bottom'] frame<br/>
 Successfully switched  to index frame<br/>
 Navigation Bar appear/loaded successfully<br/>
-Inventory Number Inventory page opened sucessfully<br/>
+Product Provisioning page opened sucessfully<br/>
 Successfully switched  to bottom frame<br/>
 Successfully switched  to target frame<br/>
-Search_Update_Delete_Inventory Element is present and displayed in the page<br/>
-Add_Inventory Element is present and displayed in the page<br/>
-Add_Inventory - having xpath 'By.id: addFlag' clicked sucessfully<br/>
-Selected - 'TYNTEC LTD.' from the dropdown<br/>
- Page loaded successfully<br/>
-Selected - 'SC' from the dropdown<br/>
- Page loaded successfully<br/>
-Selected - 'ABKHAZIA' from the dropdown<br/>
- Page loaded successfully<br/>
-Number Inventory Page loaded successfully<br/>
-Number_Inventory_AddBtn - having xpath 'By.xpath: //input[@id='addButton']' clicked sucessfully<br/>
-POP Up has appeared now<br/>
-Appeared Pop is  - Error: Please enter a SC of valid length. Min 3 to Max 8 digits.  but expected POP Up was Error: Please enter a SC of valid length. Min 3 to Max 8 digits<br/>
-Number_Inventory_CancelBtn - having xpath 'By.xpath: //input[@id='cancelButton']' clicked sucessfully<br/>
- Page loaded successfully<br/>
-Successfully switched  to //iframe[@scrolling='no'] frame<br/>
-logout Successful<br/>
+Product_Provisioning_PClassBtn - having xpath 'By.xpath: //input[@id='pClassButton']' clicked sucessfully<br/>
+Pclass_CancelBtn - having xpath 'By.id: cancelButton' clicked sucessfully<br/>
 </div>
 </td>
-<td><div><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
-	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:271)
-	at com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation.DO(TC_02_SC_LN_NumberLengthValidation.java:145)
-... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1204481453", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1204481453'><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
-	at org.testng.Assert.fail(Assert.java:94)
-	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:271)
-	at com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation.DO(TC_02_SC_LN_NumberLengthValidation.java:145)
+<td><div><pre>java.lang.NullPointerException
+	at com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation.DO(TC_02_ProductProvisioningPClassPListValidation.java:110)
+... Removed 25 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1267556427", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1267556427'><pre>java.lang.NullPointerException
+	at com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation.DO(TC_02_ProductProvisioningPClassPListValidation.java:110)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -150,8 +132,8 @@ logout Successful<br/>
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
 </pre></div></td>
-<td>29</td>
-<td>com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation@799d4f69</td></tr>
+<td>43</td>
+<td>com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation@45afc369</td></tr>
 </table><p>
 </body>
 </html>

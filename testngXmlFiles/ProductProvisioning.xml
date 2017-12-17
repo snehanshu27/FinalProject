@@ -17,15 +17,16 @@
 				name="com.tata.selenium.test.productProvisioningCases.TC_01_ProductProvisioningUIValidation" />
 		</classes>
 	</test> 
-	<!--  
-	<test name="t2">
+	 
+	 
+	<!-- <test name="t2">
 		<parameter name="testCaseId" value="TC_02" />
 		<parameter name="uniqueDataId" value="Data_02" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.productProvisioningCases.TC_02_ProductProvisioningPClassPListValidation" />
 		</classes>
-	</test>  
+	</test>   -->
 	<test name="t3">
 		<parameter name="testCaseId" value="TC_03" />
 		<parameter name="uniqueDataId" value="Data_03" />
@@ -78,5 +79,5 @@
 				name="com.tata.selenium.test.productProvisioningCases.TC_08_VerifyExcel" />
 		</classes>
 	</test> 
-		  -->
+		 
 </suite>

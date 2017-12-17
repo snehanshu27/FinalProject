@@ -100,7 +100,7 @@ public class TC_03_ProductProvisioningPopUpValidation  implements ApplicationCon
 		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductStatusLst", dataMap.get("Product_Provisioning_ProductStatusLst"));
 		
 		cu.clickElement("Product_Provisioning_SubmitBtn");
-		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please display a product to continue");
+		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please display a product to continue.");
 		
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		

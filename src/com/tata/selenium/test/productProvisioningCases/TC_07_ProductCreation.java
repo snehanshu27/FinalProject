@@ -41,7 +41,7 @@ public class TC_07_ProductCreation implements ApplicationConstants {
 
 	@Test
 	@Parameters({ "uniqueDataId", "testCaseId" })
-	public void DO(String uniqueDataId, String testCaseId) {
+	public void DO(String uniqueDataId, String testCaseId) throws InterruptedException {
 		// Starting the extent report
 		test = extent
 				.startTest("Execution triggered for - TC_07_ProductCreation -with TestdataId: "
@@ -105,22 +105,26 @@ public class TC_07_ProductCreation implements ApplicationConstants {
 		cu.getScreenShot("Click submit ");
 		cu.clickElement("Product_Provisioning_SubmitBtn");
 		
-		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please select a default gateway");
+		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please select a default gateway.");
 		
 		cu.clickElement("DefaultGateway_RadioBtn");
 		cu.getScreenShot("Click submit after selecting default gateway");
 		cu.clickElement("Product_Provisioning_SubmitBtn");
-		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please select a default roaming route");
+		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please select a default roaming route.");
 		
 		cu.clickElement("DefaultRoaming_RadioBtn");
 		cu.getScreenShot(" Click submit after selecting default roaming");
 		cu.clickElement("Product_Provisioning_SubmitBtn");
-		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: The default roaming route should to be an aggregator");	
-		
-		cu.clickElement("MRTestChk");
+		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: The default roaming route should to be an aggregator.");	
+		Thread.sleep(2000);
+		//cu.clickElement("MRTestChk");
+		cu.clickElement("Product_IncludeChk1");
+		Thread.sleep(2000);
 		cu.getScreenShot(" Click MR-TEST roaming radio button");
-		
-		cu.clickElement("Default_Roaming_MRTestBtn");
+		Thread.sleep(2000);
+		//cu.clickElement("Default_Roaming_MRTestBtn");
+		cu.clickElement("DefaultRoaming_RadioBtn1");
+		Thread.sleep(2000);
 		cu.clickElement("Product_Provisioning_SubmitBtn");
 		cu.getScreenShot("Click submit after entering all the details ");
 		
