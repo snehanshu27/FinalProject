@@ -10,23 +10,23 @@
   </listeners>
   
  
- <!--  <test name="t1">
+<!--   <test name="t1">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_01"/>
     <classes>
       <class name="com.tata.selenium.test.productCoverageCases.TC_001_ProductCoverageUIValidation"/>
     </classes>
-  </test> -->
+  </test>
  
-  <!-- <test name="t2">
+  <test name="t2">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_02"/>
     <classes>
       <class name="com.tata.selenium.test.productCoverageCases.TC_001_ProductCoverageUIValidation"/>
     </classes>
-  </test> -->
+  </test>
   
- <!--  <test name="t3">
+  <test name="t3">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_03"/>
     <classes>
@@ -42,20 +42,20 @@
     </classes>
   </test>
   
- <!--  <test name="t5">
+  <test name="t5">
     <parameter name="testCaseId" value="TC_003"/>
     <parameter name="uniqueDataId" value="Data_05"/>
     <classes>
       <class name="com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS"/>
     </classes>
-  </test> -->
+  </test>
   
-  <!-- <test name="t6">
+  <test name="t6">
     <parameter name="testCaseId" value="TC_003"/>
     <parameter name="uniqueDataId" value="Data_06"/>
     <classes>
       <class name="com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS"/>
     </classes>
-  </test> -->
+  </test>
   
 </suite>
