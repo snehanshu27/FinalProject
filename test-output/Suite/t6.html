@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>t6</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Dec 17 12:10:58 IST 2017</td>
+<td>Started on:</td><td>Sun Dec 17 15:28:00 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>40 seconds (40184 ms)</td>
+<tr><td>Total time:</td><td>51 seconds (51003 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,20 +67,20 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td width="30%"><b>Exception</b></td>
 <td width="10%"><b>Time (seconds)</b></td>
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.tata.selenium.test.productProvisioningCases.TC_06_ProductProvisioningMOLNSDisabledValidations.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.productProvisioningCases.TC_06_ProductProvisioningMOLNSDisabledValidations<br>Parameters: Data_06, TC_06<br/>
-<a href="#Output-1585239756" onClick='toggleBox("Output-1585239756", this, "Show output", "Hide output");'>Show output</a>
+<td title='com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS<br>Parameters: Data_06, TC_003<br/>
+<a href="#Output-310212872" onClick='toggleBox("Output-310212872", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1585239756" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1585239756">
-Executing Test Case -TC_06 -with TestdataId : Data_06<br/>
+<a href="#Output-310212872" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-310212872">
+Executing Test Case -TC_003 -with TestdataId : Data_06<br/>
 New CHROME LOCAL driver instantiated<br/>
 URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
 TATA Messaging Login Page appear/loaded successfully<br/>
@@ -94,23 +94,102 @@ After Login Screen verified sucessfully<br/>
 Successfully switched  to //iframe[@name='bottom'] frame<br/>
 Successfully switched  to index frame<br/>
 Navigation Bar appear/loaded successfully<br/>
-Product Provisioning page opened sucessfully<br/>
+Product Coverage Management page opened sucessfully<br/>
 Successfully switched  to bottom frame<br/>
 Successfully switched  to target frame<br/>
-Selected - 'Mx-MO' from the dropdown<br/>
+Selected - 'Mobile LNS' from the dropdown<br/>
  Page loaded successfully<br/>
-Product_Provisioning_DisplayBtn - having xpath 'By.xpath: //input[@id='displayButton']' clicked sucessfully<br/>
-Product_Provisioning_PriorityLst field is non-editable<br/>
-Product_Provisioning_PValueTxt field is non editable<br/>
-DefaultGateway_CheckedRadioBtn doesnt element Exist<br/>
-DefaultRoaming_CheckedRadioBtn doesnt element Exist<br/>
-Successfully switched  to //iframe[@scrolling='no'] frame<br/>
-logout Successful<br/>
+ Page loaded successfully<br/>
+Selected - 'TST_PRD_MLNS' from the dropdown<br/>
+ Page loaded successfully<br/>
+ Page loaded successfully<br/>
+Selected - 'CLX NETWORKS AB' from the dropdown<br/>
+ Page loaded successfully<br/>
+ProductCoverage Page loaded successfully<br/>
+2 were obtianed from the Product_Coverage_SupplierAccNameLstdropdown<br/>
+CLX-MLNS-SMPP seems to selected in Product_Coverage_SupplierAccNameLst dropdown<br/>
+Selected - 'CLX-MLNS-SMPP' from the dropdown<br/>
+ Page loaded successfully<br/>
+ProductCoverage Page loaded successfully<br/>
+4 were obtianed from the Product_Coverage_HistoryLstdropdown<br/>
+Selected - '49209-COVERAGE-17-DEC-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+Product_Coverage_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+ Page loaded successfully<br/>
+Selected - '49208-COVERAGE-17-DEC-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+Product_Coverage_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+ Page loaded successfully<br/>
+Selected - '37393-COVERAGE-26-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+Product_Coverage_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+ Page loaded successfully<br/>
+Selected - '37393-COVERAGE-26-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+Product_Coverage_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+dynamicCoverageCheckbox_ByCountry checkbox has been unselected<br/>
+Product_Coverage_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+Error occured while checking popup message/ accepting popup.   Exception - org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[@id='popup_message']"}
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 10.0.16299 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.05 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.3.1', revision: '5234b325d5', time: '2017-03-10 09:10:29 +0000'
+System info: host: 'PAVILION', ip: '10.149.232.32', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_77'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\Hp\AppData\Local\Temp\scoped_dir14700_28153}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 85695d848b1a4535fc8057b860743b04
+*** Element info: {Using=xpath, value=//div[@id='popup_message']}<br/>
+Exception occured while looking for element : pdfEmbed  - org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//embed[contains(@src, 'pdf')]"}
+  (Session info: chrome=63.0.3239.84)
+  (Driver info: chromedriver=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f),platform=Windows NT 10.0.16299 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.02 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.3.1', revision: '5234b325d5', time: '2017-03-10 09:10:29 +0000'
+System info: host: 'PAVILION', ip: '10.149.232.32', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_77'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.33.506120 (e3e53437346286c0bc2d2dc9aa4915ba81d9023f), userDataDir=C:\Users\Hp\AppData\Local\Temp\scoped_dir14700_28153}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=63.0.3239.84, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 85695d848b1a4535fc8057b860743b04
+*** Element info: {Using=xpath, value=//embed[contains(@src, 'pdf')]}<br/>
 </div>
 </td>
-<td></td>
-<td>37</td>
-<td>com.tata.selenium.test.productProvisioningCases.TC_06_ProductProvisioningMOLNSDisabledValidations@799d4f69</td></tr>
+<td><div><pre>java.lang.AssertionError: null
+	at com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS.validateSuccessAlertMessageAndPDFPageLoaded(TC_003_ProductCoverageMOSMSAndMLNS.java:472)
+	at com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS.DO(TC_003_ProductCoverageMOSMSAndMLNS.java:129)
+... Removed 27 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace310212872", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace310212872'><pre>java.lang.AssertionError: null
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.fail(Assert.java:101)
+	at com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS.validateSuccessAlertMessageAndPDFPageLoaded(TC_003_ProductCoverageMOSMSAndMLNS.java:472)
+	at com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS.DO(TC_003_ProductCoverageMOSMSAndMLNS.java:129)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1129)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:746)
+	at org.testng.TestRunner.run(TestRunner.java:600)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1264)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1189)
+	at org.testng.TestNG.runSuites(TestNG.java:1104)
+	at org.testng.TestNG.run(TestNG.java:1076)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+</pre></div></td>
+<td>48</td>
+<td>com.tata.selenium.test.productCoverageCases.TC_003_ProductCoverageMOSMSAndMLNS@21a947fe</td></tr>
 </table><p>
 </body>
 </html>

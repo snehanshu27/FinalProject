@@ -457,7 +457,7 @@ public class TC_003_ProductCoverageMOSMSAndMLNS implements ApplicationConstants 
 	  
 	  public void validateSuccessAlertMessageAndPDFPageLoaded(CommonUtils cu) 
 	  {	
-		  cu.checkMessage("application_PopUpMessage", "Sucess popup message after modifing the coverage", "The new coverage(s) have been successfully entered and will become active immediately. You will receive a confirmation email for reference");
+		  cu.checkMessage("application_PopUpMessage", "Sucess popup message after modifing the coverage", "The new coverage(s) have been successfully entered and will become active immediately. You will receive a confirmation email for reference.");
 		  
 			//switch to new window and check pdf loaded
 			String parentWindow = cu.getCurrWindowName();

@@ -10,7 +10,7 @@
   </listeners>
   
  
-<!--   <test name="t1">
+  <test name="t1">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_01"/>
     <classes>
@@ -32,7 +32,7 @@
     <classes>
       <class name="com.tata.selenium.test.productCoverageCases.TC_001_ProductCoverageUIValidation"/>
     </classes>
-  </test> -->
+  </test>
   
   <test name="t4">
     <parameter name="testCaseId" value="TC_002"/>

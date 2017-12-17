@@ -2,23 +2,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" name="Failed suite [Suite]">
   <parameter name="browser" value="chrome"/>
-  <parameter name="uniqueDataId" value="Data_08"/>
-  <parameter name="testCaseId" value="TC_08"/>
+  <parameter name="uniqueDataId" value="Data_04"/>
+  <parameter name="testCaseId" value="TC_002"/>
   <listeners>
     <listener class-name="com.tata.selenium.driver.Driver"/>
   </listeners>
-  <test name="t8(failed)">
-    <parameter name="uniqueDataId" value="Data_08"/>
-    <parameter name="testCaseId" value="TC_08"/>
+  <test name="t4(failed)">
+    <parameter name="uniqueDataId" value="Data_04"/>
+    <parameter name="testCaseId" value="TC_002"/>
     <classes>
-      <class name="com.tata.selenium.test.productProvisioningCases.TC_08_VerifyExcel">
+      <class name="com.tata.selenium.test.productCoverageCases.TC_02_ProductCoverageMTSMS">
         <methods>
           <include name="afterMethodFailed"/>
           <include name="beforeMethod"/>
           <include name="DO" invocation-numbers="0"/>
           <include name="afterMethod"/>
         </methods>
-      </class> <!-- com.tata.selenium.test.productProvisioningCases.TC_08_VerifyExcel -->
+      </class> <!-- com.tata.selenium.test.productCoverageCases.TC_02_ProductCoverageMTSMS -->
     </classes>
-  </test> <!-- t8(failed) -->
+  </test> <!-- t4(failed) -->
 </suite> <!-- Failed suite [Suite] -->
