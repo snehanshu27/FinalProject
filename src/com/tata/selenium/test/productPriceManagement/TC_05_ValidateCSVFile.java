@@ -220,10 +220,9 @@ public class TC_05_ValidateCSVFile implements ApplicationConstants {
 			}else{
 				csvDatamap = csvu.getData("Country", dataMap.get("Country"));
 			}
-				
+				//&& csvDatamap.get("Upcoming Effective Date").equals(dataMap.get("newTab_NewEffectiveDate")
 			
-			if(csvDatamap.get("Country").equals(dataMap.get("Country")) && csvDatamap.get("New Price").equals(dataMap.get("newTab_NewPrice"))				
-					&& csvDatamap.get("Upcoming Effective Date").equals(dataMap.get("newTab_NewEffectiveDate")))
+			if(csvDatamap.get("Country").equals(dataMap.get("Country")) && csvDatamap.get("New Price").equals(dataMap.get("newTab_NewPrice")))
 			{
 				test.log(LogStatus.PASS, "EXPECTECD: Values should be same in both csv and UI", "Usage: <span style='font-weight:bold;'>ACTUAL:: Value is same in both csv and UI'</span>");
 			}else{

@@ -103,8 +103,8 @@ public class TC_02_ModifyPrice implements ApplicationConstants {
 		
 		//Giving option to display result based on filter
 		if(!dataMap.get("CountryFilterLst").isEmpty() || !dataMap.get("DestinationFilterLst").isEmpty()){
-			cu.SelectDropDownByVisibleText("CountryFilterLst", dataMap.get("CountryFilterLst"));
-			cu.SelectDropDownByVisibleText("DestinationFilterLst", dataMap.get("DestinationFilterLst"));
+			cu.SelectDropDownByVisibleText("newTab_Country", dataMap.get("CountryFilterLst"));
+			cu.SelectDropDownByVisibleText("newTab_Destination", dataMap.get("DestinationFilterLst"));
 			cu.SelectDropDownByVisibleText("Mcc_FilterLst", dataMap.get("Mcc_FilterLst"));
 			cu.SelectDropDownByVisibleText("Mnc_FilterLst", dataMap.get("Mnc_FilterLst"));
 			cu.setData("CriteriaTxt", dataMap.get("CriteriaTxt"));

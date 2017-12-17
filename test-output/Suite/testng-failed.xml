@@ -2,23 +2,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" name="Failed suite [Suite]">
   <parameter name="browser" value="chrome"/>
-  <parameter name="uniqueDataId" value="Data_04"/>
-  <parameter name="testCaseId" value="TC_002"/>
+  <parameter name="uniqueDataId" value="Data_05"/>
+  <parameter name="testCaseId" value="TC_04"/>
   <listeners>
     <listener class-name="com.tata.selenium.driver.Driver"/>
   </listeners>
-  <test name="t4(failed)">
-    <parameter name="uniqueDataId" value="Data_04"/>
-    <parameter name="testCaseId" value="TC_002"/>
+  <test name="t5(failed)">
+    <parameter name="uniqueDataId" value="Data_05"/>
+    <parameter name="testCaseId" value="TC_04"/>
     <classes>
-      <class name="com.tata.selenium.test.productCoverageCases.TC_02_ProductCoverageMTSMS">
+      <class name="com.tata.selenium.test.productPriceManagement.TC_04_ValidateNegativePrice">
         <methods>
-          <include name="afterMethodFailed"/>
           <include name="beforeMethod"/>
-          <include name="DO" invocation-numbers="0"/>
+          <include name="afterMethodFailed"/>
           <include name="afterMethod"/>
+          <include name="DO" invocation-numbers="0"/>
         </methods>
-      </class> <!-- com.tata.selenium.test.productCoverageCases.TC_02_ProductCoverageMTSMS -->
+      </class> <!-- com.tata.selenium.test.productPriceManagement.TC_04_ValidateNegativePrice -->
     </classes>
-  </test> <!-- t4(failed) -->
+  </test> <!-- t5(failed) -->
 </suite> <!-- Failed suite [Suite] -->

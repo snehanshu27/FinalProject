@@ -47,7 +47,7 @@ public class TC_04_ValidateNegativePrice implements ApplicationConstants {
 	
 	@Test
 	@Parameters({"uniqueDataId", "testCaseId"})	
-	public void DO (String uniqueDataId, String testCaseId) {
+	public void DO (String uniqueDataId, String testCaseId) throws InterruptedException {
 		//Starting the extent report
 		test = extent.startTest("Execution triggered for - TC_04_ValidateNegativePrice - "+uniqueDataId);
 		String sheetName="Product_Price_Management_Screen";
@@ -147,8 +147,10 @@ public class TC_04_ValidateNegativePrice implements ApplicationConstants {
 	    //Set New Price and date
 	    cu.setData("newTab_NewPrice", dataMap.get("newTab_NewPrice"));
 	    cu.sendTabKeys("newTab_NewPrice");
-	    cu.clickElement("clickOutside");
-	    cu.checkMessage("application_PopUpTitle", "Validating error msg for new price above range", "Warning: The price should be between 0.0000 and 0.2300.");
+	    Thread.sleep(2000);
+	    cu.clickElement("newTab_SaveBtn");
+	    Thread.sleep(2000);
+	    cu.checkMessage("application_PopUpTitle", "Validating error msg for new price above range", "Warning: The price should be between 0.0000 and 0.2000.");
 	    
 	    driver.close();
     	driver.switchTo().window(oldTab);
