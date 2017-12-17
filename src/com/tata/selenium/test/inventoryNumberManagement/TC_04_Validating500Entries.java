@@ -118,7 +118,7 @@ public class TC_04_Validating500Entries implements ApplicationConstants {
 		cu.waitForPageLoad("");
 		
 		cu.checkMessage("application_PopUpTitle", "Validating if the Number field accept more than 500 entries",
-				"Please add maximum of 500 SC / LN");
+				"Please add maximum of 500 SC / LN.");
 		
 		cu.clickElement("Number_Inventory_CancelBtn");
 		cu.waitForPageLoad("");

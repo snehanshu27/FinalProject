@@ -96,7 +96,7 @@ public class TC_03_AddingNumbersToSupplier implements ApplicationConstants {
 		// Validating Submit by clicking it without adding any number
 		cu.clickElement("Number_Inventory_SubmitBtn");
 		cu.checkMessage("application_PopUpTitle", "Validating Submit Btn by clicking it",
-				"Error: Please add a number to submit to the inventory");
+				"Error: Please add a number to submit to the inventory.");
 
 		// Selecting appropriate option to display
 		if (("Y").equalsIgnoreCase(dataMap.get("Add_Inventory"))) {

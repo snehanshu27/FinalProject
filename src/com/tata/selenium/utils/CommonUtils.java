@@ -1257,7 +1257,9 @@ public class CommonUtils implements ApplicationConstants {
 					test.log(LogStatus.PASS, "POP Up is expected at " + testStep,
 							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up is being displayed and it is  - "
 									+ popUpName + "</span>");
+					Thread.sleep(5000);
 					driver.findElement(putility.getObject("application_PopUpOkBtn")).click();
+					Thread.sleep(5000);
 					excelUtils.setCellData(sheetName, "PASS", uniqueDataId, "Result_Status");
 					excelUtils.setCellData(sheetName, popUpName, uniqueDataId, "Result_Errors");
 					printLogs("Validation passed as Pop up is being displayed and it is  - " + popUpName);

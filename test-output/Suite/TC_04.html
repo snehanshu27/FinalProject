@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>TestNG:  TC_04</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>TC_04</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Sat Dec 16 23:47:28 IST 2017</td>
+</tr>
+<tr><td>Total time:</td><td>44 seconds (44921 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.tata.selenium.test.supplierCostManagementCases.TC_04_SupplierCostMgmtHistoryValildation.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.supplierCostManagementCases.TC_04_SupplierCostMgmtHistoryValildation<br>Parameters: Data_04, TC_04<br/>
+<a href="#Output-1551446957" onClick='toggleBox("Output-1551446957", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1551446957" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1551446957">
+Executing Test Case -TC_04 -with TestdataId : Data_04<br/>
+New CHROME LOCAL driver instantiated<br/>
+URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
+TATA Messaging Login Page appear/loaded successfully<br/>
+Username 'sonali.das@tatacommunications.com' entered sucessfully<br/>
+Password 'Welcome01' entered sucessfully<br/>
+Submit Btn clicked sucessfully<br/>
+MessagingInstanceHomePage Page loaded successfully<br/>
+Successfully switched  to //iframe[@scrolling='no'] frame<br/>
+TATA Messaging Home Page appear/loaded successfully<br/>
+After Login Screen verified sucessfully<br/>
+Successfully switched  to //iframe[@name='bottom'] frame<br/>
+Successfully switched  to index frame<br/>
+Navigation Bar appear/loaded successfully<br/>
+Supplier Cost Management page opened sucessfully<br/>
+Successfully switched  to bottom frame<br/>
+Successfully switched  to target frame<br/>
+Selected - '4PAY SYSTEM ROMANIA' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_Supplier_Acc_NameLst field is editable and the default value selected is 4PAY Demo<br/>
+CostManagement_CurrencyTxt field is non editable and the value present is USD<br/>
+6 were obtianed from the CostManagement_Cost_CardLstdropdown<br/>
+5  latest values are available in dropdown<br/>
+Selected - '49199-SUBMITTED-16-DEC-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+CostManagement_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+application_PopUpNoBtn - having xpath 'By.xpath: //button[contains(text(),'No')]' clicked sucessfully<br/>
+First Value from List is -49199-SUBMITTED-16-DEC-2017 and is editable in the page<br/>
+Selected - '37352-SUBMITTED-24-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+CostManagement_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+2nd/th Value from List is -37352-SUBMITTED-24-OCT-2017 and is non editable in the page<br/>
+Selected - '37164-SUBMITTED-13-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+CostManagement_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+3nd/th Value from List is -37164-SUBMITTED-13-OCT-2017 and is non editable in the page<br/>
+Selected - '37069-SUBMITTED-06-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+CostManagement_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+4nd/th Value from List is -37069-SUBMITTED-06-OCT-2017 and is non editable in the page<br/>
+Selected - '37065-SUBMITTED-06-OCT-2017' from the dropdown<br/>
+ Page loaded successfully<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+CostManagement_SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+5nd/th Value from List is -37065-SUBMITTED-06-OCT-2017 and is non editable in the page<br/>
+CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
+</div>
+</td>
+<td></td>
+<td>42</td>
+<td>com.tata.selenium.test.supplierCostManagementCases.TC_04_SupplierCostMgmtHistoryValildation@45afc369</td></tr>
+</table><p>
+</body>
+</html>

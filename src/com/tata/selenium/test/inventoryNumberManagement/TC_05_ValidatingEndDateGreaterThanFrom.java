@@ -123,12 +123,12 @@ public class TC_05_ValidatingEndDateGreaterThanFrom implements ApplicationConsta
 		cu.clickElement("Number_Inventory_AddBtn");
 		cu.waitForPageLoad("");
 		
-		cu.checkMessage("application_PopUpTitle", "Validating date pop up where End date is greater than From date","Error: To Date should be greater than or equal to From");
+		cu.checkMessage("application_PopUpTitle", "Validating date pop up where End date is greater than From date","Error: To Date should be greater than or equal to From.");
 		
 		//Clicking Submit Btn
 		cu.clickElement("Number_Inventory_SubmitBtn");
 		cu.waitForPageLoad("");
-		cu.checkMessage("application_PopUpTitle", "Validatin pop Up after clicking Submit", "Error: Please add a number to submit to the inventory");
+		cu.checkMessage("application_PopUpTitle", "Validatin pop Up after clicking Submit", "Error: Please add a number to submit to the inventory.");
 		
 		//Taking screenshot and Logging out
 		cu.getScreenShot("Validation Of "+dataMap.get("Number_Inventory_TONLst")+" in InventoryScreen");

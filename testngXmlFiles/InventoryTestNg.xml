@@ -10,7 +10,7 @@
   </listeners>
   
 
-  <!-- <test name="t1">
+ <!--  <test name="t1">
     <parameter name="testCaseId" value="TC_01"/>
     <parameter name="uniqueDataId" value="Data_01"/>
     <classes>
@@ -25,17 +25,17 @@
       <class name="com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation"/>
     </classes>
   </test> 
-   -->
-  <!--  <test name="t3">
+  
+   <test name="t3">
     <parameter name="testCaseId" value="TC_02"/>
     <parameter name="uniqueDataId" value="Data_03"/>
     <classes>
       <class name="com.tata.selenium.test.inventoryNumberManagement.TC_02_SC_LN_NumberLengthValidation"/>
     </classes>
-  </test>  --> 
-  
+  </test>  
+   -->
    
-  <!--  <test name="t4">
+   <!-- <test name="t4">
     <parameter name="testCaseId" value="TC_03"/>
     <parameter name="uniqueDataId" value="Data_04"/>
     <classes>
@@ -44,7 +44,7 @@
   </test>  -->
   
   
-    <!-- <test name="t5">
+   <!--  <test name="t5">
     <parameter name="testCaseId" value="TC_04"/>
     <parameter name="uniqueDataId" value="Data_05"/>
     <classes>
@@ -52,13 +52,13 @@
     </classes>
   </test>  -->
   
- <!--  <test name="t6">
+  <test name="t6">
     <parameter name="testCaseId" value="TC_05"/>
     <parameter name="uniqueDataId" value="Data_06"/>
     <classes>
       <class name="com.tata.selenium.test.inventoryNumberManagement.TC_03_AddingNumbersToSupplier"/>
     </classes>
-  </test>  -->
+  </test> 
   
    
   <test name="t7">
@@ -69,21 +69,21 @@
     </classes>
   </test> 
   
-  <!-- <test name="t8">
+  <test name="t8">
     <parameter name="testCaseId" value="TC_07"/>
     <parameter name="uniqueDataId" value="Data_08"/>
     <classes>
       <class name="com.tata.selenium.test.inventoryNumberManagement.TC_06_ClearingResultsValidation"/>
     </classes>
-  </test>  -->
+  </test> 
   
-  <!-- <test name="t9">
+  <test name="t9">
     <parameter name="testCaseId" value="TC_08"/>
     <parameter name="uniqueDataId" value="Data_09"/>
     <classes>
       <class name="com.tata.selenium.test.inventoryNumberManagement.TC_07_DisplayResultsBasedOn_Input"/>
     </classes>
-  </test>  -->
+  </test> 
   
   
 </suite>

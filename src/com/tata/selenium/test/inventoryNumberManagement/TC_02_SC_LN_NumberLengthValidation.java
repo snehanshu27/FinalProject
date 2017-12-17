@@ -113,7 +113,7 @@ public class TC_02_SC_LN_NumberLengthValidation implements ApplicationConstants 
 			}
 			
 			cu.clickElement("Number_Inventory_AddBtn");
-			cu.checkMessage("application_PopUpTitle", "Validating Number length for TON as SC", "Error: Please enter a SC of valid length. Min 3 to Max 8 digits");
+			cu.checkMessage("application_PopUpTitle", "Validating Number length for TON as SC", "Error: Please enter a SC of valid length. Min 3 to Max 8 digits.");
 			cu.clickElement("Number_Inventory_CancelBtn");
 			cu.waitForPageLoad("");
 		}
@@ -131,7 +131,7 @@ public class TC_02_SC_LN_NumberLengthValidation implements ApplicationConstants 
 			}	
 			
 			cu.clickElement("Number_Inventory_AddBtn");
-			cu.checkMessage("application_PopUpTitle", "Validating Number length for TON as LN", "Error: Please enter a LN of valid length. Min 7 to Max 15 digits");
+			cu.checkMessage("application_PopUpTitle", "Validating Number length for TON as LN", "Error: Please enter a LN of valid length. Min 7 to Max 15 digits.");
 			cu.clickElement("Number_Inventory_CancelBtn");
 			cu.waitForPageLoad("");
 		}

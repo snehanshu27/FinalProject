@@ -113,7 +113,7 @@ public class TC_01_InventoryUIValidation implements ApplicationConstants {
 			cu.checkElementPresence("Number_Inventory_SubmitBtn");
 			cu.checkElementPresence("Number_Inventory_CancelBtn");
 			cu.clickElement("Number_Inventory_AddBtn");
-			cu.checkMessage("application_PopUpTitle", "Checking pop up after clicking Add Btn without adding any Number", "Error: Please select all input parameters");
+			cu.checkMessage("application_PopUpTitle", "Checking pop up after clicking Add Btn without adding any Number", "Error: Please select all input parameters.");
 			cu.waitForPageLoad("");
 			cu.getScreenShot("Validation Of Inventory Management Screen");	
 		}
@@ -133,7 +133,7 @@ public class TC_01_InventoryUIValidation implements ApplicationConstants {
 			cu.checkElementPresence("Number_Inventory_CancelBtn");
 			//Validating Pop Up if no details eneterd and Submit Btn is clicked
 			cu.clickElement("Number_Inventory_SubmitBtn");
-			cu.checkMessage("application_PopUpTitle", "Validating Pop up after clicking Submit Btn without entering any details ", "Error: Please add a number to submit to the inventory");
+			cu.checkMessage("application_PopUpTitle", "Validating Pop up after clicking Submit Btn without entering any details ", "Error: Please add a number to submit to the inventory.");
 			//cu.getScreenShot("Validation Of Inventory Management Screen");	
 		}
 		
