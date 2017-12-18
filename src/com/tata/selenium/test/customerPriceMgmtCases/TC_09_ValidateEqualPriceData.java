@@ -99,8 +99,6 @@ public class TC_09_ValidateEqualPriceData implements ApplicationConstants {
 		String currentPrice = cu.getText("dynamicCurrentPrice", "$destination$", dataMap.get("dynamicDestination"));
 		String offerPrice = cu.getAttribute("dynamicOfferPrice","value", "$destination$", dataMap.get("dynamicDestination"));
 		
-		System.out.println(currentPrice);
-		System.out.println(offerPrice);
 	
 		if (currentPrice.equals(offerPrice)) {
 			test.log(LogStatus.PASS,
