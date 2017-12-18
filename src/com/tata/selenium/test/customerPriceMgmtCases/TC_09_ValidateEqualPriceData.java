@@ -91,21 +91,25 @@ public class TC_09_ValidateEqualPriceData implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		
 		//click display button
 		cu.clickElement("DisplayBtn");
 
 		String currentPrice = cu.getText("dynamicCurrentPrice", "$destination$", dataMap.get("dynamicDestination"));
 		String offerPrice = cu.getAttribute("dynamicOfferPrice","value", "$destination$", dataMap.get("dynamicDestination"));
+		
+		System.out.println(currentPrice);
+		System.out.println(offerPrice);
 	
 		if (currentPrice.equals(offerPrice)) {
 			test.log(LogStatus.PASS,
-					"EXPECTECD: Current Price and the Offer price should be same  as- " + currentPrice,
+					"EXPECTED: Current Price and the Offer price should be same  as- " + currentPrice,
 					"Validation:  <span style='font-weight:bold;'>ACTUAL::  Current Price and the Offer price should be same  as- "
 							+ currentPrice + "</span>");
 		} else {
 			test.log(LogStatus.FAIL,
-					"EXPECTECD: Current Price and the Offer price should be same  as- " + currentPrice,
+					"EXPECTED: Current Price and the Offer price should be same  as- " + currentPrice,
 					"Validation:  <span style='font-weight:bold;'>ACTUAL::  Current Price and the Offer price should be same  as- "
 							+ currentPrice + "</span>");
 		}

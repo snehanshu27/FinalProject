@@ -90,7 +90,7 @@ public class TC_07_HistoryValidation implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
-		cu.checkEditableDropDown("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		cu.checkEditableDropDown("CustomerProductLst", dataMap.get("CustomerProductLst"));
 
 		//First validation: Price Card Tab has 5 latest values or not.

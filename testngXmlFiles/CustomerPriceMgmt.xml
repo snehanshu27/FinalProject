@@ -8,7 +8,7 @@
 	<listeners>
 		<listener class-name="com.tata.selenium.driver.Driver" />
 	</listeners>
-
+<!-- 
  	<test name="TC_01">
 		<parameter name="testCaseId" value="TC_01" />
 		<parameter name="uniqueDataId" value="Data_01" />
@@ -16,7 +16,7 @@
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_01_CustomerPriceMgmtUIValidation" />
 		</classes>
-	</test> 
+	</test>  -->
 		<!-- <test name="TC_02">
 		<parameter name="testCaseId" value="TC_02" />
 		<parameter name="uniqueDataId" value="Data_02" />
@@ -24,9 +24,9 @@
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage" />
 		</classes>
-	</test>
+	</test> -->
 	
-	<test name="TC_03">
+	<!-- <test name="TC_03">
 		<parameter name="testCaseId" value="TC_03" />
 		<parameter name="uniqueDataId" value="Data_03" />
 		<classes>
@@ -34,9 +34,9 @@
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_03_ValidateExcelData" />
 		</classes>
 	</test> 
-		
+		 -->
 
-	<test name="TC_04">
+	<!-- <test name="TC_04">
 		<parameter name="testCaseId" value="TC_04" />
 		<parameter name="uniqueDataId" value="Data_04" />
 		<classes>
@@ -44,33 +44,33 @@
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_04_UploadCSVWithInvalidDate" />
 		</classes>
 	</test>
-	
-		<test name="TC_05">
+	 -->
+		<!-- <test name="TC_05">
 		<parameter name="testCaseId" value="TC_05" />
 		<parameter name="uniqueDataId" value="Data_05" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_05_UploadCSVWithPastDate" />
 		</classes>
-	</test>
+	</test> -->
 	
-	<test name="TC_06">
+	<!-- <test name="TC_06">
 		<parameter name="testCaseId" value="TC_06" />
 		<parameter name="uniqueDataId" value="Data_06" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate" />
 		</classes>
-	</test>
-			<test name="TC_07">
+	</test> -->
+			<!-- <test name="TC_07">
 		<parameter name="testCaseId" value="TC_07" />
 		<parameter name="uniqueDataId" value="Data_07" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_07_HistoryValidation" />
 		</classes>
-	</test>
-	<test name="TC_08">
+	</test> -->
+<!-- 	<test name="TC_08">
 		<parameter name="testCaseId" value="TC_08" />
 		<parameter name="uniqueDataId" value="Data_08" />
 		<classes>
@@ -78,25 +78,25 @@
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_08_Search" />
 		</classes>
 	</test>
-	
-		<test name="TC_09">
+	 -->
+		<!-- <test name="TC_09">
 		<parameter name="testCaseId" value="TC_09" />
 		<parameter name="uniqueDataId" value="Data_09" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_09_ValidateEqualPriceData" />
 		</classes>
-	</test>
+	</test> -->
 	
-		<test name="TC_10">
+	<!-- 	<test name="TC_10">
 		<parameter name="testCaseId" value="TC_10" />
 		<parameter name="uniqueDataId" value="Data_10" />
 		<classes>
 			<class
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage" />
 		</classes>
-	</test>
-			<test name="TC_12">
+	</test> -->
+		<!-- 	<test name="TC_12">
 		<parameter name="testCaseId" value="TC_10" />
 		<parameter name="uniqueDataId" value="Data_10" />
 		<classes>
@@ -104,7 +104,7 @@
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_03_ValidateExcelData" />
 		</classes>
 	</test> 
-	
+	 -->
 			<test name="TC_11">
 		<parameter name="testCaseId" value="TC_11" />
 		<parameter name="uniqueDataId" value="Data_11" />
@@ -113,5 +113,5 @@
 				name="com.tata.selenium.test.customerPriceMgmtCases.TC_11_MOSMSUIValidation" />
 		</classes>
 	</test> 
-	 -->
+	
 </suite>

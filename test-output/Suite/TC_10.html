@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sat Dec 16 23:30:05 IST 2017</td>
+<td>Started on:</td><td>Mon Dec 18 11:39:00 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>36 seconds (36717 ms)</td>
+<tr><td>Total time:</td><td>96 seconds (96324 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,12 +75,12 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.tata.selenium.test.supplierCostManagementCases.TC_08_UploadWithInvalidCostValue.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.supplierCostManagementCases.TC_08_UploadWithInvalidCostValue<br>Parameters: Data_10, TC_08<br/>
-<a href="#Output-1551446957" onClick='toggleBox("Output-1551446957", this, "Show output", "Hide output");'>Show output</a>
+<td title='com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage<br>Parameters: Data_10, TC_10<br/>
+<a href="#Output-1605851606" onClick='toggleBox("Output-1605851606", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1551446957" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1551446957">
-Executing Test Case -TC_08 -with TestdataId : Data_10<br/>
+<a href="#Output-1605851606" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1605851606">
+Executing Test Case -TC_10 -with TestdataId : Data_10<br/>
 New CHROME LOCAL driver instantiated<br/>
 URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
 TATA Messaging Login Page appear/loaded successfully<br/>
@@ -94,41 +94,38 @@ After Login Screen verified sucessfully<br/>
 Successfully switched  to //iframe[@name='bottom'] frame<br/>
 Successfully switched  to index frame<br/>
 Navigation Bar appear/loaded successfully<br/>
-Supplier Cost Management page opened sucessfully<br/>
+Customer Price Management page opened sucessfully<br/>
 Successfully switched  to bottom frame<br/>
 Successfully switched  to target frame<br/>
-Selected - '4PAY SYSTEM ROMANIA' from the dropdown<br/>
+Selected - 'MT SMS' from the dropdown<br/>
  Page loaded successfully<br/>
-CostManagement_Supplier_Acc_NameLst field is editable and the default value selected is 4PAY Demo<br/>
-CostManagement_CurrencyTxt field is non editable and the value present is USD<br/>
-CostManagement_DisplayBtn - having xpath 'By.xpath: //input[@id='diplayButton']' clicked sucessfully<br/>
-AllfilesInFolder :1<br/>
-file: 4PAY SYSTEM ROMANIA-4PAY Demo.csv<br/>
-deleted all files from download loaction<br/>
-CostManagement_ExportBtn - having xpath 'By.xpath: //a[@title='Export']' clicked sucessfully<br/>
-Supplier Cost Management Page loaded successfully<br/>
-checking for download completed<br/>
-no downloads pending<br/>
-dowloaded file path: C:\selenium\files\4PAY SYSTEM ROMANIA-4PAY Demo.csv<br/>
-CSV file has been generated as the input: C:\Users\Hp\git\ui_automationscript\temp\-16-12-2017_23-30-34\4PAY SYSTEM ROMANIA-4PAY Demo-Cost Update.csv<br/>
-C:\Users\Hp\git\ui_automationscript\temp\-16-12-2017_23-30-34\4PAY SYSTEM ROMANIA-4PAY Demo-Cost Update.csv has been sent/entered to elemet CostManagement_UploadBtn<br/>
-POP Up has appeared now<br/>
-Appeared Pop is  - Warning: This action will upload the Selected CSV. Do you want to Continue ?  but expected POP Up was Warning: This action will upload the Selected CSV. Do you want to Continue?<br/>
+Selected - '2SMS.COM LIMITED' from the dropdown<br/>
  Page loaded successfully<br/>
+Selected - 'sms_http' from the dropdown<br/>
+ Page loaded successfully<br/>
+CustomerProductLst field is editable and the default value selected is Product_Test<br/>
+CurrencyTxt field is non editable and the value present is <br/>
+RatePeriod field is non editable and the value present is <br/>
+SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
 POP Up has appeared now<br/>
-Appeared Pop is  - UNITEL - Warning: MT Cost should be between 0.0000 and 0.2000- found in the row 1  but expected POP Up was UNITEL - Warning: MT Cost should be between 0.0000 and 0.2300- found in the row 1<br/>
+Appeared Pop is  - Error: No price card available. Please select a price card.  but expected POP Up was Error: No price card available. Please select a price card<br/>
+DisplayBtn - having xpath 'By.xpath: //input[@id='displayButton']' clicked sucessfully<br/>
+dynamicCoverageChk checkbox has been unselected<br/>
+SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+POP Up has appeared now<br/>
+Validation passed as Pop up is being displayed and it is  - The new price(s) have been successfully entered and will become active on the effective date. You will receive a confirmation email for reference.<br/>
 Successfully switched  to //iframe[@scrolling='no'] frame<br/>
 logout Successful<br/>
 </div>
 </td>
 <td><div><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
-	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:271)
-	at com.tata.selenium.test.supplierCostManagementCases.TC_08_UploadWithInvalidCostValue.DO(TC_08_UploadWithInvalidCostValue.java:116)
-... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1551446957", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1551446957'><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
+	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:272)
+	at com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage.DO(TC_10_RemoveCoverage.java:121)
+... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1605851606", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1605851606'><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
 	at org.testng.Assert.fail(Assert.java:94)
-	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:271)
-	at com.tata.selenium.test.supplierCostManagementCases.TC_08_UploadWithInvalidCostValue.DO(TC_08_UploadWithInvalidCostValue.java:116)
+	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:272)
+	at com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage.DO(TC_10_RemoveCoverage.java:121)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -155,8 +152,8 @@ logout Successful<br/>
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
 </pre></div></td>
-<td>34</td>
-<td>com.tata.selenium.test.supplierCostManagementCases.TC_08_UploadWithInvalidCostValue@45afc369</td></tr>
+<td>93</td>
+<td>com.tata.selenium.test.customerPriceMgmtCases.TC_10_RemoveCoverage@45afc369</td></tr>
 </table><p>
 </body>
 </html>

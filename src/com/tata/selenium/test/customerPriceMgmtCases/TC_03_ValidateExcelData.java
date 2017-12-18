@@ -91,7 +91,7 @@ public class TC_03_ValidateExcelData implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
-		cu.checkEditableDropDown("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		cu.checkEditableDropDown("CustomerProductLst", dataMap.get("CustomerProductLst"));
 
 		// Validating Readonly properties

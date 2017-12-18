@@ -98,6 +98,7 @@ public class CommonUtils implements ApplicationConstants {
 	public static void setTimeStamp(String timeStamp) {
 		CommonUtils.timeStamp = timeStamp;
 	}
+	
 
 	public CommonUtils(WebDriver driver, ExtentTest test, String sheetName, String uniqueDataId, String testCaseId,
 			String objetResPath) {
@@ -3343,6 +3344,7 @@ public class CommonUtils implements ApplicationConstants {
 			}
 		return strText;
 	}
+	
 	
 	public String getTxtBoxValue(String fieldName, String replaceKeys, String replaceValues) {
 		WebElement textField = null;

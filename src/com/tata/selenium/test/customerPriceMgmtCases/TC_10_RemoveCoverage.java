@@ -89,7 +89,7 @@ public class TC_10_RemoveCoverage implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
-		cu.checkEditableDropDown("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		cu.checkEditableDropDown("CustomerProductLst", dataMap.get("CustomerProductLst"));
 
 		// Validating Readonly properties
@@ -99,7 +99,7 @@ public class TC_10_RemoveCoverage implements ApplicationConstants {
 		// click submit and validate the pop-up message
 		cu.clickElement("SubmitBtn");
 		cu.checkMessage("application_PopUpMessage", "Click submit",
-				"Error: No price card available. Please select a price card");
+				"Error: No price card available. Please select a price card.");
 
 		// click display button
 		cu.clickElement("DisplayBtn");

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>TestNG:  TC_06</title>
+<title>TestNG:  TC_02</title>
 <link href="../testng.css" rel="stylesheet" type="text/css" />
 <link href="../my-testng.css" rel="stylesheet" type="text/css" />
 
@@ -53,13 +53,13 @@ function toggleAllBoxes() {
 
 </head>
 <body>
-<h2 align='center'>TC_06</h2><table border='1' align="center">
+<h2 align='center'>TC_02</h2><table border='1' align="center">
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Dec 18 11:07:56 IST 2017</td>
+<td>Started on:</td><td>Mon Dec 18 09:53:15 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>89 seconds (89738 ms)</td>
+<tr><td>Total time:</td><td>106 seconds (106298 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,12 +75,12 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate<br>Parameters: Data_06, TC_06<br/>
-<a href="#Output-1758056825" onClick='toggleBox("Output-1758056825", this, "Show output", "Hide output");'>Show output</a>
+<td title='com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage.DO()'><b>DO</b><br>Test class: com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage<br>Parameters: Data_02, TC_02<br/>
+<a href="#Output-1585239756" onClick='toggleBox("Output-1585239756", this, "Show output", "Hide output");'>Show output</a>
 
-<a href="#Output-1758056825" onClick="toggleAllBoxes();">Show all outputs</a>
-<div class='log' id="Output-1758056825">
-Executing Test Case -TC_06 -with TestdataId : Data_06<br/>
+<a href="#Output-1585239756" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1585239756">
+Executing Test Case -TC_02 -with TestdataId : Data_02<br/>
 New CHROME LOCAL driver instantiated<br/>
 URL launched is : https://10.133.43.10:8443/MessagingInstance<br/>
 TATA Messaging Login Page appear/loaded successfully<br/>
@@ -106,27 +106,34 @@ Selected - 'sms_http' from the dropdown<br/>
 CustomerProductLst field is editable and the default value selected is Product_Test<br/>
 CurrencyTxt field is non editable and the value present is <br/>
 RatePeriod field is non editable and the value present is <br/>
-DisplayBtn - having xpath 'By.xpath: //input[@id='displayButton']' clicked sucessfully<br/>
-CSV file has been generated as the input: C:\Users\Hp\git\ui_automationscript\temp\-18-12-2017_11-9-11\2SMS.COM LIMITED-sms_http-CoverageUpdate.csv<br/>
-C:\Users\Hp\git\ui_automationscript\temp\-18-12-2017_11-9-11\2SMS.COM LIMITED-sms_http-CoverageUpdate.csv has been sent/entered to elemet Upload<br/>
-POP Up has appeared now<br/>
-Appeared Pop is  - Warning: This action will upload the Selected CSV. Do you want to Continue ?  but expected POP Up was Warning: This action will upload the Selected CSV. Do you want to Continue?<br/>
- Page loaded successfully<br/>
 SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
 POP Up has appeared now<br/>
-Appeared Pop is  - Error: Please enter a valid offer price and effective date.  but expected POP Up was The new price(s) have been successfully entered and will become active on the effective date. You will receive a confirmation email for reference.<br/>
+Appeared Pop is  - Error: No price card available. Please select a price card.  but expected POP Up was Error: No price card available. Please select a price card<br/>
+DisplayBtn - having xpath 'By.xpath: //input[@id='displayButton']' clicked sucessfully<br/>
+dynamicCoverageChk checkbox has been selected<br/>
+SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+POP Up has appeared now<br/>
+Appeared Pop is  - Error: Please enter a valid offer price and effective date.  but expected POP Up was Error: Please enter a valid offer price and effective date<br/>
+CancelBtn - having xpath 'By.xpath: //input[@id='cancelButton']' clicked sucessfully<br/>
+POP Up has appeared now<br/>
+Appeared Pop is  - Warning: This action will reload the initial price card. Do you want to Continue ?  but expected POP Up was Warning: This action will reload the initial price card. Do you want to Continue?<br/>
+dynamicCoverageChk checkbox has been selected<br/>
+Effective_DateTxt - having xpath 'By.xpath: //*[@id='myTable']/tbody/tr[td[text()='TWO DEGREES MOBILE']]//input[contains(@id, 'effDate')]' clicked sucessfully<br/>
+SubmitBtn - having xpath 'By.xpath: //input[@id='submitButton']' clicked sucessfully<br/>
+POP Up has appeared now<br/>
+Validation passed as Pop up is being displayed and it is  - The new price(s) have been successfully entered and will become active on the effective date. You will receive a confirmation email for reference.<br/>
 Successfully switched  to //iframe[@scrolling='no'] frame<br/>
 logout Successful<br/>
 </div>
 </td>
 <td><div><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
 	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:272)
-	at com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate.DO(TC_06_UploadCSVWithValidDate.java:114)
-... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1758056825", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1758056825'><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
+	at com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage.DO(TC_02_AddCoverage.java:146)
+... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1585239756", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1585239756'><pre>java.lang.AssertionError: Test case is having some failed/warning steps. Please check in the report
 	at org.testng.Assert.fail(Assert.java:94)
 	at com.tata.selenium.utils.CommonUtils.checkRunStatus(CommonUtils.java:272)
-	at com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate.DO(TC_06_UploadCSVWithValidDate.java:114)
+	at com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage.DO(TC_02_AddCoverage.java:146)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -153,8 +160,8 @@ logout Successful<br/>
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
 </pre></div></td>
-<td>87</td>
-<td>com.tata.selenium.test.customerPriceMgmtCases.TC_06_UploadCSVWithValidDate@799d4f69</td></tr>
+<td>102</td>
+<td>com.tata.selenium.test.customerPriceMgmtCases.TC_02_AddCoverage@45afc369</td></tr>
 </table><p>
 </body>
 </html>

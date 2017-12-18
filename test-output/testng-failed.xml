@@ -2,23 +2,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="1" name="Failed suite [Suite]">
   <parameter name="browser" value="chrome"/>
-  <parameter name="uniqueDataId" value="Data_05"/>
-  <parameter name="testCaseId" value="TC_04"/>
+  <parameter name="uniqueDataId" value="Data_11"/>
+  <parameter name="testCaseId" value="TC_11"/>
   <listeners>
     <listener class-name="com.tata.selenium.driver.Driver"/>
   </listeners>
-  <test name="t5(failed)">
-    <parameter name="uniqueDataId" value="Data_05"/>
-    <parameter name="testCaseId" value="TC_04"/>
+  <test name="TC_11(failed)">
+    <parameter name="uniqueDataId" value="Data_11"/>
+    <parameter name="testCaseId" value="TC_11"/>
     <classes>
-      <class name="com.tata.selenium.test.productPriceManagement.TC_04_ValidateNegativePrice">
+      <class name="com.tata.selenium.test.customerPriceMgmtCases.TC_11_MOSMSUIValidation">
         <methods>
+          <include name="DO" invocation-numbers="0"/>
+          <include name="afterMethod"/>
           <include name="beforeMethod"/>
           <include name="afterMethodFailed"/>
-          <include name="afterMethod"/>
-          <include name="DO" invocation-numbers="0"/>
         </methods>
-      </class> <!-- com.tata.selenium.test.productPriceManagement.TC_04_ValidateNegativePrice -->
+      </class> <!-- com.tata.selenium.test.customerPriceMgmtCases.TC_11_MOSMSUIValidation -->
     </classes>
-  </test> <!-- t5(failed) -->
+  </test> <!-- TC_11(failed) -->
 </suite> <!-- Failed suite [Suite] -->

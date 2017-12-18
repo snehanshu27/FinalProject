@@ -95,7 +95,7 @@ public class TC_04_UploadCSVWithInvalidDate implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
-		cu.checkEditableDropDown("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		cu.checkEditableDropDown("CustomerProductLst", dataMap.get("CustomerProductLst"));
 
 		// Validating Readonly properties
@@ -165,7 +165,7 @@ public class TC_04_UploadCSVWithInvalidDate implements ApplicationConstants {
 
 		// Check warning message and accept popup
 		cu.checkMessage("application_PopUpMessage", "Check popup waring message after uploading the file",
-				"Warning: This action will upload the Selected CSV. Do you want to Continue?");
+				"Warning: This action will upload the Selected CSV. Do you want to Continue ?");
 		cu.waitForPageLoad("");
 
 		// Validate the pop up message

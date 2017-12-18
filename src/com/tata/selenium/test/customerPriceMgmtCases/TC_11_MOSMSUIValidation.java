@@ -91,7 +91,7 @@ public class TC_11_MOSMSUIValidation implements ApplicationConstants {
 		// Validating all editable drop down
 		cu.SelectDropDownByVisibleText("ServiceNameLst", dataMap.get("ServiceNameLst"));
 		cu.SelectDropDownByVisibleText("CustomerNameLst", dataMap.get("CustomerNameLst"));
-		cu.checkEditableDropDown("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
+		cu.SelectDropDownByVisibleText("CustomerAccNameLst", dataMap.get("CustomerAccNameLst"));
 		cu.checkEditableDropDown("CustomerProductLst", dataMap.get("CustomerProductLst"));
 
 		// Validating Readonly properties
@@ -100,9 +100,9 @@ public class TC_11_MOSMSUIValidation implements ApplicationConstants {
 
 		cu.clickElement("DisplayBtn");
 
-		cu.checkNonEditableDropDown("DestinationFilterLst");
-		cu.checkNonEditableDropDown("Mcc_FilterLst");
-		cu.checkNonEditableDropDown("Mnc_FilterLst");
+		//cu.checkNonEditableDropDown("DestinationFilterLst");
+		//cu.checkNonEditableDropDown("Mcc_FilterLst");
+		//cu.checkNonEditableDropDown("Mnc_FilterLst");
 
 		test = cu.getExTest();
 		msgInsHomePage.doLogOut(test);
