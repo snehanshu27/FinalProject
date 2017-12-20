@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class NavigationMenuPage extends CommonUtils {
 	private static final Logger LOGGER = Logger.getLogger(NavigationMenuPage.class.getName());
-	PropertyUtility putility=new PropertyUtility(OBJECT_REPO_FILEPATH);
+	PropertyUtility putility=new PropertyUtility(OBJECT_REPO_FILEPATH, getExTest());
 	ExtentTest test;
 	By navBar = putility.getObject("navigation_Dashboard");
 		

@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.testng.Assert;
+
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 /**
  * @date 
@@ -19,9 +23,13 @@ public class PropertyUtility {
 	private static final Logger LOGGER = Logger.getLogger(PropertyUtility.class.getName());
 
 	Properties prop = new Properties();	
+	String fileName;
+	ExtentTest test;
 	
-	public PropertyUtility(String fileName)
+	public PropertyUtility(String fileName,ExtentTest test)
 	{
+		this.fileName = fileName;
+		this.test = test;
 		try{
 			InputStream input =  null;
 			input = new FileInputStream(fileName);
@@ -50,7 +58,7 @@ public class PropertyUtility {
 			finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
 		return finalStrObj;
 	}
-	public By getObjectFromStr(String strObj)
+	private By getObjectFromStr(String strObj)
 	{
 		By ret = null;
 		
@@ -94,6 +102,12 @@ public class PropertyUtility {
 	public By getObject(String name, String replaceKeys, String replaceValues )
 	{
 		String finalStrObj = getProperty(name);
+		if(finalStrObj==null)			
+		{
+			test.log(LogStatus.FAIL, "Property should be present", "Property: '"+name+"' missing in object repository file: "+fileName);
+			Assert.fail("Property: '"+name+"' missing in object repository file: "+fileName);
+		}
+		
 		String[] rKys = replaceKeys.split("\\~");
 		String[] rVals = replaceValues.split("\\~");
 
@@ -108,45 +122,15 @@ public class PropertyUtility {
 	{
 		By ret = null;
 		
-//		String[] keyVal = getProperty(name).split("\\~");
-//		String key = keyVal[0].trim();
-//		String value = keyVal[1].trim();
-		
-		String keyVal = getProperty(name).trim();		
-		int index = keyVal.indexOf('~');
-		String key = keyVal.substring(0, index).trim();
-		String value = keyVal.substring(index+1, keyVal.length()).trim();
-		
-		switch(key.toLowerCase())
+		String proStr = getProperty(name);
+		if(proStr!=null)
+			ret = getObjectFromStr(proStr);
+		else	
 		{
-		case "class":
-				ret = By.className(value);
-			break;
-		case "css":	
-			ret = By.cssSelector(value);
-			break;
-		case "id":
-			ret = By.id(value);
-			break;
-		case "link":
-			ret = By.linkText(value);
-			break;
-		case "name":
-			ret = By.name(value);
-			break;
-		case "partiallink":
-			ret = By.partialLinkText(value);
-			break;
-		case "tagname":
-			ret = By.tagName(value);
-			break;
-		case "xpath":
-			ret = By.xpath(value);
-			break;
-		default:
-			break;
+			test.log(LogStatus.FAIL, "Property should be present", "Property: '"+name+"' missing in object repository file: "+fileName);
+			Assert.fail("Property: '"+name+"' missing in object repository file: "+fileName);
 		}
-		
+						
 		return ret;
 	}
 }

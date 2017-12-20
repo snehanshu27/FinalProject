@@ -317,7 +317,7 @@ public class TC_03_EditRule implements ApplicationConstants {
 		if(!subRule.get("OA_Cond_New").isEmpty())
 		{
 			
-			if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", index))
+			if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", index))
 				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "--Select--", "$index$", index);
 			cu.clickElement("filteringRules_EditableRow_SubRule_Dynamic_OAResultTxt",  "$index$", index);
 			
@@ -327,7 +327,7 @@ public class TC_03_EditRule implements ApplicationConstants {
 		{
 			if(!subRule.get("TON_Cond_New").isEmpty())
 			{
-				if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index))
+				if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index))
 					cu.clearData("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index);
 				cu.clickElement("filteringRules_EditableRow_SubRule_Dynamic_OAResultTxt",  "$index$", index);
 				

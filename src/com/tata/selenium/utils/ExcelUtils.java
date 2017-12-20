@@ -45,7 +45,7 @@ public class ExcelUtils implements ApplicationConstants {
     int reqcellrowno;
 	int reqcellcolno;
 	
-	PropertyUtility putility = new PropertyUtility(OBJECT_REPO_FILEPATH);
+	PropertyUtility putility = new PropertyUtility(OBJECT_REPO_FILEPATH, null);
 	
 	public void setExcelFile(String path, String sheetName) throws Exception {
 		try {

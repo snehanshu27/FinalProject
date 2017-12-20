@@ -87,7 +87,7 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 		
 		//Validating Submit btn should be disabled by default before clicking Edit Btn
 		
-		if(cu.checkDisabledBtn("Customer_SubmitBtn")){
+		if(cu.isDisabledBtn("Customer_SubmitBtn")){
 			cu.printLogs("Validation Failed: SubmitBtn is editable before clicking Edit Btn");
 			test.log(LogStatus.FAIL, "EXPECTECD: Submit Btn should be Non editable  before clicking Edit Btn", "Validation: <span style='font-weight:bold;'>ACTUAL:: Submit Btn is editable  before clicking Edit Btn</span>");
 		}

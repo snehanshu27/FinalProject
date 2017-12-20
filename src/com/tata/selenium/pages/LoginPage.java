@@ -20,7 +20,7 @@ public class LoginPage extends CommonUtils {
 	
 	private static final Logger LOGGER = Logger.getLogger(LoginPage.class.getName());
 	static String properties =  "./data/Login.properties";
-	PropertyUtility putility=new PropertyUtility(properties);
+	PropertyUtility putility=new PropertyUtility(properties, getExTest());
 	
 	
 	By username = putility.getObject("login_Usrname");

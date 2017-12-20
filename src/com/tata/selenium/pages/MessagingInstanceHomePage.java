@@ -21,7 +21,7 @@ import com.tata.selenium.utils.PropertyUtility;
 public class MessagingInstanceHomePage extends CommonUtils {
 	private static final Logger LOGGER = Logger.getLogger(MessagingInstanceHomePage.class.getName());
 	ExcelUtils excelUtils= new ExcelUtils();
-	PropertyUtility putility=new PropertyUtility(OBJECT_REPO_FILEPATH);
+	PropertyUtility putility=new PropertyUtility(OBJECT_REPO_FILEPATH, getExTest());
 	
 	
 	By signOutBtn = putility.getObject("homepage_logoutBtn");

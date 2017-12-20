@@ -107,7 +107,7 @@ public class CommonUtils implements ApplicationConstants {
 		this.sheetName = sheetName;
 		this.uniqueDataId = uniqueDataId;
 		this.testCaseId = testCaseId;
-		this.putility = new PropertyUtility(objetResPath);
+		this.putility = new PropertyUtility(objetResPath, test);
 	}
 
 	/**
@@ -696,7 +696,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("UI Element  " + fieldName);
 			LOGGER.info(fieldName + " -UI Element validation failed..." + e);
 			printLogs(fieldName + " -UI Element validation failed..." + e);
-			test.log(LogStatus.FAIL, "UI Element validation", "UI Element validation failed because  -" + e);
+			test.log(LogStatus.FAIL, "UI Element validation", fieldName+" - UI Element validation failed because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -1011,12 +1011,8 @@ public class CommonUtils implements ApplicationConstants {
 				sleep(700);
 				WebElement dropDownSearchTextboxEle = driver.findElement(putility.getObject(dropDownSearchTextbox));
 				dropDownSearchTextboxEle.sendKeys(replaceValue);
-
 				sleep(500);
-
-				String finalStrObj = putility.getProperty(dynamicLabelOption).replace(replaceKey, replaceValue);
-				By locator = putility.getObjectFromStr(finalStrObj);
-				WebElement dynamicLabelOptionEle = driver.findElement(locator);
+				WebElement dynamicLabelOptionEle = driver.findElement(putility.getObject(dynamicLabelOption, replaceKey, replaceValue));
 				dynamicLabelOptionEle.click();
 
 				printLogs("Selected - '" + replaceValue + "' from the custom dropdown " + dropDownButton);
@@ -1092,12 +1088,8 @@ public class CommonUtils implements ApplicationConstants {
 				sleep(700);
 				WebElement dropDownSearchTextboxEle = driver.findElement(putility.getObject(dropDownSearchTextbox));
 				dropDownSearchTextboxEle.sendKeys(value);
-
 				sleep(500);
-
-				String finalStrObj = putility.getProperty(dynamicLabelOption).replace("$option$", value);
-				By locator = putility.getObjectFromStr(finalStrObj);
-				WebElement dynamicLabelOptionEle = driver.findElement(locator);
+				WebElement dynamicLabelOptionEle = driver.findElement(putility.getObject(dynamicLabelOption, "$option$", value));
 				dynamicLabelOptionEle.click();
 
 				printLogs("Selected - '" + value + "' from the custom dropdown " + dropDownButton);
@@ -1921,7 +1913,7 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
-	public boolean checkDisabledBtn(String fieldName) {
+	public boolean isDisabledBtn(String fieldName) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
 			if (textField.isEnabled()) {
@@ -1935,7 +1927,21 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 	
-	public boolean checkDisabledEelement(String fieldName, String replaceKeys, String replaceValues) {
+	public boolean isDisabledEelement(String fieldName) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			if (textField.isEnabled()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			LOGGER.info("Exception:  " + e);
+			return false;
+		}
+	}
+	
+	public boolean isDisabledEelement(String fieldName, String replaceKeys, String replaceValues) {
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
 			if (textField.isEnabled()) {
@@ -2039,16 +2045,7 @@ public class CommonUtils implements ApplicationConstants {
 
 	public boolean existsElement(String fieldName, String replaceKeys, String replaceValues) {
 		try {
-			String finalStrObj = putility.getProperty(fieldName);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
-
-			driver.findElement(locator);
+			driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
 			printLogs(fieldName + " element Exist");
 
 			return true;
@@ -2188,16 +2185,8 @@ public class CommonUtils implements ApplicationConstants {
 
 	public String getAttribute(String fieldname, String attribute, String replaceKeys, String replaceValues) {
 		try {
-			String finalStrObj = putility.getProperty(fieldname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
-
-			return driver.findElement(locator).getAttribute(attribute);
+			
+			return driver.findElement(putility.getObject(fieldname, replaceKeys, replaceValues)).getAttribute(attribute);
 		} catch (NoSuchElementException e) {
 			LOGGER.info("Exception occured while getting attribute " + attribute + " from element : " + fieldname
 					+ "  - " + e);
@@ -2210,9 +2199,8 @@ public class CommonUtils implements ApplicationConstants {
 	public String getAttribute(String fieldname, String attribute) {
 		try {
 
-			By locator = putility.getObjectFromStr(putility.getProperty(fieldname));
 
-			return driver.findElement(locator).getAttribute(attribute);
+			return driver.findElement(putility.getObject(fieldname)).getAttribute(attribute);
 
 		} catch (NoSuchElementException e) {
 			LOGGER.info("Exception occured while getting attribute " + attribute + " from element : " + fieldname
@@ -2350,14 +2338,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void selectCheckBox(String filedname, String replaceKeys, String replaceValues) {
 
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 
 			if (!driver.findElement(locator).isSelected())
 				driver.findElement(locator).click();
@@ -2380,14 +2361,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void unSelectCheckBox(String filedname, String replaceKeys, String replaceValues) {
 
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 
 			if (driver.findElement(locator).isSelected())
 				driver.findElement(locator).click();
@@ -2432,14 +2406,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void checkCheckBoxSelected(String filedname, String replaceKeys, String replaceValues) {
 
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 
 			if (driver.findElement(locator).isSelected()) {
 
@@ -2468,14 +2435,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void checkCheckBoxUnselected(String filedname, String replaceKeys, String replaceValues) {
 
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 
 			if (!driver.findElement(locator).isSelected()) {
 
@@ -2505,14 +2465,7 @@ public class CommonUtils implements ApplicationConstants {
 
 		Boolean ret = null;
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 
 			if (driver.findElement(locator).isSelected()) {
 				printLogs(filedname + " checkbox in Selected status");
@@ -2546,14 +2499,7 @@ public class CommonUtils implements ApplicationConstants {
 
 	public String getText(String fieldName, String replaceKeys, String replaceValues) {
 		try {
-			String finalStrObj = putility.getProperty(fieldName);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(fieldName, replaceKeys, replaceValues);
 
 			return driver.findElement(locator).getText().trim();
 
@@ -2683,6 +2629,31 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info("Checkbox validations failed..." + e);
 			printLogs("Checkbox validations failed..." + e);
 			test.log(LogStatus.FAIL, "Checkbox validation", "Checkbox validation failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
+	public void checkNonClickableButton(String fieldName) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			if (!textField.isEnabled()) {
+				printLogs(fieldName + " field is non editable");
+				test.log(LogStatus.PASS, "EXPECTED: Button " + fieldName + " should be non clickable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Button " + fieldName
+								+ " is non clickable</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Button " + fieldName + " should be non clickable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Button " + fieldName
+								+ " is clickable</span>");
+			}
+
+		} catch (Exception e) {
+			getScreenShot("Validating field" + fieldName);
+			LOGGER.info("Button validations failed..." + e);
+			printLogs("Button validations failed..." + e);
+			test.log(LogStatus.FAIL, "Button validation", fieldName+" - Button validation failed  because  -" + e);
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -2877,14 +2848,7 @@ public class CommonUtils implements ApplicationConstants {
 
 	public boolean clickElement(String fieldname, String replaceKeys, String replaceValues) {
 
-		String finalStrObj = putility.getProperty(fieldname);
-		String[] rKys = replaceKeys.split("\\~");
-		String[] rVals = replaceValues.split("\\~");
-
-		for (int i = 0; i < rKys.length; i++)
-			finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-		By locator = putility.getObjectFromStr(finalStrObj);
+		By locator = putility.getObject(fieldname, replaceKeys, replaceValues);
 		printConsole("locator  " + locator);
 		try {
 			WebElement clkObject = driver.findElement(locator);
@@ -2905,14 +2869,7 @@ public class CommonUtils implements ApplicationConstants {
 	public boolean existElement(String filedname, String replaceKeys, String replaceValues) {
 		boolean val = false;
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
 			printConsole("locator is " + locator);
 			if (driver.findElement(locator).isDisplayed()) {
 				printLogs("Element exist");
@@ -2971,6 +2928,25 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 
+	
+	public boolean elementPresentAndDisplayed(String fieldName) {
+		try {
+			WebElement uiElement = driver.findElement(putility.getObject(fieldName));
+			
+			if (uiElement.isDisplayed())
+				return true;
+			else
+				return false;
+
+		} catch (Exception e) {
+			getScreenShot("UI Element  " + fieldName);
+			LOGGER.info(fieldName + " -UI Element validation failed..." + e);
+			printLogs(fieldName + " -UI Element validation failed..." + e);
+			return false;
+		}
+
+	}	
+	
 	public boolean presenceOfElement(String fieldName) {
 		boolean val = false;
 		try {
@@ -3096,15 +3072,7 @@ public class CommonUtils implements ApplicationConstants {
 
 	public void checkEditableBox(String fieldName, String replaceKeys, String replaceValues) {
 		try {
-			String finalStrObj = putility.getProperty(fieldName);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
-
+			By locator = putility.getObject(fieldName, replaceKeys, replaceValues);
 			WebElement textField = driver.findElement(locator);
 
 			if (textField.isEnabled()) {
@@ -3132,14 +3100,7 @@ public class CommonUtils implements ApplicationConstants {
 	public void checkReadonlyProperty(String fieldName, String replaceKeys, String replaceValues) {
 		try {
 
-			String finalStrObj = putility.getProperty(fieldName);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
-
-			By locator = putility.getObjectFromStr(finalStrObj);
+			By locator = putility.getObject(fieldName, replaceKeys, replaceValues);
 
 			WebElement textField = driver.findElement(locator);
 			String editFieldval = textField.getAttribute("readonly");
@@ -3242,12 +3203,7 @@ public class CommonUtils implements ApplicationConstants {
 
 	public void selectCalendarDate(String filedname, String replaceKeys, String replaceValues, String date) {
 		try {
-			String finalStrObj = putility.getProperty(filedname);
-			String[] rKys = replaceKeys.split("\\~");
-			String[] rVals = replaceValues.split("\\~");
-
-			for (int i = 0; i < rKys.length; i++)
-				finalStrObj = finalStrObj.replace(rKys[i], rVals[i]);
+			
 
 			String[] dates = date.split("-");
 			String day = dates[0].trim();

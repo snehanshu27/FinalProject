@@ -423,12 +423,12 @@ public class TC_05_Popup_Validation implements ApplicationConstants {
 	{
 		if(!subRule.get("OA_Cond_New").isEmpty() && !subRule.get("TON_Cond_New").isEmpty())
 		{
-			if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index))
+			if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index))
 				cu.clearData("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", index);
 			
 			cu.clickElement("filteringRules_EditableRow_SubRule_Dynamic_OAResultTxt",  "$index$", index);
 			
-			if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", index))
+			if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", index))
 				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "--Select--", "$index$", index);
 			
 			cu.clickElement("filteringRules_EditableRow_SubRule_Dynamic_OAResultTxt",  "$index$", index);
@@ -510,10 +510,10 @@ public class TC_05_Popup_Validation implements ApplicationConstants {
 		clearDataAfterScrolling("filteringRules_EditableRow_OA_BL_CondTxt");
 		clearDataAfterScrolling("filteringRules_EditableRow_OA_PassThroughTxt");
 		
-		if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", "1"))
+		if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "$index$", "1"))
 			selectDropDownByVisibleTextAfterScrolling("filteringRules_EditableRow_SubRule_Dynamic_TONCondLst", "--Select--", "$index$", "1");
 		
-		if(cu.checkDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", "1"))
+		if(cu.isDisabledEelement("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", "1"))
 			clearDataAfterScrolling("filteringRules_EditableRow_SubRule_Dynamic_OACondTxt", "$index$", "1");
 						
 		clearDataAfterScrolling("filteringRules_EditableRow_SubRule_Dynamic_OAResultTxt", "$index$", "1");
