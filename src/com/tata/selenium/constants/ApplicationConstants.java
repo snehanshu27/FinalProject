@@ -24,8 +24,16 @@ public interface ApplicationConstants {
 	public static final String dev="";
 	public static String FILE_DOWNLOAD_PATH="C:\\selenium\\files\\";
 	public static int implicitWait = 3;
+	static long ONE_MINUTE_IN_MILLIS =60000;
+	public static long loadWaitTime = ONE_MINUTE_IN_MILLIS*1;
 //    public static final String APP_URL ="https://mtmdevmblws01:8443/ProvSMSCDefAlphaHttpSuplr";
 //    public static final String APP_URL ="https://10.133.43.10:8443/MessagingInstance";
+//	public static final String APP_URL ="https://10.133.43.10:8443/DeliveryStatisticsReportsWeb/";
+//	 public static final String APP_URL ="https://mtmdevmblws01:8443/MMXDeliveryStatisticsReportsWeb/index.jsp?uname=sonali.das@tatacommunications.com&regno=918";
+//	public static final String APP_URL ="https://mtmdevmblws01:8443/DeliveryStatisticsReportsWebProd/";
+	
+	
+	 
     public static final String APP_URL = System.getProperty("appURL");
 	
 //    public static final boolean RUN_IN_REMOTE=false;

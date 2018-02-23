@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MMX LCR">
+  <listeners>
+    <listener class-name="com.tata.selenium.driver.Driver"/>
+  </listeners>
+ <!--   <test name="com.tata.selenium.test.deliveryStatistics.c.TC_04_SelectCustomerAccount   -    Admin">
+    <parameter name="uniqueDataId" value="Data_06"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.three.x.TC_04_SelectCustomerAccount   -    Admin"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.three.x.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> 
+   
+   
+   <test name="com.tata.selenium.test.deliveryStatistics.c.TC_04_SelectCustomerAccount   -    Admin1">
+    <parameter name="uniqueDataId" value="Data_07"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.three.x.TC_04_SelectCustomerAccount   -    Admin"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.three.x.TC_04_SelectCustomerAccount"/>
+    </classes>
+  </test> 
+  
+   --> 
+  
+  <test name="com.tata.selenium.test.deliveryStatistics.c.TC_05_SelectSupplier_v1   -    Admin1">
+    <parameter name="uniqueDataId" value="Data_08"/>
+    <parameter name="testCaseId" value="com.tata.selenium.test.deliveryStatistics.three.x.TC_05_SelectSupplier_v1   -    Admin"/>
+    <classes>
+      <class name="com.tata.selenium.test.deliveryStatistics.three.x.TC_05_SelectSupplier_v1"/>
+    </classes>
+  </test> 
+  
+  
+</suite> <!-- MMX LCR -->

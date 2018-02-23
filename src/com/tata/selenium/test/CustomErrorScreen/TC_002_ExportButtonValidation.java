@@ -104,7 +104,7 @@ public class TC_002_ExportButtonValidation implements ApplicationConstants {
 		hu.newWindowHandles(parentWindow);
 		Thread.sleep(500);
 		
-		hu.SelectDropDownByVisibleTextCustomMMX("supplierName_List_Button", "supplierName_List_SearchTextbox", "supplierName_List_Dynamic_LabelOPtion", dataMap.get("Supplier_Name"));
+		hu.SelectDropDownByVisibleTextCustomMMX3("supplierName_List_Button", "supplierName_List_SearchTextbox", "supplierName_List_Dynamic_LabelOPtion", dataMap.get("Supplier_Name"));
 		System.out.println(dataMap.get("Supplier_Name"));
 		hu.waitForPageLoad("");
 

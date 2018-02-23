@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -30,6 +31,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -44,6 +47,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -53,6 +57,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -226,6 +231,9 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info("Error occured on waiting for the element to appear  - " + e);
 			Reporter.log("Error occured on waiting for the element to appear  - " + e);
 			val = false;
+			getScreenShot("Error occured on waiting for the element");
+			test.log(LogStatus.FAIL, "Error occured on waiting for the element to appear  - " + e);
+			
 			Assert.fail("Error occured on waiting for the element to appear  - " + e);
 		}
 		return val;
@@ -259,7 +267,22 @@ public class CommonUtils implements ApplicationConstants {
 	public void waitForPageLoadWithSleep(String pageName, long initialSleepmilisec) {
 		sleep(initialSleepmilisec);
 		waitForPageLoad(pageName);
+		
 	}
+	
+	public void waitUntilElemetDisappearsMMX3(String fieldName) {
+		long loopTm = getLoopTimeStampNumber();		
+		while(true)
+		{
+			if(!checkElementDisplayed(fieldName, 500, false))
+				break;
+			
+			if(loopTm<getCurrentTimeStampNumber())
+				break;
+				
+		}
+	}
+
 
 	public void checkRunStatus() {
 		LogStatus value = test.getRunStatus();
@@ -322,7 +345,8 @@ public class CommonUtils implements ApplicationConstants {
 	
 	public void checkEditableDropDown(String fieldName, String value, String replaceKeys, String replaceValues) {
 		try {
-			WebElement dropDownField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			By by = putility.getObject(fieldName, replaceKeys, replaceValues);
+			WebElement dropDownField = driver.findElement(by);
 			Select oSelect = new Select(dropDownField);
 			String defaultSelVal = oSelect.getFirstSelectedOption().getText();
 			LOGGER.info("defaultSelVal is " + defaultSelVal);
@@ -331,9 +355,9 @@ public class CommonUtils implements ApplicationConstants {
 				printLogs(fieldName + " field is editable and the default value selected is " + defaultSelVal);
 				test.log(LogStatus.PASS,
 						"EXPECTED: Drop down " + fieldName + " should be editable and " + value
-								+ " is by default selected",
+								+ " is by default selected.",
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is editable and default value selected is '" + value + "</span>");
+								+ " is editable and default value selected is '" + value + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			} else {
 				if(val)
 				{
@@ -342,7 +366,7 @@ public class CommonUtils implements ApplicationConstants {
 							"EXPECTED: Drop down " + fieldName + " should be editable and " + value
 									+ " is selected by default",
 							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-									+ " is editable and but default value selected is -'" + defaultSelVal + "'</span>");
+									+ " is editable and but default value selected is -'" + defaultSelVal + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 				}
 				else
 				{
@@ -446,25 +470,26 @@ public class CommonUtils implements ApplicationConstants {
 	}
 	
 	public void checkNonEditableDropDown(String fieldName, String replaceKeys, String replaceValues) {
-		try {
-			WebElement dropDownField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+		By by = putility.getObject(fieldName, replaceKeys, replaceValues);
+		try {			
+			WebElement dropDownField = driver.findElement(by);
 			boolean val = dropDownField.isEnabled();
 			if (val) {
 				printLogs(fieldName + " field is editable");
 				test.log(LogStatus.FAIL, "EXPECTED: Drop down " + fieldName + " should be Non-editable",
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is editable</span>");
+								+ " is editable"+addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			} else {
 				printLogs(fieldName + " field is non-editable");
 				test.log(LogStatus.PASS, "EXPECTED: Drop down " + fieldName + " should be Non-editable",
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Drop down " + fieldName
-								+ " is Non-editable</span>");
+								+ " is Non-editable"+addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			}
 		} catch (Exception e) {
 			getScreenShot("Checking dropdown status " + fieldName);
 			LOGGER.info(fieldName + " -Dropdown validation failed..." + e);
 			printLogs(fieldName + " -Dropdown validation failed..." + e);
-			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e);
+			test.log(LogStatus.FAIL, "Drop down validation", "Drop down validation failed failed because  -" + e+addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -602,19 +627,20 @@ public class CommonUtils implements ApplicationConstants {
 
 	
 	public void checkEditableBox(String fieldName, String value, String replaceKeys, String replaceValues) {
+		By by = putility.getObject(fieldName, replaceKeys, replaceValues);
 		try {
-			WebElement textField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			WebElement textField = driver.findElement(by );
 			String strText = textField.getAttribute("value").trim();
 			if (textField.isEnabled()) {
 				printLogs(fieldName + " field is editable");
 				test.log(LogStatus.PASS, "EXPECTED: Text field " + fieldName + " should be editable",
 						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
-								+ " is editable</span>");
+								+ " is editable"+addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			} else {
 				printLogs(fieldName + " field is editable");
 				test.log(LogStatus.FAIL, "EXPECTED: Text field " + fieldName + " should be editable",
 						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
-								+ " is non editable</span>");
+								+ " is non editable"+addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 
 			}
 			if (strText.equalsIgnoreCase(value.trim())) {
@@ -622,20 +648,20 @@ public class CommonUtils implements ApplicationConstants {
 				test.log(LogStatus.PASS,
 						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
 						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
-								+ " is has default value as " + strText + "</span>");
+								+ " is has default value as " + strText + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			} else {
 				printLogs(fieldName + " field is editable");
 				test.log(LogStatus.FAIL,
 						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
 						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
-								+ " has default value as - " + strText + "</span>");
+								+ " has default value as - " + strText  + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			}
 
 		} catch (Exception e) {
 			getScreenShot("Validating field" + fieldName);
 			LOGGER.info("Text field validations failed..." + e);
 			printLogs("Text field validations failed..." + e);
-			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
@@ -655,6 +681,21 @@ public class CommonUtils implements ApplicationConstants {
 		return val;
 	}
 
+	public boolean waitForElementVisiblity(String fieldName, int timeout) {
+		boolean val = false;
+		try {
+			By objPath = putility.getObject(fieldName);
+			WebDriverWait wait = new WebDriverWait(driver, timeout);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(objPath));
+			val = true;
+		} catch (Exception e) {
+			LOGGER.info("Error occured on waiting for the visiblity of element  - " + e);
+			val = false;
+			Assert.fail("Error occured on waiting for the visiblity of element  - " + e);
+		}
+		return val;
+	}
+	
 	public void checkElementNotPresence(String fieldName) {
 		try {			
 			if (existsElement(fieldName, 500) && driver.findElement(putility.getObject(fieldName)).isDisplayed()) {
@@ -747,9 +788,10 @@ public class CommonUtils implements ApplicationConstants {
 	}
 
 	public boolean elementDisplayed(String fieldName, String replaceKeys, String replaceValues) {
+		By by = putility.getObject(fieldName, replaceKeys, replaceValues);
 		try {
 
-			WebElement uiElement = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			WebElement uiElement = driver.findElement(by);
 			if (uiElement.isDisplayed())
 				return true;
 			else
@@ -759,7 +801,7 @@ public class CommonUtils implements ApplicationConstants {
 			getScreenShot("UI Element  " + fieldName);
 			LOGGER.info(fieldName + " -UI Element validation failed..." + e);
 			printLogs(fieldName + " -UI Element validation failed..." + e);
-			test.log(LogStatus.FAIL, "UI Element validation", "UI Element validation failed because  -" + e);
+			test.log(LogStatus.FAIL, "UI Element validation", "UI Element validation failed because  -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
@@ -810,20 +852,21 @@ public class CommonUtils implements ApplicationConstants {
 	}
 	
 	public void setData(String fieldName, String setValue, String replaceKeys, String replaceValues) {
+		By by = putility.getObject(fieldName, replaceKeys, replaceValues);
 		try {
-			WebElement objPath = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			WebElement objPath = driver.findElement(by );
 			if (setValue != null && setValue.trim().length() > 0) {
 				objPath.clear();
 				objPath.sendKeys(setValue);
 				printLogs("Data  '" + setValue + "' entered sucessfully in the " + fieldName + " box");
 				test.log(LogStatus.PASS, "Enter value in the field",
-						"Value - '" + setValue + "' entered sucessfully in " + fieldName + "field");
+						"Value - '" + setValue + "' entered sucessfully in " + fieldName + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			}
 		} catch (Exception e) {
 			LOGGER.info("Error occured while setting data  " + setValue + "  - " + e);
 			printLogs("Error occured while setting data  " + setValue + "  - " + e);
 			test.log(LogStatus.FAIL, "Enter value in " + fieldName,
-					"Value - '" + setValue + "' could not be entered - " + e);
+					"Value - '" + setValue + "' could not be entered - " + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 		}
 	}
 	
@@ -845,20 +888,21 @@ public class CommonUtils implements ApplicationConstants {
 	}
 	
 	public void clearData(String fieldName, String replaceKeys, String replaceValues) {
+		By by = putility.getObject(fieldName, replaceKeys, replaceValues);
 		try {
-			WebElement objPath = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			WebElement objPath = driver.findElement(by );
 				objPath.clear();				
 				LOGGER.info(fieldName + " box has been cleared");
 				printLogs(fieldName + " box has been cleared");				
 				test.log(LogStatus.PASS, "Clear a text field",
-						fieldName + "' text field cleared sucessfully");
+						fieldName + "' text field cleared sucessfully " + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			
 		} catch (Exception e) {
 			LOGGER.info("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
 			printLogs("Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
 			getScreenShot("Error occured while clearing text field  - "+fieldName);
 			test.log(LogStatus.FAIL, "Clear a text field",
-					"Error occured while clearing text field  - "+fieldName+"    Exception - " + e);
+					"Error occured while clearing text field  - "+fieldName+"    Exception - " + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 		}
 	}
 
@@ -868,6 +912,7 @@ public class CommonUtils implements ApplicationConstants {
 			if (setValue != null && setValue.trim().length() > 0) {
 				objPath.sendKeys(Keys.chord(Keys.CONTROL, "a"));
 				objPath.sendKeys(setValue);
+		
 				printLogs("Data  '" + setValue + "' entered sucessfully in the " + fieldName + " box");
 				test.log(LogStatus.PASS, "Enter value in the field",
 						"Value - '" + setValue + "' entered sucessfully in " + fieldName + "field");
@@ -978,15 +1023,16 @@ public class CommonUtils implements ApplicationConstants {
 
 	
 	public boolean SelectDropDownByVisibleText(String fieldname, String value, String replaceKeys, String replaceValues) {
+		By by = putility.getObject(fieldname, replaceKeys, replaceValues);
 		try {
 			if (value != null && value.trim().length() > 0) {
-				WebElement supplierName = driver.findElement(putility.getObject(fieldname, replaceKeys, replaceValues));
+				WebElement supplierName = driver.findElement(by );
 
 				Select oSelect = new Select(supplierName);
 				oSelect.selectByVisibleText(value);
 				printLogs("Selected - '" + value + "' from the dropdown");
 				test.log(LogStatus.PASS, "Drop down should be selected",
-						"Drop down value -'" + value + "'- selected from field "+fieldname+" sucessfully");
+						"Drop down value -'" + value + "'- selected from field "+fieldname+" sucessfully " + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			}
 			return true;
 		} catch (Exception e) {
@@ -994,7 +1040,7 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info("Dropdown selection failed..." + e);
 			printLogs("Dropdown selection failed..." + e);
 			test.log(LogStatus.FAIL, "Drop down should be selected",
-					"Drop down value -'" + value + "'- could not be selected from filedname "+fieldname+" because -" + e);
+					"Drop down value -'" + value + "'- could not be selected from filedname "+fieldname+" because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
@@ -1003,21 +1049,24 @@ public class CommonUtils implements ApplicationConstants {
 
 	public boolean SelectDropDownByVisibleTextCustomMMX(String dropDownButton, String dropDownSearchTextbox,
 			String dynamicLabelOption, String replaceKey, String replaceValue) {
+		By byDropdownToggle = putility.getObject(dropDownButton);
+		By byOPtion = putility.getObject(dynamicLabelOption, replaceKey, replaceValue);
 		try {
 			if (replaceValue != null && replaceValue.trim().length() > 0) {
 
-				WebElement dropDownButtonEle = driver.findElement(putility.getObject(dropDownButton));
+				WebElement dropDownButtonEle = driver.findElement(byOPtion );
 				dropDownButtonEle.click();
 				sleep(700);
-				WebElement dropDownSearchTextboxEle = driver.findElement(putility.getObject(dropDownSearchTextbox));
-				dropDownSearchTextboxEle.sendKeys(replaceValue);
-				sleep(500);
-				WebElement dynamicLabelOptionEle = driver.findElement(putility.getObject(dynamicLabelOption, replaceKey, replaceValue));
+//				WebElement dropDownSearchTextboxEle = driver.findElement(putility.getObject(dropDownSearchTextbox));
+//				dropDownSearchTextboxEle.sendKeys(replaceValue);
+//				sleep(500);
+				WebElement dynamicLabelOptionEle = driver.findElement(byDropdownToggle);
 				dynamicLabelOptionEle.click();
 
 				printLogs("Selected - '" + replaceValue + "' from the custom dropdown " + dropDownButton);
 				test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
-						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully");
+						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully"+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+								
 			}
 			return true;
 		} catch (Exception e) {
@@ -1025,12 +1074,98 @@ public class CommonUtils implements ApplicationConstants {
 			LOGGER.info(dropDownButton + " Custom Dropdown selection failed..." + e);
 			printLogs(dropDownButton + " Custom Dropdown selection failed..." + e);
 			test.log(LogStatus.FAIL, dropDownButton + " Custom Drop down should be selected",
-					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e);
+					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
 			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
 		}
 	}
+	
+	public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, String dropDownSearchTextbox, String dynamicLabelOption, String replaceKey, String replaceValue) {
+		
+		By byDropdownToggle = putility.getObject(dropDownButton);
+		By bySearchBox = putility.getObject(dropDownSearchTextbox);
+		By byOPtion = putility.getObject(dynamicLabelOption, replaceKey, replaceValue);
+		try {
+			if (replaceValue != null && replaceValue.trim().length() > 0) {
+
+				WebElement dropDownButtonEle = driver.findElement(byDropdownToggle);
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dropDownButtonEle);		
+				dropDownButtonEle.click();
+				sleep(400);
+				
+				WebElement dropDownSearchBox = driver.findElement(bySearchBox);
+				dropDownSearchBox.sendKeys(replaceValue);
+				sleep(300);
+				
+				WebElement dynamicLabelOptionEle = driver.findElement(byOPtion);
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dynamicLabelOptionEle);
+				dynamicLabelOptionEle.click();
+				
+				test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
+						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully"+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+			
+			
+			}
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + replaceValue);
+			LOGGER.info(dropDownButton + " Custom Dropdown selection failed..." + e);
+			printLogs(dropDownButton + " Custom Dropdown selection failed..." + e);
+			test.log(LogStatus.FAIL, dropDownButton + " Custom Drop down should be selected",
+					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
+	
+public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, String dynamicLabelOption, String replaceKey, String replaceValue) {
+		
+		By byDropdownToggle = putility.getObject(dropDownButton);
+		By byOPtion = putility.getObject(dynamicLabelOption, replaceKey, replaceValue);
+		try {
+			if (replaceValue != null && replaceValue.trim().length() > 0) {
+
+				WebElement dropDownButtonEle = driver.findElement(byDropdownToggle);
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dropDownButtonEle);		
+				dropDownButtonEle.click();
+				sleep(700);
+				
+				WebElement dynamicLabelOptionEle = driver.findElement(byOPtion);
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dynamicLabelOptionEle);
+				sleep(500);
+				dynamicLabelOptionEle.click();
+				
+				test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
+						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully"+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+			
+			
+			}
+			return true;
+		} catch (Exception e) {
+			getScreenShot("Selecting  " + replaceValue);
+			LOGGER.info(dropDownButton + " Custom Dropdown selection failed..." + e);
+			printLogs(dropDownButton + " Custom Dropdown selection failed..." + e);
+			test.log(LogStatus.FAIL, dropDownButton + " Custom Drop down should be selected",
+					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+			return false;
+		}
+	}
+	
+	
+	private String addMoreDetailsHTMLStrForDynamicElement(String replaceKeys, String replaceValues, By by)
+	{
+		
+		String ret = "<br/><br/><a class=\"clikForMoreDetails\" style=\"cursor: pointer;\" onclick=\"$(this).next().slideToggle(50, function () {});\">Click here to see more details</a>"
+				+ "<div>Dynamic Element Details: <br/> { <br/>  [ replaceKeys='"+replaceKeys+"' ], <br/><br/>  [ replaceValues='"+replaceValues+"' ], <br/><br/>  [ ByObject='"+by.toString()+"' ]<br/>}<div>";
+		
+		return ret;
+	}
+	
+	
 	public boolean deselectDropDownByVisibleText(String filedname, String value) {
 		try {
 			if (value != null && value.trim().length() > 0) {
@@ -1078,7 +1213,7 @@ public class CommonUtils implements ApplicationConstants {
 			return false;
 		}
 	}
-	public boolean SelectDropDownByVisibleTextCustomMMX(String dropDownButton, String dropDownSearchTextbox,
+	/*public boolean SelectDropDownByVisibleTextCustomMMX(String dropDownButton, String dropDownSearchTextbox,
 			String dynamicLabelOption, String value) {
 		try {
 			if (value != null && value.trim().length() > 0) {
@@ -1107,7 +1242,7 @@ public class CommonUtils implements ApplicationConstants {
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 			return false;
 		}
-	}
+	}*/
 
 	/**
 	 * @description Methos used to switch to different frame using frame name
@@ -2848,20 +2983,72 @@ public class CommonUtils implements ApplicationConstants {
 
 	public boolean clickElement(String fieldname, String replaceKeys, String replaceValues) {
 
-		By locator = putility.getObject(fieldname, replaceKeys, replaceValues);
-		printConsole("locator  " + locator);
-		try {
-			WebElement clkObject = driver.findElement(locator);
+		By by = putility.getObject(fieldname, replaceKeys, replaceValues);
+		printConsole("locator  " + by);
+		try {			
+			WebElement clkObject = driver.findElement(by);
 			clkObject.click();
-			printLogs(fieldname + " - having xpath '" + locator + "' clicked sucessfully");
-			test.log(LogStatus.PASS, "Element should be clicked sucessfully", fieldname + " - clicked sucessfully");
+			printLogs(fieldname + " - having xpath '" + by + "' clicked sucessfully");
+			test.log(LogStatus.PASS, "Element should be clicked sucessfully", fieldname + " - clicked sucessfully "+ addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			return true;
 		} catch (Exception e) {
 			getScreenShot("'" + fieldname + "'  could not be clicked");
-			LOGGER.info(fieldname + " - having xpath '" + locator + "'  click failed  - " + e);
+			LOGGER.info(fieldname + " - having xpath '" + by + "'  click failed  - " + e);
 			test.log(LogStatus.WARNING, "Element should be clicked sucessfully",
-					fieldname + " - (locator: "+locator+") could not be clicked because -" + e);
-			printLogs(fieldname + " - having xpath '" + locator + "'  click failed  - " + e);
+					fieldname + " - (locator: "+by+") could not be clicked because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
+			printLogs(fieldname + " - having xpath '" + by + "'  click failed  - " + e);
+			return false;
+		}
+	}
+	
+	
+	public boolean clickElementAfterScrollToView(String fieldname, String replaceKeys, String replaceValues) {
+
+		scrollPageToViewElement(fieldname, replaceKeys, replaceValues);
+		By by = putility.getObject(fieldname, replaceKeys, replaceValues);
+		printConsole("locator  " + by);
+		try {			
+			WebElement clkObject = driver.findElement(by);
+			clkObject.click();
+			printLogs(fieldname + " - having xpath '" + by + "' clicked sucessfully");
+			test.log(LogStatus.PASS, "Element should be clicked sucessfully", fieldname + " - clicked sucessfully "+ addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
+			return true;
+		} catch (Exception e) {
+			getScreenShot("'" + fieldname + "'  could not be clicked");
+			LOGGER.info(fieldname + " - having xpath '" + by + "'  click failed  - " + e);
+			test.log(LogStatus.WARNING, "Element should be clicked sucessfully",
+					fieldname + " - (locator: "+by+") could not be clicked because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
+			printLogs(fieldname + " - having xpath '" + by + "'  click failed  - " + e);
+			return false;
+		}
+	}
+	
+	
+	
+	public boolean clickElementFromTopCornerWithOffset(String fieldname, String replaceKeys, String replaceValues
+			, int xOffsetPercentageFromWidth, int yOffsetPercentageFromHeight) {
+
+		By by = putility.getObject(fieldname, replaceKeys, replaceValues);
+		printConsole("locator  " + by);
+		try {
+			Actions action = new Actions(driver);
+			scrollPageToViewElement(fieldname, replaceKeys, replaceValues);
+			WebElement clkObject = driver.findElement(by);				
+			
+			double xoffPerD = xOffsetPercentageFromWidth/100.0;
+			double yoffPerD = yOffsetPercentageFromHeight/100.0;
+			
+			action.moveToElement(clkObject, (int) (clkObject.getSize().width*xoffPerD), (int) (clkObject.getSize().height*yoffPerD))
+						.click().build().perform();		
+			printLogs(fieldname + " - having xpath '" + by + "' clicked sucessfully with offset (x-y offset%: "+xOffsetPercentageFromWidth+"-"+yOffsetPercentageFromHeight+")");
+			test.log(LogStatus.PASS, "Element should be clicked sucessfully", fieldname + " - clicked sucessfully with offset (x-y offset%: "+xOffsetPercentageFromWidth+"-"+yOffsetPercentageFromHeight+") " + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
+			return true;
+		} catch (Exception e) {
+			getScreenShot("'" + fieldname + "'  could not be clicked");
+			LOGGER.info(fieldname + " - having xpath '" + by + "'  click failed  - " + e);
+			test.log(LogStatus.WARNING, "Element should be clicked sucessfully  with offset (x-y offset%: "+xOffsetPercentageFromWidth+"-"+yOffsetPercentageFromHeight+")",
+					fieldname + " - (locator: "+by+") could not be clicked because -" + e);
+			printLogs(fieldname + " - having xpath '" + by + "'  click  with offset (x-y offset%: "+xOffsetPercentageFromWidth+"-"+yOffsetPercentageFromHeight+") failed  - " + e + addMoreDetailsHTMLStrForDynamicElement(replaceKeys, replaceValues, by));
 			return false;
 		}
 	}
@@ -3475,7 +3662,25 @@ public class CommonUtils implements ApplicationConstants {
 		while (iter.hasNext()) {
 			WebElement item = iter.next();
 
-			list1.add(item.getText());
+			//list1.add(item.getText());
+			list1.add(item.getAttribute("textContent").trim());			
+		}
+		return list1;
+
+	}
+	
+	public List<String> ElementsToListWithTrimAndLineBreakRemovedAtEnd(String fieldName) {
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+			
+			String txt = item.getAttribute("textContent").trim();			
+			list1.add(txt);
 		}
 		return list1;
 
@@ -3490,8 +3695,8 @@ public class CommonUtils implements ApplicationConstants {
 		// this will check whether list has some element or not
 		while (iter.hasNext()) {
 			WebElement item = iter.next();
-
-			list1.add(item.getText().trim());
+			String txt = item.getAttribute("textContent").trim();
+			list1.add(txt);
 		}
 		return list1;
 
@@ -3506,8 +3711,8 @@ public class CommonUtils implements ApplicationConstants {
 		// this will check whether list has some element or not
 		while (iter.hasNext()) {
 			WebElement item = iter.next();
-
-			list1.add(item.getText().trim());
+			list1.add(item.getAttribute("textContent").trim());
+			
 		}
 		return list1;
 
@@ -3602,6 +3807,30 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 	
+	public void executeInjectJQuery()
+	{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("var scriptElt = document.createElement('script');scriptElt.type = 'text/javascript';"
+				+ "scriptElt.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';"
+				+ "document.getElementsByTagName('head')[0].appendChild(scriptElt);");
+	}
+	
+	
+	public void executeJavaScrpit(String scriptStr)
+	{
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript(scriptStr);
+	}
+	
+	public void executeJavaScrpit(String fieldName, String scriptStr)
+	{
+		
+		WebElement ele = driver.findElement(putility.getObject(fieldName));
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript(scriptStr, ele);
+	}
+	
+	
 	public void scrollUpPage()
 	{
 		try{
@@ -3694,5 +3923,59 @@ public class CommonUtils implements ApplicationConstants {
 	public String getPropery(String fieldsName, String replaceKeys, String replaceValues)
 	{
 		return putility.getProperty(fieldsName, replaceKeys, replaceValues);
+	}
+	
+	public void waitUntilElemetDisplayed(String fieldName) 
+	{
+		long loopTm = getLoopTimeStampNumber();		
+		while(true)
+		{
+			if(checkElementDisplayed(fieldName, 2000, false))
+				break;
+			
+			if(loopTm<getCurrentTimeStampNumber())
+				break;
+				
+		}
+		
+	}
+	
+	private long getCurrentTimeStampNumber()
+	{
+		Calendar date = Calendar.getInstance();
+		long t= date.getTimeInMillis();		
+		return t;
+	}
+	
+	private long getLoopTimeStampNumber()
+	{
+		long ONE_MINUTE_IN_MILLIS=60000;//millisecs
+		Calendar date = Calendar.getInstance();
+		long t= date.getTimeInMillis();
+		
+		//3 min
+		long loopTime = new Date(t + (loadWaitTime * ONE_MINUTE_IN_MILLIS)).getTime();
+		return loopTime;
+	}
+	
+	
+	public boolean checkElementDisplayed(String fieldName, long timeoutMilliSecs, boolean snapShotOnFail) {
+		try {			
+			driver.manage().timeouts().implicitlyWait(timeoutMilliSecs, TimeUnit.MILLISECONDS);
+			
+			WebElement uiElement = driver.findElement(putility.getObject(fieldName));
+			
+			boolean ret = uiElement.isDisplayed();
+			driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);				
+			return ret;
+		} catch (Exception e) {
+			if(snapShotOnFail)
+				getScreenShot("UI Element" + fieldName);
+			LOGGER.info(fieldName + " -UI Element validation failed..." + e);
+			printLogs(fieldName + " -UI Element validation failed..." + e);
+			
+			driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
+			return false;
+		}
 	}
 }
