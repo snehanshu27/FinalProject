@@ -36,7 +36,7 @@ public interface ApplicationConstants {
 	
 	
 	 
-//    public static final String APP_URL = System.getProperty("appURL");
+    public static final String APP_URL = System.getProperty("appURL");
 	
 //    public static final boolean RUN_IN_REMOTE=false;
 	public static final boolean RUN_IN_REMOTE=true;
