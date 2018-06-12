@@ -95,10 +95,10 @@ public class TC_07_DisplayResultsBasedOn_Input implements ApplicationConstants {
 			cu.clickElement("Search_Update_Delete_Inventory");
 		}
 		
-		cu.SelectDropDownByVisibleText("Number_Inventory_SupplierNameLst",dataMap.get("Number_Inventory_SupplierNameLst"));
-		cu.SelectDropDownByVisibleText("Number_Inventory_TONLst",dataMap.get("Number_Inventory_TONLst"));
-		cu.SelectDropDownByVisibleText("Number_Inventory_CountryLst",dataMap.get("Number_Inventory_CountryLst"));
-		cu.SelectDropDownByVisibleText("Number_Inventory_StatusLst",dataMap.get("Number_Inventory_StatusLst"));
+		cu.selectDropDownByVisibleText("Number_Inventory_SupplierNameLst",dataMap.get("Number_Inventory_SupplierNameLst"));
+		cu.selectDropDownByVisibleText("Number_Inventory_TONLst",dataMap.get("Number_Inventory_TONLst"));
+		cu.selectDropDownByVisibleText("Number_Inventory_CountryLst",dataMap.get("Number_Inventory_CountryLst"));
+		cu.selectDropDownByVisibleText("Number_Inventory_StatusLst",dataMap.get("Number_Inventory_StatusLst"));
 		cu.waitForPageLoad("Number Inventory");
 		
 		cu.selectDate("Number_Inventory_StartDateTxt", dataMap.get("Number_Inventory_StartDateTxt"));

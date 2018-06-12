@@ -125,10 +125,10 @@ public class TC_02_TopNDestinationCSVExportValidation implements ApplicationCons
 	
 	  private void selectMainFilter() {
             
-			cu.SelectDropDownByVisibleText("TopNDestination_Service_DropDown", dataMap.get("Service"));
-			cu.SelectDropDownByVisibleText("TopNDestination_Granularity_DropDown",dataMap.get("Granularity"));
-			cu.SelectDropDownByVisibleText("TopNDestination_Granularity_Period_DropDown",dataMap.get("Granularity_Period") );
-			cu.SelectDropDownByVisibleText("TopNDestination_Selection_Based_On_DropDown", dataMap.get("Selection_Based_On"));
+			cu.selectDropDownByVisibleText("TopNDestination_Service_DropDown", dataMap.get("Service"));
+			cu.selectDropDownByVisibleText("TopNDestination_Granularity_DropDown",dataMap.get("Granularity"));
+			cu.selectDropDownByVisibleText("TopNDestination_Granularity_Period_DropDown",dataMap.get("Granularity_Period") );
+			cu.selectDropDownByVisibleText("TopNDestination_Selection_Based_On_DropDown", dataMap.get("Selection_Based_On"));
 			cu.checkEditableBox("TopNDestination_N_Text", dataMap.get("N"));
 			cu.checkElementPresence("TopNDestination_From_Date_SelectfromCalendar");
 			cu.checkElementPresence("TopNDestination_To_Date_SelectformCalendar");

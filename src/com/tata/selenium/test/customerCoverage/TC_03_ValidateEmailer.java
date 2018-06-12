@@ -99,9 +99,9 @@ public class TC_03_ValidateEmailer implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 	
-		cu.SelectDropDownByVisibleText("Customer_Coverage_ServiceNameLst",dataMap.get("Customer_Coverage_ServiceNameLst"));
-		cu.SelectDropDownByVisibleText("Customer_Coverage_CustomerNameLst",dataMap.get("Customer_Coverage_CustomerNameLst"));
-		cu.SelectDropDownByVisibleText("Customer_Coverage_TemplateLst",dataMap.get("Customer_Coverage_TemplateLst"));
+		cu.selectDropDownByVisibleText("Customer_Coverage_ServiceNameLst",dataMap.get("Customer_Coverage_ServiceNameLst"));
+		cu.selectDropDownByVisibleText("Customer_Coverage_CustomerNameLst",dataMap.get("Customer_Coverage_CustomerNameLst"));
+		cu.selectDropDownByVisibleText("Customer_Coverage_TemplateLst",dataMap.get("Customer_Coverage_TemplateLst"));
 		cu.waitForPageLoad("");
 		
 		//Validating whether the desired results are displayed

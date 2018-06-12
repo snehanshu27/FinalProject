@@ -111,7 +111,7 @@ public class TC_009_CancelOrder implements ApplicationConstants {
 						+ " is displayed</span>");
 		}
 		
-		hu.SelectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
+		hu.selectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
 		System.out.println(dataMap.get("Supplier_Name"));
 		hu.waitForPageLoad("");
 		//Thread.sleep(200);

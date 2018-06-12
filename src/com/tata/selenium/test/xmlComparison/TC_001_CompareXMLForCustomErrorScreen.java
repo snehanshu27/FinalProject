@@ -90,8 +90,8 @@ public class TC_001_CompareXMLForCustomErrorScreen implements ApplicationConstan
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
-		cu.SelectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("Supplier_Name", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("Supplier_Account_Name" , dataMap.get("Supplier_Account_Name"));
 		cu.clickElement("supplier_DisplayBtn");
 		cu.waitForPageLoad("");	 //Taking screenshot and Logging out
 		cu.getScreenShot("Validation Of Coverage Screen");		

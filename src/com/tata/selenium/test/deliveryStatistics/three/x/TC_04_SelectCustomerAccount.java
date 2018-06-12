@@ -58,7 +58,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		// Starting the extent report
 		test = extent
 				.startTest("Execution triggered for - "+TC_04_SelectCustomerAccount.class.getName()+" -with TestdataId: " + uniqueDataId);
-		String sheetName = "Delivery_Statistics_Screen";
+		String sheetName = "Delivery_Statistics_Screen3.x";
 		
 		// Reading excel values
 		try {
@@ -89,19 +89,19 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		cu.printLogs("Executing Test Case -" + testCaseId + " -with TestdataId : " + uniqueDataId);
 		driver = cu.LaunchUrl(dataMap.get("URL"));
 
-//		LoginPage loginPage = new LoginPage(driver, test, sheetName, uniqueDataId, testCaseId, properties);
-//		loginPage.dologin(dataMap.get("Username"), dataMap.get("Password"));
-//		cu.waitForPageLoad("MessagingInstanceHomePage");
-//
-//		MessagingInstanceHomePage msgInsHomePage = new MessagingInstanceHomePage(driver, test, sheetName, uniqueDataId,
-//				testCaseId, properties);
-//		msgInsHomePage.verifyLogin(test, testCaseId, sheetName);
-//
-//		NavigationMenuPage navMenuPage = new NavigationMenuPage(driver, test, sheetName, uniqueDataId, testCaseId,
-//				properties);
-//		navMenuPage.navigateToMenu(dataMap.get("Navigation"));
-//		cu.SwitchFrames("bottom");
-//		cu.SwitchFrames("target");
+		LoginPage loginPage = new LoginPage(driver, test, sheetName, uniqueDataId, testCaseId, properties);
+		loginPage.dologin(dataMap.get("Username"), dataMap.get("Password"));
+		cu.waitForPageLoad("MessagingInstanceHomePage");
+
+		MessagingInstanceHomePage msgInsHomePage = new MessagingInstanceHomePage(driver, test, sheetName, uniqueDataId,
+				testCaseId, properties);
+		msgInsHomePage.verifyLogin(test, testCaseId, sheetName);
+
+		NavigationMenuPage navMenuPage = new NavigationMenuPage(driver, test, sheetName, uniqueDataId, testCaseId,
+				properties);
+		navMenuPage.navigateToMenu(dataMap.get("Navigation"));
+		cu.SwitchFrames("bottom");
+		cu.SwitchFrames("target");
 
 		if(cu.elementDisplayed("application_PopUpMessage", 2))
 			cu.checkMessage("application_PopUpMessage", "After loading the page",
@@ -109,12 +109,12 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//cu.executeInjectJQuery();
 		cu.waitForPageLoadWithSleep("DeliveryStatisticsPage", 20);
 		cu.waitForElementVisiblity("DeliveryStat_SubmitButton", 180);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		//cu.checkElementPresent("DeliveryStat_SubmitButton");
 		selectMainFilter();
 		cu.clickElement("DeliveryStat_SubmitButton");
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 				
 		collapseMainFilter();
 		//Table header validation
@@ -222,7 +222,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		cu.clickElement("drillDownCusAccWin_ExportButton");
 		cu.moveAndClick("drillDownCusAccWin_ExportAllRecords");
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		cu.sleep(2000);
 		String csvFilePath = cu.getDownlaodedFileName();
 
@@ -324,7 +324,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//Select ServiceLst filter
 		if(!dataMap.get("DeliveryStat_ServiceLst").trim().isEmpty())
 			
-			cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_ServiceListToggleDiv","DeliveryStat_ServiceListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_ServiceLst"));
+			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_ServiceListToggleDiv","DeliveryStat_ServiceListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_ServiceLst"));
 					
 			cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 		    
@@ -346,7 +346,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 					}
 					cu.clickElement("DeliveryStat_ProductLabel");*/
 					
-					cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_ProductListToggleDiv","DeliveryStat_ProductListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_ProductLst"));
+					cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_ProductListToggleDiv","DeliveryStat_ProductListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_ProductLst"));
 					cu.clickElement("DeliveryStatisticsPage");
 					cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 				}
@@ -356,7 +356,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//Select Customer filter
 		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()) && !dataMap.get("DeliveryStat_Customer_NameLst").trim().isEmpty())
 		{
-			cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_Customer_NameListToggleDiv","DeliveryStat_Customer_NameListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_Customer_NameLst"));
+			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_Customer_NameListToggleDiv","DeliveryStat_Customer_NameListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_Customer_NameLst"));
 
 			cu.clickElement("DeliveryStatisticsPage");
 			cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
@@ -369,7 +369,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		{
 			if(!dataMap.get("DeliveryStat_Supplier_NameLst").trim().isEmpty())
 			{
-				cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_Supplier_NameListToggleDiv","DeliveryStat_Supplier_NameListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_Supplier_NameLst"));
+				cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_Supplier_NameListToggleDiv","DeliveryStat_Supplier_NameListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_Supplier_NameLst"));
 				cu.clickElement("DeliveryStatisticsPage");
 				cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 			}
@@ -378,7 +378,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//Select Dimension filter
 		if(!dataMap.get("Dimension").trim().isEmpty()){
 			
-			cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_DimensionListToggleDiv","DeliveryStat_DimensionListDynamicOption", "$optionvalue$", dataMap.get("Dimension"));
+			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_DimensionListToggleDiv","DeliveryStat_DimensionListDynamicOption", "$optionvalue$", dataMap.get("Dimension"));
 
 		cu.clickElement("DeliveryStatisticsPage");
 		cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
@@ -386,7 +386,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//Select Country filter
 		if(!dataMap.get("DeliveryStat_CountryLst").trim().isEmpty())
 		{
-			cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_CountryListToggleDiv","DeliveryStat_CountryListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_CountryLst"));
+			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_CountryListToggleDiv","DeliveryStat_CountryListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_CountryLst"));
 
 			cu.clickElement("DeliveryStatisticsPage");
 			cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
@@ -417,7 +417,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 //				cu.deselectDropDownAllOptions("DeliveryStat_InstanceLst");
 //				cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
 				
-				cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_HostsListToggleDiv","DeliveryStat_HostsListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_InstanceLst"));
+				cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_HostsListToggleDiv","DeliveryStat_HostsListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_InstanceLst"));
 				cu.clickElement("DeliveryStatisticsPage");
 				cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 			}
@@ -450,7 +450,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		cu.clickElement("DeliveryStatisticsPage");*/
 		if(!dataMap.get("PeriodDate").trim().isEmpty()){
 		cu.selectCheckBox("DeliveryStat_PeriodRadiobtn");
-		cu.SelectDropDownByVisibleTextCustomMMX3("DeliveryStat_PeriodComboListToggleDiv", "DeliveryStat_PeriodComboListDynamicOption", "$optionvalue$", dataMap.get("PeriodDate"));
+		cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_PeriodComboListToggleDiv", "DeliveryStat_PeriodComboListDynamicOption", "$optionvalue$", dataMap.get("PeriodDate"));
 		cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 		}
 }
@@ -540,7 +540,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 //		cu.clickElement("dynamicCustAccMainTableLink", "$customerAccName$", cusAccVal);
 		cu.clickElementAfterScrollToView("dynamicCustAccMainTableLink", "$customerAccName$", cusAccVal);
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		test.log(LogStatus.INFO, "######### Validating 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);
 		
 		if(!cu.elementDisplayed("drillDownCusAccWin"))
@@ -571,15 +571,15 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);				
 		cu.checkElementPresence("drillDownCusAccWin_ExportButton");
 		cu.checkElementPresence("drillDownCusAccWin_BackButton");
-		cu.checkReadonlyProperty("drillDownCusAccWin_CustomerNameTextBox");
-		cu.checkReadonlyProperty("drillDownCusAccWin_CustomerAccountrNameTextBox");
-		cu.checkReadonlyProperty("drillDownCusAccWin_FromDateTextBox");
-		cu.checkReadonlyProperty("drillDownCusAccWin_ToDateTextBox");
+		cu.checkElementPresence("drillDownCusAccWin_CustomerNameTextBox");
+		cu.checkElementPresence("drillDownCusAccWin_CustomerAccountrNameTextBox");
+		cu.checkElementPresence("drillDownCusAccWin_FromDateTextBox");
+		cu.checkElementPresence("drillDownCusAccWin_ToDateTextBox");
 
 		//Map<String, Integer> csvData = exportCSVAndGetCoverageFieldsUpdated();
 		Map<String, Integer> csvData = new LinkedHashMap<>();		
 		csvData.put("Attempted Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Attempted Failure"));
-		csvData.put("Submitted Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Submitted Failure"));
+		csvData.put("Submitted Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Submit Failure"));
 		csvData.put("Delivered Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Delivered Failure"));
 		
 		
@@ -760,7 +760,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										+"~"+currMap_1stDrill.get("Attempted Failure"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillAttemptedFailureDisWin"))
 		{
@@ -869,7 +869,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										+"~"+currMap_1stDrill.get("Submit Failure"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillSubmitFailureDisWin"))
 		{
@@ -980,7 +980,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										+"~"+currMap_1stDrill.get("Delivered Failure"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownDeliveredFailureDisWin"))
 		{
@@ -1093,7 +1093,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownAckLatencyDisWin"))
 		{
@@ -1231,52 +1231,52 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (400-500 ms %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage400To500msPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//500 ms - 1 sec % Validation
-			double expectedPercentage500msTo1SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("500 ms - 1 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentage500msTo1SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("500 ms - 1 sec %").replace("%", "")));
+			//500 ms-1 sec % Validation
+			double expectedPercentage500msTo1SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("500 ms-1 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentage500msTo1SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("500 ms-1 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage500msTo1SecPer, actualPercentage500msTo1SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//1 sec - 3 sec % validation
-			double expectedPercentage1SecTo3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("1 sec - 3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentage1SecTo3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("1 sec - 3 sec %").replace("%", "")));
+			//1 sec-3 sec % validation
+			double expectedPercentage1SecTo3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("1 sec-3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentage1SecTo3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("1 sec-3 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage1SecTo3SecPer, actualPercentage1SecTo3SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//> 3 sec % Validation
-			double expectedPercentageGreaterThan3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("> 3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentageGreaterThan3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("> 3 sec %").replace("%", "")));
+			//>3 sec % Validation
+			double expectedPercentageGreaterThan3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get(">3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentageGreaterThan3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get(">3 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGreaterThan3SecPer, actualPercentageGreaterThan3SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
 			}			
 		}
 				
@@ -1292,7 +1292,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										+"~"+currMap_1stDrill.get("E2E Latency (s)"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownAverageE2EDisWin"))
 		{
@@ -1507,7 +1507,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 										+"~"+currMap_1stDrill.get("Platform Latency (ms)"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownPlatformLatencyDisWin"))
 		{
@@ -1565,7 +1565,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(platformLatencyTableRowMapList.size()>0)
 		{		
 			//0-250 Msecs % Validation
-			double expectedPercentage0To250MsecPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("0-250 Msecs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage0To250MsecPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("0-250 Msecs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage0To250MsecPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("0-250 Msecs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage0To250MsecPer, actualPercentage0To250MsecPer))
 			{			
@@ -1581,7 +1581,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 
 			//250-500 Msecs % Validation
-			double expectedPercentage250To500Msecs = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("250-500 Msecs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage250To500Msecs = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("250-500 Msecs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage250To500Msecs = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("250-500 Msecs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage250To500Msecs, actualPercentage250To500Msecs))
 			{			
@@ -1597,7 +1597,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 			
 			//500 Msecs-1 Secs % Validation
-			double expectedPercentage500MsecsTo1SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("500 Msecs-1 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage500MsecsTo1SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("500 Msecs-1 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage500MsecsTo1SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("500 Msecs-1 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage500MsecsTo1SecsPer, actualPercentage500MsecsTo1SecsPer))
 			{			
@@ -1613,7 +1613,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 			
 			//1-3 Secs % Validation
-			double expectedPercentage1To3SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("1-3 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage1To3SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("1-3 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage1To3SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("1-3 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage1To3SecsPer, actualPercentage1To3SecsPer))
 			{			
@@ -1629,7 +1629,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 			
 			//3-5 Secs % Validation
-			double expectedPercentage3To5SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("3-5 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage3To5SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("3-5 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage3To5SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("3-5 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage3To5SecsPer, actualPercentage3To5SecsPer))
 			{			
@@ -1645,7 +1645,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 			
 			//5-10 Secs % Validation
-			double expectedPercentage5To10Secs = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("5-10 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
+			double expectedPercentage5To10Secs = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("5-10 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentage5To10Secs = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("5-10 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage5To10Secs, actualPercentage5To10Secs))
 			{			
@@ -1660,20 +1660,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (5-10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage5To10Secs+" (+/- 0.01 offset)</span>");
 			}
 			
-			//> 10 Secs % validation
-			double expectedPercentageGreaterThan10SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get("> 10 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered #")));
-			double actualPercentageGreaterThan10SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get("> 10 Secs %").replace("%", "")));
+			//>10 Secs % validation
+			double expectedPercentageGreaterThan10SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get(">10 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentageGreaterThan10SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get(">10 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGreaterThan10SecsPer, actualPercentageGreaterThan10SecsPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
 			}
 		}
 
@@ -1689,7 +1689,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
 										+"~"+currMap_1stDrill.get("Delivery Latency (s)"));
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownDeliveryLatencyDisWin"))
 		{
@@ -1925,20 +1925,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}	
 			
 			
-			//> 24 Hours % Validation
-			double expectedPercentageGeaterThan24HoursPer = roundDobule(calculatePercentage(deliveryLatencyTableRowMapList.get(0).get("> 24 Hours"), deliveryLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentageGeaterThan24HoursPer = roundDobule(Double.valueOf(deliveryLatencyTableRowMapList.get(0).get("> 24 Hours %").replace("%", "")));
+			//>24 Hours % Validation
+			double expectedPercentageGeaterThan24HoursPer = roundDobule(calculatePercentage(deliveryLatencyTableRowMapList.get(0).get(">24 Hours"), deliveryLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentageGeaterThan24HoursPer = roundDobule(Double.valueOf(deliveryLatencyTableRowMapList.get(0).get(">24 Hours %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGeaterThan24HoursPer, actualPercentageGeaterThan24HoursPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
 			}	
 		}
 		
@@ -2381,7 +2381,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	 
 	 
 	 
-	 List<Map<String, String>> getUITableDataAlongWithHeadersWithoutMappingFromDataStores(List<List<String>>  retRowLst)
+	 List<Map<String, String>> getUITableDataAlongWithHeadersWithoutMappingFromDataStores()
 	 {
 		 
 		 String jsStr1 = "var scriptElt = document.createElement('script');"
@@ -2453,24 +2453,45 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	 
 	 
 	 
-	 List<String> modifyTheDataRows(List<String> allHeaderNames, List<String> rowDataColoumn)
+	 List<String> modifyTheDataRows(List<String> allActHeaderNames, List<String> rowDataColoumn)
 	 {
 		 //Remove comma from number
 		 String[] headersNeedChanges1 = new String[]{"Attempted","Attempted Failure","Submitted", "Submit Failure", "Enroute", "Delivered", "Failed"
-					, "Total Delivered #", "0-15s #", "15-45s #", "45-90s #", "90-180s #", ">180s #"
+					, "Total Delivered #", "0-15s #", "15-45s #", "45-90s #", "90-180s #", ">180s #", "> 180s #"
 						, "Attempted Success", "Submitted Success", "Delivered Success", "Delivered Failure"
 							, "E2E Latency (s)","Ack Latency (ms)", "Platform Latency (ms)", "Delivery Latency (s)", "Submitted Failure"
-							,"Total Delivered", "0-100 ms", "100-200 ms", "200-300 ms", "300-400 ms" , "400-500 ms", "500 ms - 1 sec", "1 sec - 3 sec", "> 3 sec"
-							, "0-5 Secs", "5-10 Secs", "10-15 Secs", "15-30 Secs", "30-60 Secs", "60-120 Secs", "120-180 Secs", "3-10 Min", ">10 Min"
-							, "Total Delivered #", "0-250 Msecs", "250-500 Msecs", "500 Msecs-1 Secs", "1-3 Secs", "3-5 Secs", "3-5 Secs", "5-10 Secs", "> 10 Secs"
-							, "10-30 Min", "30-360 Min", "6-24 Hours", "> 24 Hours" };
+							,"Total Delivered", "0-100 ms", "100-200 ms", "200-300 ms", "300-400 ms" , "400-500 ms", "500 ms-1 sec", "1 sec-3 sec", ">3 sec", "> 3 sec"
+							, "0-5 Secs", "5-10 Secs", "10-15 Secs", "15-30 Secs", "30-60 Secs", "60-120 Secs", "120-180 Secs", "3-10 Min", ">10 Min", "> 10 Min"
+							, "Total Delivered #", "0-250 Msecs", "250-500 Msecs", "500 Msecs-1 Secs", "1-3 Secs", "3-5 Secs", "3-5 Secs", "5-10 Secs", ">10 Secs" , "> 10 Secs"
+							, "10-30 Min", "30-360 Min", "6-24 Hours", ">24 Hours", "> 24 Hours" };
 		 					
-		 headersNeedChanges1 =  new LinkedHashSet<String>(Arrays.asList(headersNeedChanges1)).toArray(headersNeedChanges1);
+		 System.out.println();
 		 
-		 for(String header : headersNeedChanges1)				
-			 if(allHeaderNames.contains(header))			 
-				 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(",", ""));
+		 LinkedHashSet<String> modifyHeadersSet = new LinkedHashSet<String>(Arrays.asList(headersNeedChanges1));
+
+//		 headersNeedChanges1 =  set.toArray(new String[set.size()]);		 
+//		 for(String header : headersNeedChanges1)		
+//		 {
+//			
+//			 if(allHeaderNames.contains(header))			 
+//				 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(",", ""));
+//			 else
+//				 if(header.contains(" %"))
+//					 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(" %", "%"));
+//			
+//		 }
 		 
+		 for(String actHeader : allActHeaderNames)
+		 {
+			 if(modifyHeadersSet.contains(actHeader))
+				 rowDataColoumn.set(allActHeaderNames.indexOf(actHeader), rowDataColoumn.get(allActHeaderNames.indexOf(actHeader)).replace(",", ""));
+			 else
+				 if(actHeader.trim().endsWith(" %"))
+					 rowDataColoumn.set(allActHeaderNames.indexOf(actHeader), rowDataColoumn.get(allActHeaderNames.indexOf(actHeader)).replace(" %", "%"));
+			 
+		 }
+		 
+		 		 
 		 return rowDataColoumn;
 	 }
 		
@@ -2501,7 +2522,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		  	cu.sleep(200);
 		  	cu.clickElement(locatorFieldNameForExportAllRecords);
 			cu.waitForPageLoadWithSleep("", 500);
-			cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 60);
+			cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 			cu.sleep(2000);
 			String csvFilePath = cu.getDownlaodedFileName();
 			
@@ -2529,10 +2550,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						, "Usage: <span style='font-weight:bold;'>ACTUAL:: Records size in UI and CSV have not matched. ( UI_Rows_Size: '"+(uiDataMapRows.size()-1)
 						+"'. CSV_Rows_Size: '"+(csvRawRowLines.size()-1)+"' )</span>");
 			
+			csvRawRowLines = modifyCSVHeaderAndData(csvRawRowLines);
 			if(csvRawRowLines.size()>0 && uiDataMapRows.size()>0)
 			{
-				List<String> csvHeaders = modifyHeaders(trimListOfString(csvRawRowLines.get(0)));
-				List<String> uiHeaders = modifyHeaders(trimListOfString(uiDataMapRows.get(0)));
+				List<String> csvHeaders = csvRawRowLines.get(0);
+				List<String> uiHeaders = uiDataMapRows.get(0);
 				
 				//Compare Headers
 				if(csvHeaders.equals(uiHeaders))				
@@ -2688,12 +2710,12 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 //		modifyHeadersKeyValues.put("Platform Latency(ms)", "Platform Latency (ms)");
 //		modifyHeadersKeyValues.put("Delivery Latency(s)", "Delivery Latency (s)");
 //		
-//		modifyHeadersKeyValues.put("500 ms-1 sec", "500 ms - 1 sec");
-//		modifyHeadersKeyValues.put("500 ms-1 sec %", "500 ms - 1 sec %");
-//		modifyHeadersKeyValues.put("1 sec-3 sec", "1 sec - 3 sec");
-//		modifyHeadersKeyValues.put("1 sec-3 sec %", "1 sec - 3 sec %");
-//		modifyHeadersKeyValues.put(">3 sec", "> 3 sec");
-//		modifyHeadersKeyValues.put(">3 sec %", "> 3 sec %");
+//		modifyHeadersKeyValues.put("500 ms-1 sec", "500 ms-1 sec");
+//		modifyHeadersKeyValues.put("500 ms-1 sec %", "500 ms-1 sec %");
+//		modifyHeadersKeyValues.put("1 sec-3 sec", "1 sec-3 sec");
+//		modifyHeadersKeyValues.put("1 sec-3 sec %", "1 sec-3 sec %");
+//		modifyHeadersKeyValues.put(">3 sec", ">3 sec");
+//		modifyHeadersKeyValues.put(">3 sec %", ">3 sec %");
 //		
 //		modifyHeadersKeyValues.put("Total Delivered #", "Total Delivered");
 				
@@ -2834,6 +2856,21 @@ List<String> trimListOfString(List<String> rawLst)
 		ret.add(rEle.trim());
 	
 	return ret;
+}
+
+List<List<String>>  modifyCSVHeaderAndData(List<List<String>> rawData)
+{	
+	if(rawData.size()>0)
+	{
+		List<List<String>> ret = new LinkedList<>();
+		ret.add(modifyHeaders(trimListOfString(rawData.get(0))));
+		for(int i=1; i<rawData.size(); i++)		
+			ret.add(modifyTheDataRows(ret.get(0), rawData.get(i)));
+		
+		return ret;
+	}
+	else
+		return rawData;	
 }
 
 

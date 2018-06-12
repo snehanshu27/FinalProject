@@ -97,8 +97,8 @@ public class TC_01_ProductDefaultUIValidation implements ApplicationConstants {
 				CommonUtils.printConsole("parentWindow   "+parentWindow);
 
 				//Validating all fields
-				cu.SelectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
-				cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+				cu.selectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
+				cu.selectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
 				
 				cu.clickElement("Product_DefaultBtn");
 				

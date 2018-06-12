@@ -101,8 +101,8 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 
 		String historyDefaultSelected = cu.getSelectVauleFromDropDown("supplierCoverageHistoryLst");
 		// validate 1st AccName has been auto populated
@@ -110,7 +110,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 			validateFirstAccNameAutoPopulated(cu);
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
 
 		// validate Historys
@@ -119,7 +119,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 
 		// select history as per data
 //		cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", dataMap.get("Coverage_History"));
-		cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", historyDefaultSelected);
+		cu.selectDropDownByVisibleText("supplierCoverageHistoryLst", historyDefaultSelected);
 		// click on display button
 		cu.clickElement("displayBtn");
 
@@ -162,10 +162,10 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
 
 		// get time string as date-month-year and validate date on which order
@@ -295,7 +295,7 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 								+ (coverageHistories.size() - 1) + "</span>");
 
 				for (int i = 1; i < coverageHistories.size(); i++) {
-					cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", coverageHistories.get(i));
+					cu.selectDropDownByVisibleText("supplierCoverageHistoryLst", coverageHistories.get(i));
 					cu.clickElement("displayBtn");
 					cu.waitForPageLoad("");
 					String disAtt = cu.getAttribute("dynamicCoverageCheckbox", "disabled", "$destinationVal$",
@@ -360,10 +360,10 @@ public class TC_002_SupplierCoverageMTSMS implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
 
 		cu.clickElement("displayBtn");

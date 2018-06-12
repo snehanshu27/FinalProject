@@ -89,9 +89,9 @@ public class TC_09_TrafficSpecificParameterValidation implements ApplicationCons
 		cu1.SwitchFrames("bottom");
 		cu1.SwitchFrames("target");
 		Thread.sleep(5000);
-		cu1.SelectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
+		cu1.selectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
 		Thread.sleep(5000);
-		cu1.SelectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
+		cu1.selectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
 		Thread.sleep(5000);
 		//cu1.clickElement("Customer_DisplayBtn");
 		//cu1.waitForPageLoad("");

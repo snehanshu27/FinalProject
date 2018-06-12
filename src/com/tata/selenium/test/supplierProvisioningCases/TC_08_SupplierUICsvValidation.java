@@ -120,9 +120,9 @@ public class TC_08_SupplierUICsvValidation implements ApplicationConstants {
 		cu.waitForPageLoad("");
 		
 		//Selecting values from main Tab
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("History", dataMap.get("History"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		
 		
 		String Supplier_ID=cu.getTxtBoxValue("Supplier_ID", dataMap.get("Supplier_ID"));

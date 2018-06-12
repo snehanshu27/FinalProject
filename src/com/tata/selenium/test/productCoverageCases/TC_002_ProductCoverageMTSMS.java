@@ -94,11 +94,11 @@ public class TC_002_ProductCoverageMTSMS implements ApplicationConstants {
 	
 		//Selecting required values from drop down based on input
 		//For validating ValidateFirstAccNameAutoPopulated
-		cu.SelectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
 		cu.waitForPageLoad("");
-		cu.SelectDropDownByVisibleText("Product_Coverage_ProductNameLst", dataMap.get("Product_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_ProductNameLst", dataMap.get("Product_Name"));
 		cu.waitForPageLoad("");
-		cu.SelectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));
 		
 		//validate 1st AccName has been auto populated
 		if("ON".equals(dataMap.get("ValidateFirstAccNameAutoPopulated")))
@@ -106,19 +106,19 @@ public class TC_002_ProductCoverageMTSMS implements ApplicationConstants {
 		
 		//Selecting required values from drop down based on input
 		////For validating ValidateHistory
-		cu.SelectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("ProductCoverage");
 		
 		if ("ON".equals(dataMap.get("ValidateFirstAccNameAutoPopulated")))
 			validateFirstAccNameAutoPopulated(cu);
-		cu.SelectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("ProductCoverage");
 		//validate Historys
 		if("ON".equals(dataMap.get("ValidateHistory")))
 			validateHistory(dataMap, cu, dataMap.get("Product_Coverage_SupplierAccNameLst"));
 		
 		//select history as per data
-		cu.SelectDropDownByVisibleText("Product_Coverage_HistoryLst", dataMap.get("Coverage_History"));
+		cu.selectDropDownByVisibleText("Product_Coverage_HistoryLst", dataMap.get("Coverage_History"));
 		//click on display button
 		cu.clickElement("Product_Coverage_DisplayBtn");
 System.out.println("Before coverage1");
@@ -137,11 +137,11 @@ System.out.println("Before coverage1");
 		
 		System.out.println("After Validate1");
 		//Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("Product_Coverage_ProductNameLst", dataMap.get("Product_Name"));
-		cu.SelectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));		
+		cu.selectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("Product_Coverage_ProductNameLst", dataMap.get("Product_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));		
 		cu.waitForPageLoad("ProductCoverage");
-		cu.SelectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("ProductCoverage");
 		
 		//get time string as date-month-year and validate date on which order is created should be appended to the order number (history)
@@ -262,7 +262,7 @@ System.out.println("Before coverage1");
 					
 					for(int i=1; i<coverageHistories.size(); i++)
 					{					
-						cu.SelectDropDownByVisibleText("Product_Coverage_HistoryLst", coverageHistories.get(i));
+						cu.selectDropDownByVisibleText("Product_Coverage_HistoryLst", coverageHistories.get(i));
 						cu.clickElement("displayBtn");
 						cu.waitForPageLoad("");
 						String disAtt = cu.getAttribute("dynamicCoverageCheckbox", "disabled", "$destinationVal$", dataMap.get("Destination"));
@@ -320,10 +320,10 @@ System.out.println("Before coverage1");
 			cu.SwitchFrames("target");
 				
 			//Selecting required values from drop down based on input
-			cu.SelectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
-			cu.SelectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));		
+			cu.selectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
+			cu.selectDropDownByVisibleText("Product_Coverage_SupplierNameLst", dataMap.get("Supplier_Name"));		
 			cu.waitForPageLoad("ProductCoverage");
-			cu.SelectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+			cu.selectDropDownByVisibleText("Product_Coverage_SupplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 			cu.waitForPageLoad("ProductCoverage");
 			
 			cu.clickElement("Product_Coverage_DisplayBtn");

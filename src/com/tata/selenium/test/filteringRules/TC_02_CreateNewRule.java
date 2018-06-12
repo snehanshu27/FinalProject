@@ -107,27 +107,27 @@ public class TC_02_CreateNewRule implements ApplicationConstants {
 				cu.clickElement("filteringRules_AddRuleButton");
 				cu.sleep(500);
 				
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_CoutryLst", dataMap.get("Country"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_CoutryLst", dataMap.get("Country"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("Country")))
 					cu.sleep(3000);
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_DestinationLst", dataMap.get("Destination"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_DestinationLst", dataMap.get("Destination"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("Destination")))
 					cu.sleep(3000);
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_SupplierNameLst", dataMap.get("SupplierName"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_SupplierNameLst", dataMap.get("SupplierName"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("SupplierName")))
 					cu.sleep(3000);				
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("SupplierAccountName")))	
 					cu.sleep(3000);
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_CustomerNameLst", dataMap.get("CustomerName"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_CustomerNameLst", dataMap.get("CustomerName"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("CustomerName")))	
 					cu.sleep(3000);
-				cu.SelectDropDownByVisibleText("filteringRules_EditableRow_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
+				cu.selectDropDownByVisibleText("filteringRules_EditableRow_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
 				if(!"ALL".equalsIgnoreCase(dataMap.get("CustomerAccountName")))	
 					cu.sleep(3000);
 				
 				if(!dataMap.get("TON_BL_Cond").trim().isEmpty())					
-					cu.SelectDropDownByVisibleText("filteringRules_EditableRow_TON_BL_CondLst", dataMap.get("TON_BL_Cond"));
+					cu.selectDropDownByVisibleText("filteringRules_EditableRow_TON_BL_CondLst", dataMap.get("TON_BL_Cond"));
 				
 				if(!dataMap.get("OA_BL_Cond").trim().isEmpty())
 					cu.setData("filteringRules_EditableRow_OA_BL_CondTxt", dataMap.get("OA_BL_Cond"));

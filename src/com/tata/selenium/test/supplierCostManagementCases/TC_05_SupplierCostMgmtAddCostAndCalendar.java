@@ -91,8 +91,8 @@ public class TC_05_SupplierCostMgmtAddCostAndCalendar implements ApplicationCons
 		cu.SwitchFrames("target");
 
 		// Select the parameters
-		cu.SelectDropDownByVisibleText("CostManagement_ServiceLst", dataMap.get("CostManagement_ServiceLst"));
-		cu.SelectDropDownByVisibleText("CostManagement_Supplier_NameLst",
+		cu.selectDropDownByVisibleText("CostManagement_ServiceLst", dataMap.get("CostManagement_ServiceLst"));
+		cu.selectDropDownByVisibleText("CostManagement_Supplier_NameLst",
 				dataMap.get("CostManagement_Supplier_NameLst"));
 		cu.validatePopulatedDropDownValue("CostManagement_Supplier_Acc_NameLst",
 				dataMap.get("CostManagement_Supplier_Acc_NameLst"));

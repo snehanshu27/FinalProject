@@ -80,8 +80,8 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
-		cu.SelectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
+		cu.selectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
+		cu.selectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
 		//cu.clickElement("Customer_EditBtn");
 		cu.waitForPageLoad("");
 		
@@ -100,14 +100,14 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 		cu.waitForPageLoad("");
 		
 		//Selecting values from main Tab
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("History", dataMap.get("History"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		cu.setData("Rate_Change_Notification_Period", dataMap.get("RateChangeNotification"));
 		
 		//Entering values in Instance Info Tab if data is present in test data
 		if(("Y").equalsIgnoreCase(dataMap.get("Ins_TAB"))){
-			cu.SelectDropDownByVisibleText("Ins_Instance_StateLst",dataMap.get("Ins_Instance_StateLst"));	
+			cu.selectDropDownByVisibleText("Ins_Instance_StateLst",dataMap.get("Ins_Instance_StateLst"));	
 			cu.setData("Ins_commentsTxt", dataMap.get("Ins_commentsTxt"));
 		}
 		
@@ -122,7 +122,7 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			if(dataMap.get("Traffic_OASupportLst").trim().length() >0){
 				String[] data=dataMap.get("Traffic_OASupportLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("Traffic_OASupportLst", val);
+					cu.selectDropDownByVisibleText("Traffic_OASupportLst", val);
 			}
 			
 			cu.setData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
@@ -137,17 +137,17 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			if(dataMap.get("Ehanced_Dlr_Parameter").trim().length() >0){
 				String[] data=dataMap.get("Ehanced_Dlr_Parameter").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("Ehanced_Dlr_Parameter", val);
+					cu.selectDropDownByVisibleText("Ehanced_Dlr_Parameter", val);
 			}
 		}
 		
 		if(("Y").equalsIgnoreCase(dataMap.get("SMPP_InfoTab"))){
 			cu.clickElement("SMPP_InfoTab");
 			cu.waitForPageLoad("SMPP_InfoTab");
-			cu.SelectDropDownByVisibleText("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
-			cu.SelectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
-			cu.SelectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
-			cu.SelectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
+			cu.selectDropDownByVisibleText("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
+			cu.selectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
+			cu.selectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
+			cu.selectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
 			cu.setData("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
 			cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
 			cu.setData("SMPP_MaxConnectionsTxt", dataMap.get("SMPP_MaxConnectionsTxt"));
@@ -155,13 +155,13 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			cu.setData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
 			cu.setData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
 			cu.setData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
-			cu.SelectDropDownByVisibleText("Enhanced_DLR_Format", dataMap.get("Enhanced_DLR_Format"));
+			cu.selectDropDownByVisibleText("Enhanced_DLR_Format", dataMap.get("Enhanced_DLR_Format"));
 			
 			//Handling multi select options
 			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){
 				String[] data=dataMap.get("SMPP_DataCodeLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("SMPP_DataCodeLst", val);
+					cu.selectDropDownByVisibleText("SMPP_DataCodeLst", val);
 			}
 		}
 		
@@ -185,7 +185,7 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			if(dataMap.get("NumberMgt_NumbersLst").trim().length() >0){
 				String[] data=dataMap.get("NumberMgt_NumbersLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("NumberMgt_NumbersLst", val);
+					cu.selectDropDownByVisibleText("NumberMgt_NumbersLst", val);
 				
 				cu.clickElement("NumberMgt_AllRightSelectBtn");
 			}
@@ -193,7 +193,7 @@ public class TC_07_CustomerEditing implements ApplicationConstants {
 			if(dataMap.get("NumberMgt_AssignedNumbersLst").trim().length() >0){
 				String[] data=dataMap.get("NumberMgt_AssignedNumbersLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("NumberMgt_AssignedNumbersLst", val);
+					cu.selectDropDownByVisibleText("NumberMgt_AssignedNumbersLst", val);
 			}	
 	
 		}

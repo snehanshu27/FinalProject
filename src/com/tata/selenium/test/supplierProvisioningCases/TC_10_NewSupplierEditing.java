@@ -116,13 +116,13 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 		cu.waitForPageLoad("");
 		
 		//Selecting values from main Tab
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("History", dataMap.get("History"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		
 		//Entering values in Instance Info Tab if data is present in test data
 		if(("Y").equalsIgnoreCase(dataMap.get("Ins_TAB"))){
-			cu.SelectDropDownByVisibleText("Ins_Instance_StateLst",dataMap.get("Ins_Instance_StateLst"));
+			cu.selectDropDownByVisibleText("Ins_Instance_StateLst",dataMap.get("Ins_Instance_StateLst"));
 			if(("Y").equalsIgnoreCase(dataMap.get("Ins_Sms_FireWallChk")))
 				cu.clickElement("Ins_Sms_FireWallChk");
 			
@@ -150,7 +150,7 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			if(dataMap.get("Traffic_OASupportLst").trim().length() >0){
 				String[] data=dataMap.get("Traffic_OASupportLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("Traffic_OASupportLst", val);
+					cu.selectDropDownByVisibleText("Traffic_OASupportLst", val);
 			}
 			cu.setData("Traffic_OABlackListTxt", dataMap.get("Traffic_OABlackListTxt"));
 			cu.setData("Traffic_DABlackListTxt", dataMap.get("Traffic_DABlackListTxt"));
@@ -163,12 +163,12 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			Thread.sleep(5000);
 			cu.clickElement("SMPP_InfoTab");
 			cu.waitForPageLoad("SMPP_InfoTab");
-			cu.SelectDropDownByVisibleText("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
+			cu.selectDropDownByVisibleText("SMPP_VersionLst", dataMap.get("SMPP_VersionLst"));
 			cu.setData("SMPP_BindAdderTonTxt", dataMap.get("SMPP_BindAdderTonTxt"));
 			cu.setData("SMPP_BindAdderNpiTxt", dataMap.get("SMPP_BindAdderNpiTxt"));
-			cu.SelectDropDownByVisibleText("SMPP_Dlr_SupportLst", dataMap.get("SMPP_Dlr_SupportLst"));
-			cu.SelectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
-			cu.SelectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
+			cu.selectDropDownByVisibleText("SMPP_Dlr_SupportLst", dataMap.get("SMPP_Dlr_SupportLst"));
+			cu.selectDropDownByVisibleText("SMPP_MsgIDTypeLst", dataMap.get("SMPP_MsgIDTypeLst"));
+			cu.selectDropDownByVisibleText("SMPP_MsgLengthLst", dataMap.get("SMPP_MsgLengthLst"));
 			cu.setData("SMPP_WindowSizeTxt", dataMap.get("SMPP_WindowSizeTxt"));
 			cu.SetDataWithoutClearing("SMPP_SysIdTxt", dataMap.get("SMPP_SysIdTxt"));
 			cu.SetDataWithoutClearing("SMPP_PasswordTxt", dataMap.get("SMPP_PasswordTxt"));
@@ -180,8 +180,8 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			cu.setData("SMPP_OANpiTxt", dataMap.get("SMPP_OANpiTxt"));
 			cu.setData("SMPP_DATonTxt", dataMap.get("SMPP_DATonTxt"));
 			cu.setData("SMPP_DANpiTxt", dataMap.get("SMPP_DANpiTxt"));
-			cu.SelectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
-			cu.SelectDropDownByVisibleText("SMPP_SMSC_MsgModeLst", dataMap.get("SMPP_SMSC_MsgModeLst"));
+			cu.selectDropDownByVisibleText("SMPP_SMSC_DefaultLst", dataMap.get("SMPP_SMSC_DefaultLst"));
+			cu.selectDropDownByVisibleText("SMPP_SMSC_MsgModeLst", dataMap.get("SMPP_SMSC_MsgModeLst"));
 			cu.setData("SMPP_EnqLinkTimerTxt", dataMap.get("SMPP_EnqLinkTimerTxt"));
 			cu.setData("SMPP_InactivityTimerTxt", dataMap.get("SMPP_InactivityTimerTxt"));
 			cu.setData("SMPP_ResponceTimerTxt", dataMap.get("SMPP_ResponceTimerTxt"));
@@ -191,7 +191,7 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){
 				String[] data=dataMap.get("SMPP_DataCodeLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("SMPP_DataCodeLst", val);
+					cu.selectDropDownByVisibleText("SMPP_DataCodeLst", val);
 			}
 			Thread.sleep(5000);
 			cu.clickElement("SS7_InfoTab");
@@ -208,13 +208,13 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			cu.setData("SS7_OANpiTxt", dataMap.get("SS7_OANpiTxt"));
 			cu.setData("SS7_DA_TONTxt", dataMap.get("SS7_DA_TONTxt"));
 			cu.setData("SS7_DANpiTxt", dataMap.get("SS7_DANpiTxt"));
-			cu.SelectDropDownByVisibleText("SS7_SM_RP_PRI_FlagLst", dataMap.get("SS7_SM_RP_PRI_FlagLst"));
+			cu.selectDropDownByVisibleText("SS7_SM_RP_PRI_FlagLst", dataMap.get("SS7_SM_RP_PRI_FlagLst"));
 			cu.setData("SS7_MaxFragmentationTxt", dataMap.get("SS7_MaxFragmentationTxt"));
 			//Checking for multiple option to get selected based on input
 			if(dataMap.get("SS7_MT_DCSSupportLst").trim().length() >0){
 				String[] data=dataMap.get("SS7_MT_DCSSupportLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("SS7_MT_DCSSupportLst", val);
+					cu.selectDropDownByVisibleText("SS7_MT_DCSSupportLst", val);
 			}
 			
 			if(dataMap.get("Traffic_ThrottlingTxt")==""){
@@ -247,7 +247,7 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			if(dataMap.get("NumberMgt_NumbersLst").trim().length() >0){
 				String[] data=dataMap.get("NumberMgt_NumbersLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("NumberMgt_NumbersLst", val);
+					cu.selectDropDownByVisibleText("NumberMgt_NumbersLst", val);
 				
 				cu.clickElement("NumberMgt_AllRightSelectBtn");
 			}
@@ -255,7 +255,7 @@ public class TC_10_NewSupplierEditing implements ApplicationConstants{
 			if(dataMap.get("NumberMgt_AssignedNumbersLst").trim().length() >0){
 				String[] data=dataMap.get("NumberMgt_AssignedNumbersLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("NumberMgt_AssignedNumbersLst", val);
+					cu.selectDropDownByVisibleText("NumberMgt_AssignedNumbersLst", val);
 			}	
 	
 		}

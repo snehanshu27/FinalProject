@@ -95,13 +95,13 @@ public class TC_02_DeliveryStatisticsDisplayData implements ApplicationConstants
 //				"No data for the selected input parameters");
 
 		// Validating all editable drop down
-		cu.SelectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
 		cu.checkEditableDropDown("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
-		cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
+		cu.selectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
 
 		// Select From DATE
 		cu.moveAndClick("DeliveryStat_FromDateTxt");

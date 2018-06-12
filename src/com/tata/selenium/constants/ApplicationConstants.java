@@ -12,7 +12,7 @@ public interface ApplicationConstants {
 	static final String LOG_FILENAME= "./log4j.properties";
 	static final String OBJECT_REPO_FILEPATH = "./data/SupplierProvisioning.properties";
 	static final String DATA_REPO_FILEPATH = "./data";
-//	static final String DATA_FILEPATH = "G:\\AAAShared\\Test_Data.xlsx";
+//	static final String DATA_FILEPATH = "F:\\Test_Data.xlsx";
 	static final String DATA_FILEPATH = "./data/Test_Data.xlsx";
 	static final String DB_DATA_FILEPATH = "D:/MMX/DatabaseTestingMaven2/data/result/DB_Result_MMX3.xlsx";
 	static final String DATA_FILEPATH_NEW = "./data/Test_Data_new.xlsx";
@@ -31,10 +31,12 @@ public interface ApplicationConstants {
 //	public static final String APP_URL ="https://10.133.43.10:8443/DeliveryStatisticsReportsWeb/";
 //	 public static final String APP_URL ="https://mtmdevmblws01:8443/MMXDeliveryStatisticsReportsWeb/index.jsp?uname=sonali.das@tatacommunications.com&regno=918";
 //	public static final String APP_URL ="https://mtmdevmblws01:8443/DeliveryStatisticsReportsWebProd/";
+//	public static final String APP_URL ="https://mtmdevmblws01:8443/MMXSenderIDWeb/index.jsp?uname=sonali.das@tatacommunications.com&orgNo=918";
+
 	
 	
 	 
-    public static final String APP_URL = System.getProperty("appURL");
+//    public static final String APP_URL = System.getProperty("appURL");
 	
 //    public static final boolean RUN_IN_REMOTE=false;
 	public static final boolean RUN_IN_REMOTE=true;

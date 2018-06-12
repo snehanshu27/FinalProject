@@ -90,11 +90,11 @@ public class TC_04_ProductProvisioningChangePriority   implements ApplicationCon
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst",dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst",dataMap.get("Product_Provisioning_ProductNameLst"));
 		
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		cu.getScreenShot("Screenshot of the current screen");
-		cu.SelectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
 		cu.getScreenShot("Screenshot of the changing priority from P1 to P2");
 		cu.checkReadonlyProperty("Product_Provisioning_PValueTxt", dataMap.get("Product_Provisioning_PValueTxt"));
 		

@@ -95,7 +95,7 @@ public class TC_07_UploadWithInvalidDate implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// Select the parameters
-		cu.SelectDropDownByVisibleText("CostManagement_Supplier_NameLst",
+		cu.selectDropDownByVisibleText("CostManagement_Supplier_NameLst",
 				dataMap.get("CostManagement_Supplier_NameLst"));
 		cu.validatePopulatedDropDownValue("CostManagement_Supplier_Acc_NameLst",
 				dataMap.get("CostManagement_Supplier_Acc_NameLst"));

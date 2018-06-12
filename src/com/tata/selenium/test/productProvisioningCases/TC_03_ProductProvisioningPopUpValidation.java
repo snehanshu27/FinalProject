@@ -91,13 +91,13 @@ public class TC_03_ProductProvisioningPopUpValidation  implements ApplicationCon
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst",dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst",dataMap.get("Product_Provisioning_ProductNameLst"));
 		cu.checkReadonlyProperty("Product_Provisioning_ProductIDTxt",dataMap.get("Product_Provisioning_ProductIDTxt"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ServiceLst", dataMap.get("Product_Provisioning_ServiceLst"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductCurrencyLst", dataMap.get("Product_Provisioning_ProductCurrencyLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ServiceLst", dataMap.get("Product_Provisioning_ServiceLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductCurrencyLst", dataMap.get("Product_Provisioning_ProductCurrencyLst"));
 		cu.checkReadonlyProperty("Product_Provisioning_PValueTxt", dataMap.get("Product_Provisioning_PValueTxt"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductStatusLst", dataMap.get("Product_Provisioning_ProductStatusLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductStatusLst", dataMap.get("Product_Provisioning_ProductStatusLst"));
 		
 		cu.clickElement("Product_Provisioning_SubmitBtn");
 		cu.checkMessage("application_PopUpMessage", "click submit button", "Error: Please display a product to continue.");

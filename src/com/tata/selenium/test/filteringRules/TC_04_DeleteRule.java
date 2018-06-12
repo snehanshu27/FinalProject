@@ -232,17 +232,17 @@ public class TC_04_DeleteRule implements ApplicationConstants {
 	
 	void selectMainDropdowns()
 	{
-		cu.SelectDropDownByVisibleText("filteringRules_CountryLst", dataMap.get("Country"));
+		cu.selectDropDownByVisibleText("filteringRules_CountryLst", dataMap.get("Country"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_DestinationLst", dataMap.get("Destination"));
+		cu.selectDropDownByVisibleText("filteringRules_DestinationLst", dataMap.get("Destination"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_SupplierNameLst", dataMap.get("SupplierName"));
+		cu.selectDropDownByVisibleText("filteringRules_SupplierNameLst", dataMap.get("SupplierName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
+		cu.selectDropDownByVisibleText("filteringRules_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_CustomerNameLst", dataMap.get("CustomerName"));
+		cu.selectDropDownByVisibleText("filteringRules_CustomerNameLst", dataMap.get("CustomerName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
+		cu.selectDropDownByVisibleText("filteringRules_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
 		cu.waitForPageLoadWithSleep("", 100);
 	}
 	

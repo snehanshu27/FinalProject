@@ -91,7 +91,7 @@ public class TC_06_ProductProvisioningMOLNSDisabledValidations implements Applic
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst",
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst",
 				dataMap.get("Product_Provisioning_ProductNameLst"));
 
 		cu.clickElement("Product_Provisioning_DisplayBtn");

@@ -77,10 +77,10 @@ public class TC_06_CustomerHistoryValidation implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
-		cu.SelectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
+		cu.selectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		cu.clickElement("Customer_DisplayBtn");
 		
 		//First validation: History Tab has 5 latest values or not.

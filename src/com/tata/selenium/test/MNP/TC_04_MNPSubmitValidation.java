@@ -113,7 +113,7 @@ public class TC_04_MNPSubmitValidation implements ApplicationConstants {
 		cu.newWindowHandles(parentWindow);
 		String winHandleAfter = driver.getWindowHandle();
 		
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
 		cu.waitForPageLoad("");
 		
 		cu.clickElement("Product_Provisioning_SubmitBtn");

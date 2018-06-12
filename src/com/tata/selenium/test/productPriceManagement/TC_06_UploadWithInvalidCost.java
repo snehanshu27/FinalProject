@@ -92,8 +92,8 @@ public class TC_06_UploadWithInvalidCost implements ApplicationConstants {
 		
 		// Select the parameters
 		
-		cu.SelectDropDownByVisibleText("Service_NameLst",dataMap.get("Service_NameLst"));
-		cu.SelectDropDownByVisibleText("Product_NameLst",dataMap.get("Product_NameLst"));
+		cu.selectDropDownByVisibleText("Service_NameLst",dataMap.get("Service_NameLst"));
+		cu.selectDropDownByVisibleText("Product_NameLst",dataMap.get("Product_NameLst"));
 		cu.checkNonEditableBox("CurrencyTxt", dataMap.get("CurrencyTxt"));
 
 		cu.clickElement("DisplayBtn");

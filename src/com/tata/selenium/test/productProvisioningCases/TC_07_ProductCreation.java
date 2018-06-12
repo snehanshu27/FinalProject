@@ -94,10 +94,10 @@ public class TC_07_ProductCreation implements ApplicationConstants {
 		cu.setData("Product_Provisioning_ProductNameTxt", dataMap.get("Product_Provisioning_ProductNameTxt"));
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		cu.ConfirmAlert();
-		cu.SelectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ServiceLst", dataMap.get("Product_Provisioning_ServiceLst"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductCurrencyLst", dataMap.get("Product_Provisioning_ProductCurrencyLst"));
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductStatusLst", dataMap.get("Product_Provisioning_ProductStatusLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_PriorityLst", dataMap.get("Product_Provisioning_PriorityLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ServiceLst", dataMap.get("Product_Provisioning_ServiceLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductCurrencyLst", dataMap.get("Product_Provisioning_ProductCurrencyLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductStatusLst", dataMap.get("Product_Provisioning_ProductStatusLst"));
 		
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		cu.getScreenShot("Select Include ");

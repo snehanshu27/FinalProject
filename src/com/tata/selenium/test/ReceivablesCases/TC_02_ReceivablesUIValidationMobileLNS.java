@@ -93,7 +93,7 @@ public class TC_02_ReceivablesUIValidationMobileLNS implements ApplicationConsta
 		cu.SwitchFrames("target");
 		
 		//Select service
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
 		
 		// Validating all editable drop down
 		cu.checkEditableDropDown("CustomerLst", dataMap.get("CustomerLst"));

@@ -112,7 +112,7 @@ public class TC_03_MNPNewDestinationValidation implements ApplicationConstants {
 		cu.newWindowHandles(parentWindow);
 		String winHandleAfter = driver.getWindowHandle();
 		
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
 		cu.waitForPageLoad("");
 		
 		cu.clickElement("Product_Provisioning_DisplayBtn");

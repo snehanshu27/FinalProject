@@ -98,7 +98,7 @@ public class TC_02_RoutingDetailsPopupsValidations implements ApplicationConstan
 		//set incorrect from and to dates and valiadate popus
 		cu.setData("Product_Routing_Details_FromDate_TextBox", dataMap.get("FromDate"));
 		cu.setData("Product_Routing_Details_ToDate_TextBox", dataMap.get("ToDate"));
-		cu.SelectDropDownByVisibleText("Product_Routing_Details_ReportType_Dropdown", dataMap.get("Report_Type"));
+		cu.selectDropDownByVisibleText("Product_Routing_Details_ReportType_Dropdown", dataMap.get("Report_Type"));
 		cu.clickElement("Product_Routing_Details_Display_Button");
 		
 		cu.checkMessage("application_PopUpMessage", "Validation popup message - on clicking Display button without proper start and end dates", "No data for the selected input parameters");

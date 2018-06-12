@@ -299,17 +299,17 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		//Select filters
 		//Select ServiceLst filter
 		if(!dataMap.get("DeliveryStat_ServiceLst").trim().isEmpty())
-			cu.SelectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_ServiceLst", dataMap.get("DeliveryStat_ServiceLst"));
 		
 		//Select Dimension filter
 		if(!dataMap.get("Dimension").trim().isEmpty())
-			cu.SelectDropDownByVisibleText("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
+			cu.selectDropDownByVisibleText("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
 		
 		//Select Customer filter
 		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()) && !dataMap.get("DeliveryStat_Customer_NameLst").trim().isEmpty())
 		{
 			cu.deselectDropDownAllOptions("DeliveryStat_Customer_NameLst");
-			cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 			cu.waitForPageLoadWithSleep("", 500);
 		}
@@ -322,7 +322,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			if(!dataMap.get("DeliveryStat_Supplier_NameLst").trim().isEmpty())
 			{
 				cu.deselectDropDownAllOptions("DeliveryStat_Supplier_NameLst");
-				cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
+				cu.selectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 				cu.clickElement("DeliveryStatisticsPage");
 				cu.waitForPageLoadWithSleep("", 500);
 			}
@@ -332,7 +332,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!dataMap.get("DeliveryStat_CountryLst").trim().isEmpty())
 		{
 			cu.deselectDropDownAllOptions("DeliveryStat_CountryLst");
-			cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 			cu.waitForPageLoadWithSleep("", 500);
 		}
@@ -341,7 +341,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!dataMap.get("DeliveryStat_DestinationLst").trim().isEmpty())
 		{
 			cu.deselectDropDownAllOptions("DeliveryStat_DestinationLst");
-			cu.SelectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 			cu.waitForPageLoadWithSleep("", 500);
 		}
@@ -376,7 +376,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			if(!dataMap.get("DeliveryStat_InstanceLst").trim().isEmpty())
 			{
 				cu.deselectDropDownAllOptions("DeliveryStat_InstanceLst");
-				cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
+				cu.selectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
 				cu.clickElement("DeliveryStatisticsPage");
 				cu.waitForPageLoadWithSleep("", 500);
 			}

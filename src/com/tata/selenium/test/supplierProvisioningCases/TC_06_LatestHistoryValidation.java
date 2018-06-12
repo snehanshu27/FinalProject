@@ -100,8 +100,8 @@ public class TC_06_LatestHistoryValidation implements ApplicationConstants {
 		cu.sleep(1000);
 		cu.clickElement("Supplier_Account_Name_DropDown_Dynamic_LabelOPtion", "$supplieraccountname$", dataMap.get("Supplier_Account_Name"));
 		
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		cu.clickElement("supplier_DisplayBtn");
 		
 		//First validation: History Tab has 5 latest values or not.

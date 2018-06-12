@@ -90,7 +90,7 @@ public class TC_001_ProductCoverageUIValidation implements ApplicationConstants 
 			cu.checkEditableDropDown("Product_Coverage_ServiceLst", dataMap.get("Service"));
 		else
 		{
-			cu.SelectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
+			cu.selectDropDownByVisibleText("Product_Coverage_ServiceLst", dataMap.get("Service"));
 			cu.waitForPageLoad("");
 		}
 		cu.checkEditableDropDown("Product_Coverage_ProductNameLst", dataMap.get("Product_Name"));

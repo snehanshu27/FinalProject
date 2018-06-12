@@ -91,7 +91,7 @@ public class TC_001_SupplierCoverageUIValidation implements ApplicationConstants
 			hu.checkEditableDropDown("supplierServiceLst", dataMap.get("Service"));
 		else
 		{
-			hu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+			hu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
 			hu.waitForPageLoad("");
 		}
 		hu.checkEditableDropDown("supplierNameLst", dataMap.get("Supplier_Name"));

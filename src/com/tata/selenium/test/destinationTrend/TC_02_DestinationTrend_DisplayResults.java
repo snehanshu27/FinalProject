@@ -91,7 +91,7 @@ public class TC_02_DestinationTrend_DisplayResults implements ApplicationConstan
 		if(cu.existsElement("application_PopUpOkBtn"))
 			cu.clickElement("application_PopUpOkBtn");
 		//Validating all fields
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
 		cu.waitForPageLoad("");
 	
 		cu.selectMultipleVaFromDropDown("ProductLst", dataMap.get("ProductLst"));

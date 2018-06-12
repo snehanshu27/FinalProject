@@ -91,7 +91,7 @@ public class TC_01_DestinationTrendUIValidation implements ApplicationConstants 
 			cu.clickElement("application_PopUpOkBtn");
 		
 		//Validating all fields
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
 		cu.waitForPageLoad("");
 		cu.checkEditableDropDown("ServiceLst",dataMap.get("ServiceLst"));
 		cu.checkEditableDropDown("ProductLst",dataMap.get("ProductLst"));

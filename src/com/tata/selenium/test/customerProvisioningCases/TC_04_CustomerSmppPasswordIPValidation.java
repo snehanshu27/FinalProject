@@ -80,11 +80,11 @@ public class TC_04_CustomerSmppPasswordIPValidation implements ApplicationConsta
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
-		cu.SelectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
+		cu.selectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("History", dataMap.get("History"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		cu.clickElement("Customer_DisplayBtn");
 		cu.clickElement("Customer_EditBtn");
 		
@@ -110,7 +110,7 @@ public class TC_04_CustomerSmppPasswordIPValidation implements ApplicationConsta
 			if(dataMap.get("SMPP_DataCodeLst").trim().length() >0){
 				String[] data=dataMap.get("SMPP_DataCodeLst").split(";");
 				for(String val : data)
-					cu.SelectDropDownByVisibleText("SMPP_DataCodeLst", val);
+					cu.selectDropDownByVisibleText("SMPP_DataCodeLst", val);
 			}
 			
 		}

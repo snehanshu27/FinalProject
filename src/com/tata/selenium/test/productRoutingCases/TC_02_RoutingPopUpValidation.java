@@ -92,7 +92,7 @@ public class TC_02_RoutingPopUpValidation implements ApplicationConstants {
 		cu.checkMessage("application_PopUpMessage", "Validation popup message - on clicking Submit button without product and country", "Error: Please select a product.");
 		cu.getScreenShot("Validation Of Routing Screen");
 		
-		cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+		cu.selectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
 		cu.clickElement("Product_DisplayBtn");
 		cu.checkMessage("application_PopUpMessage", "Validation popup message - on clicking Display button without country", "Error: Please select a country.");
 		cu.clickElement("Product_SubmitBtn");
@@ -100,8 +100,8 @@ public class TC_02_RoutingPopUpValidation implements ApplicationConstants {
 		cu.getScreenShot("Validation Of Routing Screen");
 	
 		// Validating all pop up message for Submit button without making any changes
-		cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
-		cu.SelectDropDownByVisibleText("Product_CountryLst", dataMap.get("Product_CountryLst"));
+		cu.selectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+		cu.selectDropDownByVisibleText("Product_CountryLst", dataMap.get("Product_CountryLst"));
 		cu.clickElement("Product_DisplayBtn");
 		
 		cu.clickElement("Product_SubmitBtn");

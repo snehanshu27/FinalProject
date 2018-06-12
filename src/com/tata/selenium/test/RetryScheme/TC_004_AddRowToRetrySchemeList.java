@@ -98,10 +98,10 @@ public class TC_004_AddRowToRetrySchemeList implements ApplicationConstants {
 		
 		hu.newWindowHandles(parentWindow);
 		
-		hu.SelectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
+		hu.selectDropDownByVisibleText("supplierName_List", dataMap.get("Supplier_Name"));
 		System.out.println(dataMap.get("Supplier_Name"));
 		hu.waitForPageLoad("");
-		hu.SelectDropDownByVisibleText("supplierAccName_List", dataMap.get("Supplier_Account_Name"));
+		hu.selectDropDownByVisibleText("supplierAccName_List", dataMap.get("Supplier_Account_Name"));
 		System.out.println(dataMap.get("Supplier_Account_Name"));
 		hu.waitForPageLoad("");
 		//Thread.sleep(200);

@@ -27,12 +27,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -57,7 +54,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
+
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -65,7 +62,6 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.tata.selenium.constants.ApplicationConstants;
 import com.tata.selenium.constants.MyConstants;
 
-import bsh.Capabilities;
 
 /**
  * @date
@@ -666,6 +662,51 @@ public class CommonUtils implements ApplicationConstants {
 			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
 		}
 	}
+	
+	public void checkEditableBoxVerifyPlaceholderAttribute(String fieldName, String value) {
+		try {
+			WebElement textField = driver.findElement(putility.getObject(fieldName));
+			String strText = textField.getAttribute("placeholder");
+			strText = (strText!=null?strText.trim():"");
+			
+			if (textField.isEnabled()) {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.PASS, "EXPECTED: Text field " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is editable</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL, "EXPECTED: Text field " + fieldName + " should be editable",
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is non editable</span>");
+
+			}
+			if (strText.equalsIgnoreCase(value.trim())) {
+				printLogs(fieldName + " field has default value as -" + strText);
+				test.log(LogStatus.PASS,
+						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " is has default value as " + strText + "</span>");
+			} else {
+				printLogs(fieldName + " field is editable");
+				test.log(LogStatus.FAIL,
+						"EXPECTED: Text field " + fieldName + " should have default value as -" + value,
+						"Validation: <span style='font-weight:bold;'>ACTUAL:: Text field " + fieldName
+								+ " has default value as - " + strText + "</span>");
+			}
+
+		} catch (Exception e) {
+			getScreenShot("Validating field" + fieldName);
+			LOGGER.info("Text field validations failed..." + e);
+			printLogs("Text field validations failed..." + e);
+			test.log(LogStatus.FAIL, "Text field validation", "Text field validation failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+		}
+	}
+
+	
+	
 	public boolean waitForElementInvisiblity(String fieldName, int timeout) {
 		boolean val = false;
 		try {
@@ -674,18 +715,20 @@ public class CommonUtils implements ApplicationConstants {
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(objPath));
 			val = true;
 		} catch (Exception e) {
-			LOGGER.info("Error occured on waiting for the invisiblity of element  - " + e);
+			getScreenShot("Error occured on waiting for the invisiblity of element: "+fieldName);
+			test.log(LogStatus.FAIL, "Error occured on waiting for the invisiblity of element: "+fieldName+"  -        Exception: " + e);
+			LOGGER.info("Error occured on waiting for the invisiblity of element: "+fieldName+"  -        Exception: " + e);
 			val = false;
-			Assert.fail("Error occured on waiting for the invisiblity of element  - " + e);
+			Assert.fail("Error occured on waiting for the invisiblity of element: "+fieldName+"-          Exception: " + e);
 		}
 		return val;
 	}
 
-	public boolean waitForElementVisiblity(String fieldName, int timeout) {
+	public boolean waitForElementVisiblity(String fieldName, int timeoutInSeconds) {
 		boolean val = false;
 		try {
 			By objPath = putility.getObject(fieldName);
-			WebDriverWait wait = new WebDriverWait(driver, timeout);
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(objPath));
 			val = true;
 		} catch (Exception e) {
@@ -996,7 +1039,7 @@ public class CommonUtils implements ApplicationConstants {
 	 * @throws Exception
 	 *             throwing exception for any error occurring in try block
 	 */
-	public boolean SelectDropDownByVisibleText(String fieldname, String value) {
+	public boolean selectDropDownByVisibleText(String fieldname, String value) {
 		try {
 			if (value != null && value.trim().length() > 0) {
 				WebElement supplierName = driver.findElement(putility.getObject(fieldname));
@@ -1120,42 +1163,88 @@ public class CommonUtils implements ApplicationConstants {
 		}
 	}
 	
-public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, String dynamicLabelOption, String replaceKey, String replaceValue) {
+public boolean selectDropDownByVisibleTextCustomMMX3(String dropDownButton, String dynamicLabelOption, String replaceKey, String replaceValue) {
 		
 		By byDropdownToggle = putility.getObject(dropDownButton);
 		By byOPtion = putility.getObject(dynamicLabelOption, replaceKey, replaceValue);
-		try {
-			if (replaceValue != null && replaceValue.trim().length() > 0) {
+		
 
+		if (replaceValue != null && replaceValue.trim().length() > 0) {
+
+			try{
 				WebElement dropDownButtonEle = driver.findElement(byDropdownToggle);
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dropDownButtonEle);		
 				dropDownButtonEle.click();
 				sleep(700);
+			}catch(Exception e)
+			{				
+				test.log(LogStatus.FAIL, "Dropdown Toggle element should be clicked",
+						"ErrorInDropDown: Error occured while clicking Dropdown Toggle element '"+dropDownButton+"'.    Expection: "+e);
+				LOGGER.error("ErrorInDropDown: Error occured while clicking Dropdown Toggle element '"+dropDownButton+"'.    Expection: "+e);
+				return false;
+			}
+			
+			try{
+					WebElement dynamicLabelOptionEle = driver.findElement(byOPtion);
+					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dynamicLabelOptionEle);
+					sleep(500);
+					dynamicLabelOptionEle.click();
+			}catch(Exception e)
+			{
+				LOGGER.error("ErrorInDropDown: Error occured while clicking Dropdown Option element '"+replaceValue+"'.    Expection: "+e);
+				test.log(LogStatus.FAIL, "Dropdown Option element should be clicked",
+						"ErrorInDropDown: Error occured while clicking Dropdown Option element '"+replaceValue+"'.    Expection: "+e+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
+			}
+			
+			test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
+					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully"+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
 				
+		}
+		return true;
+	}
+	
+	
+public boolean selectDropDownByVisibleTextCustomMMX3(String dropDownTButton, String replaceKeyForTButton, String replaceValueForTButton
+						, String dynamicLabelOption, String replaceKeyForOption, String replaceValueForOption) {
+	
+	By byDropdownToggle = putility.getObject(dropDownTButton, replaceKeyForTButton, replaceValueForTButton);
+	By byOPtion = putility.getObject(dynamicLabelOption, replaceKeyForOption, replaceValueForOption);
+
+	if (replaceValueForOption != null && replaceValueForOption.trim().length() > 0) {
+		try{
+			WebElement dropDownButtonEle = driver.findElement(byDropdownToggle);			
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dropDownButtonEle);
+				
+			dropDownButtonEle.click();
+			sleep(700);
+		}catch(Exception e)
+		{				
+			test.log(LogStatus.FAIL, "Dropdown Toggle element should be clicked",
+					"ErrorInDropDown: Error occured while clicking Dropdown Toggle element '"+dropDownTButton+"'.    Expection: "+e+addMoreDetailsHTMLStrForDynamicElement(replaceKeyForTButton, replaceValueForTButton, byOPtion));
+			LOGGER.error("ErrorInDropDown: Error occured while clicking Dropdown Toggle element '"+dropDownTButton+"'.    Expection: "+e);
+			return false;
+		}
+		
+		try{
 				WebElement dynamicLabelOptionEle = driver.findElement(byOPtion);
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", dynamicLabelOptionEle);
 				sleep(500);
 				dynamicLabelOptionEle.click();
-				
-				test.log(LogStatus.PASS, dropDownButton + "Custom Drop down should be selected",
-						dropDownButton + " Custom Drop down value -'" + replaceValue + "'- selected sucessfully"+addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
-			
-			
-			}
-			return true;
-		} catch (Exception e) {
-			getScreenShot("Selecting  " + replaceValue);
-			LOGGER.info(dropDownButton + " Custom Dropdown selection failed..." + e);
-			printLogs(dropDownButton + " Custom Dropdown selection failed..." + e);
-			test.log(LogStatus.FAIL, dropDownButton + " Custom Drop down should be selected",
-					dropDownButton + " Custom Drop down value -'" + replaceValue + "'- could not be selected because -" + e + addMoreDetailsHTMLStrForDynamicElement(replaceKey, replaceValue, byOPtion));
-			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
-			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
-			return false;
+		}catch(Exception e)
+		{
+			LOGGER.error("ErrorInDropDown: Error occured while clicking Dropdown Option element '"+dynamicLabelOption+"' with value '"+replaceValueForOption+"'.    Expection: "+e);
+			test.log(LogStatus.FAIL, "Dropdown Option element should be clicked",
+					"ErrorInDropDown: Error occured while clicking Dropdown Option element '"+dynamicLabelOption+"' with value '"+replaceValueForOption+"'.    Expection: "+e+addMoreDetailsHTMLStrForDynamicElement(replaceKeyForOption, replaceValueForOption, byOPtion));
 		}
+		
+		test.log(LogStatus.PASS, dropDownTButton + "Custom Drop down should be selected",
+				dropDownTButton + " Custom Drop down with option -'" + dynamicLabelOption+"' [value='"+replaceValueForOption + "']- selected sucessfully. <br/>optionDetails: <br/>"+addMoreDetailsHTMLStrForDynamicElement(replaceKeyForOption, replaceValueForOption, byOPtion));
+			
 	}
-	
-	
+	return true;
+}
+
+
 	private String addMoreDetailsHTMLStrForDynamicElement(String replaceKeys, String replaceValues, By by)
 	{
 		
@@ -1468,6 +1557,58 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 	}
 
 
+	
+	public void checkMessage(String popupWindowField, String popupMessageField, String popupOkYesButton, String testStep, String expectedPopUpMsg) {
+		String popUpMsgText = null;
+		try {
+			WebElement popupWindowEle = driver.findElement(putility.getObject(popupWindowField));
+			if ((popupWindowEle).isDisplayed()) {
+				printLogs("POP Up has appeared now");
+				getScreenShot(testStep);
+				WebElement popupMessageEle = driver.findElement(putility.getObject(popupMessageField));
+				popUpMsgText = popupMessageEle.getText().trim();
+				if (popUpMsgText.equalsIgnoreCase(expectedPopUpMsg.trim())) {
+					test.log(LogStatus.PASS, "POP Up is expected at " + testStep,
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up is being displayed and it is  - "
+									+ popUpMsgText + "</span>");
+					Thread.sleep(5000);
+					driver.findElement(putility.getObject(popupOkYesButton)).click();
+					Thread.sleep(5000);
+					excelUtils.setCellData(sheetName, "PASS", uniqueDataId, "Result_Status");
+					excelUtils.setCellData(sheetName, popUpMsgText, uniqueDataId, "Result_Errors");
+					printLogs("Validation passed as Pop up is being displayed and it is  - " + popUpMsgText);
+				} else {
+					getScreenShot(testStep);
+					printLogs("Appeared Pop is  -" + popUpMsgText + "  but expected POP Up was " + expectedPopUpMsg);
+					excelUtils.setCellData(sheetName, popUpMsgText, uniqueDataId, "Result_Errors");
+					excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+					test.log(LogStatus.WARNING, "Expected POP Up is-  " + expectedPopUpMsg,
+							"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up appeared is different than expected.<br/>"
+									+ popUpMsgText + "</span>");
+					driver.findElement(putility.getObject(popupOkYesButton)).click();
+				}
+			} else {
+				excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+				excelUtils.setCellData(sheetName, popUpMsgText, uniqueDataId, "Result_Errors");
+				printLogs("Validation failed as expected Pop up did not get displayed");
+				test.log(LogStatus.FAIL, "POP Up is expected at " + testStep,
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Pop up did not get displayed</span>");
+			}
+		} catch (Exception e) {
+
+			getScreenShot("Error occured while checking popup message/ accepting popup. ");
+			LOGGER.info("Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			printLogs("Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			test.log(LogStatus.FAIL, "Popup message should be verified and accecpted",
+					"Error occured while checking popup message/ accepting popup.   Exception - " + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "" + e, uniqueDataId, "Result_Errors");
+
+		}
+	}
+	
+	
+	
 	public WebElement returnElement(String fieldName) {
 		WebElement objPath = null;
 		try {
@@ -1944,7 +2085,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		int historyValueCount = dropDwonValues.size();
 		for (int i = 1; i < historyValueCount; i++) {
 			String history = dropDwonValues.get(i);
-			SelectDropDownByVisibleText("History", history);
+			selectDropDownByVisibleText("History", history);
 			clickElement("Customer_EditBtn");
 			if (verifyHistoryTabFields("application_PopUpTitle")) {
 				if (i == 1) {
@@ -1978,7 +2119,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		int historyValueCount = dropDwonValues.size();
 		for (int i = 1; i < historyValueCount; i++) {
 			String history = dropDwonValues.get(i);
-			SelectDropDownByVisibleText("History", history);
+			selectDropDownByVisibleText("History", history);
 			clickElement("supplier_EditBtn");
 			if (verifyHistoryTabFields("application_PopUpTitle")) {
 				if (i == 1) {
@@ -2195,7 +2336,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		int historyValueCount = dropDwonValues.size();
 		for (int i = 1; i < historyValueCount; i++) {
 			String history = dropDwonValues.get(i);
-			SelectDropDownByVisibleText("CostManagement_Cost_CardLst", history);
+			selectDropDownByVisibleText("CostManagement_Cost_CardLst", history);
 			clickElement("CostManagement_DisplayBtn");
 			clickElement("CostManagement_SubmitBtn");
 			if (i == 1) {
@@ -2286,7 +2427,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 				String year = dates[2].trim();
 				WebElement dropDownField = driver.findElement(putility.getObject(filedname));
 				dropDownField.click();
-				SelectDropDownByVisibleText("selectYear", year);
+				selectDropDownByVisibleText("selectYear", year);
 				String month1 = mapMothNumberToAlphabet(month);
 				String getmonthVal = driver.findElement(By.xpath("//div[@class='ui-datepicker-title']/span")).getText()
 						.trim();
@@ -2474,9 +2615,12 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 
 		try {
 			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
-
-			if (!driver.findElement(locator).isSelected())
-				driver.findElement(locator).click();
+			WebElement element = driver.findElement(locator);
+			if (!element.isSelected())
+			{
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+				element.click();
+			}
 
 			printLogs(filedname + " checkbox has been selected");
 			test.log(LogStatus.PASS, "EXPECTED: checkbox " + filedname + " should be selected",
@@ -2497,15 +2641,64 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 
 		try {
 			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
-
-			if (driver.findElement(locator).isSelected())
-				driver.findElement(locator).click();
-
+			WebElement element = driver.findElement(locator);
+			if (element.isSelected())
+			{
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(locator));
+				element.click();
+			}
+			
 			printLogs(filedname + " checkbox has been unselected");
 			test.log(LogStatus.PASS, "EXPECTED: checkbox " + filedname + " should be unselected",
 					"Usage: <span style='font-weight:bold;'>ACTUAL:: checkbox " + filedname
 							+ " has been unselected</span>");
+			
+		} catch (Exception e) {
+			getScreenShot("Unselecting checkbox " + filedname);
+			LOGGER.info("Unselecting checkbox failed..." + e);
+			printLogs("Unselecting checkbox failed..." + e);
+			test.log(LogStatus.FAIL, "Unselecting checkbox failed", "Unselecting checkbox failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "Selecting checkbox failed " + e, uniqueDataId, "Result_Errors");
+		}
+	}
+	
+	public void selectCheckBoxWithoutAutoScroll(String filedname, String replaceKeys, String replaceValues) {
 
+		try {
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
+			WebElement element = driver.findElement(locator);
+			if (!element.isSelected())		
+				element.click();			
+
+			printLogs(filedname + " checkbox has been selected");
+			test.log(LogStatus.PASS, "EXPECTED: checkbox " + filedname + " should be selected",
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: checkbox " + filedname
+							+ " has been selected</span>");
+
+		} catch (Exception e) {
+			getScreenShot("selecting checkbox " + filedname);
+			LOGGER.info("Selecting checkbox failed..." + e);
+			printLogs("Selecting checkbox failed..." + e);
+			test.log(LogStatus.FAIL, "Selecting checkbox failed", "Selecting checkbox failed  because  -" + e);
+			excelUtils.setCellData(sheetName, "FAIL", uniqueDataId, "Result_Status");
+			excelUtils.setCellData(sheetName, "Selecting checkbox failed " + e, uniqueDataId, "Result_Errors");
+		}
+	}
+
+	public void unSelectCheckBoxWithoutAutoScroll(String filedname, String replaceKeys, String replaceValues) {
+
+		try {
+			By locator = putility.getObject(filedname, replaceKeys, replaceValues);
+			WebElement element = driver.findElement(locator);
+			if (element.isSelected())
+					element.click();
+			
+			printLogs(filedname + " checkbox has been unselected");
+			test.log(LogStatus.PASS, "EXPECTED: checkbox " + filedname + " should be unselected",
+					"Usage: <span style='font-weight:bold;'>ACTUAL:: checkbox " + filedname
+							+ " has been unselected</span>");
+			
 		} catch (Exception e) {
 			getScreenShot("Unselecting checkbox " + filedname);
 			LOGGER.info("Unselecting checkbox failed..." + e);
@@ -2644,6 +2837,8 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 			return "";
 		}
 	}
+
+	
 
 	
 	public void sendKeys(String filedname, String value, boolean clearAndSend) {
@@ -2798,6 +2993,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		try {
 			WebElement textField = driver.findElement(putility.getObject(fieldName));
 			String editFieldval = textField.getAttribute("readonly");
+			
 			if (textField.isDisplayed()
 					&& ("true".equalsIgnoreCase(editFieldval) || "readonly".equalsIgnoreCase(editFieldval))) {
 				printLogs(fieldName + " field is non editable");
@@ -2965,7 +3161,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		if (dropDownValues.trim().length() > 0) {
 			String[] data = dropDownValues.split(";");
 			for (String val : data)
-				SelectDropDownByVisibleText(fieldname, val);
+				selectDropDownByVisibleText(fieldname, val);
 		}
 	}
 
@@ -3353,7 +3549,7 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		int historyValueCount = dropDwonValues.size();
 		for (int i = 1; i < historyValueCount; i++) {
 			String history = dropDwonValues.get(i);
-			SelectDropDownByVisibleText("PriceHistoryLst", history);
+			selectDropDownByVisibleText("PriceHistoryLst", history);
 			clickElement("DisplayBtn");
 			clickElement("SubmitBtn");
 			if (i == 1) {
@@ -3522,6 +3718,24 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		return strText;
 	}
 
+	public String getChkBoxStatus(String fieldName, String replaceKeys, String replaceValues) {
+		WebElement chkBoxField = null;
+		String strText = null;
+		try {
+			chkBoxField = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+			if (chkBoxField.isSelected())
+				strText = "Y";
+			else
+				strText = "N";
+			LOGGER.info("Check box status is " + strText);
+		} catch (Exception e) {
+			LOGGER.info("Exception in getting value from drop down:  " + e);
+
+		}
+	
+		return strText;
+	}
+	
 	public String getDropDownMultiSelectedVal(String fieldName, String val) {
 		WebElement dropDownField = null;
 		String allSelectedOptions = "";
@@ -3667,6 +3881,138 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 		}
 		return list1;
 
+	}
+	
+	
+	public List<String> getMultipleTxtBoxValue(String fieldName) {
+		
+
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			//list1.add(item.getText());
+			list1.add(item.getAttribute("value").trim());			
+		}
+		return list1;
+
+	}
+	
+	public List<String> getMultipleTxtBoxValueAlongWithEnabledStatus(String fieldName, boolean includeEnabledStatus) {
+		
+
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			if(includeEnabledStatus)
+				list1.add(item.getAttribute("value").trim()+"~SplitDelimit~"+(item.isEnabled()?"Y":"N"));	
+			else
+				list1.add(item.getAttribute("value").trim());	
+		}
+		return list1;
+
+	}
+	
+	public String getTxtBoxValueAlongWithEnabledStatus(String fieldName, String replaceKeys, String replaceValues, boolean includeEnabledStatus) {
+		
+		WebElement item = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+		
+		if(includeEnabledStatus)
+			return (item.getAttribute("value").trim()+"~SplitDelimit~"+(item.isEnabled()?"Y":"N"));
+		else
+			return item.getAttribute("value").trim();
+
+	}
+	
+
+	
+	public List<String> getMultipleChkBoxStatusAlongWithEnabledStatus(String fieldName, boolean includeEnabledStatus) {
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+			
+			if(includeEnabledStatus)
+				list1.add((item.isSelected()?"Y":"N")+"~SplitDelimit~"+(item.isEnabled()?"Y":"N"));			
+			else
+				list1.add((item.isSelected()?"Y":"N"));	
+		}
+		return list1;
+	}
+
+	public String getChkBoxStatusAlongWithEnabledStatus(String fieldName, String replaceKeys, String replaceValues, boolean includeEnabledStatus) {
+		
+		WebElement item = driver.findElement(putility.getObject(fieldName, replaceKeys, replaceValues));
+		
+		if(includeEnabledStatus)
+			return (item.isSelected()?"Y":"N")+"~SplitDelimit~"+(item.isEnabled()?"Y":"N");			
+		else
+			return (item.isSelected()?"Y":"N");
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	public List<String> getMultipleChkBoxStatus(String fieldName) {
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			if (item.isSelected())
+				list1.add("Y");
+			else
+				list1.add("N");
+				
+		}
+		return list1;
+	}
+
+	public List<String> getMultipleEnabledStatus(String fieldName) {
+		List<String> list1 = new LinkedList<>();
+
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		Iterator<WebElement> iter = listOfElement.iterator();
+
+		// this will check whether list has some element or not
+		while (iter.hasNext()) {
+			WebElement item = iter.next();
+
+			if (item.isEnabled())
+				list1.add("Y");
+			else
+				list1.add("N");
+				
+		}
+		return list1;
+	}
+	
+	public int ElementsSizeCount(String fieldName) {
+		List<WebElement> listOfElement = driver.findElements(putility.getObject(fieldName));
+		return listOfElement.size();
 	}
 	
 	public List<String> ElementsToListWithTrimAndLineBreakRemovedAtEnd(String fieldName) {
@@ -3816,18 +4162,18 @@ public boolean SelectDropDownByVisibleTextCustomMMX3(String dropDownButton, Stri
 	}
 	
 	
-	public void executeJavaScrpit(String scriptStr)
+	public Object executeJavaScrpit(String scriptStr)
 	{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript(scriptStr);
+		return jse.executeScript(scriptStr);
 	}
 	
-	public void executeJavaScrpit(String fieldName, String scriptStr)
+	public Object executeJavaScrpit(String fieldName, String scriptStr)
 	{
 		
 		WebElement ele = driver.findElement(putility.getObject(fieldName));
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript(scriptStr, ele);
+		return jse.executeScript(scriptStr, ele);
 	}
 	
 	

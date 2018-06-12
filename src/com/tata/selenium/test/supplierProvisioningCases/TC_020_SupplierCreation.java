@@ -95,11 +95,11 @@ public class TC_020_SupplierCreation implements ApplicationConstants {
 		cu.SelectDropDownByVisibleTextCustomMMX("nws_supplier_name", "nws_Supplier_Name_DropDown_SearchTextbox", "nws_Supplier_Name_DropDown_Dynamic_LabelOption"
 				, "$suppliername$", dataMap.get("Supplier_Name"));
 		
-		cu.SelectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
-		cu.SelectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
-		cu.SelectDropDownByVisibleText("nws_supplier_Service", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("nws_supplier_connectivityType", dataMap.get("Connectivity_Type"));
-		cu.SelectDropDownByVisibleText("nws_supplier_Security", dataMap.get("Security"));
+		cu.selectDropDownByVisibleText("nws_supplier_Category", dataMap.get("Supplier_Category"));
+		cu.selectDropDownByVisibleText("nws_supplier_Currency", dataMap.get("Supplier_Currency"));
+		cu.selectDropDownByVisibleText("nws_supplier_Service", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("nws_supplier_connectivityType", dataMap.get("Connectivity_Type"));
+		cu.selectDropDownByVisibleText("nws_supplier_Security", dataMap.get("Security"));
 		//Entering data in text field
 		cu.setData("nws_supplier_Acc_name" , dataMap.get("Supplier_Account_Name"));
 		cu.clickElement("nws_CreateBtn");		

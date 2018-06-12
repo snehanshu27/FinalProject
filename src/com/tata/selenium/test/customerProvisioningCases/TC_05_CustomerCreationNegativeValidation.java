@@ -85,12 +85,12 @@ public class TC_05_CustomerCreationNegativeValidation implements ApplicationCons
 		cu.newWindowHandles(parentWindow);
 		
 		//Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("nws_customer_name", dataMap.get("Customer_Name"));
-		cu.SelectDropDownByVisibleText("nws_customer_Category", dataMap.get("Customer_Category"));
-		cu.SelectDropDownByVisibleText("nws_customer_Currency", dataMap.get("Customer_Currency"));
-		cu.SelectDropDownByVisibleText("nws_customer_Service", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("nws_customer_connectivityType", dataMap.get("Connectivity_Type"));
-		cu.SelectDropDownByVisibleText("nws_customer_Security", dataMap.get("Security"));
+		cu.selectDropDownByVisibleText("nws_customer_name", dataMap.get("Customer_Name"));
+		cu.selectDropDownByVisibleText("nws_customer_Category", dataMap.get("Customer_Category"));
+		cu.selectDropDownByVisibleText("nws_customer_Currency", dataMap.get("Customer_Currency"));
+		cu.selectDropDownByVisibleText("nws_customer_Service", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("nws_customer_connectivityType", dataMap.get("Connectivity_Type"));
+		cu.selectDropDownByVisibleText("nws_customer_Security", dataMap.get("Security"));
 		
 		//Entering data in text field
 		cu.setData("nws_customer_Acc_name" , dataMap.get("Customer_Account_Name"));

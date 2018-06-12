@@ -112,14 +112,14 @@ public class TC_05_MNPDisabling implements ApplicationConstants {
 		String winHandleAfter = driver.getWindowHandle();
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
 		
 		
 		//cu.waitForPageLoad("");
 		// click on display button
 		cu.clickElement("Product_Provisioning_DisplayBtn");
 		
-		cu.SelectDropDownByVisibleText("Product_Provisioning_MNPFlag", dataMap.get("Product_Provisioning_MNPFlag"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_MNPFlag", dataMap.get("Product_Provisioning_MNPFlag"));
 		cu.waitForPageLoad("");
 		
 		String disAtt = cu.getAttribute("allCoverageCheckBoxes", "disabled");

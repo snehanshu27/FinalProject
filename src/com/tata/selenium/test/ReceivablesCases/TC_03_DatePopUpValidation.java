@@ -91,11 +91,11 @@ public class TC_03_DatePopUpValidation implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// passing data
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
-		cu.SelectDropDownByVisibleText("CustomerLst", dataMap.get("CustomerLst"));
-		cu.SelectDropDownByVisibleText("CustomerAccLst", dataMap.get("CustomerAccLst"));
-		cu.SelectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
-		cu.SelectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("CustomerLst", dataMap.get("CustomerLst"));
+		cu.selectDropDownByVisibleText("CustomerAccLst", dataMap.get("CustomerAccLst"));
+		cu.selectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
+		cu.selectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
 		
 		cu.clickElement("FromDate");
 		cu.selectPreviousCalendarDate("FromDate", dataMap.get("FromDate"));

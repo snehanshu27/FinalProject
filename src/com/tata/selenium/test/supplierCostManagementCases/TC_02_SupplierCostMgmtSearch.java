@@ -89,15 +89,15 @@ public class TC_02_SupplierCostMgmtSearch implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// Select the parameters
-		cu.SelectDropDownByVisibleText("CostManagement_Supplier_NameLst", dataMap.get("CostManagement_Supplier_NameLst"));
+		cu.selectDropDownByVisibleText("CostManagement_Supplier_NameLst", dataMap.get("CostManagement_Supplier_NameLst"));
 		cu.validatePopulatedDropDownValue("CostManagement_Supplier_Acc_NameLst", dataMap.get("CostManagement_Supplier_Acc_NameLst"));
 		cu.checkNonEditableBox("CostManagement_CurrencyTxt",dataMap.get("CostManagement_CurrencyTxt"));
 		 	
 		cu.clickElement("CostManagement_DisplayBtn");
 		
-		cu.SelectDropDownByVisibleText("CostManagement_Destination_FilterLst", dataMap.get("CostManagement_Destination_FilterLst"));
-		cu.SelectDropDownByVisibleText("CostManagement_Mcc_FilterLst", dataMap.get("CostManagement_Mcc_FilterLst"));
-		cu.SelectDropDownByVisibleText("CostManagement_Mnc_FilterLst", dataMap.get("CostManagement_Mnc_FilterLst"));
+		cu.selectDropDownByVisibleText("CostManagement_Destination_FilterLst", dataMap.get("CostManagement_Destination_FilterLst"));
+		cu.selectDropDownByVisibleText("CostManagement_Mcc_FilterLst", dataMap.get("CostManagement_Mcc_FilterLst"));
+		cu.selectDropDownByVisibleText("CostManagement_Mnc_FilterLst", dataMap.get("CostManagement_Mnc_FilterLst"));
 		cu.clickElement("CostManagement_FilterBtn");
 		
 		//Click Cancel button

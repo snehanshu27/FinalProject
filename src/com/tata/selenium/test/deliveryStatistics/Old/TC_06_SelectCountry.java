@@ -102,7 +102,7 @@ public class TC_06_SelectCountry implements ApplicationConstants {
 //				"No data for the selected input parameters.");
 
 		//Select dimension dropdown based on data sheet
-		cu.SelectDropDownByVisibleText("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
+		cu.selectDropDownByVisibleText("DeliveryStat_DimensionLst", dataMap.get("Dimension"));
 		cu.waitForPageLoad("DeliveryStatics");
 		
 		//validate table headernames
@@ -112,35 +112,35 @@ public class TC_06_SelectCountry implements ApplicationConstants {
 		if(!dataMap.get("DeliveryStat_Customer_NameLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_Customer_NameLst")))
 		{
 			cu.deselectDropDownByVisibleText("DeliveryStat_Customer_NameLst", "ALL");
-			cu.SelectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_Customer_NameLst", dataMap.get("DeliveryStat_Customer_NameLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		
 		if(!dataMap.get("DeliveryStat_Supplier_NameLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_Supplier_NameLst")))
 		{
 			cu.deselectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", "ALL");
-			cu.SelectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_Supplier_NameLst", dataMap.get("DeliveryStat_Supplier_NameLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		
 		if(!dataMap.get("DeliveryStat_CountryLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_CountryLst")))
 		{
 			cu.deselectDropDownByVisibleText("DeliveryStat_CountryLst", "ALL");
-			cu.SelectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_CountryLst", dataMap.get("DeliveryStat_CountryLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		
 		if(!dataMap.get("DeliveryStat_DestinationLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_DestinationLst")))
 		{
 			cu.deselectDropDownByVisibleText("DeliveryStat_DestinationLst", "ALL");
-			cu.SelectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_DestinationLst", dataMap.get("DeliveryStat_DestinationLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		
 		if(!dataMap.get("DeliveryStat_InstanceLst").trim().isEmpty() && !"ALL".equalsIgnoreCase(dataMap.get("DeliveryStat_InstanceLst")))
 		{
 			cu.deselectDropDownByVisibleText("DeliveryStat_InstanceLst", "ALL");
-			cu.SelectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
+			cu.selectDropDownByVisibleText("DeliveryStat_InstanceLst", dataMap.get("DeliveryStat_InstanceLst"));
 			cu.clickElement("DeliveryStatisticsPage");
 		}
 		

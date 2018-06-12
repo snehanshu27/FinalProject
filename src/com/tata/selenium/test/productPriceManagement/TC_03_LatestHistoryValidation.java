@@ -87,8 +87,8 @@ public class TC_03_LatestHistoryValidation implements ApplicationConstants {
 		cu.SwitchFrames("target");
 		
 		
-		cu.SelectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
-		cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+		cu.selectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
+		cu.selectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
 		cu.clickElement("DisplayBtn");
 		cu.waitForPageLoad("ProductPriceManagement");
 		
@@ -106,7 +106,7 @@ public class TC_03_LatestHistoryValidation implements ApplicationConstants {
 		 //Validation 2: Checking out of 5 fields available, except first remaining all should be non editable
 		 for(int i=1;i<historyValueCount;i++){ 
 				String History= retStrOPs.get(i);
-				cu.SelectDropDownByVisibleText("PriceCardLst", History);
+				cu.selectDropDownByVisibleText("PriceCardLst", History);
 				cu.clickElement("DisplayBtn");
 				cu.waitForPageLoad("");
 				cu.clickElement("SubmitBtn");

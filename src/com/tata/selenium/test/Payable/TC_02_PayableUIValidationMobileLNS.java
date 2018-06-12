@@ -102,7 +102,7 @@ public class TC_02_PayableUIValidationMobileLNS implements ApplicationConstants 
 		cu.SwitchFrames("target");
 		
 		//Select service
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
 		
 		// Validating all editable drop down
 		cu.checkEditableDropDown("SupplierLst", dataMap.get("SupplierLst"));

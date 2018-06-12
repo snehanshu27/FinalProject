@@ -101,11 +101,11 @@ public class TC_004_SupplierCoverageMTSMSEditableFunctionality implements Applic
 		cu.SwitchFrames("target");
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
 		
 //		 //select history as per data
@@ -232,7 +232,7 @@ public class TC_004_SupplierCoverageMTSMSEditableFunctionality implements Applic
 								+ (coverageHistories.size() - 1) + "</span>");
 
 				for (int i = 1; i < coverageHistories.size(); i++) {
-					cu.SelectDropDownByVisibleText("supplierCoverageHistoryLst", coverageHistories.get(i));
+					cu.selectDropDownByVisibleText("supplierCoverageHistoryLst", coverageHistories.get(i));
 					cu.clickElement("displayBtn");
 					cu.waitForPageLoad("");
 					String disAtt = cu.getAttribute("dynamicCoverageCheckbox", "disabled", "$destinationVal$",
@@ -297,10 +297,10 @@ public class TC_004_SupplierCoverageMTSMSEditableFunctionality implements Applic
 		cu.SwitchFrames("target");
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
-		cu.SelectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
+		cu.selectDropDownByVisibleText("supplierServiceLst", dataMap.get("Service"));
+		cu.selectDropDownByVisibleText("supplierNameLst", dataMap.get("Supplier_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
-		cu.SelectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
+		cu.selectDropDownByVisibleText("supplierAccNameLst", dataMap.get("Supplier_Account_Name"));
 		cu.waitForPageLoad("SupplierCoverage");
 
 		cu.clickElement("displayBtn");

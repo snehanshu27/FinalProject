@@ -92,9 +92,9 @@ public class TC_02_ContactManagementCSVExportValidation implements ApplicationCo
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("ContactManagement_CustomerNameLst", dataMap.get("CustomerNameLst"));
+		cu.selectDropDownByVisibleText("ContactManagement_CustomerNameLst", dataMap.get("CustomerNameLst"));
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.SelectDropDownByVisibleText("ContactManagement_CustomerAccountNameLst", dataMap.get("CustomerAccountNameLst"));
+		cu.selectDropDownByVisibleText("ContactManagement_CustomerAccountNameLst", dataMap.get("CustomerAccountNameLst"));
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.clickElement("ContactManagement_DisplayButton");
 		cu.waitForPageLoadWithSleep("", 500);

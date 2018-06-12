@@ -95,11 +95,11 @@ public class TC_05_RAValidateDataMTSMS implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// passing data
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
-		cu.SelectDropDownByVisibleText("CustomerLst", dataMap.get("CustomerLst"));
-		cu.SelectDropDownByVisibleText("CustomerAccLst", dataMap.get("CustomerAccLst"));
-		cu.SelectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
-		cu.SelectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("CustomerLst", dataMap.get("CustomerLst"));
+		cu.selectDropDownByVisibleText("CustomerAccLst", dataMap.get("CustomerAccLst"));
+		cu.selectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
+		cu.selectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
 		
 	System.out.println(dataMap.get("FromDate"));
 			System.out.println(dataMap.get("ToDate"));

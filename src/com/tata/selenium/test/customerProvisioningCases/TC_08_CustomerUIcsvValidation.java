@@ -79,8 +79,8 @@ public class TC_08_CustomerUIcsvValidation implements ApplicationConstants {
 		cu.SwitchFrames("bottom");
 		cu.SwitchFrames("target");
 		
-		cu.SelectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
-		cu.SelectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
+		cu.selectDropDownByVisibleText("Customer_Name", dataMap.get("Customer_Name"));
+		cu.selectDropDownByVisibleText("Customer_Account_Name" , dataMap.get("Customer_Account_Name"));
 		cu.clickElement("Customer_DisplayBtn");
 		cu.waitForPageLoad("");
 		
@@ -99,9 +99,9 @@ public class TC_08_CustomerUIcsvValidation implements ApplicationConstants {
 		cu.waitForPageLoad("");
 		
 		//Selecting values from main Tab
-		cu.SelectDropDownByVisibleText("Instance", dataMap.get("Instance"));
-		cu.SelectDropDownByVisibleText("History", dataMap.get("History"));
-		cu.SelectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
+		cu.selectDropDownByVisibleText("Instance", dataMap.get("Instance"));
+		cu.selectDropDownByVisibleText("History", dataMap.get("History"));
+		cu.selectDropDownByVisibleText("Account_Status", dataMap.get("Account_Status"));
 		
 		
 		String Supplier_ID=cu.getTxtBoxValue("Customer_ID", dataMap.get("Customer_ID"));

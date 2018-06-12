@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.apache.poi.hwmf.record.HwmfEscape.EscapeFunction;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -27,8 +26,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.google.gson.JsonParser;
-import com.google.gson.JsonStreamParser;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -114,7 +111,7 @@ public class TC_03_EditRule implements ApplicationConstants {
 				
 				
 				if(!dataMap.get("TON_BL_Cond").trim().isEmpty())					
-					cu.SelectDropDownByVisibleText("filteringRules_EditableRow_TON_BL_CondLst", dataMap.get("TON_BL_Cond"));
+					cu.selectDropDownByVisibleText("filteringRules_EditableRow_TON_BL_CondLst", dataMap.get("TON_BL_Cond"));
 				
 				if(!dataMap.get("OA_BL_Cond").trim().isEmpty())
 					cu.setData("filteringRules_EditableRow_OA_BL_CondTxt", dataMap.get("OA_BL_Cond"));
@@ -285,17 +282,17 @@ public class TC_03_EditRule implements ApplicationConstants {
 	
 	void selectMainDropdowns()
 	{
-		cu.SelectDropDownByVisibleText("filteringRules_CountryLst", dataMap.get("Country"));
+		cu.selectDropDownByVisibleText("filteringRules_CountryLst", dataMap.get("Country"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_DestinationLst", dataMap.get("Destination"));
+		cu.selectDropDownByVisibleText("filteringRules_DestinationLst", dataMap.get("Destination"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_SupplierNameLst", dataMap.get("SupplierName"));
+		cu.selectDropDownByVisibleText("filteringRules_SupplierNameLst", dataMap.get("SupplierName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
+		cu.selectDropDownByVisibleText("filteringRules_SupplierAccNameLst", dataMap.get("SupplierAccountName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_CustomerNameLst", dataMap.get("CustomerName"));
+		cu.selectDropDownByVisibleText("filteringRules_CustomerNameLst", dataMap.get("CustomerName"));
 		cu.waitForPageLoadWithSleep("", 100);
-		cu.SelectDropDownByVisibleText("filteringRules_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
+		cu.selectDropDownByVisibleText("filteringRules_CustomerAccNameLst", dataMap.get("CustomerAccountName"));
 		cu.waitForPageLoadWithSleep("", 100);
 	}
 	

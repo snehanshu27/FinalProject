@@ -110,7 +110,7 @@ public class TC_02_MNPUpdation implements ApplicationConstants {
 		String winHandleAfter = driver.getWindowHandle();
 
 		// Selecting required values from drop down based on input
-		cu.SelectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
+		cu.selectDropDownByVisibleText("Product_Provisioning_ProductNameLst", dataMap.get("Product_Provisioning_ProductNameLst"));
 		cu.waitForPageLoad("");
 		//cu.SelectDropDownByVisibleText("Product_Provisioning_MNPFlag", dataMap.get("Product_Provisioning_MNPFlag"));
 		//cu.waitForPageLoad("");

@@ -100,11 +100,11 @@ public class TC_03_PayableDatePopUpValidation implements ApplicationConstants {
 		cu.SwitchFrames("target");
 
 		// passing data
-		cu.SelectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
-		cu.SelectDropDownByVisibleText("SupplierLst", dataMap.get("SupplierLst"));
-		cu.SelectDropDownByVisibleText("SupplierAccLst", dataMap.get("SupplierAccLst"));
-		cu.SelectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
-		cu.SelectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
+		cu.selectDropDownByVisibleText("ServiceLst", dataMap.get("ServiceLst"));
+		cu.selectDropDownByVisibleText("SupplierLst", dataMap.get("SupplierLst"));
+		cu.selectDropDownByVisibleText("SupplierAccLst", dataMap.get("SupplierAccLst"));
+		cu.selectDropDownByVisibleText("CountryLst", dataMap.get("CountryLst"));
+		cu.selectDropDownByVisibleText("DestinationLst", dataMap.get("DestinationLst"));
 		
 		cu.clickElement("FromDate");
 		cu.selectPreviousCalendarDate("FromDate", dataMap.get("FromDate"));

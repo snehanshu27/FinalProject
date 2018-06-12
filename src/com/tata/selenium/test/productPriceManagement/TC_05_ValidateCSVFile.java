@@ -83,8 +83,8 @@ public class TC_05_ValidateCSVFile implements ApplicationConstants {
 		cu.SwitchFrames("target");
 	
 		//Validating all fields
-		cu.SelectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
-		cu.SelectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
+		cu.selectDropDownByVisibleText("Service_NameLst", dataMap.get("Service_NameLst"));
+		cu.selectDropDownByVisibleText("Product_NameLst", dataMap.get("Product_NameLst"));
 		cu.clickElement("DisplayBtn");
 		cu.waitForPageLoad("ProductPriceManagement");
 		
@@ -98,10 +98,10 @@ public class TC_05_ValidateCSVFile implements ApplicationConstants {
 		
 		//Giving option to display result based on filter
 		if(!dataMap.get("CountryFilterLst").isEmpty() || !dataMap.get("DestinationFilterLst").isEmpty()){
-			cu.SelectDropDownByVisibleText("CountryFilterLst", dataMap.get("CountryFilterLst"));
-			cu.SelectDropDownByVisibleText("DestinationFilterLst", dataMap.get("DestinationFilterLst"));
-			cu.SelectDropDownByVisibleText("Mcc_FilterLst", dataMap.get("Mcc_FilterLst"));
-			cu.SelectDropDownByVisibleText("Mnc_FilterLst", dataMap.get("Mnc_FilterLst"));
+			cu.selectDropDownByVisibleText("CountryFilterLst", dataMap.get("CountryFilterLst"));
+			cu.selectDropDownByVisibleText("DestinationFilterLst", dataMap.get("DestinationFilterLst"));
+			cu.selectDropDownByVisibleText("Mcc_FilterLst", dataMap.get("Mcc_FilterLst"));
+			cu.selectDropDownByVisibleText("Mnc_FilterLst", dataMap.get("Mnc_FilterLst"));
 			cu.setData("CriteriaTxt", dataMap.get("CriteriaTxt"));
 			cu.clickElement("FilterBtn");
 			cu.waitForPageLoad("");
