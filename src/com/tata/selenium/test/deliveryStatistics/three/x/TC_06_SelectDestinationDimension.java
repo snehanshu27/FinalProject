@@ -41,8 +41,8 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_06_SelectDestination implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_06_SelectDestination.class.getName());
+public class TC_06_SelectDestinationDimension implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_06_SelectDestinationDimension.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
 
 	String properties = "./data/DeliveryStatistics3x.properties";
@@ -57,7 +57,7 @@ public class TC_06_SelectDestination implements ApplicationConstants {
 	public void DO(String uniqueDataId, String testCaseId) {
 		// Starting the extent report
 		test = extent
-				.startTest("Execution triggered for - "+TC_06_SelectDestination.class.getName()+" -with TestdataId: " + uniqueDataId);
+				.startTest("Execution triggered for - "+TC_06_SelectDestinationDimension.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen3.x";
 		
 		// Reading excel values
@@ -109,12 +109,12 @@ public class TC_06_SelectDestination implements ApplicationConstants {
 		//cu.executeInjectJQuery();
 		cu.waitForPageLoadWithSleep("DeliveryStatisticsPage", 20);
 		cu.waitForElementVisiblity("DeliveryStat_SubmitButton", 180);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 180);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		//cu.checkElementPresent("DeliveryStat_SubmitButton");
 		selectMainFilter();
 		cu.clickElement("DeliveryStat_SubmitButton");
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 180);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 				
 		collapseMainFilter();
 		//Table header validation
@@ -223,7 +223,7 @@ public class TC_06_SelectDestination implements ApplicationConstants {
 		cu.clickElement("drillDownSuppAccWin_ExportButton");
 		cu.moveAndClick("drillDownSuppAccWin_ExportAllRecords");
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 180);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		cu.sleep(2000);
 		String csvFilePath = cu.getDownlaodedFileName();
 
@@ -527,7 +527,7 @@ public class TC_06_SelectDestination implements ApplicationConstants {
 //		cu.clickElement("dynamicCustAccMainTableLink", "$customerAccName$", cusAccVal);
 		cu.clickElementAfterScrollToView("dynamicDestinationMainTableLink", "$destinationName$", destinationVal);
 		cu.waitForPageLoadWithSleep("", 500);
-		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 180);
+		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		test.log(LogStatus.INFO, "######### Validating 1st drilldown ( Destination Distribution Page ) for Customer account: "+destinationVal);
 		
 		if(!cu.elementDisplayed("drillDownDestinationWin"))
@@ -757,7 +757,7 @@ public class TC_06_SelectDestination implements ApplicationConstants {
 		  	cu.sleep(200);
 		  	cu.clickElement(locatorFieldNameForExportAllRecords);
 			cu.waitForPageLoadWithSleep("", 500);
-			cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 180);
+			cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 			cu.sleep(2000);
 			String csvFilePath = cu.getDownlaodedFileName();
 			

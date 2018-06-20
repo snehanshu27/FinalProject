@@ -41,8 +41,8 @@ import com.tata.selenium.utils.ExcelUtils;
 import com.tata.selenium.utils.ExtReport;
 import com.tata.selenium.utils.Log;
 
-public class TC_04_SelectCustomerAccount implements ApplicationConstants {
-	private static final Logger LOGGER = Logger.getLogger(TC_04_SelectCustomerAccount.class.getName());
+public class TC_05_SelectSupplierDimension implements ApplicationConstants {
+	private static final Logger LOGGER = Logger.getLogger(TC_05_SelectSupplierDimension.class.getName());
 	Map<String, String> dataMap = new HashMap<>();
 
 	String properties = "./data/DeliveryStatistics3x.properties";
@@ -57,7 +57,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	public void DO(String uniqueDataId, String testCaseId) {
 		// Starting the extent report
 		test = extent
-				.startTest("Execution triggered for - "+TC_04_SelectCustomerAccount.class.getName()+" -with TestdataId: " + uniqueDataId);
+				.startTest("Execution triggered for - "+TC_05_SelectSupplierDimension.class.getName()+" -with TestdataId: " + uniqueDataId);
 		String sheetName = "Delivery_Statistics_Screen3.x";
 		
 		// Reading excel values
@@ -118,11 +118,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 				
 		collapseMainFilter();
 		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in Customer Main Page");		
-		validateTableHeaders(dataMap.get("MainTableHeaders"), "Customer Main Page", "allMainTableHeaders");
+		test.log(LogStatus.INFO, "Validating Table Headers in Supplier Dimension Main Page");		
+		validateTableHeaders(dataMap.get("MainTableHeaders"), "Supplier Dimension Main Page", "allMainTableHeaders");
 		
 		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in Customer Main Page");
+		test.log(LogStatus.INFO, "Validating CSV and UI table data in Supplier Dimension Main Page");
 		
 		//Get UI table data
 		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_Main = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
@@ -135,15 +135,15 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
 				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
 					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_Main, "MMX-DeliveryStatisticsData*.csv", "Customer Main Page", 17, "DeliveryStat_ExportButton", "DeliveryStat_ExportAllRecords");
+			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_Main, "MMX-DeliveryStatisticsData*.csv", "Supplier Dimension Main Page", 17, "DeliveryStat_ExportButton", "DeliveryStat_ExportAllRecords");
 		else
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_Main, "MMX-DeliveryStatisticsData*.csv", "Customer Main Page", 17, "DeliveryStat_ExportButton", "DeliveryStat_ExportAllRecords");
+			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_Main, "MMX-DeliveryStatisticsData*.csv", "Supplier Dimension Main Page", 17, "DeliveryStat_ExportButton", "DeliveryStat_ExportAllRecords");
 						
-		List<String> customerAccValues = getColoumnListFromRawTableData(uiTableDataAlongWithHeadersWithoutMapping_Main, "Customer Account");
+		List<String> supplierAccValues = getColoumnListFromRawTableData(uiTableDataAlongWithHeadersWithoutMapping_Main, "Supplier Account");
 
-		for (String cusAccVal : customerAccValues) 
+		for (String suppAccVal : supplierAccValues) 
 		{
-			mainPageAndSubsequenceDrillDownValidation(cusAccVal, uiTableDataAlongWithHeadersWithoutMapping_Main);
+			mainPageAndSubsequenceDrillDownValidation(suppAccVal, uiTableDataAlongWithHeadersWithoutMapping_Main);
 		}
 
 		test = cu.getExTest();
@@ -192,7 +192,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	public Map<String, Double> getUIValesMainPage(String customerAccValue, List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_Main)  {
 		Map<String, Double> ret = new HashMap<>();
 
-		Map<String, Map<String, String>> tableMap = convertListTableDataToMapOfMapData(uiTableDataAlongWithHeadersWithoutMapping_Main, "Customer Account");
+		Map<String, Map<String, String>> tableMap = convertListTableDataToMapOfMapData(uiTableDataAlongWithHeadersWithoutMapping_Main, "Supplier Account");
 		try {			
 			ret.put("Attempted Success", Double.valueOf(tableMap.get(customerAccValue).get("Attempted Success").replace(",", "")));
 			ret.put("Attempted Failure",Double.valueOf(tableMap.get(customerAccValue).get("Attempted Failure").replace(",", "")));
@@ -219,8 +219,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 
 	public Map<String, Integer> exportCSVAndGetCoverageFieldsUpdated()
     {
-		cu.clickElement("drillDownCusAccWin_ExportButton");
-		cu.moveAndClick("drillDownCusAccWin_ExportAllRecords");
+		cu.clickElement("drillDownSuppAccWin_ExportButton");
+		cu.moveAndClick("drillDownSuppAccWin_ExportAllRecords");
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		cu.sleep(2000);
@@ -322,12 +322,21 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		expandMainFilter();
 		//Select filters
 		//Select ServiceLst filter
-		if(!dataMap.get("DeliveryStat_ServiceLst").trim().isEmpty())
-			
+		if(!dataMap.get("DeliveryStat_ServiceLst").trim().isEmpty())			
 			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_ServiceListToggleDiv","DeliveryStat_ServiceListDynamicOption", "$optionvalue$", dataMap.get("DeliveryStat_ServiceLst"));
 					
 			cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
 		    
+		//Select Dimension filter
+		if(!dataMap.get("Dimension").trim().isEmpty()){
+			
+			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_DimensionListToggleDiv","DeliveryStat_DimensionListDynamicOption", "$optionvalue$", dataMap.get("Dimension"));
+
+		cu.clickElement("DeliveryStatisticsPage");
+		cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
+		}	
+			
+			
 		  //Select Product filter
 			if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()) 
 					&& !"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
@@ -375,14 +384,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}
 		}
 		
-		//Select Dimension filter
-		if(!dataMap.get("Dimension").trim().isEmpty()){
-			
-			cu.selectDropDownByVisibleTextCustomMMX3("DeliveryStat_DimensionListToggleDiv","DeliveryStat_DimensionListDynamicOption", "$optionvalue$", dataMap.get("Dimension"));
-
-		cu.clickElement("DeliveryStatisticsPage");
-		cu.waitUntilElemetDisappearsMMX3("DeliveryStatisticsPageLoad");
-		}	
+		
 		//Select Country filter
 		if(!dataMap.get("DeliveryStat_CountryLst").trim().isEmpty())
 		{
@@ -456,125 +458,110 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 }
 	
 	
-	void mainPageAndSubsequenceDrillDownValidation(String cusAccVal, List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_Main)
+	void mainPageAndSubsequenceDrillDownValidation(String suppAccVal, List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_Main)
 	{
-		test.log(LogStatus.INFO, "$$$$$$$$$$$ Validating for customer account: "+cusAccVal);
-		Map<String, Double> uiDataMainPage = getUIValesMainPage(cusAccVal, uiTableDataAlongWithHeadersWithoutMapping_Main);
+		test.log(LogStatus.INFO, "$$$$$$$$$$$ Validating for supplier account: "+suppAccVal);
+		Map<String, Double> uiDataMainPage = getUIValesMainPage(suppAccVal, uiTableDataAlongWithHeadersWithoutMapping_Main);
 		
 		//checking % and enroute valdiations on main page		
 		
 		Double submittedPercentageExpected = calculatePercentage(uiDataMainPage.get("Submitted Success"), uiDataMainPage.get("Attempted Success"));
 		Double enrouteExpected = ( uiDataMainPage.get("Submitted Success") - (uiDataMainPage.get("Delivered Success") + uiDataMainPage.get("Delivered Failure")) );
 		Double deliveredPercentageExpected = calculatePercentage(uiDataMainPage.get("Delivered Success"), uiDataMainPage.get("Submitted Success"));
-		Double failedPercentageExpected = calculatePercentage(uiDataMainPage.get("Delivered Failure"), uiDataMainPage.get("Submitted Success"));
 		
 		Double submittedPercentageActual = uiDataMainPage.get("Submitted Percentage");
 		Double enrouteActual = uiDataMainPage.get("Enroute");
 		Double deliveredPercentageActual = uiDataMainPage.get("Delivered Percentage");
-		Double failedPercentageActual = uiDataMainPage.get("Dummy_XXXXXXXXXXXXXXXXXXXXX");
 		
 		//main page Submitted Percentage validation 
 		if(compareDoubleWithTwoDigit(roundDobule(submittedPercentageExpected), submittedPercentageActual))
 		{	
 			test.log(LogStatus.PASS,
-					"EXPECTED: Submitted Percentage (main page)for Customer Account: "+cusAccVal+" should be "+roundDobule(submittedPercentageExpected)+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Percentage (main page)for Customer Account: "+cusAccVal+" is same as  "+submittedPercentageActual+"</span>");
+					"EXPECTED: Submitted Percentage (main page)for Supplier Account: "+suppAccVal+" should be "+roundDobule(submittedPercentageExpected)+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Percentage (main page)for Supplier Account: "+suppAccVal+" is same as  "+submittedPercentageActual+"</span>");
 		}
 		else
 		{		
 			test.log(LogStatus.FAIL,
-					"EXPECTED: Submitted Percentage (main page)for Customer Account: "+cusAccVal+" should be "+roundDobule(submittedPercentageExpected)+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Customer Account: "+cusAccVal+" is not same as "+submittedPercentageActual+"</span>");
+					"EXPECTED: Submitted Percentage (main page)for Supplier Account: "+suppAccVal+" should be "+roundDobule(submittedPercentageExpected)+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Supplier Account: "+suppAccVal+" is not same as "+submittedPercentageActual+"</span>");
 		}
 		
 		//main page Delivered Percentage validation
 		if(compareDoubleWithTwoDigit(roundDobule(deliveredPercentageExpected), deliveredPercentageActual))
 		{	
 			test.log(LogStatus.PASS,
-					"EXPECTED: Delivered Percentage (main page)for Customer Account: "+cusAccVal+" should be "+roundDobule(deliveredPercentageExpected)+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Customer Account: "+cusAccVal+" is same as  "+deliveredPercentageActual+"</span>");
+					"EXPECTED: Delivered Percentage (main page)for Supplier Account: "+suppAccVal+" should be "+roundDobule(deliveredPercentageExpected)+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Supplier Account: "+suppAccVal+" is same as  "+deliveredPercentageActual+"</span>");
 		}
 		else
 		{		
 			test.log(LogStatus.FAIL,
-					"EXPECTED: Delivered Percentage (main page)for Customer Account: "+cusAccVal+" should be "+roundDobule(deliveredPercentageExpected)+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Customer Account: "+cusAccVal+" is not same as "+deliveredPercentageActual+"</span>");
+					"EXPECTED: Delivered Percentage (main page)for Supplier Account: "+suppAccVal+" should be "+roundDobule(deliveredPercentageExpected)+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Supplier Account: "+suppAccVal+" is not same as "+deliveredPercentageActual+"</span>");
 		}
 		
-		//main page Delivered Failed Percentage validation
-		/*if(compareDoubleWithTwoDigit(roundDobule(failedPercentageExpected), failedPercentageActual))
-		{	
-			test.log(LogStatus.PASS,
-					"EXPECTED: Delivered Failed Percentage (main page)for Customer Account: "+cusAccVal+" should be "+failedPercentageExpected+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Customer Account: "+cusAccVal+" is same as  "+failedPercentageActual+"</span>");
-		}
-		else
-		{		
-			test.log(LogStatus.FAIL,
-					"EXPECTED: Delivered Failed Percentage (main page)for Customer Account: "+cusAccVal+" should be "+failedPercentageExpected+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Submitted Failure Percentage (main page)for Customer Account: "+cusAccVal+" is not same as "+failedPercentageActual+"</span>");
-		}*/
 		
 		//main page Enroute validation
 		if(compareDoubleWithTwoDigit(roundDobule(enrouteExpected), enrouteActual))
 		{	
 			test.log(LogStatus.PASS,
-					"EXPECTED: Enroute (main page)for Customer Account: "+cusAccVal+" should be "+enrouteExpected+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Enroute (main page)for Customer Account: "+cusAccVal+" is same as  "+enrouteActual+"</span>");
+					"EXPECTED: Enroute (main page)for Supplier Account: "+suppAccVal+" should be "+enrouteExpected+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Enroute (main page)for Supplier Account: "+suppAccVal+" is same as  "+enrouteActual+"</span>");
 		}
 		else
 		{		
 			test.log(LogStatus.FAIL,
-					"EXPECTED: Enroute (main page)for Customer Account: "+cusAccVal+" should be "+enrouteExpected+" (+/- 0.01)",
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Enroute (main page)for Customer Account: "+cusAccVal+" is not same as "+enrouteActual+"</span>");
+					"EXPECTED: Enroute (main page)for Supplier Account: "+suppAccVal+" should be "+enrouteExpected+" (+/- 0.01)",
+					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Enroute (main page)for Supplier Account: "+suppAccVal+" is not same as "+enrouteActual+"</span>");
 		}
 		
-		firstAndSubsequenceDrillDownValidation(cusAccVal, uiDataMainPage);
+		firstAndSubsequenceDrillDownValidation(suppAccVal, uiDataMainPage);
 	}
  
 	
 	
-	void firstAndSubsequenceDrillDownValidation(String cusAccVal, Map<String, Double> uiDataMainPage)
+	void firstAndSubsequenceDrillDownValidation(String suppAccVal, Map<String, Double> uiDataMainPage)
 	{
 		//Entering Customer Account Distribution Page ( 1st drilldown		
 //		cu.clickElement("dynamicCustAccMainTableLink", "$customerAccName$", cusAccVal);
-		cu.clickElementAfterScrollToView("dynamicCustAccMainTableLink", "$customerAccName$", cusAccVal);
+		cu.clickElementAfterScrollToView("dynamicSuppAccMainTableLink", "$supplierAccName$", suppAccVal);
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
-		test.log(LogStatus.INFO, "######### Validating 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);
+		test.log(LogStatus.INFO, "######### Validating 1st drilldown ( Supplier Account Distribution Page ) for Customer account: "+suppAccVal);
 		
-		if(!cu.elementDisplayed("drillDownCusAccWin"))
+		if(!cu.elementDisplayed("drillDownSuppAccWin"))
 		{
-			cu.getScreenShot("Customer Account Distribution Window Not Opened");
-			test.log(LogStatus.FAIL, "Customer Account Distribution Window for Customer account: "+cusAccVal+"  not opened");
-			Assert.fail("Customer Account Distribution Window for Customer account: "+cusAccVal+"  not opened");
+			cu.getScreenShot("Supplier Account Distribution Window Not Opened");
+			test.log(LogStatus.FAIL, "Supplier Account Distribution Window for Supplier account: "+suppAccVal+"  not opened");
+			Assert.fail("Supplier Account Distribution Window for Supplier account: "+suppAccVal+"  not opened");
 		}
 		
 		
 		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);		
-		validateTableHeaders(dataMap.get("FisrtDrilldownHeaders"), "Customer Account Distribution Page", "drillDownCusAccWin_AllTableHeaders");
+		test.log(LogStatus.INFO, "Validating Table Headers in 1st drilldown ( Supplier Account Distribution Page ) for Supplier account: "+suppAccVal);		
+		validateTableHeaders(dataMap.get("FisrtDrilldownHeaders"), "Supplier Account Distribution Page", "drillDownSuppAccWin_AllTableHeaders");
 		
 		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);	
+		test.log(LogStatus.INFO, "Validating CSV and UI table data in 1st drilldown ( Supplier Account Distribution Page ) for Supplier account: "+suppAccVal);	
 		
 		
 		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_1stDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
-																					, "drillDownCusAccWin_AllTableHeaders"
-																						, "drillDownCusAccWin_AllTableDataRows"
-																							, "drillDownCusAccWin_Table_Dynamic_Row_AllColoumn");
+																					, "drillDownSuppAccWin_AllTableHeaders"
+																						, "drillDownSuppAccWin_AllTableDataRows"
+																							, "drillDownSuppAccWin_Table_Dynamic_Row_AllColoumn");
 		
-		cu.executeJavaScrpit("drillDownCusAccWin_TableBody", "arguments[0].scrollTop = 0;");
-		exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "MMX-CustomerAccountData*.csv", "Customer Account Distribution Page", 6, "drillDownCusAccWin_ExportButton", "drillDownCusAccWin_ExportAllRecords");
+		cu.executeJavaScrpit("drillDownSuppAccWin_TableBody", "arguments[0].scrollTop = 0;");
+		exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "MMX-SupplierAccountData*.csv", "Supplier Account Distribution Page", 6, "drillDownSuppAccWin_ExportButton", "drillDownSuppAccWin_ExportAllRecords");
 		
 		//UI fields validation
-		test.log(LogStatus.INFO, "Validating UI fields in 1st drilldown ( Customer Account Distribution Page ) for Customer account: "+cusAccVal);				
-		cu.checkElementPresence("drillDownCusAccWin_ExportButton");
-		cu.checkElementPresence("drillDownCusAccWin_BackButton");
-		cu.checkElementPresence("drillDownCusAccWin_CustomerNameTextBox");
-		cu.checkElementPresence("drillDownCusAccWin_CustomerAccountrNameTextBox");
-		cu.checkElementPresence("drillDownCusAccWin_FromDateTextBox");
-		cu.checkElementPresence("drillDownCusAccWin_ToDateTextBox");
+		test.log(LogStatus.INFO, "Validating UI fields in 1st drilldown ( Supplier Account Distribution Page ) for Supplier account: "+suppAccVal);				
+		cu.checkElementPresence("drillDownSuppAccWin_ExportButton");
+		cu.checkElementPresence("drillDownSuppAccWin_BackButton");
+		cu.checkElementPresence("drillDownSuppAccWin_CustomerNameTextBox");
+		cu.checkElementPresence("drillDownSuppAccWin_CustomerAccountrNameTextBox");
+		cu.checkElementPresence("drillDownSuppAccWin_FromDateTextBox");
+		cu.checkElementPresence("drillDownSuppAccWin_ToDateTextBox");
 
 		//Map<String, Integer> csvData = exportCSVAndGetCoverageFieldsUpdated();
 		Map<String, Integer> csvData = new LinkedHashMap<>();		
@@ -582,38 +569,29 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		csvData.put("Submitted Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Submit Failure"));
 		csvData.put("Delivered Failure", getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_1stDrill, "Delivered Failure"));
 		
-		
-		
-		
 		// Validate summation of 1st drilldown ( Customer Account Distribution Page ) with MAIN page
-		test.log(LogStatus.INFO, "Validate summation of 1st drilldown ( Customer Account Distribution Page ) with MAIN page for Customer account: "+cusAccVal);	
+		test.log(LogStatus.INFO, "Validate summation of 1st drilldown ( Supplier Account Distribution Page ) with MAIN page for Supplier account: "+suppAccVal);	
 		for(String colName : csvData.keySet())
 		{
-//		    try {
 				
 		    	Integer uiValue = Integer.valueOf((int) (uiDataMainPage.get(colName)-0));
 		    	
 				if(csvData.get(colName).equals(uiValue))					
 					test.log(LogStatus.PASS,
 							"EXPECTED: "
-									+ "Validate the summation of 1st drilldown and the MAIN page of this customer account"
-									+ cusAccVal + " -> should be same. Field Name : '"+colName+"'  - Expected value: "+uiValue,
+									+ "Validate the summation of 1st drilldown and the MAIN page of this Supplier account"
+									+ suppAccVal + " -> should be same. Field Name : '"+colName+"'  - Expected value: "+uiValue,
 							"Validation:  <span style='font-weight:bold;'>ACTUAL::"
-									+ "Validate the summation of 1st drilldown and the MAIN page of this customer account"
-									+ cusAccVal + " are same. Field Name : '"+colName+"'  - Actual value: "+csvData.get(colName)+"</span>");
+									+ "Validate the summation of 1st drilldown and the MAIN page of this Supplier account"
+									+ suppAccVal + " are same. Field Name : '"+colName+"'  - Actual value: "+csvData.get(colName)+"</span>");
 				else
 					test.log(LogStatus.FAIL,
 							"EXPECTED: "
-							+ "Validate the summation of 1st drilldown and the MAIN page of this customer account"
-							+ cusAccVal + " -> should be same. Field Name : '"+colName+"'  - Expected value: "+uiValue,
+							+ "Validate the summation of 1st drilldown and the MAIN page of this Supplier account"
+							+ suppAccVal + " -> should be same. Field Name : '"+colName+"'  - Expected value: "+uiValue,
 					"Validation:  <span style='font-weight:bold;'>ACTUAL::"
-							+ "Validate the summation of 1st drilldown and the MAIN page of this customer account"
-							+ cusAccVal + " are not same. Field Name : '"+colName+"'  - Actual value: "+csvData.get(colName)+"</span>");
-//			} catch (Exception e) {
-//				
-//				cu.printLogs("Exception occur while comparing the data  - " + e);
-//				test.log(LogStatus.FAIL,"", "Exception occur while comparing the data  - " + e);
-//			}
+							+ "Validate the summation of 1st drilldown and the MAIN page of this Supplier account"
+							+ suppAccVal + " are not same. Field Name : '"+colName+"'  - Actual value: "+csvData.get(colName)+"</span>");
 		}
 		
 		
@@ -622,141 +600,73 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		
 		for(Map<String, String> currMap_1stDrill : allRowsMapList_1stDrill)
 		{
-			cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_FirstOrAllColoumnColoum"
-					, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$"
+			cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_FirstOrAllColoumnColoum"
+					, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$"
 						, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-							+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account"));
+							+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account"));
 			
 			
-			String custNameDrill = cu.getAttribute("drillDownCusAccWin_CustomerNameTextBox", "value");
-			String custAccNameDrill = cu.getAttribute("drillDownCusAccWin_CustomerAccountrNameTextBox", "value");
+			String suppNameDrill = cu.getAttribute("drillDownSuppAccWin_SupplierNameTextBox", "value");
+			String suppAccNameDrill = cu.getAttribute("drillDownSuppAccWin_SupplierAccountNameTextBox", "value");
 			
-			currMap_1stDrill.put("CustomerNameDrillTxtBoxVal", custNameDrill);
-			currMap_1stDrill.put("CustomerAccNameDrillTxtBoxVal", custAccNameDrill);
+			currMap_1stDrill.put("SupplierNameDrillTxtBoxVal", suppNameDrill);
+			currMap_1stDrill.put("SupplierAccNameDrillTxtBoxVal", suppAccNameDrill);
 			
 			if(!"0".equals(currMap_1stDrill.get("Attempted Failure").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Attempted Failure ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Attempted Failure ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownAttemptedFailureValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("Submit Failure").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Submit Failure ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Submit Failure ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownSubmitFailureValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("Delivered Failure").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Delivered Failure ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Delivered Failure ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownDeliveredFailureValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("Ack Latency (ms)").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Ack Latency ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Ack Latency ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownAckLatencyValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("E2E Latency (s)").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( E2E Latency ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( E2E Latency ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownE2ELatencyValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("Platform Latency (ms)").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Platform Latency ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Platform Latency ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownPlatformLatencyValidation(currMap_1stDrill);
 			}
 			
 			if(!"0".equals(currMap_1stDrill.get("Delivery Latency (s)").trim()))
 			{				
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Delivery Latency ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
+				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Delivery Latency ) Validations for Supplier: "+suppNameDrill+" -> SupplierAccount: "+suppAccNameDrill);
 				secondDrillDownDeliveryLatencyValidation(currMap_1stDrill);
 			}			
 		}
 		
 		//Returning back to Main page
-		cu.clickElement("drillDownCusAccWin_BackButton");
+		cu.clickElement("drillDownSuppAccWin_BackButton");
 		
-		
-		/*
-		Assert.fail("Intentional fail -  testing");
-		
-		driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
-		int allAttemptedFailureCount = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Attempted Failure']/preceding-sibling::*)+1]/a")).size();
-		int allSubmitFailureCount = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Submit Failure']/preceding-sibling::*)+1]/a")).size();
-		int allFailedCount = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Failed']/preceding-sibling::*)+1]/a")).size();
-		int allAverageLatencyCount = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Average Latency(Sec)'|text()='Average Latency (Sec)']/preceding-sibling::*)+1]/a")).size();
-		driver.manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
-		
-		
-		
-		
-		
-		//AttemptedFailure
-		for(int i=0; i<allAttemptedFailureCount; i++)
-		{
-			if(i==0)
-			{
-				String custNameDrill = cu.getAttribute("DrillDown_CustomerNameTxt", "value");
-				String custAccNameDrill = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-				test.log(LogStatus.INFO, "Validating 2nd drilldown ( Attempted Failure ) Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
-			}
-			secondDrillDownAttemptedFailureValidation(i);
-		}
-		
-		//Submit Failure Validations
-		for(int i=0; i<allSubmitFailureCount; i++)
-		{
-			if(i==0)
-			{
-				String custNameDrill = cu.getAttribute("DrillDown_CustomerNameTxt", "value");
-				String custAccNameDrill = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-				test.log(LogStatus.INFO, "Valiadintg Submit Failure DrillDown Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
-			}
-			secondDrillDownSubmitFailureValidation(i);
-		}
-		
-		
-		//Failed Validations
-		for(int i=0; i<allFailedCount; i++)
-		{
-			if(i==0)
-			{
-				String custNameDrill = cu.getAttribute("DrillDown_CustomerNameTxt", "value");
-				String custAccNameDrill = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-				test.log(LogStatus.INFO, "Valiadintg Failed DrillDown Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
-			}
-			secondDrillDownFailedValidation(i);
-		}
-		
-		
-		//Average Latency
-		for(int i=0; i<allAverageLatencyCount; i++)
-		{
-			if(i==0)
-			{
-				String custNameDrill = cu.getAttribute("DrillDown_CustomerNameTxt", "value");
-				String custAccNameDrill = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-				test.log(LogStatus.INFO, "Validating Average Latency DrillDown Validations for Customer: "+custNameDrill+" -> CustomerAccount: "+custAccNameDrill);
-			}
-			secondDrillDownAverageLatencyValidation(i);
-		}		
-		
-		//Returning back to Main page
-		cu.clickElement("backBtn");*/
  }
 	
 	
 	private void secondDrillDownAttemptedFailureValidation(Map<String, String> currMap_1stDrill) {
 		
-		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_AttemptedFailureColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$AttemptedFailureValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_AttemptedFailureColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$AttemptedFailureValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("Attempted Failure"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
@@ -765,8 +675,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillAttemptedFailureDisWin"))
 		{
 			cu.getScreenShot("Attempted Failure Distribution Window Not Opened");
-			test.log(LogStatus.FAIL, "Attempted Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Attempted Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Attempted Failure Distribution Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Attempted Failure Distribution Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 		
 		//Table header validation
@@ -774,16 +684,14 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		validateTableHeaders(dataMap.get("SecondDrilldownHeaders_Fail"), "Attempted Failure Distribution", "drillAttemptedFailureDisWin_AllTableHeaders");
 				
 		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Attempted Failure Page )");		
+		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Attempted Failure Page )");
 		
 		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_2ndDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
 																						, "drillAttemptedFailureDisWin_AllTableHeaders"
 																							, "drillAttemptedFailureDisWin_AllTableDataRows"
 																								, "drillAttemptedFailureDisWin_Table_Dynamic_Row_AllColoumn");
-		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+				
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-AttemptedFailureData*.csv", "Attempted Failure Page", 9, "drillAttemptedFailureDisWin_ExportButton", "drillAttemptedFailureDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-AttemptedFailureData*.csv", "Attempted Failure Page", 9, "drillAttemptedFailureDisWin_ExportButton", "drillAttemptedFailureDisWin_ExportAllRecords");
@@ -792,13 +700,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Attempted Failure Page )");				
 		cu.checkElementPresence("drillAttemptedFailureDisWin_ExportButton");
 		cu.checkElementPresence("drillAttemptedFailureDisWin_BackButton");
-		cu.checkReadonlyProperty("drillAttemptedFailureDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			cu.checkElementNotPresence("drillAttemptedFailureDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillAttemptedFailureDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillAttemptedFailureDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillAttemptedFailureDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillAttemptedFailureDisWin_SupplierAccountNameTextBox");	
 		cu.checkReadonlyProperty("drillAttemptedFailureDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillAttemptedFailureDisWin_DestinationTextBox");
 		cu.checkReadonlyProperty("drillAttemptedFailureDisWin_FromDateTextBox");
@@ -807,18 +713,16 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		
 		//Validating Sumation of total failure
 		test.log(LogStatus.INFO, "Validating Summation of total failure in 2nd drilldown ( Attempted Failure Page )");
-		String cusAcctName = cu.getAttribute("drillAttemptedFailureDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillAttemptedFailureDisWin_SupplierAccountNameTextBox", "value");
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillAttemptedFailureDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillAttemptedFailureDisWin_CustomerAccountNameTextBox", "value");		
 		int totalFailureTop = Integer.valueOf(cu.getAttribute("drillAttemptedFailureDisWin_TotalFailureTextBox", "value"));	
 		
 		//failure sum validations
 		int totalFailureBott = getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Failed");
 		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
 		{	
 			test.log(LogStatus.PASS,
@@ -862,10 +766,10 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	
 	private void secondDrillDownSubmitFailureValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_SubmitFailureColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$SubmitFailureValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_SubmitFailureColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$SubmitFailureValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("Submit Failure"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
@@ -874,8 +778,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillSubmitFailureDisWin"))
 		{
 			cu.getScreenShot("Submit Failure Distribution Window Not Opened");
-			test.log(LogStatus.FAIL, "Submit Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Submit Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Submit Failure Distribution Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Submit Failure Distribution Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 				
 		//Table header validation
@@ -890,9 +794,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillSubmitFailureDisWin_AllTableDataRows"
 																								, "drillSubmitFailureDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-SubmitFailureData*.csv", "Submit Failure Page", 9, "drillSubmitFailureDisWin_ExportButton", "drillSubmitFailureDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-SubmitFailureData*.csv", "Submit Failure Page", 9, "drillSubmitFailureDisWin_ExportButton", "drillSubmitFailureDisWin_ExportAllRecords");
@@ -901,13 +803,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Submit Failure Page )");				
 		cu.checkElementPresence("drillSubmitFailureDisWin_ExportButton");
 		cu.checkElementPresence("drillSubmitFailureDisWin_BackButton");
-		cu.checkReadonlyProperty("drillSubmitFailureDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			cu.checkElementNotPresence("drillSubmitFailureDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillSubmitFailureDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillSubmitFailureDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillSubmitFailureDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillSubmitFailureDisWin_SupplierAccountNameTextBox");	
 		cu.checkReadonlyProperty("drillSubmitFailureDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillSubmitFailureDisWin_DestinationTextBox");
 		cu.checkReadonlyProperty("drillSubmitFailureDisWin_FromDateTextBox");
@@ -916,18 +816,16 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		
 		//Validating Sumation of total failure
 		test.log(LogStatus.INFO, "Validating Summation of total failure in 2nd drilldown ( Submit Failure Page )");
-		String cusAcctName = cu.getAttribute("drillSubmitFailureDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillAttemptedFailureDisWin_SupplierAccountNameTextBox", "value");
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillSubmitFailureDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillSubmitFailureDisWin_CustomerAccountNameTextBox", "value");		
 		int totalFailureTop = Integer.valueOf(cu.getAttribute("drillSubmitFailureDisWin_TotalFailureTextBox", "value"));	
 		
 		//failure sum validations
 		int totalFailureBott = getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Failed");
 		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
 		{	
 			test.log(LogStatus.PASS,
@@ -973,11 +871,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	
 	private void secondDrillDownDeliveredFailureValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_DeliveredFailureColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$DeliveredFailureValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_DeliveredFailureColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$DeliveredFailureValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
-										+"~"+currMap_1stDrill.get("Delivered Failure"));
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
+										+"~"+currMap_1stDrill.get("Delivered Failure"));	
 		
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
@@ -985,8 +883,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillDownDeliveredFailureDisWin"))
 		{
 			cu.getScreenShot("Delivered Failure Distribution Window Not Opened");
-			test.log(LogStatus.FAIL, "Delivered Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Delivered Failure Distribution Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Delivered Failure Distribution Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Delivered Failure Distribution Window for Customer Supplier: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 		
 				
@@ -1002,9 +900,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillDownDeliveredFailureDisWin_AllTableDataRows"
 																								, "drillDownDeliveredFailureDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-DeliveryFailureData*.csv", "Submit Failure Page", 9, "drillDownDeliveredFailureDisWin_ExportButton", "drillDownDeliveredFailureDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-DeliveryFailureData*.csv", "Submit Failure Page", 9, "drillDownDeliveredFailureDisWin_ExportButton", "drillDownDeliveredFailureDisWin_ExportAllRecords");
@@ -1013,13 +909,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Delivered Failure Page )");				
 		cu.checkElementPresence("drillDownDeliveredFailureDisWin_ExportButton");
 		cu.checkElementPresence("drillDownDeliveredFailureDisWin_BackButton");
-		cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			cu.checkElementNotPresence("drillDownDeliveredFailureDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillDownDeliveredFailureDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_SupplierAccountNameTextBox");	
 		cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_DestinationTextBox");
 		cu.checkReadonlyProperty("drillDownDeliveredFailureDisWin_FromDateTextBox");
@@ -1028,18 +922,16 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		
 		//Validating Sumation of total failure
 		test.log(LogStatus.INFO, "Validating Summation of total failure in 2nd drilldown ( Delivered Failure Page )");
-		String cusAcctName = cu.getAttribute("drillDownDeliveredFailureDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillAttemptedFailureDisWin_SupplierAccountNameTextBox", "value");
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillDownDeliveredFailureDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillDownDeliveredFailureDisWin_CustomerAccountNameTextBox", "value");
 		int totalFailureTop = Integer.valueOf(cu.getAttribute("drillDownDeliveredFailureDisWin_TotalFailureTextBox", "value"));	
 		
 		//failure sum validations
 		int totalFailureBott = getSummationOfColoumnFromTableData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Failed");
 		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
 		{	
 			test.log(LogStatus.PASS,
@@ -1084,13 +976,11 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 
 	private void secondDrillDownAckLatencyValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_AckLatencyColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$AckLatencyValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_AckLatencyColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$AckLatencyValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("Ack Latency (ms)"));
-
-										
 		
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
@@ -1098,8 +988,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillDownAckLatencyDisWin"))
 		{
 			cu.getScreenShot("Ack Latency Window Not Opened");
-			test.log(LogStatus.FAIL, "Ack Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Ack Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Ack Latency Window for Customer account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Ack Latency Window for Customer account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 		
 		//Table header validation
@@ -1115,9 +1005,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillDownAckLatencyDisWin_AllTableDataRows"
 																								, "drillDownAckLatencyDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-AckLatencyData*.csv", "Ack Latency Distribution Page", 9, "drillDownAckLatencyDisWin_ExportButton", "drillDownAckLatencyDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-AckLatencyData*.csv", "Ack Latency Distribution Page", 9, "drillDownAckLatencyDisWin_ExportButton", "drillDownAckLatencyDisWin_ExportAllRecords");
@@ -1126,26 +1014,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Ack Latency Page )");		
 		cu.checkElementPresence("drillDownAckLatencyDisWin_ExportButton");
 		cu.checkElementPresence("drillDownAckLatencyDisWin_BackButton");
-		cu.checkReadonlyProperty("drillDownAckLatencyDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))		
-			cu.checkElementNotPresence("drillDownAckLatencyDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillDownAckLatencyDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillDownAckLatencyDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillDownAckLatencyDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillDownAckLatencyDisWin_SupplierAccountNameTextBox");		
 		cu.checkReadonlyProperty("drillDownAckLatencyDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillDownAckLatencyDisWin_DestinationTextBox");		
 				
-		String cusAcctName = cu.getAttribute("drillSubmitFailureDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillDownAckLatencyDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillDownAckLatencyDisWin_CustomerAccountNameTextBox", "value");			
 		
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillAttemptedFailureDisWin_SupplierAccountNameTextBox", "value");
-		
-		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 
 		//percentage validations
 		List<Map<String, String>> ackLatencyTableRowMapList = convertListTableDataToListOfMapData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill);
@@ -1231,52 +1113,52 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (400-500 ms %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage400To500msPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//500 ms-1 sec % Validation
-			double expectedPercentage500msTo1SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("500 ms-1 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentage500msTo1SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("500 ms-1 sec %").replace("%", "")));
+			//500 ms - 1 sec % Validation
+			double expectedPercentage500msTo1SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("500 ms - 1 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentage500msTo1SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("500 ms - 1 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage500msTo1SecPer, actualPercentage500msTo1SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms-1 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage500msTo1SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (500 ms - 1 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage500msTo1SecPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//1 sec-3 sec % validation
-			double expectedPercentage1SecTo3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("1 sec-3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentage1SecTo3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("1 sec-3 sec %").replace("%", "")));
+			//1 sec - 3 sec % validation
+			double expectedPercentage1SecTo3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("1 sec - 3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentage1SecTo3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("1 sec - 3 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentage1SecTo3SecPer, actualPercentage1SecTo3SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec-3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentage1SecTo3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (1 sec - 3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage1SecTo3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			
-			//>3 sec % Validation
-			double expectedPercentageGreaterThan3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get(">3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
-			double actualPercentageGreaterThan3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get(">3 sec %").replace("%", "")));
+			//> 3 sec % Validation
+			double expectedPercentageGreaterThan3SecPer = roundDobule(calculatePercentage(ackLatencyTableRowMapList.get(0).get("> 3 sec"), ackLatencyTableRowMapList.get(0).get("Total Delivered")));
+			double actualPercentageGreaterThan3SecPer = roundDobule(Double.valueOf(ackLatencyTableRowMapList.get(0).get("> 3 sec %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGreaterThan3SecPer, actualPercentageGreaterThan3SecPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan3SecPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 3 sec %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan3SecPer+" (+/- 0.01 offset)</span>");
 			}			
 		}
 				
@@ -1285,10 +1167,10 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	
 	private void secondDrillDownE2ELatencyValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_E2ELatencyColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$E2ELatencyValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_E2ELatencyColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$E2ELatencyValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("E2E Latency (s)"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
@@ -1297,8 +1179,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillDownAverageE2EDisWin"))
 		{
 			cu.getScreenShot("Average E2E Latency Window Not Opened");
-			test.log(LogStatus.FAIL, "Average E2E Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Average E2E Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Average E2E Latency Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Average E2E Latency Window for Customer Supplier: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 		
 		//Table header validation
@@ -1314,9 +1196,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillDownAverageE2EDisWin_AllTableDataRows"
 																								, "drillDownAverageE2EDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-E2ELatencyData*.csv", "E2E Latency Distribution Page", 9, "drillDownAverageE2EDisWin_ExportButton", "drillDownAverageE2EDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-E2ELatencyData*.csv", "E2E Latency Distribution Page", 9, "drillDownAverageE2EDisWin_ExportButton", "drillDownAverageE2EDisWin_ExportAllRecords");
@@ -1325,26 +1205,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( E2E Latency Page )");		
 		cu.checkElementPresence("drillDownAverageE2EDisWin_ExportButton");
 		cu.checkElementPresence("drillDownAverageE2EDisWin_BackButton");
-		cu.checkReadonlyProperty("drillDownAverageE2EDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))		
-			cu.checkElementNotPresence("drillDownAverageE2EDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillDownAverageE2EDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillDownAverageE2EDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillDownAverageE2EDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillDownAverageE2EDisWin_SupplierAccountNameTextBox");	
 		cu.checkReadonlyProperty("drillDownAverageE2EDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillDownAverageE2EDisWin_DestinationTextBox");		
 				
-		String cusAcctName = cu.getAttribute("drillDownAverageE2EDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillDownAverageE2EDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillDownAverageE2EDisWin_CustomerAccountNameTextBox", "value");	
 		
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillDownAverageE2EDisWin_SupplierAccountNameTextBox", "value");
-		
-		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 
 		//percentage validations
 		List<Map<String, String>> e2eLatencyTableRowMapList = convertListTableDataToListOfMapData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill);
@@ -1500,10 +1374,10 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	
 	private void secondDrillDownPlatformLatencyValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_PlatformLatencyColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$PlatformLatencyValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_PlatformLatencyColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$PlatformLatencyValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("Platform Latency (ms)"));
 		
 		cu.waitForPageLoadWithSleep("", 500);
@@ -1512,8 +1386,8 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		if(!cu.elementDisplayed("drillDownPlatformLatencyDisWin"))
 		{
 			cu.getScreenShot("Platform Latency Window Not Opened");
-			test.log(LogStatus.FAIL, "Platform Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Platform Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Platform Latency Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Platform Latency Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 		
 		//Table header validation
@@ -1528,9 +1402,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillDownPlatformLatencyDisWin_AllTableDataRows"
 																								, "drillDownPlatformLatencyDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-PlatformLatencyData*.csv", "Platform Latency Distribution Page", 9, "drillDownPlatformLatencyDisWin_ExportButton", "drillDownPlatformLatencyDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-PlatformLatencyData*.csv", "Platform Latency Distribution Page", 9, "drillDownPlatformLatencyDisWin_ExportButton", "drillDownPlatformLatencyDisWin_ExportAllRecords");
@@ -1539,26 +1411,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Platform Latency Page )");		
 		cu.checkElementPresence("drillDownPlatformLatencyDisWin_ExportButton");
 		cu.checkElementPresence("drillDownPlatformLatencyDisWin_BackButton");
-		cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))		
-			cu.checkElementNotPresence("drillDownPlatformLatencyDisWin_SupplierAccountNameTextBox");	
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillDownPlatformLatencyDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_CustomerAccountNameTextBox");
+		cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_SupplierAccountNameTextBox");	
 		cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillDownPlatformLatencyDisWin_DestinationTextBox");		
 				
-		String cusAcctName = cu.getAttribute("drillDownPlatformLatencyDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillDownPlatformLatencyDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillDownPlatformLatencyDisWin_CustomerAccountNameTextBox", "value");		
 		
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillDownPlatformLatencyDisWin_SupplierAccountNameTextBox", "value");
-		
-		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 
 		//percentage validations
 		List<Map<String, String>> platformLatencyTableRowMapList = convertListTableDataToListOfMapData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill);
@@ -1660,20 +1526,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (5-10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentage5To10Secs+" (+/- 0.01 offset)</span>");
 			}
 			
-			//>10 Secs % validation
+			//> 10 Secs % validation
 			double expectedPercentageGreaterThan10SecsPer = roundDobule(calculatePercentage(platformLatencyTableRowMapList.get(0).get(">10 Secs"), platformLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentageGreaterThan10SecsPer = roundDobule(Double.valueOf(platformLatencyTableRowMapList.get(0).get(">10 Secs %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGreaterThan10SecsPer, actualPercentageGreaterThan10SecsPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 10 Secs %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGreaterThan10SecsPer+" (+/- 0.01 offset)</span>");
 			}
 		}
 
@@ -1683,19 +1549,20 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	
 	private void secondDrillDownDeliveryLatencyValidation(Map<String, String> currMap_1stDrill) {
 		
-		cu.clickElementAfterScrollToView("drillDownCusAccWin_Table_Dynamic_Row_DeliveryLatencyColoum_Link"
-							, "$Country$~$Destination$~$MCC$~$MNC$~$SupplierName$~$SupplierAccountName$~$DeliveryLatencyValue$"
+		cu.clickElementAfterScrollToView("drillDownSuppAccWin_Table_Dynamic_Row_DeliveryLatencyColoum_Link"
+							, "$Country$~$Destination$~$MCC$~$MNC$~$CustomerName$~$CustomerAccountName$~$DeliveryLatencyValue$"
 								, currMap_1stDrill.get("Country")+"~"+currMap_1stDrill.get("Destination")+"~"+currMap_1stDrill.get("MCC")
-									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Supplier")+"~"+currMap_1stDrill.get("Supplier Account")
+									+"~"+currMap_1stDrill.get("MNC")+"~"+currMap_1stDrill.get("Customer")+"~"+currMap_1stDrill.get("Customer Account")
 										+"~"+currMap_1stDrill.get("Delivery Latency (s)"));
+				
 		cu.waitForPageLoadWithSleep("", 500);
 		cu.waitForElementInvisiblity("DeliveryStatisticsPageLoad", 300);
 		
 		if(!cu.elementDisplayed("drillDownDeliveryLatencyDisWin"))
 		{
 			cu.getScreenShot("Delivery Latency Window Not Opened");
-			test.log(LogStatus.FAIL, "Delivery Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
-			Assert.fail("Delivery Latency Window for Customer account: "+currMap_1stDrill.get("CustomerAccNameDrillTxtBoxVal")+"  not opened");
+			test.log(LogStatus.FAIL, "Delivery Latency Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
+			Assert.fail("Delivery Latency Window for Supplier account: "+currMap_1stDrill.get("SupplierAccNameDrillTxtBoxVal")+"  not opened");
 		}
 
 
@@ -1711,9 +1578,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 																							, "drillDownDeliveryLatencyDisWin_AllTableDataRows"
 																								, "drillDownDeliveryLatencyDisWin_Table_Dynamic_Row_AllColoumn");
 		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-DeliveryLatencyData*.csv", "Delivery Latency Distribution Page", 9, "drillDownDeliveryLatencyDisWin_ExportButton", "drillDownDeliveryLatencyDisWin_ExportAllRecords");
 		else
 			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "MMX-DeliveryLatencyData*.csv", "Delivery Latency Distribution Page", 9, "drillDownDeliveryLatencyDisWin_ExportButton", "drillDownDeliveryLatencyDisWin_ExportAllRecords");
@@ -1722,26 +1587,21 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Delivery Latency Page )");		
 		cu.checkElementPresence("drillDownDeliveryLatencyDisWin_ExportButton");
 		cu.checkElementPresence("drillDownDeliveryLatencyDisWin_BackButton");
-		cu.checkReadonlyProperty("drillDownDeliveryLatencyDisWin_CustomerAccountNameTextBox");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))		
-			cu.checkElementNotPresence("drillDownDeliveryLatencyDisWin_SupplierAccountNameTextBox");	
+		cu.checkElementPresence("drillDownDeliveryLatencyDisWin_BackButton");
+		if("MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))			
+			cu.checkElementNotPresence("drillDownDeliveryLatencyDisWin_CustomerAccountNameTextBox");	
 		else
-			cu.checkReadonlyProperty("drillDownDeliveryLatencyDisWin_SupplierAccountNameTextBox");	
+			cu.checkReadonlyProperty("drillDownDeliveryLatencyDisWin_CustomerAccountNameTextBox");
 		cu.checkReadonlyProperty("drillDownDeliveryLatencyDisWin_CountryTextBox");
 		cu.checkReadonlyProperty("drillDownDeliveryLatencyDisWin_DestinationTextBox");		
 				
-		String cusAcctName = cu.getAttribute("drillDownDeliveryLatencyDisWin_CustomerAccountNameTextBox", "value");
-		String suppAccName = null;
-		
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("drillDownDeliveryLatencyDisWin_SupplierAccountNameTextBox", "value");
+		String cusAcctName = null;
+		String suppAccName =cu.getAttribute("drillDownDeliveryLatencyDisWin_SupplierAccountNameTextBox", "value");
+		if(!"MMX-Supplier Manager".equals(dataMap.get("UserRole").trim()))
+			cusAcctName = cu.getAttribute("drillDownDeliveryLatencyDisWin_CustomerAccountNameTextBox", "value");		
 		
 		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
+		String customerSuppHierarchyString = "Supplier Account: "+suppAccName+(cusAcctName!=null?"-> Customer Account: "+cusAcctName:"");
 
 		//percentage validations
 		List<Map<String, String>> deliveryLatencyTableRowMapList = convertListTableDataToListOfMapData(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill);
@@ -1925,425 +1785,26 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 			}	
 			
 			
-			//>24 Hours % Validation
+			//> 24 Hours % Validation
 			double expectedPercentageGeaterThan24HoursPer = roundDobule(calculatePercentage(deliveryLatencyTableRowMapList.get(0).get(">24 Hours"), deliveryLatencyTableRowMapList.get(0).get("Total Delivered")));
 			double actualPercentageGeaterThan24HoursPer = roundDobule(Double.valueOf(deliveryLatencyTableRowMapList.get(0).get(">24 Hours %").replace("%", "")));
 			if(compareDoubleWithTwoDigit(expectedPercentageGeaterThan24HoursPer, actualPercentageGeaterThan24HoursPer))
 			{			
 				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  is same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
 			}
 			else
 			{				
 				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (>24 Hours %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
+						"EXPECTED: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  should be "+expectedPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)",
+						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage (> 24 Hours %) for "+ customerSuppHierarchyString +"  is not same as "+actualPercentageGeaterThan24HoursPer+" (+/- 0.01 offset)</span>");
 			}	
 		}
 		
 		cu.clickElement("drillDownDeliveryLatencyDisWin_BackButton");
 	}
 	
-
-
-
-
-
-
-/*	void secondDrillDownAttemptedFailureValidation(int linkIndex)
-	{
-		//Entering AttemptedFailure Drilldown
-		List<WebElement> attemptedFailureAllLinks = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Attempted Failure']/preceding-sibling::*)+1]/a"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", attemptedFailureAllLinks.get(linkIndex));
-		attemptedFailureAllLinks.get(linkIndex).click();
-				
-		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in 2nd drilldown ( Attempted Failure Page )");		
-		validateTableHeaders(dataMap.get("SecondDrilldownHeaders_Fail"), "Attempted Failure Page", "drillDownCusAccWin_AllTableHeaders_XXXXXXX_TOBECHANGED");
-		
-		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Attempted Failure Page )");		
-		
-		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_2ndDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
-																						, "drillDownCusAccWin_AllTableHeaders_XXXXXXXXX_ToBeCHANGED"
-																							, "drillDownCusAccWin_AllTableDataRows_XXXXXXXXX_ToBeCHANGED"
-																								, "drillDownCusAccWin_Table_Dynamic_Row_AllColoumn_XXXXXXXXX_ToBeCHANGED");
-		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Attempted Failure Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		else
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Attempted Failure Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		
-		//UI fields validation
-		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Attempted Failure Page )");				
-		cu.checkElementPresence("exportBtn");
-		cu.checkElementPresence("backBtn");
-		cu.checkReadonlyProperty("DrillDown_CustomerAccNameTxt");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			cu.checkElementNotPresence("DrillDown_SupplierAccNameTxt1");	
-		else
-			cu.checkReadonlyProperty("DrillDown_SupplierAccNameTxt1");	
-		cu.checkReadonlyProperty("DrillDown_CountryNameTxt");
-		cu.checkReadonlyProperty("DrillDown_DestinationNameTxt");
-		cu.checkReadonlyProperty("DeliveryStat_FromDateTxt");
-		cu.checkReadonlyProperty("DeliveryStat_ToDateTxt");
-		cu.checkReadonlyProperty("DrillDown_TotalFailureTxt");
-				
-		//Validating Sumation of total failure
-		test.log(LogStatus.INFO, "Validating Sumation of total failure in 2nd drilldown ( Attempted Failure Page )");
-		String cusAcctName = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-		String suppAccName = null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("DrillDown_SupplierAccNameTxt1", "value");
-		int totalFailureTop = Integer.valueOf(cu.getAttribute("DrillDown_TotalFailureTxt", "value"));	
-		
-		//failure sum validations
-		int totalFailureBott = 0;
-		List<WebElement> allFailedTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[2]"));
-		for(WebElement failTd : allFailedTds)
-			totalFailureBott = totalFailureBott + Integer.valueOf(failTd.getText().replace(",", ""));
-		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
-		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
-		{	
-			test.log(LogStatus.PASS,
-					"EXPECTED: Total failures for "+customerSuppHierarchyString +" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+ customerSuppHierarchyString +" is same as "+totalFailureBott+"</span>");
-		}
-		else
-		{		
-			test.log(LogStatus.FAIL,
-					"EXPECTED: Total failures for "+ customerSuppHierarchyString +" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+ customerSuppHierarchyString +" is not as "+totalFailureBott+"</span>");
-		}
-		
-		test.log(LogStatus.INFO, "Validating  Failure percentage in 2nd drilldown ( Attempted Failure Page )");
-		//failure percentage validations
-		List<WebElement> allPercentageTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[3]"));
-		for(int j=0;j<allPercentageTds.size(); j++)
-		{
-			String failureReason = driver.findElement(By.xpath("//*[@id='myTable']/tbody/tr["+(j+1)+"]/td[1]")).getText();
-			double expectedPercentage = Double.valueOf(allPercentageTds.get(j).getText().replace("%", ""));
-			
-			double actualPercentage = (Double.valueOf(allFailedTds.get(j).getText().replace(",", ""))/Double.valueOf(totalFailureTop))*100.0;
-			double actualPercentageRoundOff = Math.round(actualPercentage * 100.0) / 100.0;
-			
-			if(String.valueOf(expectedPercentage).equals(String.valueOf(actualPercentageRoundOff)))
-			{			
-				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage for "+ customerSuppHierarchyString +" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+ customerSuppHierarchyString +" (failure reson: '"+failureReason+"') is same as "+actualPercentageRoundOff+"</span>");
-			}
-			else
-			{				
-				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage for "+ customerSuppHierarchyString +" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+ customerSuppHierarchyString +" (failure reson: '"+failureReason+"') is not same as "+actualPercentageRoundOff+"</span>");
-			}
-		}
-		
-		cu.clickElement("backBtn");
-	
-	}
-
-	void secondDrillDownSubmitFailureValidation(int linkIndex)
-	{
-		//Entering SubmitFailure Drilldown
-		List<WebElement> submitFailureAllLinks = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Submit Failure']/preceding-sibling::*)+1]/a"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", submitFailureAllLinks.get(linkIndex));
-		submitFailureAllLinks.get(linkIndex).click();
-		
-		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in 2nd drilldown ( Submit Failure Page )");		
-		validateTableHeaders(dataMap.get("SecondDrilldownHeaders_Fail"), "Submit Failure Page", "drillDownCusAccWin_AllTableHeaders_XXXXXXX_TOBECHANGED");
-		
-		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Submit Failure Page )");	
-		
-		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_2ndDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
-																						, "drillDownCusAccWin_AllTableHeaders_XXXXXXXXX_ToBeCHANGED"
-																							, "drillDownCusAccWin_AllTableDataRows_XXXXXXXXX_ToBeCHANGED"
-																								, "drillDownCusAccWin_Table_Dynamic_Row_AllColoumn_XXXXXXXXX_ToBeCHANGED");
-		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Submit Failure Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		else
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Submit Failure Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		
-		//UI fields validation
-		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Submit Failure Page )");				
-		cu.checkElementPresence("exportBtn");
-		cu.checkElementPresence("backBtn");
-		cu.checkReadonlyProperty("DrillDown_CustomerAccNameTxt");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			cu.checkElementNotPresence("DrillDown_SupplierAccNameTxt1");
-		else
-			cu.checkReadonlyProperty("DrillDown_SupplierAccNameTxt1");
-		cu.checkReadonlyProperty("DrillDown_CountryNameTxt");
-		cu.checkReadonlyProperty("DrillDown_DestinationNameTxt");
-		cu.checkReadonlyProperty("DeliveryStat_FromDateTxt");
-		cu.checkReadonlyProperty("DeliveryStat_ToDateTxt");
-		cu.checkReadonlyProperty("DrillDown_TotalFailureTxt");
-				
-		test.log(LogStatus.INFO, "Validating Sumation of total failure in 2nd drilldown ( Submit Failure Page )");
-		String cusAcctName = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-		String suppAccName = null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("DrillDown_SupplierAccNameTxt1", "value");
-		int totalFailureTop = Integer.valueOf(cu.getAttribute("DrillDown_TotalFailureTxt", "value"));	
-		
-		//failure sum validations
-		int totalFailureBott = 0;
-		List<WebElement> allFailedTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[2]"));
-		for(WebElement failTd : allFailedTds)
-			totalFailureBott = totalFailureBott + Integer.valueOf(failTd.getText().replace(",", ""));
-		
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
-		
-		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
-		{	
-			test.log(LogStatus.PASS,
-					"EXPECTED: Total failures for "+customerSuppHierarchyString+" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+customerSuppHierarchyString+" is same as "+totalFailureBott+"</span>");
-		}
-		else
-		{		
-			test.log(LogStatus.FAIL,
-					"EXPECTED: Total failures for "+customerSuppHierarchyString+" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+customerSuppHierarchyString+" is not as "+totalFailureBott+"</span>");
-		}
-		
-		test.log(LogStatus.INFO, "Validating  Failure percentage in 2nd drilldown ( Submit Failure Page )");
-		//failure percentage validations
-		List<WebElement> allPercentageTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[3]"));
-		for(int j=0;j<allPercentageTds.size(); j++)
-		{
-			String failureReason = driver.findElement(By.xpath("//*[@id='myTable']/tbody/tr["+(j+1)+"]/td[1]")).getText();
-			double expectedPercentage = Double.valueOf(allPercentageTds.get(j).getText().replace("%", ""));
-			
-			double actualPercentage = (Double.valueOf(allFailedTds.get(j).getText().replace(",", ""))/Double.valueOf(totalFailureTop))*100.0;
-			double actualPercentageRoundOff = Math.round(actualPercentage * 100.0) / 100.0;
-			
-			if(String.valueOf(expectedPercentage).equals(String.valueOf(actualPercentageRoundOff)))
-			{			
-				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') is same as "+actualPercentageRoundOff+"</span>");
-			}
-			else
-			{				
-				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') is not same as "+actualPercentageRoundOff+"</span>");
-			}
-		}
-		
-		cu.clickElement("backBtn");
-	
-	
-	}
-
-	void secondDrillDownFailedValidation(int linkIndex)
-	{		
-		
-		//Entering Failed Drilldown
-		List<WebElement> faliedAllLinks = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Failed']/preceding-sibling::*)+1]/a"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", faliedAllLinks.get(linkIndex));
-		faliedAllLinks.get(linkIndex).click();
-		
-		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in 2nd drilldown ( Failed Page )");		
-		validateTableHeaders(dataMap.get("SecondDrilldownHeaders_Fail"), "Failed Page", "drillDownCusAccWin_AllTableHeaders_XXXXXXX_TOBECHANGED");
-		
-		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Failed Page )");		
-		
-		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_2ndDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
-																					, "drillDownCusAccWin_AllTableHeaders_XXXXXXXXX_ToBeCHANGED"
-																						, "drillDownCusAccWin_AllTableDataRows_XXXXXXXXX_ToBeCHANGED"
-																							, "drillDownCusAccWin_Table_Dynamic_Row_AllColoumn_XXXXXXXXX_ToBeCHANGED");
-		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Failed Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		else
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSFailureDistribution.csv", "Failed Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		
-		//UI fields validation
-		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Failed Page )");				
-		cu.checkElementPresence("exportBtn");
-		cu.checkElementPresence("backBtn");
-		cu.checkReadonlyProperty("DrillDown_CustomerAccNameTxt");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))			
-			cu.checkElementNotPresence("DrillDown_SupplierAccNameTxt1");
-		else
-			cu.checkReadonlyProperty("DrillDown_SupplierAccNameTxt1");
-		cu.checkReadonlyProperty("DrillDown_CountryNameTxt");
-		cu.checkReadonlyProperty("DrillDown_DestinationNameTxt");
-		cu.checkReadonlyProperty("DeliveryStat_FromDateTxt");
-		cu.checkReadonlyProperty("DeliveryStat_ToDateTxt");
-		cu.checkReadonlyProperty("DrillDown_TotalFailureTxt");
-				
-		test.log(LogStatus.INFO, "Validating Sumation of total failure in 2nd drilldown ( Failed Page )");
-		String cusAcctName = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-		String suppAccName =null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("DrillDown_SupplierAccNameTxt1", "value");
-		int totalFailureTop = Integer.valueOf(cu.getAttribute("DrillDown_TotalFailureTxt", "value"));
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
-		
-		//failure sum validations
-		int totalFailureBott = 0;
-		List<WebElement> allFailedTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[2]"));
-		for(WebElement failTd : allFailedTds)
-			totalFailureBott = totalFailureBott + Integer.valueOf(failTd.getText().replace(",", ""));
-		
-		
-		if(String.valueOf(totalFailureTop).equals(String.valueOf(totalFailureBott)))
-		{	
-			test.log(LogStatus.PASS,
-					"EXPECTED: Total failures for "+customerSuppHierarchyString+" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+customerSuppHierarchyString+" is same as "+totalFailureBott+"</span>");
-		}
-		else
-		{		
-			test.log(LogStatus.FAIL,
-					"EXPECTED: Total failures for "+customerSuppHierarchyString+" should be "+totalFailureTop,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Total failures for "+customerSuppHierarchyString+" is not as "+totalFailureBott+"</span>");
-		}
-		
-		test.log(LogStatus.INFO, "Validating  Failure percentage in 2nd drilldown ( Failed Page )");
-		//failure percentage validations
-		List<WebElement> allPercentageTds = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[3]"));
-		for(int j=0;j<allPercentageTds.size(); j++)
-		{
-			String failureReason = driver.findElement(By.xpath("//*[@id='myTable']/tbody/tr["+(j+1)+"]/td[1]")).getText();
-			double expectedPercentage = Double.valueOf(allPercentageTds.get(j).getText().replace("%", ""));
-			
-			double actualPercentage = (Double.valueOf(allFailedTds.get(j).getText().replace(",", ""))/Double.valueOf(totalFailureTop))*100.0;
-			double actualPercentageRoundOff = Math.round(actualPercentage * 100.0) / 100.0;
-			
-			if(String.valueOf(expectedPercentage).equals(String.valueOf(actualPercentageRoundOff)))
-			{			
-				test.log(LogStatus.PASS,
-						"EXPECTED: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') is same as "+actualPercentageRoundOff+"</span>");
-			}
-			else
-			{				
-				test.log(LogStatus.FAIL,
-						"EXPECTED: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') should be "+expectedPercentage,
-						"Validation:  <span style='font-weight:bold;'>ACTUAL:: Percentage for "+customerSuppHierarchyString+" (failure reson: '"+failureReason+"') is not same as "+actualPercentageRoundOff+"</span>");
-			}
-		}
-		
-		cu.clickElement("backBtn");
-	
-	
-	}
-
-	void secondDrillDownAverageLatencyValidation(int linkIndex)
-	{
-		//Entering Average Latency Drilldown		
-		List<WebElement> averageLatencyAllLinks = driver.findElements(By.xpath("//*[@id='myTable']/tbody/tr/td[count(//*[@id='myTable']/thead/tr/th[text()='Average Latency(Sec)'|text()='Average Latency (Sec)']/preceding-sibling::*)+1]/a"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", averageLatencyAllLinks.get(linkIndex));
-		averageLatencyAllLinks.get(linkIndex).click();
-		
-		//Table header validation
-		test.log(LogStatus.INFO, "Validating Table Headers in 2nd drilldown ( Average Latency Drilldown Page )");		
-		validateTableHeaders(dataMap.get("SecondDrilldownHeaders_AverageLatency"), "Average Latency Drilldown Page", "drillDownCusAccWin_AllTableHeaders_XXXXXXX_TOBECHANGED");
-		
-		//CSV and UI table validation
-		test.log(LogStatus.INFO, "Validating CSV and UI table data in 2nd drilldown ( Average Latency Drilldown Page )");
-		
-		List<List<String>> uiTableDataAlongWithHeadersWithoutMapping_2ndDrill = getUITableDataAlongWithHeadersWithoutMapping(new LinkedList<>()
-																						, "drillDownCusAccWin_AllTableHeaders_XXXXXXXXX_ToBeCHANGED"
-																							, "drillDownCusAccWin_AllTableDataRows_XXXXXXXXX_ToBeCHANGED"
-																								, "drillDownCusAccWin_Table_Dynamic_Row_AllColoumn_XXXXXXXXX_ToBeCHANGED");
-		
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSLatencyDistribution.csv", "Average Latency Drilldown Page", 6, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		else
-			exportCSVAndValidateWithUI(uiTableDataAlongWithHeadersWithoutMapping_2ndDrill, "Customer-SMSLatencyDistribution.csv", "Average Latency Drilldown Page", 8, "DeliveryStat_ExportButton_XXXXX_ToBeChanged", "DeliveryStat_ExportAllRecords_XXXXX_ToBeChanged");
-		
-		//UI fields validation
-		test.log(LogStatus.INFO, "Validating UI fields in 2nd drilldown ( Average Latency Drilldown Page )");				
-		cu.checkElementPresence("exportBtn");
-		cu.checkElementPresence("backBtn");
-		cu.checkReadonlyProperty("DrillDown_CustomerAccNameTxt");
-		if("MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				|| "MMX-Customer Finance".equals(dataMap.get("UserRole").trim())
-					|| "MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-		{
-			cu.checkElementNotPresence("DrillDown_SupplierAccNameTxt");
-			cu.checkElementNotPresence("DrillDown_SupplierNameTxt");
-		}
-		else
-		{
-			cu.checkReadonlyProperty("DrillDown_SupplierAccNameTxt");
-			cu.checkReadonlyProperty("DrillDown_SupplierNameTxt");
-		}
-		cu.checkReadonlyProperty("DrillDown_DestinationNameTxt");		
-		cu.checkReadonlyProperty("DrillDown_CountryNameTxt");
-		cu.checkReadonlyProperty("DrillDown_AverageLatencyTxt");
-				
-		//Validating Sumation of total AvarageLatency
-		test.log(LogStatus.INFO, "Validating Sumation of total AvarageLatency in 2nd drilldown ( Average Latency Drilldown Page )");
-		String cusAcctName = cu.getAttribute("DrillDown_CustomerAccNameTxt", "value");
-		String suppAccName =null;
-		if(!"MMX-Customer Manager".equals(dataMap.get("UserRole").trim()) 
-				&& !"MMX-Customer Finance".equals(dataMap.get("UserRole").trim()) 
-					&& !"MMX-Customer Routing".equals(dataMap.get("UserRole").trim()))
-			suppAccName =cu.getAttribute("DrillDown_SupplierAccNameTxt", "value");
-		String customerSuppHierarchyString = "Customer Account: "+cusAcctName+(suppAccName!=null?"-> Supplier Account: "+suppAccName:"");
-		
-		int totalDelivered = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[1]"), "Total Delivered Count coloumn td").replace(",", ""));
-		int count_0_15 = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[2]"), "count_0_15 coloumn td").replace(",", ""));
-		int count_15_45 = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[4]"), "count_15_45 coloumn td").replace(",", ""));
-		int count_45_90 = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[6]"), "count_45_90 coloumn td").replace(",", ""));
-		int count_90_180 = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[8]"), "count_90_180 coloumn td").replace(",", ""));
-		int count_above180 = Integer.valueOf(cu.getText(By.xpath("//*[@id='myTable']/tbody/tr/td[10]"), "count_above180 coloumn td").replace(",", ""));
-		
-		int avarageExpected = Integer.valueOf(cu.getAttribute("DrillDown_AverageLatencyTxt", "value").replace(",", ""));				
-		int avarageActual = ((count_0_15*15)+(count_15_45*45)+(count_45_90*90)+(count_90_180*180)+(count_above180*210))/totalDelivered;
-		
-		if(String.valueOf(avarageActual).equals(String.valueOf(avarageExpected)))
-		{
-			test.log(LogStatus.PASS,
-					"EXPECTED: Average Latency for "+customerSuppHierarchyString+" should be "+avarageExpected,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Average Latency for "+customerSuppHierarchyString+" is same as "+avarageActual+"</span>");
-		}
-		else
-		{
-			test.log(LogStatus.FAIL,
-					"EXPECTED: Average Latency for "+customerSuppHierarchyString+" should be "+avarageExpected,
-					"Validation:  <span style='font-weight:bold;'>ACTUAL:: Average Latency for "+customerSuppHierarchyString+" is not same as "+avarageActual+"</span>");
-		}
-		
-		cu.clickElement("backBtn");
-		
-	}
-*/
 	 List<List<String>> getUITableDataAlongWithHeadersWithoutMapping(List<List<String>>  retRowLst
 			 , String locatorFieldNameForAllTableHeaders
 			 	, String locatorFieldNameForAllTableDataRows
@@ -2381,7 +1842,7 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	 
 	 
 	 
-	 List<Map<String, String>> getUITableDataAlongWithHeadersWithoutMappingFromDataStores()
+	 List<Map<String, String>> getUITableDataAlongWithHeadersWithoutMappingFromDataStores(List<List<String>>  retRowLst)
 	 {
 		 
 		 String jsStr1 = "var scriptElt = document.createElement('script');"
@@ -2453,45 +1914,24 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 	 
 	 
 	 
-	 List<String> modifyTheDataRows(List<String> allActHeaderNames, List<String> rowDataColoumn)
+	 List<String> modifyTheDataRows(List<String> allHeaderNames, List<String> rowDataColoumn)
 	 {
 		 //Remove comma from number
 		 String[] headersNeedChanges1 = new String[]{"Attempted","Attempted Failure","Submitted", "Submit Failure", "Enroute", "Delivered", "Failed"
-					, "Total Delivered #", "0-15s #", "15-45s #", "45-90s #", "90-180s #", ">180s #", "> 180s #"
+					, "Total Delivered #", "0-15s #", "15-45s #", "45-90s #", "90-180s #", ">180s #"
 						, "Attempted Success", "Submitted Success", "Delivered Success", "Delivered Failure"
 							, "E2E Latency (s)","Ack Latency (ms)", "Platform Latency (ms)", "Delivery Latency (s)", "Submitted Failure"
-							,"Total Delivered", "0-100 ms", "100-200 ms", "200-300 ms", "300-400 ms" , "400-500 ms", "500 ms-1 sec", "1 sec-3 sec", ">3 sec", "> 3 sec"
-							, "0-5 Secs", "5-10 Secs", "10-15 Secs", "15-30 Secs", "30-60 Secs", "60-120 Secs", "120-180 Secs", "3-10 Min", ">10 Min", "> 10 Min"
-							, "Total Delivered #", "0-250 Msecs", "250-500 Msecs", "500 Msecs-1 Secs", "1-3 Secs", "3-5 Secs", "3-5 Secs", "5-10 Secs", ">10 Secs" , "> 10 Secs"
-							, "10-30 Min", "30-360 Min", "6-24 Hours", ">24 Hours", "> 24 Hours" };
+							,"Total Delivered", "0-100 ms", "100-200 ms", "200-300 ms", "300-400 ms" , "400-500 ms", "500 ms - 1 sec", "1 sec - 3 sec", "> 3 sec"
+							, "0-5 Secs", "5-10 Secs", "10-15 Secs", "15-30 Secs", "30-60 Secs", "60-120 Secs", "120-180 Secs", "3-10 Min", ">10 Min"
+							, "Total Delivered #", "0-250 Msecs", "250-500 Msecs", "500 Msecs-1 Secs", "1-3 Secs", "3-5 Secs", "3-5 Secs", "5-10 Secs", "> 10 Secs"
+							, "10-30 Min", "30-360 Min", "6-24 Hours", "> 24 Hours" };
 		 					
-		 System.out.println();
+		 headersNeedChanges1 =  new LinkedHashSet<String>(Arrays.asList(headersNeedChanges1)).toArray(headersNeedChanges1);
 		 
-		 LinkedHashSet<String> modifyHeadersSet = new LinkedHashSet<String>(Arrays.asList(headersNeedChanges1));
-
-//		 headersNeedChanges1 =  set.toArray(new String[set.size()]);		 
-//		 for(String header : headersNeedChanges1)		
-//		 {
-//			
-//			 if(allHeaderNames.contains(header))			 
-//				 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(",", ""));
-//			 else
-//				 if(header.contains(" %"))
-//					 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(" %", "%"));
-//			
-//		 }
+		 for(String header : headersNeedChanges1)				
+			 if(allHeaderNames.contains(header))			 
+				 rowDataColoumn.set(allHeaderNames.indexOf(header), rowDataColoumn.get(allHeaderNames.indexOf(header)).replace(",", ""));
 		 
-		 for(String actHeader : allActHeaderNames)
-		 {
-			 if(modifyHeadersSet.contains(actHeader))
-				 rowDataColoumn.set(allActHeaderNames.indexOf(actHeader), rowDataColoumn.get(allActHeaderNames.indexOf(actHeader)).replace(",", ""));
-			 else
-				 if(actHeader.trim().endsWith(" %"))
-					 rowDataColoumn.set(allActHeaderNames.indexOf(actHeader), rowDataColoumn.get(allActHeaderNames.indexOf(actHeader)).replace(" %", "%"));
-			 
-		 }
-		 
-		 		 
 		 return rowDataColoumn;
 	 }
 		
@@ -2550,11 +1990,10 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 						, "Usage: <span style='font-weight:bold;'>ACTUAL:: Records size in UI and CSV have not matched. ( UI_Rows_Size: '"+(uiDataMapRows.size()-1)
 						+"'. CSV_Rows_Size: '"+(csvRawRowLines.size()-1)+"' )</span>");
 			
-			csvRawRowLines = modifyCSVHeaderAndData(csvRawRowLines);
 			if(csvRawRowLines.size()>0 && uiDataMapRows.size()>0)
 			{
-				List<String> csvHeaders = csvRawRowLines.get(0);
-				List<String> uiHeaders = uiDataMapRows.get(0);
+				List<String> csvHeaders = modifyHeaders(trimListOfString(csvRawRowLines.get(0)));
+				List<String> uiHeaders = modifyHeaders(trimListOfString(uiDataMapRows.get(0)));
 				
 				//Compare Headers
 				if(csvHeaders.equals(uiHeaders))				
@@ -2705,19 +2144,19 @@ public class TC_04_SelectCustomerAccount implements ApplicationConstants {
 		Map<String, String> modifyHeadersKeyValues = new LinkedHashMap<>();
 		//modifyHeadersKeyValues.put("Customer Account *", "Customer Account");
 		//modifyHeadersKeyValues.put("Customer *", "Customer");
-//		modifyHeadersKeyValues.put("E2E Latency(s)", "E2E Latency (s)");
-//		modifyHeadersKeyValues.put("Ack Latency(ms)", "Ack Latency (ms)");
-//		modifyHeadersKeyValues.put("Platform Latency(ms)", "Platform Latency (ms)");
-//		modifyHeadersKeyValues.put("Delivery Latency(s)", "Delivery Latency (s)");
-//		
-//		modifyHeadersKeyValues.put("500 ms-1 sec", "500 ms-1 sec");
-//		modifyHeadersKeyValues.put("500 ms-1 sec %", "500 ms-1 sec %");
-//		modifyHeadersKeyValues.put("1 sec-3 sec", "1 sec-3 sec");
-//		modifyHeadersKeyValues.put("1 sec-3 sec %", "1 sec-3 sec %");
-//		modifyHeadersKeyValues.put(">3 sec", ">3 sec");
-//		modifyHeadersKeyValues.put(">3 sec %", ">3 sec %");
-//		
-//		modifyHeadersKeyValues.put("Total Delivered #", "Total Delivered");
+		modifyHeadersKeyValues.put("E2E Latency(s)", "E2E Latency (s)");
+		modifyHeadersKeyValues.put("Ack Latency(ms)", "Ack Latency (ms)");
+		modifyHeadersKeyValues.put("Platform Latency(ms)", "Platform Latency (ms)");
+		modifyHeadersKeyValues.put("Delivery Latency(s)", "Delivery Latency (s)");
+		
+		modifyHeadersKeyValues.put("500 ms-1 sec", "500 ms - 1 sec");
+		modifyHeadersKeyValues.put("500 ms-1 sec %", "500 ms - 1 sec %");
+		modifyHeadersKeyValues.put("1 sec-3 sec", "1 sec - 3 sec");
+		modifyHeadersKeyValues.put("1 sec-3 sec %", "1 sec - 3 sec %");
+		modifyHeadersKeyValues.put(">3 sec", "> 3 sec");
+		modifyHeadersKeyValues.put(">3 sec %", "> 3 sec %");
+		
+		modifyHeadersKeyValues.put("Total Delivered #", "Total Delivered");
 				
 		
 		List<String> returnLst = new LinkedList<>();
@@ -2856,21 +2295,6 @@ List<String> trimListOfString(List<String> rawLst)
 		ret.add(rEle.trim());
 	
 	return ret;
-}
-
-List<List<String>>  modifyCSVHeaderAndData(List<List<String>> rawData)
-{	
-	if(rawData.size()>0)
-	{
-		List<List<String>> ret = new LinkedList<>();
-		ret.add(modifyHeaders(trimListOfString(rawData.get(0))));
-		for(int i=1; i<rawData.size(); i++)		
-			ret.add(modifyTheDataRows(ret.get(0), rawData.get(i)));
-		
-		return ret;
-	}
-	else
-		return rawData;	
 }
 
 
