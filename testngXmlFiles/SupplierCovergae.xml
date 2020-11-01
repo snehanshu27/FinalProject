@@ -9,7 +9,7 @@
    <listener class-name="com.tata.selenium.driver.Driver"/>
  </listeners>
   
-   <test name="t1">
+  <!--  <test name="t1">
     <parameter name="testCaseId" value="TC_001"/>
     <parameter name="uniqueDataId" value="Data_01"/>
     <classes>
@@ -39,7 +39,7 @@
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_002_SupplierCoverageMTSMS"/>
     </classes>
-  </test> 
+  </test>  -->
  
   <test name="t5">
     <parameter name="testCaseId" value="TC_002"/>
@@ -49,7 +49,7 @@
     </classes>
   </test> 
     
-  <test name="t6">
+ <!--  <test name="t6">
     <parameter name="testCaseId" value="TC_003"/>
     <parameter name="uniqueDataId" value="Data_06"/>
     <classes>
@@ -71,5 +71,5 @@
     <classes>
       <class name="com.tata.selenium.test.supplierCoverageCases.TC_004_SupplierCoverageMTSMSEditableFunctionality"/>
     </classes>
-  </test>
+  </test> -->
 </suite>
